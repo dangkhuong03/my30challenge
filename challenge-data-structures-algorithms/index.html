@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Data Structures &amp; Algorithms — 30 Days</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="app.css">
+</head>
+<body data-layout="narrative-workflow">
+  <header class="topbar"><a class="brand" href="#main">DSA · 30 Days</a><span class="run-status" id="runStatus">DRAFT</span></header>
+  <main id="main">
+    <section class="intro"><div><p class="kicker">Foundation → Mock Interview</p><h1 id="challengeTitle"></h1><p class="lede" id="challengeLede"></p></div><div class="readout"><strong id="passCount">0</strong><span>PASS / 30</span><strong id="currentDayReadout">01</strong><span>Ngày hiện tại</span></div></section>
+    <nav class="tabs" role="tablist" aria-label="Ứng dụng"><button id="learnTab" role="tab" aria-selected="true" aria-controls="learnPanel">Học</button><button id="progressTab" role="tab" aria-selected="false" aria-controls="progressPanel" tabindex="-1">Tiến độ</button><button id="docsTab" role="tab" aria-selected="false" aria-controls="docsPanel" tabindex="-1">Authority</button></nav>
+    <section id="learnPanel" class="workspace" role="tabpanel" aria-labelledby="learnTab"><aside class="day-rail"><div class="rail-head"><h2>Roadmap</h2><output id="railOutput">0/30</output></div><div class="day-grid" id="dayGrid"></div></aside><article class="lesson"><header class="lesson-head"><p class="phase" id="dayPhase"></p><h2 id="dayTitle"></h2></header><dl class="contract"><div><dt>Outcome</dt><dd id="dayOutcome"></dd></div><div><dt>Minimum</dt><dd id="dayMinimum"></dd></div><div><dt>Target</dt><dd id="dayTarget"></dd></div><div><dt>Done when</dt><dd id="dayDone"></dd></div><div><dt>Evidence</dt><dd id="dayEvidence"></dd></div><div><dt>Stretch</dt><dd id="dayStretch"></dd></div></dl><div id="dailySources" class="daily-sources"></div><div id="audioSources" class="audio-sources"></div><section class="evidence-box" aria-labelledby="evidenceTitle"><h3 id="evidenceTitle">Ghi execution evidence</h3><form id="evidenceForm" novalidate><div class="field-grid"><label>Trạng thái<select id="statusSelect"><option>IN_PROGRESS</option><option>PARTIAL</option><option>SKIPPED</option><option>BLOCKED</option></select></label><label>Thời gian (phút)<input id="timeSpent" type="number" min="0" step="1"></label></div><label>Score / Done test<input id="doneTest" type="text" aria-describedby="formMessage"></label><label>Evidence<textarea id="evidence" aria-describedby="formMessage"></textarea></label><div class="field-grid"><label>Lỗi chính / blocker<input id="mainError" type="text"></label><label>Next action<input id="nextAction" type="text"></label></div><label class="check"><input id="verified" type="checkbox"><span>Tôi đã tự chạy test và kiểm tra Done test.</span></label><div class="form-actions"><button class="button" type="submit">Lưu log</button><button class="button primary" id="passButton" type="button">Ghi PASS</button></div><p id="formMessage" class="message" aria-live="polite">PASS cần Done test, evidence và xác nhận tự kiểm tra.</p></form></section></article></section>
+    <section id="progressPanel" class="panel" role="tabpanel" aria-labelledby="progressTab" hidden><header class="panel-head"><h2>Progress log</h2><div class="backup"><button class="button" id="exportButton" type="button">Xuất progress</button><button class="button" id="importButton" type="button">Nhập progress</button><input id="importInput" type="file" accept="application/json,.json" hidden></div></header><p id="storageMessage" class="message" aria-live="polite">Progress được lưu trên trình duyệt này.</p><ol id="progressList" class="progress-list"></ol><h2>Lịch sử append-only</h2><ol id="historyList" class="history-list"></ol></section>
+    <section id="docsPanel" class="docs workspace" role="tabpanel" aria-labelledby="docsTab" hidden><nav id="documentRail" class="document-rail" aria-label="Tài liệu nguồn"></nav><article><header class="panel-head"><h2 id="documentTitle"></h2></header><p id="documentNotice" class="message" aria-live="polite"></p><div id="documentContent" class="markdown"></div></article></section>
+  </main>
+  <footer class="footer"><p id="footerCopy"></p></footer>
+  <aside class="actionbar"><span id="actionCopy">Ngày 1 · NOT_STARTED</span><button class="button primary" id="nextButton" type="button" disabled>Ngày tiếp theo</button></aside>
+  <script>
+    window.CHALLENGE_APP = {
+      slug: "data-structures-algorithms", layout: "narrative-workflow", challengeFile: "CHALLENGE.md", planFile: "PLAN.md",
+      dailySources: [
+        { file: "ASSESSMENTS.md", selector: { level: 2, headings: { 1:"Baseline Matched Form A" } } },
+        { file: "FINAL_ASSESSMENT.md", selector: { full: true, days: [30] } }
+      ],
+      protectedDocs: {
+        "ASSESSMENT_KEYS.md": { requiresEvidence: true, full: true, days: [1] },
+        "FINAL_ASSESSMENT.md": { requiresEvidence: false, full: true, days: [30] },
+        "FINAL_ASSESSMENT_KEYS.md": { requiresEvidence: true, full: true, days: [30] }
+      },
+      audioByDay: {}
+    };
+  </script>
+  <script src="content-data.js"></script><script src="app.js"></script>
+</body>
+</html>

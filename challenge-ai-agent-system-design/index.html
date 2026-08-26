@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>30-Day Challenge: AI Agent System Design Foundations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    /* Hallmark · macrostructure: Index-First · genre: modern-minimal · theme: Cobalt · enrichment: none · nav: N9 · footer: Ft2 · contrast: pass (40–41) · browser: pending */
+    /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; overflow-x: clip; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-width: 20rem;
+      background: var(--color-paper);
+      color: var(--color-ink-2);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+    }
+    button, input, select, textarea, a { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { color: inherit; }
+    .wordmark, .nav-status, .tab, .btn, .source-link, .day-button { line-height: 1; }
+    a { color: var(--color-ink); text-underline-offset: 0.22em; }
+    :focus-visible {
+      outline: 3px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    [hidden] { display: none !important; }
+
+    .shell { width: min(100%, 92rem); margin-inline: auto; }
+    .nav {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      min-height: 4rem;
+      padding-inline: clamp(var(--space-md), 4vw, var(--space-xl));
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+      background: var(--color-paper);
+    }
+    .wordmark {
+      color: var(--color-ink);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      color: var(--color-muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      white-space: nowrap;
+    }
+    .status-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--color-accent); }
+
+    .intro {
+      display: grid;
+      gap: var(--space-xl);
+      padding: var(--space-xl) clamp(var(--space-md), 4vw, var(--space-xl)) var(--space-2xl);
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+    }
+    .intro-copy { min-width: 0; }
+    .meta {
+      margin: 0 0 var(--space-md);
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { color: var(--color-ink); font-family: var(--font-display); font-style: normal; }
+    h1 {
+      max-width: 16ch;
+      margin: 0;
+      font-size: var(--text-display-s);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+    .lede { max-width: 68ch; margin: var(--space-lg) 0 0; color: var(--color-neutral); }
+    .run-readout {
+      align-self: end;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--rule-thin);
+      overflow: hidden;
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-md);
+      background: var(--color-rule);
+    }
+    .readout-cell { min-width: 0; padding: var(--space-lg); background: var(--color-paper-2); }
+    .readout-cell strong { display: block; color: var(--color-ink); font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.1; font-variant-numeric: tabular-nums; }
+    .readout-cell span { display: block; margin-top: var(--space-xs); color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); }
+
+    .tabs-wrap {
+      padding-inline: clamp(var(--space-md), 4vw, var(--space-xl));
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+    }
+    .tabs { display: flex; gap: var(--space-xl); min-height: 3.5rem; align-items: stretch; }
+    .tab {
+      position: relative;
+      min-height: 2.75rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--color-muted);
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tab::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      inset-block-end: -1px;
+      height: 2px;
+      background: var(--color-accent);
+      opacity: 0;
+      transform: scaleX(0.4);
+      transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .tab[aria-selected="true"] { color: var(--color-ink); }
+    .tab[aria-selected="true"]::after { opacity: 1; transform: scaleX(1); }
+    .tab:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .workspace {
+      display: grid;
+      min-width: 0;
+      padding: var(--space-xl) clamp(var(--space-md), 4vw, var(--space-xl)) var(--space-3xl);
+    }
+    .day-rail { min-width: 0; }
+    .rail-heading { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-md); }
+    .rail-heading h2 { margin: 0; font-size: var(--text-md); }
+    .rail-heading output { color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+    .day-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-xs); }
+    .day-button {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      min-width: 0;
+      min-height: 2.75rem;
+      border: var(--rule-thin) solid var(--color-rule);
+      border-radius: var(--radius-sm);
+      background: var(--color-paper);
+      color: var(--color-muted);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-variant-numeric: tabular-nums;
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .day-button[data-state="current"] { border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+    .day-button[data-state="complete"] { border-color: var(--color-success); background: var(--color-success-soft); color: var(--color-success); }
+    .day-button[data-state="recorded"] { border-color: var(--color-rule-2); background: var(--color-paper-3); color: var(--color-neutral); }
+    .day-button:disabled { opacity: 0.42; cursor: not-allowed; }
+    .day-button:active:not(:disabled) { transform: translateY(1px); }
+
+    .lesson-panel { min-width: 0; }
+    .day-heading { padding-bottom: var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .day-heading h2 { margin: 0; font-size: clamp(var(--text-xl), 5vw, var(--text-2xl)); line-height: 1.15; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+    .phase { margin: 0 0 var(--space-sm); color: var(--color-accent); font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .contract { display: grid; gap: 0; margin: 0; }
+    .contract-row { display: grid; gap: var(--space-xs); padding-block: var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .contract dt { color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .contract dd { margin: 0; max-width: 72ch; color: var(--color-ink-2); }
+    .source-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); padding-top: var(--space-xl); }
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      padding-inline: var(--space-md);
+      border: var(--rule-thin) solid var(--color-rule-2);
+      border-radius: var(--radius-sm);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .embedded-content { display: grid; gap: var(--space-xl); margin-top: var(--space-2xl); }
+    .content-surface { min-width: 0; padding: clamp(var(--space-md), 3vw, var(--space-xl)); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper); }
+    .content-surface > :first-child { margin-top: 0; }
+    .content-surface > :last-child { margin-bottom: 0; }
+    .content-surface h1, .content-surface h2, .content-surface h3, .content-surface h4 { margin: var(--space-xl) 0 var(--space-md); line-height: 1.2; overflow-wrap: anywhere; min-width: 0; }
+    .content-surface h1 { font-size: var(--text-xl); }
+    .content-surface h2 { font-size: var(--text-lg); }
+    .content-surface h3 { font-size: var(--text-md); }
+    .content-surface h4 { font-size: var(--text-base); }
+    .content-surface p, .content-surface li { max-width: 75ch; }
+    .content-surface ul, .content-surface ol { padding-inline-start: var(--space-lg); }
+    .content-surface li + li { margin-top: var(--space-xs); }
+    .content-surface code { padding: var(--space-3xs) var(--space-2xs); border-radius: var(--radius-sm); background: var(--color-paper-3); color: var(--color-ink); font-family: var(--font-mono); font-size: 0.92em; overflow-wrap: anywhere; }
+    .content-surface pre { max-width: 100%; overflow: auto; padding: var(--space-md); border-radius: var(--radius-sm); background: var(--color-graphite); color: var(--color-on-dark); }
+    .content-surface pre code { padding: 0; background: transparent; color: inherit; font-family: var(--font-mono); }
+    .content-surface blockquote { margin-inline: 0; padding-inline-start: var(--space-md); border-inline-start: 2px solid var(--color-accent); color: var(--color-neutral); }
+    .content-surface table { width: 100%; border-collapse: collapse; margin-block: var(--space-lg); font-size: var(--text-sm); }
+    .content-surface th, .content-surface td { padding: var(--space-sm); border-bottom: var(--rule-thin) solid var(--color-rule); text-align: start; vertical-align: top; }
+    .content-surface th { color: var(--color-ink); font-weight: 700; }
+    .table-scroll { max-width: 100%; overflow-x: auto; }
+    .document-panel { align-items: start; }
+    .document-rail { display: grid; gap: var(--space-xs); min-width: 0; }
+    .document-button { width: 100%; justify-content: flex-start; overflow: hidden; text-overflow: ellipsis; }
+    .document-button[aria-current="true"] { border-color: var(--color-accent); color: var(--color-accent); }
+    .document-reader { min-width: 0; }
+    .document-reader-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .document-reader-head h2 { margin: 0; font-family: var(--font-body); font-size: var(--text-md); overflow-wrap: anywhere; min-width: 0; }
+    .evidence-block { margin-top: var(--space-xl); padding: var(--space-lg); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper-2); }
+    .evidence-block label { display: block; margin-bottom: var(--space-xs); color: var(--color-ink); font-weight: 700; }
+    .evidence-block input:not([type="checkbox"]), .evidence-block select, .evidence-block textarea {
+      width: 100%; min-height: 2.75rem; padding: var(--space-sm);
+      border: var(--rule-thin) solid var(--color-rule-2); border-radius: var(--radius-sm);
+      outline: 2px solid transparent; outline-offset: 1px; background: var(--color-paper); color: var(--color-ink);
+      line-height: 1.55;
+    }
+    .evidence-block textarea { min-height: 7rem; resize: vertical; }
+    .evidence-block input:focus-visible, .evidence-block select:focus-visible, .evidence-block textarea:focus-visible { outline-color: var(--color-focus); }
+    .evidence-block input:disabled, .evidence-block select:disabled, .evidence-block textarea:disabled { opacity: 0.55; cursor: not-allowed; color: var(--color-neutral); }
+    .evidence-block input[data-state="loading"], .evidence-block select[data-state="loading"], .evidence-block textarea[data-state="loading"] { cursor: progress; }
+    .evidence-block input[data-state="success"], .evidence-block select[data-state="success"], .evidence-block textarea[data-state="success"] { border-color: var(--color-success); }
+    .evidence-block input[aria-invalid="true"], .evidence-block select[aria-invalid="true"], .evidence-block textarea[aria-invalid="true"] { border-color: var(--color-error); }
+    .evidence-form { display: grid; gap: var(--space-md); }
+    .field-grid { display: grid; gap: var(--space-md); }
+    .field { min-width: 0; }
+    .check-field { display: flex; align-items: flex-start; gap: var(--space-sm); }
+    .check-field input { flex: 0 0 auto; width: 1.125rem; height: 1.125rem; margin-top: var(--space-3xs); accent-color: var(--color-accent); }
+    .check-field label { margin: 0; font-weight: 600; }
+    .form-actions, .backup-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+    .evidence-help { min-height: 1lh; margin: var(--space-xs) 0 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .evidence-help[data-state="error"] { color: var(--color-error); }
+    .evidence-help[data-state="success"] { color: var(--color-success); }
+
+    .progress-panel h2 { margin: 0 0 var(--space-sm); font-size: var(--text-xl); }
+    .progress-panel > p { max-width: 68ch; margin: 0 0 var(--space-xl); color: var(--color-neutral); }
+    .progress-list { list-style: none; margin: 0; padding: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+    .progress-item { display: grid; gap: var(--space-xs); padding-block: var(--space-md); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .progress-item strong { color: var(--color-ink); }
+    .progress-state { justify-self: start; font-family: var(--font-body); font-size: var(--text-xs); }
+    .progress-state[data-state="PASS"] { color: var(--color-success); }
+    .progress-state[data-state="IN_PROGRESS"] { color: var(--color-accent); }
+    .progress-state[data-state="PARTIAL"], .progress-state[data-state="SKIPPED"], .progress-state[data-state="BLOCKED"] { color: var(--color-neutral); }
+    .progress-state[data-state="NOT_STARTED"] { color: var(--color-muted); }
+    .progress-tools { display: grid; gap: var(--space-md); margin-block: var(--space-xl); padding-block: var(--space-lg); border-block: var(--rule-thin) solid var(--color-rule); }
+    .history-heading { margin-top: var(--space-2xl) !important; }
+    .history-list { list-style: none; margin: 0; padding: 0; border-top: var(--rule-thin) solid var(--color-rule); }
+    .history-item { padding-block: var(--space-md); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .history-item p { max-width: 75ch; margin: var(--space-xs) 0 0; }
+    .history-meta { color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+
+    .action-bar {
+      position: fixed;
+      z-index: 200;
+      inset-inline: 0;
+      inset-block-end: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      min-height: 4.75rem;
+      padding: var(--space-sm) max(var(--space-md), env(safe-area-inset-right)) calc(var(--space-sm) + env(safe-area-inset-bottom)) max(var(--space-md), env(safe-area-inset-left));
+      border-top: var(--rule-thin) solid var(--color-rule);
+      background: var(--color-paper);
+    }
+    .action-copy { min-width: 0; color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .action-group { display: flex; gap: var(--space-xs); flex: 0 0 auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding-inline: var(--space-md);
+      border: var(--rule-thin) solid var(--color-rule-2);
+      border-radius: var(--radius-sm);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      cursor: pointer;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .btn-primary { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-accent-ink); }
+    .btn[data-state="success"] { border-color: var(--color-success); background: var(--color-success-soft); color: var(--color-success); }
+    .btn[data-state="error"] { border-color: var(--color-error); color: var(--color-error); }
+    .btn[data-state="loading"] { cursor: progress; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn:active:not(:disabled), .source-link:active { transform: translateY(1px); }
+    .foot-line { padding: var(--space-xl) clamp(var(--space-md), 4vw, var(--space-xl)); border-top: var(--rule-thin) solid var(--color-rule); color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); }
+    .foot-line p { margin: 0; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .day-button:hover:not(:disabled), .source-link:hover, .btn:hover:not(:disabled) { background: var(--color-paper-3); }
+      .btn-primary:hover:not(:disabled) { background: var(--color-ink); }
+      .btn-primary:focus-visible:hover { background: var(--color-accent); }
+      .evidence-block input:hover:not(:disabled), .evidence-block select:hover:not(:disabled), .evidence-block textarea:hover:not(:disabled) { background: var(--color-paper-3); }
+    }
+    @media (min-width: 40rem) {
+      .day-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .contract-row { grid-template-columns: minmax(7rem, 0.24fr) minmax(0, 1fr); gap: var(--space-lg); }
+      .progress-item { grid-template-columns: 4.5rem minmax(0, 1fr) 8rem; align-items: center; }
+      .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 60rem) {
+      .intro { grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr); align-items: end; }
+      .workspace { grid-template-columns: minmax(14rem, 0.28fr) minmax(0, 1fr); gap: clamp(var(--space-xl), 5vw, var(--space-3xl)); }
+      .day-rail { position: sticky; inset-block-start: 6.75rem; align-self: start; }
+      .document-rail { position: sticky; inset-block-start: 6.75rem; align-self: start; }
+      .day-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    }
+    @media (min-width: 90rem) { .workspace { grid-template-columns: 18rem minmax(0, 1fr); } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: var(--dur-micro) !important; animation-iteration-count: 1 !important; transition-duration: var(--dur-micro) !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav shell">
+    <a class="wordmark" href="#main">AI Agent System Design</a>
+    <span class="nav-status"><span class="status-dot" aria-hidden="true"></span><span id="navStatus">DRAFT</span></span>
+  </header>
+
+  <main id="main" class="shell">
+    <section class="intro" aria-labelledby="pageTitle">
+      <div class="intro-copy">
+        <p class="meta">30 buổi · 120 phút</p>
+        <h1 id="pageTitle">30-Day Challenge: AI Agent System Design Foundations</h1>
+        <p class="lede">Sau 30 buổi, có thể giải thích, tính toán, chứng minh và thiết kế độc lập trước các bài mới cùng họ năng lực với hai đề nguồn, thay vì ghi nhớ đáp án của 118 câu.</p>
+      </div>
+      <div class="run-readout" aria-label="Tiến độ">
+        <div class="readout-cell"><strong id="completedCount">0</strong><span>PASS</span></div>
+        <div class="readout-cell"><strong id="currentReadout">01</strong><span>Ngày</span></div>
+      </div>
+    </section>
+
+    <div class="tabs-wrap">
+      <div class="tabs" role="tablist" aria-label="Challenge">
+        <button class="tab" id="learnTab" type="button" role="tab" aria-selected="true" aria-controls="learnPanel">Học</button>
+        <button class="tab" id="progressTab" type="button" role="tab" aria-selected="false" aria-controls="progressPanel" tabindex="-1">Tiến độ</button>
+        <button class="tab" id="documentTab" type="button" role="tab" aria-selected="false" aria-controls="documentPanel" tabindex="-1">Authority files</button>
+      </div>
+    </div>
+
+    <section id="learnPanel" class="workspace" role="tabpanel" aria-labelledby="learnTab">
+      <aside class="day-rail" aria-labelledby="dayRailTitle">
+        <div class="rail-heading"><h2 id="dayRailTitle">30 ngày</h2><output id="railOutput">0/30</output></div>
+        <div id="dayGrid" class="day-grid"></div>
+      </aside>
+      <article class="lesson-panel" aria-live="polite">
+        <header class="day-heading">
+          <p class="phase" id="dayPhase"></p>
+          <h2 id="dayTitle"></h2>
+        </header>
+        <dl class="contract">
+          <div class="contract-row"><dt>Outcome</dt><dd id="dayOutcome"></dd></div>
+          <div class="contract-row"><dt>Minimum action</dt><dd id="dayMinimum"></dd></div>
+          <div class="contract-row"><dt>Target action</dt><dd id="dayTarget"></dd></div>
+          <div class="contract-row"><dt>Done when</dt><dd id="dayDone"></dd></div>
+          <div class="contract-row"><dt>Evidence</dt><dd id="dayEvidence"></dd></div>
+          <div class="contract-row"><dt>Stretch</dt><dd id="dayStretch"></dd></div>
+        </dl>
+        <!-- <nav class="source-links" aria-label="Authority files">
+          <a class="source-link" href="LESSONS.md">LESSONS.md</a>
+          <a class="source-link" href="PLAN.md">PLAN.md</a>
+          <a class="source-link" href="ASSESSMENTS.md">ASSESSMENTS.md</a>
+          <a class="source-link" href="PROGRESS.md">PROGRESS.md</a>
+        </nav> -->
+        <div class="embedded-content">
+          <section class="content-surface" id="lessonSource"></section>
+          <section class="content-surface" id="planSource"></section>
+          <section class="content-surface" id="assessmentSource" hidden></section>
+        </div>
+        <div class="evidence-block">
+          <form class="evidence-form" id="evidenceForm" novalidate>
+            <div class="field-grid">
+              <div class="field">
+                <label for="statusSelect">Trạng thái ghi log</label>
+                <select id="statusSelect">
+                  <option value="IN_PROGRESS">IN_PROGRESS</option>
+                  <option value="PARTIAL">PARTIAL</option>
+                  <option value="SKIPPED">SKIPPED</option>
+                  <option value="BLOCKED">BLOCKED</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="timeSpent">Thời gian (phút)</label>
+                <input id="timeSpent" type="number" min="0" step="1" inputmode="numeric">
+              </div>
+            </div>
+            <div class="field">
+              <label for="doneTestResult">Score / Done test</label>
+              <input id="doneTestResult" type="text" aria-describedby="evidenceHelp">
+            </div>
+            <div class="field">
+              <label for="evidenceNote">Evidence</label>
+              <textarea id="evidenceNote" aria-describedby="evidenceHelp"></textarea>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="mainError">Lỗi chính / blocker</label>
+                <input id="mainError" type="text">
+              </div>
+              <div class="field">
+                <label for="nextAction">Next action</label>
+                <input id="nextAction" type="text">
+              </div>
+            </div>
+            <div class="check-field">
+              <input id="verificationCheck" type="checkbox">
+              <label for="verificationCheck">Tôi đã tự kiểm tra Done test và evidence ở trên.</label>
+            </div>
+            <div class="form-actions">
+              <button class="btn" id="saveLogButton" type="submit">Lưu log</button>
+              <button class="btn btn-primary" id="passButton" type="button">Ghi PASS</button>
+            </div>
+            <p class="evidence-help" id="evidenceHelp" aria-live="polite">PASS chỉ được ghi khi Done test và evidence đều có dữ liệu xác minh.</p>
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <section id="progressPanel" class="workspace progress-panel" role="tabpanel" aria-labelledby="progressTab" hidden>
+      <div></div>
+      <div>
+        <h2>Progress log</h2>
+        <p>Trạng thái hợp lệ: <code>IN_PROGRESS</code>, <code>PASS</code>, <code>PARTIAL</code>, <code>SKIPPED</code>, <code>BLOCKED</code>.</p>
+        <div class="progress-tools">
+          <div class="backup-actions">
+            <button class="btn" id="exportButton" type="button">Xuất progress</button>
+            <button class="btn" id="importButton" type="button">Nhập progress</button>
+            <input id="importInput" type="file" accept="application/json,.json" hidden>
+          </div>
+          <p class="evidence-help" id="storageMessage" aria-live="polite">Progress được lưu cục bộ trên trình duyệt này.</p>
+        </div>
+        <ol class="progress-list" id="progressList"></ol>
+        <h2 class="history-heading">Lịch sử append-only</h2>
+        <ol class="history-list" id="historyList"></ol>
+      </div>
+    </section>
+
+    <section id="documentPanel" class="workspace document-panel" role="tabpanel" aria-labelledby="documentTab" hidden>
+      <nav class="document-rail" id="documentRail" aria-label="Authority files"></nav>
+      <article class="document-reader">
+        <header class="document-reader-head"><h2 id="documentTitle"></h2></header>
+        <p class="evidence-help" id="documentNotice" aria-live="polite"></p>
+        <div class="content-surface" id="documentContent"></div>
+      </article>
+    </section>
+  </main>
+
+  <!-- <footer class="foot-line shell"><p>CHALLENGE.md · PLAN.md · LESSONS.md · ASSESSMENTS.md · PROGRESS.md</p></footer> -->
+
+  <aside class="action-bar" aria-label="Ngày">
+    <span class="action-copy" id="actionCopy">Ngày 1 · NOT_STARTED</span>
+    <div class="action-group">
+      <button class="btn btn-primary" id="nextButton" type="button" disabled>Ngày tiếp theo</button>
+    </div>
+  </aside>
+
+  <script src="content-data.js"></script>
+  <script>
+    const documentPayloads = Object.fromEntries((window.CHALLENGE_CONTENT || []).map(file => [file.name, file.base64]));
+    const documents = {};
+    function readDocument(name) {
+      if (!(name in documents)) {
+        const payload = documentPayloads[name];
+        if (!payload) return "";
+        documents[name] = new TextDecoder().decode(Uint8Array.from(atob(payload), character => character.charCodeAt(0)));
+      }
+      return documents[name];
+    }
+    const documentOrder = ["CHALLENGE.md", "PLAN.md", "LESSONS.md", "COVERAGE_MAP.md", "LESSON_TEMPLATE.md", "ASSESSMENTS.md", "PROGRESS.md", "ASSESSMENT_KEYS.md"];
+    let activeDocument = "CHALLENGE.md";
+
+    function parseDayContracts(markdown) {
+      const lines = String(markdown || "").replace(/\r\n/g, "\n").split("\n");
+      const headings = new Map();
+      let phase = "";
+      lines.forEach(line => {
+        if (line.startsWith("## Phase ")) phase = line.slice(3).trim();
+        const match = line.match(/^### Ngày (\d+) — (.+)$/);
+        if (match) headings.set(Number(match[1]), { phase, title: match[2].trim() });
+      });
+      const cleanCell = value => value.trim().replace(/^`([^`]*)`$/, "$1");
+      const rows = lines.filter(line => /^\|\s*\d+\s*\|/.test(line)).map(line => line.trim().slice(1, -1).split("|").map(cleanCell));
+      const parsed = rows.map(cells => {
+        const day = Number(cells[0]);
+        const heading = headings.get(day) || { phase: "", title: "" };
+        return { day, phase: heading.phase, title: heading.title, outcome: cells[1], minimum: cells[2], target: cells[3], done: cells[4], evidence: cells[5], stretch: cells[6] };
+      });
+      if (parsed.length !== 30 || parsed.some((entry, index) => entry.day !== index + 1 || !entry.title)) throw new Error("PLAN.md không có đủ contract cho 30 ngày.");
+      return parsed;
+    }
+    const days = parseDayContracts(readDocument("PLAN.md"));
+
+    function escapeHtml(value) {
+      return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+    function renderInline(value) {
+      const code = [];
+      let output = escapeHtml(value).replace(/`([^`]+)`/g, (_, content) => {
+        const index = code.push(`<code>${content}</code>`) - 1;
+        return `\u0000${index}\u0000`;
+      });
+      output = output
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => {
+          const decodedHref = href.replaceAll("&amp;", "&");
+          const allowed = /^(https?:\/\/|\.\.?\/|[A-Za-z0-9_.-]+(?:#[A-Za-z0-9_.-]+)?)$/.test(decodedHref);
+          const external = /^https?:\/\//.test(decodedHref);
+          return `<a href="${allowed ? href : "#"}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${label}</a>`;
+        });
+      return output.replace(/\u0000(\d+)\u0000/g, (_, index) => code[Number(index)]);
+    }
+    function tableCells(line) {
+      return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(cell => cell.trim());
+    }
+    function isTableDivider(line) {
+      const cells = tableCells(line);
+      return cells.length > 0 && cells.every(cell => /^:?-{3,}:?$/.test(cell));
+    }
+    function startsBlock(lines, index) {
+      const line = lines[index] || "";
+      return /^#{1,6}\s/.test(line) || /^```/.test(line) || /^\s*[-*+]\s+/.test(line) || /^\s*\d+\.\s+/.test(line) || /^>\s?/.test(line) || /^\s*(---+|\*\*\*+)\s*$/.test(line) || (line.includes("|") && isTableDivider(lines[index + 1] || ""));
+    }
+    function renderMarkdown(markdown) {
+      const lines = String(markdown || "").replace(/\r\n/g, "\n").split("\n");
+      const output = [];
+      let index = 0;
+      while (index < lines.length) {
+        const line = lines[index];
+        if (!line.trim()) { index += 1; continue; }
+        const fence = line.match(/^```(.*)$/);
+        if (fence) {
+          const body = [];
+          index += 1;
+          while (index < lines.length && !/^```/.test(lines[index])) body.push(lines[index++]);
+          if (index < lines.length) index += 1;
+          output.push(`<pre><code>${escapeHtml(body.join("\n"))}</code></pre>`);
+          continue;
+        }
+        const heading = line.match(/^(#{1,6})\s+(.*)$/);
+        if (heading) {
+          const level = Math.min(heading[1].length + 1, 6);
+          output.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
+          index += 1;
+          continue;
+        }
+        if (/^\s*(---+|\*\*\*+)\s*$/.test(line)) { output.push("<hr>"); index += 1; continue; }
+        if (line.includes("|") && isTableDivider(lines[index + 1] || "")) {
+          const header = tableCells(line);
+          index += 2;
+          const rows = [];
+          while (index < lines.length && lines[index].includes("|") && lines[index].trim()) rows.push(tableCells(lines[index++]));
+          output.push(`<div class="table-scroll"><table><thead><tr>${header.map(cell => `<th>${renderInline(cell)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${renderInline(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+          continue;
+        }
+        if (/^\s*[-*+]\s+/.test(line)) {
+          const items = [];
+          while (index < lines.length && /^\s*[-*+]\s+/.test(lines[index])) items.push(lines[index++].replace(/^\s*[-*+]\s+/, ""));
+          output.push(`<ul>${items.map(item => `<li>${renderInline(item)}</li>`).join("")}</ul>`);
+          continue;
+        }
+        if (/^\s*\d+\.\s+/.test(line)) {
+          const items = [];
+          while (index < lines.length && /^\s*\d+\.\s+/.test(lines[index])) items.push(lines[index++].replace(/^\s*\d+\.\s+/, ""));
+          output.push(`<ol>${items.map(item => `<li>${renderInline(item)}</li>`).join("")}</ol>`);
+          continue;
+        }
+        if (/^>\s?/.test(line)) {
+          const quote = [];
+          while (index < lines.length && /^>\s?/.test(lines[index])) quote.push(lines[index++].replace(/^>\s?/, ""));
+          output.push(`<blockquote><p>${renderInline(quote.join(" "))}</p></blockquote>`);
+          continue;
+        }
+        const paragraph = [line.trim()];
+        index += 1;
+        while (index < lines.length && lines[index].trim() && !startsBlock(lines, index)) paragraph.push(lines[index++].trim());
+        output.push(`<p>${renderInline(paragraph.join(" "))}</p>`);
+      }
+      return output.join("\n");
+    }
+    function extractSection(markdown, level, headingText) {
+      const lines = String(markdown || "").replace(/\r\n/g, "\n").split("\n");
+      const marker = "#".repeat(level) + " ";
+      const start = lines.findIndex(line => line.startsWith(marker) && line.includes(headingText));
+      if (start < 0) return "";
+      let end = start + 1;
+      const boundary = new RegExp(`^#{1,${level}}\\s`);
+      while (end < lines.length && !boundary.test(lines[end])) end += 1;
+      return lines.slice(start, end).join("\n").trim();
+    }
+    function assessmentHeading(day) {
+      const match = readDocument("ASSESSMENTS.md").split(/\r?\n/).find(line => line.startsWith("## ") && new RegExp(`Ngày ${day}(?!\\d)`).test(line));
+      return match ? match.slice(3).trim() : "";
+    }
+
+    const storageKey = "challenge-ai-agent-system-design:v2";
+    const legacyStorageKey = "challenge-ai-agent-system-design:v1";
+    const validStatuses = ["IN_PROGRESS", "PASS", "PARTIAL", "SKIPPED", "BLOCKED"];
+    const terminalStatuses = ["PASS", "PARTIAL", "SKIPPED", "BLOCKED"];
+    const initialState = { schema: 2, events: [], drafts: {}, assessmentUnlocks: [] };
+    let storageError = "";
+    let state = loadState();
+    let visibleDay = currentDay();
+
+    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","assessmentSource","documentRail","documentTitle","documentNotice","documentContent"];
+    const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+
+    function freshState() { return { schema: 2, events: [], drafts: {}, assessmentUnlocks: [] }; }
+    function eventId() { return globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`; }
+    function sanitizeEvent(event) {
+      if (!event || !Number.isInteger(Number(event.day)) || Number(event.day) < 1 || Number(event.day) > 30 || !validStatuses.includes(event.status)) return null;
+      return {
+        id: String(event.id || eventId()), timestamp: String(event.timestamp || new Date().toISOString()), session: Number(event.session) || 1,
+        day: Number(event.day), status: event.status, timeMinutes: event.timeMinutes === null || event.timeMinutes === "" ? null : Number.isFinite(Number(event.timeMinutes)) && Number(event.timeMinutes) >= 0 ? Number(event.timeMinutes) : null,
+        doneTest: String(event.doneTest || ""), evidence: String(event.evidence || ""), mainError: String(event.mainError || ""), nextAction: String(event.nextAction || ""),
+        verification: String(event.verification || "self-reported"), origin: String(event.origin || "app")
+      };
+    }
+    function normalizeState(value) {
+      if (!value || value.schema !== 2 || !Array.isArray(value.events)) return null;
+      return {
+        schema: 2,
+        events: value.events.map(sanitizeEvent).filter(Boolean),
+        drafts: value.drafts && typeof value.drafts === "object" ? value.drafts : {},
+        assessmentUnlocks: Array.isArray(value.assessmentUnlocks) ? value.assessmentUnlocks.filter(item => item && Number.isInteger(Number(item.day))).map(item => ({ day: Number(item.day), timestamp: String(item.timestamp || "") })) : []
+      };
+    }
+    function migrateLegacy(value) {
+      if (!value || !Array.isArray(value.completed) || typeof value.notes !== "object") return null;
+      const migrated = freshState();
+      const touchedDays = new Set([...value.completed, ...Object.keys(value.notes).map(Number)]);
+      [...touchedDays].filter(day => Number.isInteger(day) && day >= 1 && day <= 30).sort((a, b) => a - b).forEach(day => {
+        const wasComplete = value.completed.includes(day);
+        migrated.events.push(sanitizeEvent({
+          id: eventId(), timestamp: new Date().toISOString(), session: migrated.events.length + 1, day,
+          status: wasComplete ? "PARTIAL" : "IN_PROGRESS", doneTest: wasComplete ? "Legacy PASS cần xác minh lại" : "Legacy draft",
+          evidence: String(value.notes[day] || ""), mainError: wasComplete ? "Legacy PASS không có structured verification" : "", nextAction: "Xác minh theo Done test hiện tại",
+          verification: "legacy-unverified", origin: "v1-migration"
+        }));
+      });
+      return migrated;
+    }
+    function loadState() {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (stored) return normalizeState(JSON.parse(stored)) || freshState();
+        const legacy = localStorage.getItem(legacyStorageKey);
+        if (!legacy) return freshState();
+        const migrated = migrateLegacy(JSON.parse(legacy)) || freshState();
+        localStorage.setItem(storageKey, JSON.stringify(migrated));
+        return migrated;
+      } catch {
+        storageError = "Không thể đọc localStorage. Hãy xuất progress sau khi trình duyệt cho phép lưu cục bộ.";
+        return freshState();
+      }
+    }
+    function saveState() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(state));
+        storageError = "";
+        renderStorageMessage();
+        return true;
+      } catch {
+        storageError = "Không lưu được localStorage. Hãy dùng Xuất progress để giữ bản sao.";
+        renderStorageMessage();
+        return false;
+      }
+    }
+    function eventsForDay(day) { return state.events.filter(event => event.day === day); }
+    function compareEvents(a, b) {
+      const time = Date.parse(a.timestamp) - Date.parse(b.timestamp);
+      return time || a.session - b.session;
+    }
+    function latestEvent(day) { return eventsForDay(day).sort(compareEvents).at(-1) || null; }
+    function nextSession() { return state.events.reduce((max, event) => Math.max(max, event.session), 0) + 1; }
+    function isComplete(day) { return latestEvent(day)?.status === "PASS"; }
+    function dayStatus(day) {
+      return latestEvent(day)?.status || "NOT_STARTED";
+    }
+    function contiguousPasses() {
+      let count = 0;
+      while (count < 30 && isComplete(count + 1)) count += 1;
+      return count;
+    }
+    function currentDay() { return Math.min(contiguousPasses() + 1, 30); }
+    function isUnlocked(day) { return day <= Math.min(contiguousPasses() + 1, 30); }
+    function getDraft(day) {
+      return state.drafts[day] || { status: "IN_PROGRESS", timeMinutes: "", doneTest: "", evidence: "", mainError: "", nextAction: "", verified: false };
+    }
+    function renderStorageMessage() {
+      if (!el?.storageMessage) return;
+      el.storageMessage.textContent = storageError || "Progress được lưu cục bộ trên trình duyệt này.";
+      el.storageMessage.dataset.state = storageError ? "error" : "idle";
+    }
+
+    function renderDayRail() {
+      el.dayGrid.replaceChildren(...days.map(entry => {
+        const { day, outcome } = entry;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "day-button";
+        button.textContent = String(day).padStart(2, "0");
+        button.disabled = !isUnlocked(day);
+        button.dataset.state = isComplete(day) ? "complete" : terminalStatuses.includes(dayStatus(day)) ? "recorded" : day === visibleDay ? "current" : "idle";
+        button.setAttribute("aria-label", `Ngày ${day} — ${outcome} — ${dayStatus(day)}`);
+        if (day === visibleDay) button.setAttribute("aria-current", "step");
+        button.addEventListener("click", () => { visibleDay = day; render(); document.getElementById("dayTitle").focus({ preventScroll: true }); });
+        return button;
+      }));
+    }
+
+    function renderLesson() {
+      const { day, phase, title, outcome, minimum, target, done, evidence, stretch } = days[visibleDay - 1];
+      el.dayPhase.textContent = phase;
+      el.dayTitle.textContent = `Ngày ${day} — ${title}`;
+      el.dayTitle.tabIndex = -1;
+      el.dayOutcome.textContent = outcome;
+      el.dayMinimum.textContent = minimum;
+      el.dayTarget.textContent = target;
+      el.dayDone.textContent = done;
+      el.dayEvidence.textContent = evidence;
+      el.dayStretch.textContent = stretch;
+      const lessonSection = extractSection(readDocument("LESSONS.md"), 2, `Ngày ${day} —`);
+      const planSection = extractSection(readDocument("PLAN.md"), 3, `Ngày ${day} —`);
+      const assessmentSection = assessmentHeading(day) ? extractSection(readDocument("ASSESSMENTS.md"), 2, assessmentHeading(day)) : "";
+      el.lessonSource.innerHTML = renderMarkdown(lessonSection);
+      el.planSource.innerHTML = renderMarkdown(planSection);
+      el.assessmentSource.hidden = !assessmentSection;
+      el.assessmentSource.innerHTML = assessmentSection ? renderMarkdown(assessmentSection) : "";
+      const draft = getDraft(day);
+      el.statusSelect.value = validStatuses.includes(draft.status) && draft.status !== "PASS" ? draft.status : "IN_PROGRESS";
+      el.timeSpent.value = draft.timeMinutes ?? "";
+      el.doneTestResult.value = draft.doneTest || "";
+      el.evidenceNote.value = draft.evidence || "";
+      el.mainError.value = draft.mainError || "";
+      el.nextAction.value = draft.nextAction || "";
+      el.verificationCheck.checked = Boolean(draft.verified);
+      el.evidenceNote.placeholder = evidence;
+      [el.statusSelect, el.timeSpent, el.doneTestResult, el.evidenceNote, el.mainError, el.nextAction].forEach(field => field.setAttribute("aria-invalid", "false"));
+      el.evidenceHelp.dataset.state = "idle";
+      const latest = latestEvent(day);
+      el.evidenceHelp.textContent = latest ? `Log gần nhất: ${latest.status} · ${latest.timestamp}` : "PASS chỉ được ghi khi Done test và evidence đều có dữ liệu xác minh.";
+      el.passButton.textContent = isComplete(day) ? "PASS đã ghi" : "Ghi PASS";
+      el.passButton.disabled = isComplete(day);
+      el.passButton.dataset.state = isComplete(day) ? "success" : "default";
+      el.nextButton.disabled = !isComplete(day) || day === 30;
+      el.nextButton.hidden = day === 30;
+      el.actionCopy.textContent = `Ngày ${day} · ${dayStatus(day)}`;
+    }
+
+    function renderProgress() {
+      el.progressList.replaceChildren(...days.map(({ day, outcome }) => {
+        const item = document.createElement("li");
+        item.className = "progress-item";
+        const number = document.createElement("span");
+        number.textContent = `Ngày ${day}`;
+        const title = document.createElement("strong");
+        title.textContent = outcome;
+        const status = document.createElement("span");
+        status.className = "progress-state";
+        status.dataset.state = dayStatus(day);
+        status.textContent = dayStatus(day);
+        item.append(number, title, status);
+        return item;
+      }));
+    }
+
+    function renderHistory() {
+      if (!state.events.length) {
+        const item = document.createElement("li");
+        item.className = "history-item";
+        item.textContent = "Chưa có log.";
+        el.historyList.replaceChildren(item);
+        return;
+      }
+      el.historyList.replaceChildren(...[...state.events].sort(compareEvents).reverse().map(event => {
+        const item = document.createElement("li");
+        item.className = "history-item";
+        const meta = document.createElement("div");
+        meta.className = "history-meta";
+        meta.textContent = `Buổi ${event.session} · Ngày ${event.day} · ${event.status} · ${event.timestamp}`;
+        const detail = document.createElement("p");
+        const time = event.timeMinutes === null ? "—" : `${event.timeMinutes}'`;
+        detail.textContent = `Thời gian: ${time} · Done test: ${event.doneTest || "—"} · Evidence: ${event.evidence || "—"} · Lỗi chính: ${event.mainError || "—"} · Next action: ${event.nextAction || "—"} · ${event.verification}`;
+        item.append(meta, detail);
+        return item;
+      }));
+    }
+
+    function renderSummary() {
+      const count = days.filter(({ day }) => isComplete(day)).length;
+      el.completedCount.textContent = count;
+      el.currentReadout.textContent = String(currentDay()).padStart(2, "0");
+      el.railOutput.textContent = `${count}/30`;
+      el.navStatus.textContent = dayStatus(30) === "PASS" ? "PASS" : state.events.length ? "IN_PROGRESS" : "DRAFT";
+    }
+    function renderDocumentRail() {
+      el.documentRail.replaceChildren(...documentOrder.map(name => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn document-button";
+        button.textContent = name;
+        button.setAttribute("aria-current", String(name === activeDocument));
+        button.addEventListener("click", () => openDocument(name));
+        return button;
+      }));
+    }
+    function assessmentKeySection(day) {
+      const source = readDocument("ASSESSMENT_KEYS.md");
+      if (day === 1) return extractSection(source, 2, "Baseline Form A");
+      if (day === 30) return [extractSection(source, 2, "Final Form B"), extractSection(source, 2, "Final status")].filter(Boolean).join("\n\n");
+      return extractSection(source, 2, "Weekly review rubric");
+    }
+    function hasAssessmentUnlock(day) { return state.assessmentUnlocks.some(item => item.day === day); }
+    function openDocument(name) {
+      el.documentNotice.textContent = "";
+      el.documentNotice.dataset.state = "idle";
+      if (name === "ASSESSMENT_KEYS.md" && !hasAssessmentUnlock(visibleDay)) {
+        const heading = assessmentHeading(visibleDay);
+        const attempt = heading && eventsForDay(visibleDay).some(event => event.evidence && event.status !== "SKIPPED");
+        if (!heading) {
+          el.documentNotice.textContent = "Ngày hiện tại không có assessment để mở đáp án.";
+          el.documentNotice.dataset.state = "error";
+          return;
+        }
+        if (!attempt) {
+          el.documentNotice.textContent = "Hãy ghi một attempt có evidence cho assessment của ngày hiện tại trước khi mở đáp án.";
+          el.documentNotice.dataset.state = "error";
+          return;
+        }
+        if (!window.confirm("Mở đáp án sẽ được ghi vào progress. Tiếp tục?")) return;
+        state.assessmentUnlocks.push({ day: visibleDay, timestamp: new Date().toISOString() });
+        saveState();
+      }
+      activeDocument = name;
+      el.documentTitle.textContent = name;
+      el.documentContent.innerHTML = renderMarkdown(name === "ASSESSMENT_KEYS.md" ? assessmentKeySection(visibleDay) : readDocument(name));
+      renderDocumentRail();
+      el.documentTitle.tabIndex = -1;
+      if (!document.getElementById("documentPanel").hidden) el.documentTitle.focus({ preventScroll: true });
+    }
+    function render() {
+      renderDayRail(); renderLesson(); renderProgress(); renderHistory(); renderSummary(); renderStorageMessage();
+      if (activeDocument === "ASSESSMENT_KEYS.md") {
+        if (hasAssessmentUnlock(visibleDay)) {
+          el.documentContent.innerHTML = renderMarkdown(assessmentKeySection(visibleDay));
+        } else {
+          activeDocument = "CHALLENGE.md";
+          el.documentTitle.textContent = activeDocument;
+          el.documentContent.innerHTML = renderMarkdown(readDocument(activeDocument));
+          renderDocumentRail();
+        }
+      }
+    }
+
+    function syncDraft() {
+      state.drafts[visibleDay] = {
+        status: el.statusSelect.value, timeMinutes: el.timeSpent.value, doneTest: el.doneTestResult.value,
+        evidence: el.evidenceNote.value, mainError: el.mainError.value, nextAction: el.nextAction.value, verified: el.verificationCheck.checked
+      };
+      saveState();
+      el.actionCopy.textContent = `Ngày ${visibleDay} · ${dayStatus(visibleDay)}`;
+    }
+    [el.statusSelect, el.timeSpent, el.doneTestResult, el.evidenceNote, el.mainError, el.nextAction, el.verificationCheck].forEach(field => field.addEventListener("input", syncDraft));
+
+    function setFormMessage(message, kind, invalidFields = []) {
+      [el.statusSelect, el.timeSpent, el.doneTestResult, el.evidenceNote, el.mainError, el.nextAction].forEach(field => field.setAttribute("aria-invalid", String(invalidFields.includes(field))));
+      el.evidenceHelp.textContent = message;
+      el.evidenceHelp.dataset.state = kind;
+      invalidFields[0]?.focus();
+    }
+    function appendProgress(status) {
+      syncDraft();
+      const draft = getDraft(visibleDay);
+      const evidence = draft.evidence.trim();
+      const doneTest = draft.doneTest.trim();
+      if (status === "PASS" && (!evidence || !doneTest || !draft.verified)) {
+        const invalid = [!doneTest && el.doneTestResult, !evidence && el.evidenceNote].filter(Boolean);
+        setFormMessage("PASS cần Done test, evidence và xác nhận tự kiểm tra.", "error", invalid);
+        return;
+      }
+      if (["IN_PROGRESS", "PARTIAL"].includes(status) && !evidence) {
+        setFormMessage(`${status} cần evidence của phần đã làm.`, "error", [el.evidenceNote]);
+        return;
+      }
+      if (status === "BLOCKED" && !draft.mainError.trim()) {
+        setFormMessage("BLOCKED cần mô tả blocker cụ thể.", "error", [el.mainError]);
+        return;
+      }
+      if (status === "SKIPPED" && !draft.nextAction.trim()) {
+        setFormMessage("SKIPPED cần next action để tiếp tục challenge.", "error", [el.nextAction]);
+        return;
+      }
+      state.events.push(sanitizeEvent({
+        id: eventId(), timestamp: new Date().toISOString(), session: nextSession(), day: visibleDay, status,
+        timeMinutes: draft.timeMinutes === "" ? null : Number(draft.timeMinutes), doneTest, evidence,
+        mainError: draft.mainError.trim(), nextAction: draft.nextAction.trim(), verification: status === "PASS" ? "self-reported" : "not-verified", origin: "app"
+      }));
+      delete state.drafts[visibleDay];
+      saveState();
+      render();
+      setFormMessage(`Đã thêm log ${status}. Log cũ không bị sửa.`, "success");
+    }
+    el.evidenceForm.addEventListener("submit", event => {
+      event.preventDefault();
+      appendProgress(el.statusSelect.value);
+    });
+    el.passButton.addEventListener("click", () => appendProgress("PASS"));
+    el.nextButton.addEventListener("click", () => {
+      if (!isComplete(visibleDay) || visibleDay >= 30) return;
+      visibleDay += 1;
+      render();
+      document.getElementById("dayTitle").focus({ preventScroll: true });
+      window.scrollTo({ top: document.getElementById("learnPanel").offsetTop - 72, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+
+    el.exportButton.addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "challenge-ai-agent-system-design-progress.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+    el.importButton.addEventListener("click", () => el.importInput.click());
+    el.importInput.addEventListener("change", async event => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const imported = normalizeState(JSON.parse(await file.text()));
+        if (!imported) throw new Error("invalid");
+        const knownIds = new Set(state.events.map(item => item.id));
+        state.events.push(...imported.events.filter(item => !knownIds.has(item.id)));
+        state.drafts = { ...imported.drafts, ...state.drafts };
+        const unlockKeys = new Set(state.assessmentUnlocks.map(item => `${item.day}:${item.timestamp}`));
+        state.assessmentUnlocks.push(...imported.assessmentUnlocks.filter(item => !unlockKeys.has(`${item.day}:${item.timestamp}`)));
+        saveState();
+        visibleDay = currentDay();
+        render();
+        el.storageMessage.textContent = "Đã nhập và hợp nhất progress; không xóa log hiện có.";
+        el.storageMessage.dataset.state = "success";
+      } catch {
+        el.storageMessage.textContent = "File progress không hợp lệ; dữ liệu hiện có được giữ nguyên.";
+        el.storageMessage.dataset.state = "error";
+      } finally {
+        event.target.value = "";
+      }
+    });
+
+    const tabs = [document.getElementById("learnTab"), document.getElementById("progressTab"), document.getElementById("documentTab")];
+    const panels = [document.getElementById("learnPanel"), document.getElementById("progressPanel"), document.getElementById("documentPanel")];
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectTab(index));
+      tab.addEventListener("keydown", event => {
+        if (!['ArrowLeft','ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+        selectTab(next);
+        tabs[next].focus({ preventScroll: true });
+      });
+    });
+    function selectTab(active) {
+      tabs.forEach((tab, index) => { const selected = index === active; tab.setAttribute("aria-selected", String(selected)); tab.tabIndex = selected ? 0 : -1; panels[index].hidden = !selected; });
+    }
+
+    openDocument(activeDocument);
+    render();
+  </script>
+</body>
+</html>
