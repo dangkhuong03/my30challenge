@@ -44,6 +44,11 @@
   --space-2xl: 4rem;
   --space-3xl: 6rem;
 
+  --layout-topbar: 4rem;
+  --layout-tabs: 3.5rem;
+  --layout-actionbar: 5.5rem;
+  --layout-gutter: 1rem;
+
   --radius-sm: 0.375rem;
   --radius-md: 0.625rem;
   --radius-round: 999rem;

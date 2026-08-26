@@ -1,0 +1,4 @@
+interface:
+  display_name: "Personal 30-Day Challenge"
+  short_description: "Plan, run, and verify a focused 30-day challenge"
+  default_prompt: "Use $personal-30-day-challenge to turn my goal into a realistic, measurable 30-day challenge."
