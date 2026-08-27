@@ -65,8 +65,6 @@ body[data-route=overview] .readout{padding:var(--space-md)}
 .start-here span{font-family:var(--font-mono);font-size:var(--text-xs);font-weight:700;color:var(--color-accent-3);text-transform:uppercase;letter-spacing:.06em}
 .start-here p{margin:var(--space-sm) 0 0;color:var(--color-ink);font-size:var(--text-md);font-weight:600;line-height:1.45}
 .start-here small{display:block;margin-top:var(--space-md);color:var(--color-neutral);font-family:var(--font-mono);font-size:var(--text-xs)}
-.day-outline{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin:0 0 var(--space-lg);padding-bottom:var(--space-lg);border-bottom:var(--rule-thin) solid var(--color-rule)}
-.day-outline .outline-link{display:inline-flex;min-height:2.5rem;align-items:center;padding:var(--space-xs) var(--space-sm);border:var(--rule-thin) solid var(--color-rule);border-radius:999px;background:var(--color-paper);color:var(--color-ink);font-size:var(--text-xs);font-weight:700;text-align:start}
 .reading-desk .contract>div{display:block}
 .reading-desk .contract dt{margin-bottom:var(--space-xs)}
 .reading-desk .markdown{padding-inline:0;border:0;border-top:var(--rule-thin) solid var(--color-rule);border-radius:0;background:transparent}
@@ -92,7 +90,5 @@ body[data-route=overview] .readout{padding:var(--space-md)}
 .evidence-disclosure{margin-top:var(--space-md);border-block-start:var(--rule-thin) solid var(--color-rule)}
 .evidence-disclosure .evidence-box{margin:0;padding:var(--space-md);border:0;border-radius:0}
 .day-brief,.day-work{min-width:0}
-.reading-desk .day-outline{flex-wrap:nowrap;max-width:100%;margin-bottom:var(--space-sm);padding-bottom:var(--space-xs);overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
-.reading-desk .day-outline .outline-link{flex:0 0 auto;max-width:min(18rem,80vw);min-height:2.25rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 @media(max-width:39.99rem){body[data-route=day] .detail-view{padding-top:var(--space-sm)}body[data-route=day] .detail-nav{margin-bottom:var(--space-md)}.reading-desk .lesson-head{padding-bottom:var(--space-md)}.reading-desk .lesson-head h2{font-size:clamp(var(--text-lg),8vw,var(--text-xl))}.start-here{margin:var(--space-md) 0;padding:var(--space-md)}.reading-desk .source-disclosure>.markdown{padding-inline:0}}
 @media(min-width:60rem){body[data-route=day]:has(#learnTab[aria-selected=true]){height:100dvh;overflow:hidden;padding-bottom:0}body[data-route=day] .detail-view{display:flex;width:min(100%,86rem);height:calc(100dvh - var(--layout-topbar) - var(--layout-tabs) - var(--layout-actionbar));max-width:none;flex-direction:column;padding-block:var(--space-sm);overflow:hidden}body[data-route=day] .detail-nav{flex:0 0 auto;margin-bottom:var(--space-sm);padding-bottom:var(--space-xs)}body[data-route=day] .reading-desk{display:grid;min-height:0;grid-template-columns:minmax(18rem,.36fr) minmax(0,1fr);gap:clamp(var(--space-lg),4vw,var(--space-2xl));overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-inline-end:var(--space-xs)}body[data-route=day] .day-brief,body[data-route=day] .day-work{align-self:start}.day-work .evidence-disclosure{margin-bottom:var(--space-lg)}}

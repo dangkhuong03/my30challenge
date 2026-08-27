@@ -11,13 +11,13 @@
     }
     return cache[name];
   };
-  const ids = ["challengeTitle","challengeLede","passCount","currentDayReadout","runStatus","railOutput","dayGrid","dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","dailySources","audioSources","evidenceForm","statusSelect","timeSpent","doneTest","evidence","mainError","nextAction","verified","passButton","formMessage","progressList","historyList","exportButton","importButton","importInput","storageMessage","documentRail","documentTitle","documentNotice","documentContent","footerCopy","actionCopy","previousButton","nextButton","overviewView","dayDetailView","routeNotice","phaseRibbon","chunkSummary","chunkDueCopy","dayOutline","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
+  const ids = ["challengeTitle","challengeLede","passCount","currentDayReadout","runStatus","railOutput","dayGrid","dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","dailySources","audioSources","evidenceForm","statusSelect","timeSpent","doneTest","evidence","mainError","nextAction","verified","passButton","formMessage","progressList","historyList","exportButton","importButton","importInput","storageMessage","documentRail","documentTitle","documentNotice","documentContent","footerCopy","actionCopy","previousButton","nextButton","overviewView","dayDetailView","routeNotice","phaseRibbon","chunkSummary","chunkDueCopy","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const lessonShell = el.dayDetailView.querySelector(".lesson");
   const dayBrief = document.createElement("div"); dayBrief.className = "day-brief";
   const dayWork = document.createElement("div"); dayWork.className = "day-work";
   [".lesson-head",".start-here",".contract-disclosure"].forEach(selector => dayBrief.append(lessonShell.querySelector(selector)));
-  ["#dayOutline","#dailySources","#audioSources",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
+  ["#dailySources","#audioSources",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
   lessonShell.append(dayBrief,dayWork);
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   function renderInline(value) {
@@ -204,13 +204,6 @@
     }
     el.dailySources.replaceChildren(...surfaces);
     if (surfaces[preferredIndex] instanceof HTMLDetailsElement) surfaces[preferredIndex].open = true;
-    const disclosures = [...el.dailySources.querySelectorAll("details.source-disclosure")];
-    const outlineLinks = disclosures.map((disclosure,index) => {
-      const surface = disclosure.querySelector("section.markdown");
-      surface.id = `day-${String(day).padStart(2,"0")}-source-${index + 1}`;
-      const link = document.createElement("button"); link.type = "button"; link.className = "outline-link"; link.textContent = disclosure.querySelector("summary").textContent; link.title = link.textContent; link.addEventListener("click",() => { disclosures.forEach(item => item.open = item === disclosure); disclosure.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",block:"start"}); }); return link;
-    });
-    el.dayOutline.replaceChildren(...outlineLinks); el.dayOutline.hidden = outlineLinks.length < 2;
     const tracks = config.audioByDay?.[day] || [];
     el.audioSources.replaceChildren(...tracks.map(path => { const card = document.createElement("div"); card.className = "audio-card"; const label = document.createElement("p"); label.textContent = path; const audio = document.createElement("audio"); audio.controls = true; audio.preload = "metadata"; audio.src = path; card.append(label,audio); return card; }));
   }
