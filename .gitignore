@@ -1,3 +1,31 @@
 ﻿ai-agent-system-design-exam.pdf
 de-luyen-tap.md
 Lo_trinh_hoc_100_cau_de_thi.md
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies, build output, and caches
+node_modules/
+dist/
+coverage/
+.cache/
+
+# Generated browser/audit evidence
+audit-evidence/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# IDE and operating-system metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
