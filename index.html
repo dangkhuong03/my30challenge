@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Trang chọn ba lộ trình học 30 ngày.">
+  <title>30 Day Challenge Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Newsreader:opsz,wght@6..72,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./tokens.css">
+  <style>
+    /* Hallmark · genre: editorial · macrostructure: Index-First · theme: Almanac · enrichment: none · nav: N6 · footer: Ft1 · contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · mobile: pass (34, 49, 50–57) */
+    /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; }
+    html { color-scheme: light; }
+    body {
+      min-height: 100dvh;
+      margin: 0;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .skip-link {
+      position: fixed;
+      inset-block-start: var(--space-sm);
+      inset-inline-start: var(--space-sm);
+      z-index: var(--z-skip);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-ink);
+      color: var(--color-paper);
+      opacity: 0;
+      transform: translateY(-150%);
+      transition: opacity var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .skip-link:focus { opacity: 1; transform: none; }
+    .shell {
+      width: min(100%, var(--layout-max));
+      margin-inline: auto;
+      padding-inline: var(--page-gutter);
+    }
+    .nav-mast {
+      display: grid;
+      gap: var(--space-sm);
+      padding-block-start: var(--space-md);
+      text-align: center;
+    }
+    .mast-line {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      color: var(--color-neutral);
+      font-size: var(--text-xs);
+    }
+    .mast-line span { white-space: nowrap; }
+    .mast-name {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+      line-height: 1.05;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .mast-action {
+      min-height: var(--target-size);
+      padding: var(--space-sm) 0;
+      border-block-end: var(--rule-medium) solid var(--color-accent);
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .mast-rule {
+      height: var(--rule-double-height);
+      margin: 0;
+      border: 0;
+      border-block: var(--rule-thin) solid var(--color-rule-strong);
+    }
+    .mast-name:focus-visible,
+    .mast-action:focus-visible,
+    .challenge-link:focus-visible {
+      outline: var(--rule-focus) solid var(--color-focus);
+      outline-offset: var(--space-2xs);
+    }
+    .mast-name:active,
+    .mast-action:active { transform: translateY(var(--rule-thin)); }
+    .mast-name[aria-disabled="true"],
+    .mast-action[aria-disabled="true"],
+    .challenge-link[aria-disabled="true"] {
+      color: var(--color-neutral);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    main {
+      display: grid;
+      gap: var(--space-2xl);
+      padding-block: var(--space-2xl) var(--space-3xl);
+    }
+    .introduction { min-width: 0; }
+    h1 {
+      max-width: var(--measure-heading);
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+      line-height: 1.12;
+      overflow-wrap: anywhere;
+    }
+    .introduction p {
+      max-width: var(--measure-copy);
+      margin: var(--space-lg) 0 0;
+      color: var(--color-neutral);
+    }
+    .index-list {
+      margin: 0;
+      padding: 0;
+      border-block-start: var(--rule-thin) solid var(--color-rule-strong);
+      list-style: none;
+    }
+    .challenge-link {
+      display: grid;
+      min-width: 0;
+      min-height: var(--row-height);
+      grid-template-columns: var(--index-width) minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-md);
+      border-block-end: var(--rule-thin) solid var(--color-rule);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .challenge-number {
+      color: var(--color-neutral);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-variant-numeric: tabular-nums;
+    }
+    .challenge-title {
+      min-width: 0;
+      overflow: hidden;
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+      line-height: 1.15;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .challenge-meta {
+      display: none;
+      color: var(--color-neutral);
+      font-size: var(--text-sm);
+      white-space: nowrap;
+    }
+    .challenge-arrow {
+      color: var(--color-accent);
+      font-size: var(--text-md);
+      line-height: 1;
+    }
+    .challenge-link:visited { color: var(--color-ink); }
+    .challenge-link:active { transform: translateX(var(--space-2xs)); }
+    .foot-mast {
+      display: grid;
+      min-height: var(--footer-height);
+      align-content: center;
+      gap: var(--space-xs);
+      border-block-start: var(--rule-thin) solid var(--color-rule);
+      color: var(--color-neutral);
+    }
+    .foot-mast p { margin: 0; }
+    .foot-wordmark {
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .foot-note { font-size: var(--text-sm); }
+    @media (hover: hover) and (pointer: fine) {
+      .mast-name:hover,
+      .mast-action:hover { color: var(--color-accent); }
+      .challenge-link:hover { color: var(--color-accent); transform: translateX(var(--space-xs)); }
+    }
+    @media (min-width: 40rem) {
+      main {
+        grid-template-columns: minmax(14rem, 0.72fr) minmax(0, 1.28fr);
+        gap: var(--space-3xl);
+        padding-block-start: var(--space-3xl);
+      }
+      .challenge-link {
+        grid-template-columns: var(--index-width) minmax(0, 1fr) minmax(9rem, 0.72fr) auto;
+        gap: var(--space-lg);
+      }
+      .challenge-meta { display: block; }
+      .foot-mast {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+      }
+    }
+    @media (min-width: 60rem) {
+      main { align-items: start; }
+      .introduction { position: sticky; inset-block-start: var(--space-xl); }
+      h1 { font-size: var(--text-2xl); }
+      .challenge-title { font-size: var(--text-xl); }
+    }
+    @media (pointer: coarse) {
+      .mast-name, .mast-action, .challenge-link { min-height: var(--target-size); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: var(--dur-reduced) !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: var(--dur-reduced) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#challenges">Đi tới danh sách challenge</a>
+  <header class="shell nav-mast">
+    <div class="mast-line">
+      <span>Ba lộ trình · 30 ngày</span>
+      <a class="mast-action" href="#challenges">Mở mục lục ↓</a>
+    </div>
+    <a class="mast-name" href="./" aria-label="Trang chủ 30 Day Challenge">30 Day Index</a>
+    <hr class="mast-rule" aria-hidden="true">
+  </header>
+
+  <main class="shell">
+    <section class="introduction" aria-labelledby="page-title">
+      <h1 id="page-title">Ba lộ trình. Một nơi bắt đầu.</h1>
+      <p>Chọn challenge bạn muốn tiếp tục. Mỗi liên kết mở ứng dụng 30 ngày tương ứng và giữ tiến độ riêng trong trình duyệt.</p>
+    </section>
+
+    <nav id="challenges" aria-label="Ba challenge 30 ngày">
+      <ol class="index-list">
+        <li>
+          <a class="challenge-link" href="./challenge-ai-agent-system-design/index.html" aria-label="Mở challenge AI Agent System Design Foundations">
+            <span class="challenge-number">01</span>
+            <span class="challenge-title">AI Agent</span>
+            <span class="challenge-meta">System Design · 30 ngày</span>
+            <span class="challenge-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="challenge-link" href="./challenge-data-structures-algorithms/index.html" aria-label="Mở challenge Data Structures and Algorithms">
+            <span class="challenge-number">02</span>
+            <span class="challenge-title">DSA</span>
+            <span class="challenge-meta">Algorithms · 30 ngày</span>
+            <span class="challenge-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="challenge-link" href="./challenge-english-technical-papers/index.html" aria-label="Mở challenge English for Technical Papers">
+            <span class="challenge-number">03</span>
+            <span class="challenge-title">English Papers</span>
+            <span class="challenge-meta">Reading &amp; speaking · 30 ngày</span>
+            <span class="challenge-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ol>
+    </nav>
+  </main>
+
+  <footer class="shell foot-mast">
+    <p class="foot-wordmark">30 Day Index</p>
+  </footer>
+</body>
+</html>
