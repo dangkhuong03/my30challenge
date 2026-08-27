@@ -11,42 +11,63 @@
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="app.css">
 </head>
-<body data-layout="guided-reading">
-  <header class="topbar"><div class="topbar-links"><a class="root-index-link" href="../index.html" aria-label="Quay về mục lục chính">← Mục lục</a><a class="brand" href="#overview">English · Technical Papers</a></div><span class="run-status" id="runStatus">DRAFT</span></header>
+<body data-layout="mission-training">
+  <header class="topbar">
+    <a class="root-index-link" href="../index.html">← Mục lục</a>
+    <a class="brand" href="#overview">English / 30</a>
+    <nav class="tabs" role="tablist" aria-label="Ứng dụng"><button id="learnTab" role="tab" aria-selected="true" aria-controls="learnPanel">Journey</button><button id="progressTab" role="tab" aria-selected="false" aria-controls="progressPanel" tabindex="-1">Progress</button><button id="docsTab" role="tab" aria-selected="false" aria-controls="docsPanel" tabindex="-1">Source</button></nav>
+    <span class="run-status" id="runStatus">DRAFT</span>
+  </header>
   <main id="main">
-    <section class="intro" id="overviewIntro"><div><p class="kicker">30-day reading notebook</p><h1 id="challengeTitle"></h1><p class="lede" id="challengeLede"></p></div><div class="readout"><strong id="passCount">0</strong><span>PASS / 30</span><strong id="currentDayReadout">01</strong><span>Ngày hiện tại</span></div></section>
-    <nav class="tabs" role="tablist" aria-label="Ứng dụng"><button id="learnTab" role="tab" aria-selected="true" aria-controls="learnPanel">Học hôm nay</button><button id="progressTab" role="tab" aria-selected="false" aria-controls="progressPanel" tabindex="-1">Tiến độ</button><button id="docsTab" role="tab" aria-selected="false" aria-controls="docsPanel" tabindex="-1">Tài liệu</button></nav>
-    <section id="learnPanel" class="learning-stage" role="tabpanel" aria-labelledby="learnTab">
+    <section id="learnPanel" role="tabpanel" aria-labelledby="learnTab">
       <section class="overview-view" id="overviewView" aria-labelledby="overviewTitle">
-        <header class="overview-head"><div><p class="kicker">Your reading calendar</p><h2 id="overviewTitle">30 ngày, từng trang một</h2></div><output id="railOutput">0/30</output></header>
+        <header class="journey-masthead">
+          <div class="journey-copy"><p class="kicker">30-day mission programme</p><h1 id="challengeTitle"></h1><p class="lede" id="challengeLede"></p></div>
+          <div class="journey-readout"><span>POSITION</span><strong>DAY <b id="currentDayReadout">01</b></strong><span id="chunkSummary"></span></div>
+        </header>
+        <section class="independence-track" aria-label="Tiến trình giảm hỗ trợ"><div><small>DAY 01</small><strong>S4 · SCRIPT</strong></div><i></i><div><small>DAY 10</small><strong>S3 · FRAMES</strong></div><i></i><div><small>DAY 20</small><strong>S2 · KEYWORDS</strong></div><i></i><div><small>DAY 30</small><strong>S1 · INDEPENDENT</strong></div></section>
+        <section class="journey-launch" id="currentLaunch" aria-labelledby="overviewTitle"><div><p class="kicker">Current mission</p><h2 id="overviewTitle">Continue the journey</h2><p id="currentMissionCopy"></p></div><button class="button primary launch-button" id="launchCurrentButton" type="button">Open mission</button></section>
         <p class="route-notice" id="routeNotice" aria-live="polite"></p>
-        <p class="chunk-summary" id="chunkSummary"></p>
+        <header class="journey-section-head"><div><h2>The 30-day journey</h2><p>Survival → Conversation → Real life &amp; work → Independence</p></div><output id="railOutput">0/30</output></header>
         <div class="phase-ribbon" id="phaseRibbon"></div>
-        <div class="day-grid editorial-calendar" id="dayGrid"></div>
+        <div class="day-grid" id="dayGrid"></div>
       </section>
+
       <section class="detail-view" id="dayDetailView" hidden>
-        <nav class="detail-nav" aria-label="Điều hướng ngày"><button class="back-link" id="backToOverview" type="button">← Lịch 30 ngày</button><span id="detailStatus">NOT_STARTED</span></nav>
-        <article class="lesson reading-desk">
-          <header class="lesson-head"><p class="phase" id="dayPhase"></p><h2 id="dayTitle"></h2></header>
-          <section class="start-here mission-shell" id="missionShell" aria-labelledby="missionHeading">
-            <div class="mission-heading"><div><span id="missionKind">TODAY'S MISSION</span><h3 id="missionHeading">Làm được bằng tiếng Anh</h3></div><strong id="missionSupport" class="support-badge"></strong></div>
-            <p class="mission-statement" id="nowStepCopy"></p>
-            <p class="mission-ability" id="missionAbility"></p>
-            <dl class="mission-gates"><div><dt>Mission Challenge</dt><dd id="missionChallenge"></dd></div><div><dt>PASS when</dt><dd id="missionPass"></dd></div></dl>
-            <small id="chunkDueCopy"></small>
-            <nav class="learning-loop" id="learningLoop" aria-label="Learning loop trong ngày"></nav>
-            <section class="loop-panel" id="loopPanel" aria-live="polite"><div class="loop-panel-head"><span id="loopPosition"></span><h3 id="loopTitle"></h3></div><div id="loopBody"></div><div id="targetChunks" class="target-chunks"></div><div id="mistakesDue" class="mistakes-due"></div><div class="loop-actions"><button class="button" id="stageResourceButton" type="button" hidden></button><button class="button primary" id="loopNextButton" type="button">Bước tiếp theo</button></div></section>
+        <nav class="detail-nav" aria-label="Điều hướng ngày"><button class="back-link" id="backToOverview" type="button">← 30-day journey</button><span id="detailStatus">NOT_STARTED</span></nav>
+        <article class="lesson session-studio">
+          <header class="mission-control">
+            <div class="mission-day"><span id="missionKind">TODAY'S MISSION</span><strong id="missionDayReadout">01 / 30</strong></div>
+            <div class="mission-phase"><span id="dayPhase"></span><small id="bossDistance"></small></div>
+            <div class="mission-support"><span>SUPPORT</span><strong id="missionSupport"></strong></div>
+          </header>
+          <section class="mission-brief" id="missionShell" aria-labelledby="dayTitle">
+            <div class="brief-main"><p class="kicker">Do English</p><h1 id="dayTitle"></h1><p class="mission-statement" id="nowStepCopy"></p><p class="mission-ability" id="missionAbility"></p></div>
+            <aside class="pass-brief"><span>PASS REQUIREMENT</span><p id="missionPass"></p><button class="button primary" id="startSessionButton" type="button">Start session</button></aside>
           </section>
-          <details class="compact-disclosure contract-disclosure"><summary>Timebox &amp; contract</summary><dl class="contract"><div><dt>Outcome</dt><dd id="dayOutcome"></dd></div><div><dt>Minimum</dt><dd id="dayMinimum"></dd></div><div><dt>Target</dt><dd id="dayTarget"></dd></div><div><dt>Done when</dt><dd id="dayDone"></dd></div><div><dt>Evidence</dt><dd id="dayEvidence"></dd></div><div><dt>Stretch</dt><dd id="dayStretch"></dd></div></dl></details>
-          <section class="day-materials" aria-labelledby="materialsTitle"><div class="section-label"><span>LEARN + PRACTICE</span><h3 id="materialsTitle">Tài liệu để hoàn thành mission</h3></div><div id="dailySources" class="daily-sources"></div><div id="audioSources" class="audio-sources"></div></section>
-          <details class="compact-disclosure evidence-disclosure"><summary>Feedback, retry &amp; evidence</summary><section class="evidence-box" aria-labelledby="evidenceTitle"><h3 id="evidenceTitle">Ghi performance thật</h3><form id="evidenceForm" novalidate><div class="field-grid"><label>Trạng thái<select id="statusSelect"><option>IN_PROGRESS</option><option>PARTIAL</option><option>SKIPPED</option><option>BLOCKED</option></select></label><label>Thời gian học (phút)<input id="timeSpent" type="number" min="0" step="1"></label></div><label>Score / Done test<input id="doneTest" type="text" aria-describedby="formMessage"></label><div class="metric-grid"><label>Meaning (%)<input id="meaningScore" type="number" min="0" max="100" step="1" inputmode="numeric"></label><label>Output (giây)<input id="outputDuration" type="number" min="0" step="1" inputmode="numeric"></label><label>Latency (giây)<input id="responseLatency" type="number" min="0" step="0.1" inputmode="decimal"></label><label>Support<select id="supportLevel"><option value="">Chưa ghi</option><option>S4</option><option>S3</option><option>S2</option><option>S1</option></select></label><label>Interaction turns<input id="interactionTurns" type="number" min="0" step="1" inputmode="numeric"></label><label>Repair<select id="repairResult"><option value="">Chưa ghi</option><option>N/A</option><option>FAILED</option><option>REPAIRED_WITH_PROMPT</option><option>REPAIRED_INDEPENDENTLY</option></select></label></div><label>Evidence<textarea id="evidence" aria-describedby="formMessage"></textarea></label><div class="field-grid"><label>Lỗi chính / blocker<input id="mainError" type="text"></label><label>Next action<input id="nextAction" type="text"></label></div><label class="check"><input id="verified" type="checkbox"><span>Tôi đã đối chiếu PASS criteria và evidence; đây là self-check, không phải đánh giá độc lập.</span></label><div class="form-actions"><button class="button" type="submit">Lưu log</button><button class="button primary" id="passButton" type="button">Ghi PASS</button></div><p id="formMessage" class="message" aria-live="polite">PASS cần Done test, evidence và xác nhận tự kiểm tra.</p></form></section></details>
+
+          <div class="session-shell" id="sessionShell" hidden>
+            <nav class="learning-loop" id="learningLoop" aria-label="Training loop trong ngày"></nav>
+            <section class="loop-panel" id="loopPanel" aria-live="polite">
+              <header class="stage-head"><div><span id="loopMode">TRAIN</span><small id="loopPosition"></small></div><h2 id="loopTitle"></h2></header>
+              <div class="stage-content"><div id="loopBody"></div><div id="targetChunks" class="target-chunks"></div><div id="mistakesDue" class="mistakes-due"></div></div>
+              <div class="recall-cover" id="recallCover" hidden><p>Closed-book mode</p><button class="button" id="revealRecallButton" type="button">Reveal / check</button></div>
+              <div class="performance-timer" id="performanceTimer" hidden><span id="timerReadout">00:00</span><div><button class="button" id="timerToggle" type="button">Start timer</button><button class="text-button" id="timerReset" type="button">Reset</button></div></div>
+              <footer class="loop-actions"><button class="button" id="stageResourceButton" type="button" hidden></button><button class="button primary" id="loopNextButton" type="button">Complete step</button></footer>
+            </section>
+            <aside class="mission-proof"><div><span>MISSION CHALLENGE</span><p id="missionChallenge"></p></div><div><span>RETENTION</span><p id="chunkDueCopy"></p></div><details class="contract-disclosure"><summary>Session contract</summary><dl class="contract"><div><dt>Outcome</dt><dd id="dayOutcome"></dd></div><div><dt>Minimum</dt><dd id="dayMinimum"></dd></div><div><dt>Target</dt><dd id="dayTarget"></dd></div><div><dt>Done when</dt><dd id="dayDone"></dd></div><div><dt>Evidence</dt><dd id="dayEvidence"></dd></div><div><dt>Stretch</dt><dd id="dayStretch"></dd></div></dl></details></aside>
+          </div>
+
+          <section class="day-materials" aria-labelledby="materialsTitle"><header><span>SOURCE DESK</span><h2 id="materialsTitle">Material for this mission</h2></header><div id="dailySources" class="daily-sources"></div><div id="audioSources" class="audio-sources"></div></section>
+          <section class="evidence-box" id="missionCheck" aria-labelledby="evidenceTitle"><header><span>MISSION CHECK</span><h2 id="evidenceTitle">Record what actually happened</h2></header><form id="evidenceForm" novalidate><div class="field-grid"><label>Trạng thái<select id="statusSelect"><option>IN_PROGRESS</option><option>PARTIAL</option><option>SKIPPED</option><option>BLOCKED</option></select></label><label>Thời gian học (phút)<input id="timeSpent" type="number" min="0" step="1"></label></div><label>Score / Done test<input id="doneTest" type="text" aria-describedby="formMessage"></label><div class="metric-grid"><label>Meaning (%)<input id="meaningScore" type="number" min="0" max="100" step="1" inputmode="numeric"></label><label>Output (giây)<input id="outputDuration" type="number" min="0" step="1" inputmode="numeric"></label><label>Latency (giây)<input id="responseLatency" type="number" min="0" step="0.1" inputmode="decimal"></label><label>Support<select id="supportLevel"><option value="">Chưa ghi</option><option>S4</option><option>S3</option><option>S2</option><option>S1</option></select></label><label>Interaction turns<input id="interactionTurns" type="number" min="0" step="1" inputmode="numeric"></label><label>Repair<select id="repairResult"><option value="">Chưa ghi</option><option>N/A</option><option>FAILED</option><option>REPAIRED_WITH_PROMPT</option><option>REPAIRED_INDEPENDENTLY</option></select></label></div><label>Evidence<textarea id="evidence" aria-describedby="formMessage"></textarea></label><div class="field-grid"><label>Things I'm fixing<input id="mainError" type="text"></label><label>Next action<input id="nextAction" type="text"></label></div><label class="check"><input id="verified" type="checkbox"><span>Tôi đã đối chiếu PASS criteria và evidence; đây là self-check, không phải đánh giá độc lập.</span></label><div class="form-actions"><button class="button" type="submit">Save attempt</button><button class="button primary" id="passButton" type="button">Record PASS</button></div><p id="formMessage" class="message" aria-live="polite">PASS cần Done test, evidence và xác nhận tự kiểm tra.</p></form></section>
         </article>
       </section>
     </section>
-    <section id="progressPanel" class="panel" role="tabpanel" aria-labelledby="progressTab" hidden><header class="panel-head"><h2>Progress log</h2><div class="backup"><button class="button" id="exportButton" type="button">Xuất progress</button><button class="button" id="importButton" type="button">Nhập progress</button><input id="importInput" type="file" accept="application/json,.json" hidden></div></header><p id="storageMessage" class="message" aria-live="polite">Progress được lưu trên trình duyệt này.</p><ol id="progressList" class="progress-list"></ol><h2>Lịch sử append-only</h2><ol id="historyList" class="history-list"></ol></section>
-    <section id="docsPanel" class="docs workspace" role="tabpanel" aria-labelledby="docsTab" hidden><nav id="documentRail" class="document-rail" aria-label="Tài liệu nguồn"></nav><article><header class="panel-head"><h2 id="documentTitle"></h2></header><p id="documentNotice" class="message" aria-live="polite"></p><div id="documentContent" class="markdown"></div></article></section>
+
+    <section id="progressPanel" class="panel progress-room" role="tabpanel" aria-labelledby="progressTab" hidden><header class="panel-head"><div><p class="kicker">Capability growth</p><h1>What is getting easier?</h1></div><div class="backup"><button class="button" id="exportButton" type="button">Export</button><button class="button" id="importButton" type="button">Import</button><input id="importInput" type="file" accept="application/json,.json" hidden></div></header><p id="storageMessage" class="message" aria-live="polite">Progress được lưu trên trình duyệt này.</p><div id="capabilityGrowth" class="capability-growth"></div><section class="fixing-section"><h2>Things I'm fixing</h2><div id="errorProgress"></div></section><details class="history-disclosure"><summary>30-day status &amp; append-only history</summary><ol id="progressList" class="progress-list"></ol><ol id="historyList" class="history-list"></ol></details></section>
+    <section id="docsPanel" class="docs workspace" role="tabpanel" aria-labelledby="docsTab" hidden><nav id="documentRail" class="document-rail" aria-label="Tài liệu nguồn"></nav><article><header class="panel-head"><h1 id="documentTitle"></h1></header><p id="documentNotice" class="message" aria-live="polite"></p><div id="documentContent" class="markdown"></div></article></section>
   </main>
-  <aside class="actionbar" id="dayActionBar" hidden><span id="actionCopy">Ngày 1 · NOT_STARTED</span><div class="action-group"><button class="button" id="previousButton" type="button" disabled>Ngày trước</button><button class="button primary" id="nextButton" type="button" disabled>Ngày tiếp theo</button></div></aside>
+  <aside class="actionbar" id="dayActionBar" hidden><span id="actionCopy">Ngày 1 · NOT_STARTED</span><div class="action-group"><button class="button" id="previousButton" type="button" disabled>Previous</button><button class="button primary" id="nextButton" type="button" disabled>Next mission</button></div></aside>
   <script>
     window.CHALLENGE_APP = {
       slug: "english-technical-papers", layout: "guided-reading", challengeFile: "CHALLENGE.md", planFile: "PLAN.md", missionFile: "SCAFFOLD_MAP.md", chunksFile: "CHUNKS.md", errorLedgerFile: "ERROR_LEDGER.md",

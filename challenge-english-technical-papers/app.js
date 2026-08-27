@@ -19,15 +19,11 @@
     "importInput","storageMessage","documentRail","documentTitle","documentNotice","documentContent","actionCopy","previousButton","nextButton",
     "overviewView","dayDetailView","routeNotice","phaseRibbon","chunkSummary","chunkDueCopy","backToOverview","detailStatus","nowStepCopy",
     "dayActionBar","missionShell","missionKind","missionSupport","missionChallenge","missionPass","learningLoop","loopPanel","loopPosition",
-    "loopTitle","loopBody","targetChunks","mistakesDue","stageResourceButton","loopNextButton"
+    "loopTitle","loopBody","targetChunks","mistakesDue","stageResourceButton","loopNextButton","startSessionButton","sessionShell","loopMode",
+    "recallCover","revealRecallButton","performanceTimer","timerReadout","timerToggle","timerReset","missionDayReadout","bossDistance",
+    "currentMissionCopy","launchCurrentButton","capabilityGrowth","errorProgress","missionCheck"
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
-  const lessonShell = el.dayDetailView.querySelector(".lesson");
-  const dayBrief = document.createElement("div"); dayBrief.className = "day-brief";
-  const dayWork = document.createElement("div"); dayWork.className = "day-work";
-  [".lesson-head",".start-here",".contract-disclosure"].forEach(selector => dayBrief.append(lessonShell.querySelector(selector)));
-  [".day-materials",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
-  lessonShell.append(dayBrief,dayWork);
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   function renderInline(value) {
     const code = [];
@@ -147,9 +143,9 @@
   const days = parseDays();
   const chunkBank = parseChunkBank();
   const loopSteps = [
-    { key:"mission", label:"Mission" }, { key:"learn", label:"Learn" }, { key:"practice", label:"Practice" },
-    { key:"recall", label:"Recall" }, { key:"produce", label:"Produce" }, { key:"interact", label:"Interact" },
-    { key:"feedback", label:"Feedback" }, { key:"retry", label:"Retry" }, { key:"retain", label:"Retain" }
+    { key:"input", label:"Input", mode:"TRAIN" }, { key:"notice", label:"Notice", mode:"TRAIN" }, { key:"imitate", label:"Imitate", mode:"TRAIN" },
+    { key:"recall", label:"Recall", mode:"PERFORM" }, { key:"produce", label:"Produce", mode:"PERFORM" }, { key:"interact", label:"Interact", mode:"PERFORM" },
+    { key:"feedback", label:"Feedback", mode:"IMPROVE" }, { key:"retry", label:"Retry", mode:"IMPROVE" }, { key:"check", label:"Mission check", mode:"PROVE" }
   ];
   const validStatuses = ["IN_PROGRESS","PASS","PARTIAL","SKIPPED","BLOCKED"];
   const storageKey = `challenge:${config.slug}:v1`; let storageError = "";
@@ -168,7 +164,7 @@
     try { const value = localStorage.getItem(storageKey); return value ? normalizeState(JSON.parse(value)) || freshState() : freshState(); }
     catch { storageError = "Không đọc được localStorage. Hãy dùng Xuất progress để giữ bản sao."; return freshState(); }
   }
-  let state = loadState(); let visibleDay = 1; let activeDocument = config.challengeFile; let activeLoopStep = 0;
+  let state = loadState(); let visibleDay = 1; let activeDocument = config.challengeFile; let activeLoopStep = 0; let timerSeconds = 0; let timerHandle = null;
   let activeRoute = {kind:"overview"}; let routeNoticeText = "";
   function saveState() {
     try { localStorage.setItem(storageKey, JSON.stringify(state)); storageError = ""; renderStorage(); return true; }
@@ -184,10 +180,15 @@
   const currentDay = () => Math.min(contiguousPasses() + 1, 30);
   const isUnlocked = day => day <= Math.min(contiguousPasses() + 1, 30);
   const nextSession = () => state.events.reduce((max,event) => Math.max(max,event.session),0) + 1;
-  const defaultDraft = () => ({ status:"IN_PROGRESS", timeMinutes:"", doneTest:"", meaningScore:"", outputDuration:"", responseLatency:"", supportLevel:"", interactionTurns:"", repairResult:"", evidence:"", mainError:"", nextAction:"", verified:false });
+  const defaultDraft = () => ({ status:"IN_PROGRESS", timeMinutes:"", doneTest:"", meaningScore:"", outputDuration:"", responseLatency:"", supportLevel:"", interactionTurns:"", repairResult:"", evidence:"", mainError:"", nextAction:"", verified:false, sessionStarted:false, sessionStep:0 });
   const draftForDay = day => state.drafts[day] || defaultDraft();
   function renderDayRail() {
-    el.dayGrid.replaceChildren(...days.map(entry => {
+    const phases = config.journeyPhases || [{from:1,to:7,label:"Week 1 · Survival"},{from:8,to:14,label:"Week 2 · Conversation"},{from:15,to:21,label:"Week 3 · Real life & work"},{from:22,to:30,label:"Week 4 · Independence"}];
+    el.dayGrid.replaceChildren(...phases.map((phase, phaseIndex) => {
+      const section = document.createElement("section"); section.className = "journey-phase"; section.dataset.phase = String(phaseIndex + 1);
+      const head = document.createElement("header"); const week = document.createElement("span"); week.textContent = `WEEK ${phaseIndex + 1}`; const title = document.createElement("h3"); title.textContent = String(phase.label || "").replace(/^Week\s*\d+\s*[·—-]?\s*/i, "") || `Phase ${phaseIndex + 1}`; const score = document.createElement("output"); const phaseDays = days.filter(entry => entry.day >= phase.from && entry.day <= phase.to); score.textContent = `${phaseDays.filter(entry => isPass(entry.day)).length}/${phaseDays.length}`; head.append(week,title,score);
+      const path = document.createElement("div"); path.className = "mission-path";
+      path.append(...phaseDays.map(entry => {
       const button = document.createElement("button"); button.type = "button"; button.className = "day-button";
       const unlocked = isUnlocked(entry.day); const status = statusForDay(entry.day);
       button.dataset.state = !unlocked ? "locked" : isPass(entry.day) ? "complete" : status === "BLOCKED" ? "blocked" : terminalStatuses.includes(status) ? "recorded" : "available";
@@ -201,11 +202,14 @@
       button.setAttribute("aria-disabled",String(!unlocked));
       button.addEventListener("click",() => { if (!unlocked) { routeNoticeText = lockReason; el.routeNotice.textContent = routeNoticeText; return; } navigateToDay(entry.day); });
       return button;
+      }));
+      section.append(head,path); return section;
     }));
   }
   function renderPhaseRibbon() {
     const phases = (config.journeyPhases || []).map(phase => ({name:phase.label,days:days.filter(entry => entry.day >= phase.from && entry.day <= phase.to).map(entry => entry.day)}));
-    el.phaseRibbon.replaceChildren(...phases.map(phase => { const item=document.createElement("div"); item.className="phase-note"; const title=document.createElement("strong"); title.textContent=phase.name; const range=document.createElement("span"); range.textContent=`Ngày ${phase.days[0]}–${phase.days.at(-1)} · ${phase.days.filter(isPass).length}/${phase.days.length}`; item.append(title,range); return item; }));
+    const current = currentDay();
+    el.phaseRibbon.replaceChildren(...phases.map((phase,index) => { const item=document.createElement("div"); item.className="phase-note"; item.dataset.state=current>=phase.days[0]&&current<=phase.days.at(-1)?"current":phase.days.every(isPass)?"complete":"upcoming"; const title=document.createElement("strong"); title.textContent=phase.name; const range=document.createElement("span"); range.textContent=`${phase.days.filter(isPass).length}/${phase.days.length} missions`; item.append(title,range); return item; }));
   }
   function chunkTasks(day) {
     const tasks = [];
@@ -247,34 +251,47 @@
   }
   function stageResource(step) {
     const assessmentLocked=(config.assessmentGateDays || []).includes(visibleDay)&&!terminalStatuses.includes(statusForDay(visibleDay));
-    if (step.key === "learn") return visibleDay===1 ? {file:"LESSONS.md",label:"Mở hướng dẫn diagnostic"} : assessmentLocked ? {file:"ASSESSMENTS.md",label:"Mở assessment trước"} : {file:"LESSONS.md",label:"Mở bài học gốc"};
-    if (step.key === "practice") return assessmentLocked ? {file:"ASSESSMENTS.md",label:"Hoàn thành assessment trước"} : {file:"EXERCISES.md",label:"Mở bài tập cố định"};
+    if (["input","notice"].includes(step.key)) return visibleDay===1 ? {file:"LESSONS.md",label:"Open diagnostic guide"} : assessmentLocked ? {file:"ASSESSMENTS.md",label:"Open assessment first"} : {file:"LESSONS.md",label:"Open lesson source"};
+    if (step.key === "imitate") return assessmentLocked ? {file:"ASSESSMENTS.md",label:"Complete assessment first"} : {file:"EXERCISES.md",label:"Open fixed practice"};
     if (step.key === "recall") return {file:config.errorLedgerFile,label:"Mở Error Ledger",docs:true};
-    if (["feedback","retry","retain"].includes(step.key)) return {evidence:true,label:"Ghi feedback & retry"};
+    if (["feedback","retry","check"].includes(step.key)) return {evidence:true,label:"Open mission check"};
     return null;
   }
+  function splitAtPause(value) {
+    const parts = String(value || "").split(";").map(part => part.trim()).filter(Boolean);
+    return { first:parts[0] || value || "", rest:parts.slice(1).join("; ") || parts[0] || value || "" };
+  }
+  function stopTimer() { if (timerHandle) clearInterval(timerHandle); timerHandle = null; if (el.timerToggle) el.timerToggle.textContent = "Start timer"; }
+  function paintTimer() { el.timerReadout.textContent = `${String(Math.floor(timerSeconds/60)).padStart(2,"0")}:${String(timerSeconds%60).padStart(2,"0")}`; }
   function renderLoopStep(index) {
     activeLoopStep=Math.max(0,Math.min(index,loopSteps.length-1)); const step=loopSteps[activeLoopStep]; const mission=parseMission(visibleDay),f=mission.fields,repair=splitFeedback(f["Feedback & Retry"]);
-    const content={ mission:["Mission Challenge",f["Mission Challenge / PASS"]], learn:["Input + target language",f["Input + Target language"]], practice:["Notice + imitate",f["Imitate / Controlled"]], recall:["Recall from memory",f["Recall + Reuse"]], produce:["Independent production",f.Production], interact:["Two-way interaction",f.Interaction], feedback:["Feedback",repair.feedback], retry:["Retry",repair.retry], retain:["Retain the result",f.Evidence] }[step.key];
+    const input=splitAtPause(f["Input + Target language"]);
+    const content={ input:["Input",input.first], notice:["Notice",input.rest], imitate:["Imitate",f["Imitate / Controlled"]], recall:["Recall from memory",f["Recall + Reuse"]], produce:["Now it is your turn",f.Production], interact:["Scenario",f.Interaction], feedback:["Key correction",repair.feedback], retry:["Improved attempt",repair.retry], check:["Prove the mission",f.Evidence] }[step.key];
+    stopTimer(); document.body.dataset.sessionMode=step.mode.toLowerCase(); el.loopMode.textContent=step.mode;
     [...el.learningLoop.children].forEach((button,buttonIndex) => { button.setAttribute("aria-current",buttonIndex===activeLoopStep?"step":"false"); button.dataset.state=buttonIndex<activeLoopStep?"visited":buttonIndex===activeLoopStep?"current":"upcoming"; });
     el.loopPosition.textContent=`Bước ${activeLoopStep+1}/${loopSteps.length}`; el.loopTitle.textContent=content[0]; el.loopBody.innerHTML=`<p>${renderInline(content[1] || "Chưa có dữ liệu cho bước này.")}</p>`;
-    renderChunkCards(visibleDay,step.key); el.mistakesDue.replaceChildren(); if(step.key==="recall")renderMistakesDue(visibleDay);
+    renderChunkCards(visibleDay,step.key === "input" ? "learn" : step.key); el.mistakesDue.replaceChildren(); if(step.key==="recall")renderMistakesDue(visibleDay);
+    el.recallCover.hidden=step.key!=="recall"; el.performanceTimer.hidden=step.key!=="produce"; el.missionCheck.classList.toggle("is-active",step.key==="check");
+    if(step.key==="recall") el.targetChunks.hidden=true; else el.targetChunks.hidden=false;
+    if(step.key==="produce"){timerSeconds=0;paintTimer();}
     const resource=stageResource(step); el.stageResourceButton.hidden=!resource; el.stageResourceButton.disabled=false; if(resource){el.stageResourceButton.textContent=resource.label;el.stageResourceButton.dataset.file=resource.file||"";el.stageResourceButton.dataset.action=resource.docs?"docs":resource.evidence?"evidence":"source";}
-    el.loopNextButton.hidden=activeLoopStep===loopSteps.length-1; el.loopNextButton.textContent=activeLoopStep<loopSteps.length-1?`Tiếp: ${loopSteps[activeLoopStep+1].label}`:"";
+    el.loopNextButton.hidden=false; el.loopNextButton.textContent=activeLoopStep<loopSteps.length-1?`Complete · Next ${loopSteps[activeLoopStep+1].label}`:"Go to mission check";
+    const draft=draftForDay(visibleDay); draft.sessionStarted=true; draft.sessionStep=activeLoopStep; state.drafts[visibleDay]=draft; saveState();
   }
   function renderMission(day) {
     const mission=parseMission(day),f=mission.fields,isBoss=[7,14,21,28].includes(day),isFinal=day===30;
     el.missionShell.dataset.kind=isFinal?"final":isBoss?"boss":"daily"; el.missionKind.textContent=isFinal?"FINAL INTERACTION":isBoss?"BOSS FIGHT":"TODAY'S MISSION";
     const ability=f["Required ability + support"] || "",support=ability.match(/`(S[1-4](?:→S[1-4])?)`/)?.[1] || ability.match(/\bS[1-4](?:→S[1-4])?\b/)?.[0] || "Support";
-    el.nowStepCopy.innerHTML=renderInline(f["Mission / Why"] || days[day-1].outcome); el.missionSupport.textContent=support; el.missionSupport.title=ability; document.getElementById("missionAbility").innerHTML=renderInline(ability); el.missionChallenge.innerHTML=renderInline(f["Production"] || ""); el.missionPass.innerHTML=renderInline(f["Mission Challenge / PASS"] || days[day-1].done); el.chunkDueCopy.textContent=chunkDue(day);
+    el.nowStepCopy.innerHTML=renderInline(f["Mission / Why"] || days[day-1].outcome); el.missionSupport.textContent=support; el.missionSupport.title=ability; document.getElementById("missionAbility").innerHTML=renderInline(ability); el.missionChallenge.innerHTML=renderInline(f["Production"] || ""); el.missionPass.innerHTML=renderInline(f["Mission Challenge / PASS"] || days[day-1].done); el.chunkDueCopy.textContent=chunkDue(day); el.missionDayReadout.textContent=`${String(day).padStart(2,"0")} / 30`;
+    const nextBoss=[7,14,21,28,30].find(value=>value>=day); el.bossDistance.textContent=nextBoss===day?(isFinal?"Final interaction":"Checkpoint today"):nextBoss?`${nextBoss-day} day${nextBoss-day===1?"":"s"} to ${nextBoss===30?"Final":"Boss Fight"}`:"";
     el.learningLoop.replaceChildren(...loopSteps.map((step,index) => { const button=document.createElement("button"); button.type="button"; button.className="loop-step"; button.textContent=step.label; button.addEventListener("click",()=>renderLoopStep(index)); return button; }));
-    activeLoopStep=0; renderLoopStep(0);
+    const draft=draftForDay(day); el.sessionShell.hidden=!draft.sessionStarted; el.startSessionButton.textContent=draft.sessionStarted?"Resume session":"Start session"; activeLoopStep=Math.max(0,Math.min(Number(draft.sessionStep)||0,loopSteps.length-1)); if(draft.sessionStarted)renderLoopStep(activeLoopStep);
   }
   function openStageResource() {
     const action=el.stageResourceButton.dataset.action,file=el.stageResourceButton.dataset.file;
-    if(action==="evidence"){const disclosure=document.querySelector(".evidence-disclosure");disclosure.open=true;disclosure.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});return;}
+    if(action==="evidence"){el.missionCheck.classList.add("is-active");el.missionCheck.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});return;}
     if(action==="docs"){selectTab(2);openDocument(file);return;}
-    const surface=[...el.dailySources.querySelectorAll(".markdown[data-source]")].find(item=>item.dataset.source===file); if(!surface){el.formMessage.textContent="Tài liệu này mở sau assessment theo đúng gate của ngày.";el.formMessage.dataset.state="error";return;} const disclosure=surface.closest("details");disclosure.open=true;disclosure.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+    const surface=[...el.dailySources.querySelectorAll(".markdown[data-source]")].find(item=>item.dataset.source===file); if(!surface){el.formMessage.textContent="Tài liệu này mở sau assessment theo đúng gate của ngày.";el.formMessage.dataset.state="error";return;} const disclosure=surface.closest("details");document.querySelector(".day-materials").classList.add("is-active");disclosure.open=true;disclosure.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   }
   function renderDailySources(day) {
     const assessmentLocked = (config.assessmentGateDays || []).includes(day) && !terminalStatuses.includes(statusForDay(day));
@@ -303,7 +320,8 @@
     el.audioSources.replaceChildren(...tracks.map(path => { const card = document.createElement("div"); card.className = "audio-card"; const label = document.createElement("p"); label.textContent = path; const audio = document.createElement("audio"); audio.controls = true; audio.preload = "metadata"; audio.src = path; card.append(label,audio); return card; }));
   }
   function renderLesson() {
-    const entry = days[visibleDay - 1]; el.dayPhase.textContent = entry.phase; el.dayTitle.textContent = `Ngày ${entry.day} — ${entry.title}`; el.dayTitle.tabIndex = -1;
+    const entry = days[visibleDay - 1]; el.dayPhase.textContent = entry.phase; el.dayTitle.textContent = entry.title; el.dayTitle.tabIndex = -1; document.body.dataset.missionKind=entry.day===30?"final":[7,14,21,28].includes(entry.day)?"boss":"daily";
+    document.querySelector(".day-materials").classList.remove("is-active"); el.missionCheck.classList.remove("is-active");
     el.dayOutcome.textContent = entry.outcome; el.dayMinimum.textContent = entry.minimum; el.dayTarget.textContent = entry.target; el.dayDone.textContent = entry.done; el.dayEvidence.textContent = entry.evidence; el.dayStretch.textContent = entry.stretch;
     el.detailStatus.textContent = statusForDay(entry.day); renderMission(entry.day);
     renderDailySources(entry.day); const draft = draftForDay(entry.day); el.statusSelect.value = draft.status; el.timeSpent.value = draft.timeMinutes ?? ""; el.doneTest.value = draft.doneTest ?? ""; el.meaningScore.value=draft.meaningScore ?? ""; el.outputDuration.value=draft.outputDuration ?? ""; el.responseLatency.value=draft.responseLatency ?? ""; el.supportLevel.value=draft.supportLevel ?? ""; el.interactionTurns.value=draft.interactionTurns ?? ""; el.repairResult.value=draft.repairResult ?? ""; el.evidence.value = draft.evidence ?? ""; el.mainError.value = draft.mainError ?? ""; el.nextAction.value = draft.nextAction ?? ""; el.verified.checked = Boolean(draft.verified);
@@ -314,10 +332,22 @@
   }
   function renderProgress() {
     el.progressList.replaceChildren(...days.map(entry => { const item = document.createElement("li"); item.className = "progress-item"; const day = document.createElement("span"); day.textContent = `Ngày ${entry.day}`; const title = document.createElement("strong"); title.textContent = entry.outcome; const status = document.createElement("span"); status.className = "progress-state"; status.dataset.state = statusForDay(entry.day); status.textContent = statusForDay(entry.day); item.append(day,title,status); return item; }));
+    const measurable = state.events.filter(event => event.status !== "SKIPPED").sort(compareEvents);
+    const capabilitySpecs=[
+      {label:"Speak longer",key:"outputDuration",unit:"s",better:"higher"},{label:"Respond faster",key:"responseLatency",unit:"s",better:"lower"},{label:"Need less help",key:"supportLevel",unit:"",better:"support"},{label:"Handle more turns",key:"interactionTurns",unit:" turns",better:"higher"},{label:"Recover better",key:"repairResult",unit:"",better:"repair"}
+    ];
+    el.capabilityGrowth.replaceChildren(...capabilitySpecs.map(spec=>{
+      const values=measurable.map(event=>event[spec.key]).filter(value=>value!==null&&value!==undefined&&value!==""); const item=document.createElement("article"); const label=document.createElement("h2"); label.textContent=spec.label; const result=document.createElement("p");
+      if(values.length<2) result.textContent="Need more evidence";
+      else { const first=values[0],last=values.at(-1); result.textContent=`${first}${spec.unit} → ${last}${spec.unit}`; }
+      const note=document.createElement("small"); note.textContent=values.length?`${values.length} recorded attempt${values.length===1?"":"s"}`:"No measurement yet"; item.append(label,result,note); return item;
+    }));
+    const fixes=state.events.filter(event=>event.mainError).sort(compareEvents).reverse();
+    el.errorProgress.replaceChildren(...(fixes.length?fixes.slice(0,8).map(event=>{const item=document.createElement("article");const label=document.createElement("span");label.textContent=`DAY ${String(event.day).padStart(2,"0")}`;const copy=document.createElement("p");copy.textContent=event.mainError;const due=document.createElement("small");due.textContent=`Review Day ${Math.min(30,event.day+1)} and Day ${Math.min(30,event.day+3)}`;item.append(label,copy,due);return item;}):[Object.assign(document.createElement("p"),{textContent:"No recorded correction yet."})]));
     if (!state.events.length) { const item = document.createElement("li"); item.className = "history-item"; item.textContent = "Chưa có log."; el.historyList.replaceChildren(item); }
     else el.historyList.replaceChildren(...[...state.events].sort(compareEvents).reverse().map(event => { const item = document.createElement("li"); item.className = "history-item"; const meta = document.createElement("div"); meta.className = "history-meta"; meta.textContent = `Buổi ${event.session} · Ngày ${event.day} · ${event.status} · ${event.timestamp}`; const performance=document.createElement("p"); performance.className="performance-metrics"; performance.textContent=`Meaning ${event.meaningScore ?? "—"}% · Output ${event.outputDuration ?? "—"}s · Latency ${event.responseLatency ?? "—"}s · Support ${event.supportLevel || "—"} · Turns ${event.interactionTurns ?? "—"} · Repair ${event.repairResult || "—"}`; const detail = document.createElement("p"); detail.textContent = `Thời gian: ${event.timeMinutes === null ? "—" : `${event.timeMinutes}'`} · Done test: ${event.doneTest || "—"} · Evidence: ${event.evidence || "—"} · Lỗi: ${event.mainError || "—"} · Next: ${event.nextAction || "—"} · ${event.verification}`; item.append(meta,performance,detail); return item; }));
   }
-  function renderSummary() { const passes = days.filter(entry => isPass(entry.day)).length; const today=currentDay(); const phase=(config.journeyPhases||[]).find(item=>today>=item.from&&today<=item.to); el.passCount.textContent = passes; el.currentDayReadout.textContent = String(today).padStart(2,"0"); el.railOutput.textContent = `${passes}/30`; el.chunkSummary.textContent = `${phase?.label || "30-day journey"} · supported English → independent English · ${chunkDue(today)}`; el.runStatus.textContent = statusForDay(30) === "PASS" ? "PASS" : state.events.length ? "IN_PROGRESS" : "DRAFT"; }
+  function renderSummary() { const passes = days.filter(entry => isPass(entry.day)).length; const today=currentDay(); const phase=(config.journeyPhases||[]).find(item=>today>=item.from&&today<=item.to); el.currentDayReadout.textContent = String(today).padStart(2,"0"); el.railOutput.textContent = `${passes}/30`; el.chunkSummary.textContent = `${phase?.label || "30-day journey"} · ${passes} PASS`; el.currentMissionCopy.textContent=days[today-1]?.outcome||""; el.launchCurrentButton.textContent=state.drafts[today]?.sessionStarted?"Resume mission":"Open mission"; el.runStatus.textContent = statusForDay(30) === "PASS" ? "PASS" : state.events.length ? "IN_PROGRESS" : "DRAFT"; }
   function renderStorage() { if (!el.storageMessage) return; el.storageMessage.textContent = storageError || "Progress được lưu trên trình duyệt này."; el.storageMessage.dataset.state = storageError ? "error" : "idle"; }
   function hasUnlock(name,day) { return state.unlocks.some(item => item.name === name && item.day === day); }
   function protectedContent(name,day) {
@@ -358,7 +388,7 @@
   }
   function navigateToDay(day,{replace=false}={}) { if(!isUnlocked(day))return; routeNoticeText=""; if(activeRoute.kind==="day")syncDraft(); selectTab(0); history[replace?"replaceState":"pushState"](null,"",`#day/${String(day).padStart(2,"0")}`); applyRoute({focus:true}); window.scrollTo({top:document.getElementById("learnPanel").offsetTop-72,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); }
   function navigateToOverview(){if(activeRoute.kind==="day")syncDraft();routeNoticeText="";selectTab(0);history.pushState(null,"","#overview");applyRoute({focus:true});document.querySelector(`.day-button:nth-child(${visibleDay})`)?.focus({preventScroll:true});}
-  function syncDraft() { if(activeRoute.kind!=="day")return; state.drafts[visibleDay] = { status:el.statusSelect.value,timeMinutes:el.timeSpent.value,doneTest:el.doneTest.value,meaningScore:el.meaningScore.value,outputDuration:el.outputDuration.value,responseLatency:el.responseLatency.value,supportLevel:el.supportLevel.value,interactionTurns:el.interactionTurns.value,repairResult:el.repairResult.value,evidence:el.evidence.value,mainError:el.mainError.value,nextAction:el.nextAction.value,verified:el.verified.checked }; saveState(); }
+  function syncDraft() { if(activeRoute.kind!=="day")return; const existing=draftForDay(visibleDay); state.drafts[visibleDay] = { status:el.statusSelect.value,timeMinutes:el.timeSpent.value,doneTest:el.doneTest.value,meaningScore:el.meaningScore.value,outputDuration:el.outputDuration.value,responseLatency:el.responseLatency.value,supportLevel:el.supportLevel.value,interactionTurns:el.interactionTurns.value,repairResult:el.repairResult.value,evidence:el.evidence.value,mainError:el.mainError.value,nextAction:el.nextAction.value,verified:el.verified.checked,sessionStarted:Boolean(existing.sessionStarted),sessionStep:Number(existing.sessionStep)||0 }; saveState(); }
   [el.statusSelect,el.timeSpent,el.doneTest,el.meaningScore,el.outputDuration,el.responseLatency,el.supportLevel,el.interactionTurns,el.repairResult,el.evidence,el.mainError,el.nextAction,el.verified].forEach(field => field.addEventListener("input",syncDraft));
   function formMessage(message,stateName,invalid=[]) { [el.statusSelect,el.timeSpent,el.doneTest,el.meaningScore,el.outputDuration,el.responseLatency,el.supportLevel,el.interactionTurns,el.repairResult,el.evidence,el.mainError,el.nextAction].forEach(field => field.setAttribute("aria-invalid",String(invalid.includes(field)))); el.formMessage.textContent = message; el.formMessage.dataset.state = stateName; invalid[0]?.focus(); }
   function appendProgress(status) {
@@ -373,7 +403,12 @@
   el.previousButton.addEventListener("click",() => { if(visibleDay<=1)return; navigateToDay(visibleDay-1); });
   el.nextButton.addEventListener("click",() => { if (!isPass(visibleDay) || visibleDay >= 30) return; navigateToDay(visibleDay+1); });
   el.backToOverview.addEventListener("click",navigateToOverview);
-  el.loopNextButton.addEventListener("click",()=>renderLoopStep(activeLoopStep+1)); el.stageResourceButton.addEventListener("click",openStageResource);
+  el.startSessionButton.addEventListener("click",()=>{const draft=draftForDay(visibleDay);draft.sessionStarted=true;draft.sessionStep=Number(draft.sessionStep)||0;state.drafts[visibleDay]=draft;saveState();el.sessionShell.hidden=false;renderLoopStep(draft.sessionStep);el.sessionShell.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});});
+  el.launchCurrentButton.addEventListener("click",()=>navigateToDay(currentDay()));
+  el.loopNextButton.addEventListener("click",()=>{if(activeLoopStep<loopSteps.length-1)renderLoopStep(activeLoopStep+1);else{el.missionCheck.classList.add("is-active");el.missionCheck.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}); el.stageResourceButton.addEventListener("click",openStageResource);
+  el.revealRecallButton.addEventListener("click",()=>{el.recallCover.hidden=true;el.targetChunks.hidden=false;el.revealRecallButton.textContent="Revealed";});
+  el.timerToggle.addEventListener("click",()=>{if(timerHandle){stopTimer();return;}el.timerToggle.textContent="Pause timer";timerHandle=setInterval(()=>{timerSeconds+=1;paintTimer();},1000);});
+  el.timerReset.addEventListener("click",()=>{stopTimer();timerSeconds=0;paintTimer();});
   el.exportButton.addEventListener("click",() => { const blob = new Blob([JSON.stringify(state,null,2)],{type:"application/json"}); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `${config.slug}-progress.json`; link.click(); URL.revokeObjectURL(url); });
   el.importButton.addEventListener("click",() => el.importInput.click()); el.importInput.addEventListener("change",async event => { const file = event.target.files?.[0]; if (!file) return; try { const imported = normalizeState(JSON.parse(await file.text())); if (!imported) throw new Error("invalid"); const ids = new Set(state.events.map(item => item.id)); state.events.push(...imported.events.filter(item => !ids.has(item.id))); state.drafts = {...imported.drafts,...state.drafts}; const unlocks = new Set(state.unlocks.map(item => `${item.name}:${item.day}:${item.timestamp}`)); state.unlocks.push(...imported.unlocks.filter(item => !unlocks.has(`${item.name}:${item.day}:${item.timestamp}`))); saveState(); visibleDay = currentDay(); render(); el.storageMessage.textContent = "Đã hợp nhất progress; log hiện có được giữ nguyên."; el.storageMessage.dataset.state = "success"; } catch { el.storageMessage.textContent = "File progress không hợp lệ; dữ liệu hiện có được giữ nguyên."; el.storageMessage.dataset.state = "error"; } finally { event.target.value = ""; } });
   const tabs = [document.getElementById("learnTab"),document.getElementById("progressTab"),document.getElementById("docsTab")]; const panels = [document.getElementById("learnPanel"),document.getElementById("progressPanel"),document.getElementById("docsPanel")];
