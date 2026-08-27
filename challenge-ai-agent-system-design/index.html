@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <style>
-    /* Hallmark · macrostructure: Index-First · genre: modern-minimal · theme: Cobalt · enrichment: none · nav: N9 · footer: Ft2 · contrast: pass (40–41) · browser: pending */
-    /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+    /* Hallmark · genre: modern-minimal · macrostructure: Map/Diagram overview + Workbench detail · theme: Cobalt · designed-as-app */
+    /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; overflow-x: clip; }
     html { scroll-behavior: smooth; scroll-padding-block-start: calc(var(--layout-tabs) + var(--layout-gutter)); scroll-padding-block-end: calc(var(--layout-actionbar) + env(safe-area-inset-bottom)); }
@@ -288,6 +288,34 @@
     }
     .action-copy { flex: 1 1 auto; min-width: 0; color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .action-group { display: flex; gap: var(--space-xs); flex: 0 0 auto; }
+    body[data-route="overview"] { padding-bottom: 0; }
+    body[data-route="day"] #overviewIntro { display: none; }
+    .learning-stage { min-width: 0; }
+    .overview-view { width: min(100%, 80rem); margin-inline: auto; padding: var(--space-lg) clamp(var(--space-md), 4vw, var(--space-xl)) var(--space-3xl); }
+    .overview-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-lg); padding-bottom: var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule-2); }
+    .overview-heading h2 { max-width: 16ch; margin: 0; font-size: clamp(var(--text-xl), 6vw, var(--text-2xl)); line-height: 1.05; overflow-wrap: anywhere; min-width: 0; }
+    .overview-heading output { color: var(--color-accent); font-family: var(--font-mono); font-size: var(--text-lg); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .route-notice { min-height: 1lh; margin: var(--space-sm) 0; color: var(--color-error); font-size: var(--text-sm); }
+    .phase-map { display: grid; gap: var(--rule-thin); margin-block: var(--space-lg); border-block: var(--rule-thin) solid var(--color-rule); background: var(--color-rule); }
+    .phase-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-md); padding: var(--space-sm) 0; background: var(--color-paper); }
+    .phase-row strong { overflow-wrap: anywhere; min-width: 0; font-family: var(--font-display); font-size: var(--text-sm); }
+    .phase-row span { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .overview-days { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); }
+    .overview-days .day-button { display: flex; min-height: 3.5rem; justify-content: space-between; gap: var(--space-xs); padding: var(--space-sm); text-align: start; }
+    .day-number { color: inherit; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .day-state { overflow: hidden; color: inherit; font-size: var(--text-xs); text-overflow: ellipsis; white-space: nowrap; }
+    .day-button[data-state="available"] { border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+    .day-button[data-state="locked"] { cursor: help; opacity: 0.55; }
+    .day-button[data-state="blocked"] { border-color: var(--color-error); color: var(--color-error); }
+    .day-detail-view { width: min(100%, 76rem); margin-inline: auto; padding: var(--space-md) clamp(var(--space-md), 4vw, var(--space-xl)) var(--space-3xl); }
+    .detail-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding-block: var(--space-sm) var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .back-link { min-height: 2.75rem; padding: 0; border: 0; background: transparent; color: var(--color-accent); cursor: pointer; font-weight: 700; white-space: nowrap; }
+    .detail-nav span { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-xs); white-space: nowrap; }
+    .day-detail-view .lesson-panel { padding-top: var(--space-xl); }
+    .now-step { display: grid; grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr); gap: var(--space-lg); margin-block: var(--space-xl); padding-block: var(--space-lg); border-block: var(--rule-thin) solid var(--color-accent); }
+    .now-step h3, .now-step p { margin: 0; }
+    .now-step h3 { font-size: var(--text-sm); }
+    .now-step p { max-width: 68ch; }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -313,13 +341,13 @@
     .foot-line p { margin: 0; }
 
     @media (hover: hover) and (pointer: fine) {
-      .day-button:hover:not(:disabled), .source-link:hover, .btn:hover:not(:disabled) { background: var(--color-paper-3); }
+      .day-button:hover, .source-link:hover, .btn:hover:not(:disabled) { background: var(--color-paper-3); }
       .btn-primary:hover:not(:disabled) { background: var(--color-ink); }
       .btn-primary:focus-visible:hover { background: var(--color-accent); }
       .evidence-block input:hover:not(:disabled), .evidence-block select:hover:not(:disabled), .evidence-block textarea:hover:not(:disabled) { background: var(--color-paper-3); }
     }
     @media (min-width: 40rem) {
-      .day-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .day-grid, .overview-days { grid-template-columns: repeat(6, minmax(0, 1fr)); }
       .contract-row { grid-template-columns: minmax(7rem, 0.24fr) minmax(0, 1fr); gap: var(--space-lg); }
       .progress-item { grid-template-columns: 4.5rem minmax(0, 1fr) 8rem; align-items: center; }
       .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -334,24 +362,71 @@
       .document-rail { display: grid; overflow-x: clip; padding-block-end: 0; }
       .document-button { width: 100%; max-width: none; }
       .day-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .overview-days { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .phase-map { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rule-thin); }
+      .phase-row { padding-inline: var(--space-md); }
+      .day-detail-view .lesson-panel { display: grid; grid-template-columns: minmax(14rem, 0.3fr) minmax(0, 1fr); column-gap: var(--space-2xl); }
+      .day-detail-view .day-heading, .day-detail-view .now-step, .day-detail-view .contract, .day-detail-view .embedded-content, .day-detail-view .evidence-block { grid-column: 2; }
     }
     @media (min-width: 90rem) { .workspace { grid-template-columns: 18rem minmax(0, 1fr); } }
+    @media (max-width: 39.999rem) {
+      .intro { gap: var(--space-md); padding-block: var(--space-lg); }
+      .intro .lede { margin-top: var(--space-sm); font-size: var(--text-sm); }
+      .intro h1 { font-size: var(--text-xl); }
+      .readout-cell { padding: var(--space-sm); }
+      .overview-heading { align-items: start; }
+      .overview-days .day-button { align-items: flex-start; flex-direction: column; }
+      .now-step { grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); }
+      .detail-nav { position: sticky; inset-block-start: var(--layout-tabs); z-index: 280; background: var(--color-paper); }
+      .action-copy { display: none; }
+      .action-group { width: 100%; justify-content: flex-end; }
+    }
+    /* Hallmark · compact Day Detail · reasoning split · content preserved */
+    .compact-disclosure, .source-disclosure { min-width: 0; border-block-end: var(--rule-thin) solid var(--color-rule); }
+    .compact-disclosure > summary, .source-disclosure > summary { position: relative; display: block; min-height: 2.75rem; padding: var(--space-sm) calc(var(--space-lg) + var(--space-xs)) var(--space-sm) var(--space-sm); overflow: hidden; color: var(--color-ink); font-weight: 700; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; list-style: none; }
+    .compact-disclosure > summary::-webkit-details-marker, .source-disclosure > summary::-webkit-details-marker { display: none; }
+    .compact-disclosure > summary::after, .source-disclosure > summary::after { position: absolute; inset-inline-end: var(--space-sm); content: "+"; color: var(--color-accent); font-family: var(--font-mono); }
+    .compact-disclosure[open] > summary::after, .source-disclosure[open] > summary::after { content: "−"; }
+    .compact-disclosure[open] > summary, .source-disclosure[open] > summary { background: var(--color-paper-3); }
+    .contract-disclosure { margin-top: var(--space-sm); border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .contract-disclosure .contract-row { padding-block: var(--space-sm); }
+    .embedded-content { gap: 0; margin-top: 0; border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .source-disclosure > .content-surface { padding: var(--space-md); border: 0; border-block-start: var(--rule-thin) solid var(--color-rule); border-radius: 0; background: var(--color-paper); }
+    .evidence-disclosure { margin-top: var(--space-md); border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .evidence-disclosure .evidence-block { margin: 0; padding: var(--space-md); border: 0; border-radius: 0; }
+    .day-brief, .day-work { min-width: 0; }
+    @media (max-width: 39.999rem) {
+      body[data-route="day"] .day-detail-view { padding-top: var(--space-sm); }
+      body[data-route="day"] .detail-nav { margin-bottom: var(--space-md); }
+      body[data-route="day"] .day-heading { padding-bottom: var(--space-md); }
+      body[data-route="day"] .day-heading h2 { font-size: clamp(var(--text-lg), 8vw, var(--text-xl)); }
+      .now-step { margin: var(--space-md) 0; padding: var(--space-sm); }
+      .source-disclosure > .content-surface { padding-inline: 0; }
+    }
+    @media (min-width: 60rem) {
+      body[data-route="day"]:has(#learnTab[aria-selected="true"]) { height: 100dvh; overflow: hidden; padding-bottom: 0; }
+      body[data-route="day"] .day-detail-view { display: flex; width: min(100%, 86rem); height: calc(100dvh - var(--layout-topbar) - var(--layout-tabs) - var(--layout-actionbar)); max-width: none; flex-direction: column; padding-block: var(--space-sm); overflow: hidden; }
+      body[data-route="day"] .detail-nav { flex: 0 0 auto; margin-bottom: var(--space-sm); padding-bottom: var(--space-xs); }
+      body[data-route="day"] .lesson-panel { display: grid; min-height: 0; grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 1fr); gap: clamp(var(--space-lg), 4vw, var(--space-2xl)); overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; padding-inline-end: var(--space-xs); }
+      body[data-route="day"] .day-brief, body[data-route="day"] .day-work { align-self: start; }
+      .day-work .evidence-disclosure { margin-bottom: var(--space-lg); }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: var(--dur-micro) !important; animation-iteration-count: 1 !important; transition-duration: var(--dur-micro) !important; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
   <header class="nav shell">
-    <a class="wordmark" href="#main">AI Agent System Design</a>
+    <a class="wordmark" href="#overview">AI Agent System Design</a>
     <span class="nav-status"><span class="status-dot" aria-hidden="true"></span><span id="navStatus">DRAFT</span></span>
   </header>
 
   <main id="main" class="shell">
-    <section class="intro" aria-labelledby="pageTitle">
+    <section class="intro" id="overviewIntro" aria-labelledby="pageTitle">
       <div class="intro-copy">
-        <p class="meta">30 buổi · 120 phút</p>
+        <p class="meta">30 buổi · 120–210 phút theo loại buổi</p>
         <h1 id="pageTitle">30-Day Challenge: AI Agent System Design Foundations</h1>
         <p class="lede">Sau 30 buổi, có thể giải thích, tính toán, chứng minh và thiết kế độc lập trước các bài mới cùng họ năng lực với hai đề nguồn, thay vì ghi nhớ đáp án của 118 câu.</p>
       </div>
@@ -363,22 +438,42 @@
 
     <div class="tabs-wrap">
       <div class="tabs" role="tablist" aria-label="Challenge">
-        <button class="tab" id="learnTab" type="button" role="tab" aria-selected="true" aria-controls="learnPanel">Học</button>
+        <button class="tab" id="learnTab" type="button" role="tab" aria-selected="true" aria-controls="learnPanel">Lộ trình</button>
         <button class="tab" id="progressTab" type="button" role="tab" aria-selected="false" aria-controls="progressPanel" tabindex="-1">Tiến độ</button>
         <button class="tab" id="documentTab" type="button" role="tab" aria-selected="false" aria-controls="documentPanel" tabindex="-1">Authority files</button>
       </div>
     </div>
 
-    <section id="learnPanel" class="workspace" role="tabpanel" aria-labelledby="learnTab">
-      <aside class="day-rail" aria-labelledby="dayRailTitle">
-        <div class="rail-heading"><h2 id="dayRailTitle">30 ngày</h2><output id="railOutput">0/30</output></div>
-        <div id="dayGrid" class="day-grid"></div>
-      </aside>
-      <article class="lesson-panel" aria-live="polite">
+    <section id="learnPanel" class="learning-stage" role="tabpanel" aria-labelledby="learnTab">
+      <section class="overview-view" id="overviewView" aria-labelledby="dayRailTitle">
+        <header class="overview-heading">
+          <div>
+            <p class="meta">Reasoning map</p>
+            <h2 id="dayRailTitle">Lộ trình 30 ngày</h2>
+          </div>
+          <output id="railOutput">0/30</output>
+        </header>
+        <p class="route-notice" id="routeNotice" aria-live="polite"></p>
+        <div id="dayGrid" class="day-grid overview-days"></div>
+        <div class="phase-map" id="phaseMap" aria-label="Các phase của challenge"></div>
+      </section>
+
+      <section class="day-detail-view" id="dayDetailView" hidden>
+        <nav class="detail-nav" aria-label="Điều hướng ngày">
+          <button class="back-link" id="backToOverview" type="button">← Tất cả ngày</button>
+          <span id="detailStatus">NOT_STARTED</span>
+        </nav>
+        <article class="lesson-panel" aria-live="polite">
         <header class="day-heading">
           <p class="phase" id="dayPhase"></p>
           <h2 id="dayTitle"></h2>
         </header>
+        <section class="now-step" aria-labelledby="nowStepTitle">
+          <h3 id="nowStepTitle">Việc cần làm ngay</h3>
+          <p id="nowStepCopy"></p>
+        </section>
+        <details class="compact-disclosure contract-disclosure">
+          <summary>Yêu cầu hoàn thành</summary>
         <dl class="contract">
           <div class="contract-row"><dt>Outcome</dt><dd id="dayOutcome"></dd></div>
           <div class="contract-row"><dt>Minimum action</dt><dd id="dayMinimum"></dd></div>
@@ -387,6 +482,7 @@
           <div class="contract-row"><dt>Evidence</dt><dd id="dayEvidence"></dd></div>
           <div class="contract-row"><dt>Stretch</dt><dd id="dayStretch"></dd></div>
         </dl>
+        </details>
         <!-- <nav class="source-links" aria-label="Authority files">
           <a class="source-link" href="LESSONS.md">LESSONS.md</a>
           <a class="source-link" href="PLAN.md">PLAN.md</a>
@@ -394,10 +490,15 @@
           <a class="source-link" href="PROGRESS.md">PROGRESS.md</a>
         </nav> -->
         <div class="embedded-content">
-          <section class="content-surface" id="lessonSource"></section>
-          <section class="content-surface" id="planSource"></section>
-          <section class="content-surface" id="assessmentSource" hidden></section>
+          <details class="source-disclosure" data-source-panel="assessment"><summary>Assessment của ngày</summary><section class="content-surface" id="assessmentSource" hidden></section></details>
+          <p class="evidence-help" id="assessmentGateMessage" hidden></p>
+          <details class="source-disclosure" data-source-panel="lesson" open><summary>Bài học chính</summary><section class="content-surface" id="lessonSource"></section></details>
+          <details class="source-disclosure" data-source-panel="plan"><summary>Daily contract chi tiết</summary><section class="content-surface" id="planSource"></section></details>
+          <details class="source-disclosure" data-source-panel="resource"><summary>Tài nguyên bổ trợ</summary><section class="content-surface" id="resourceSource"></section></details>
+          <details class="source-disclosure" data-source-panel="practice"><summary>Transfer practice tùy chọn</summary><section class="content-surface" id="appliedAssessmentSource"></section></details>
         </div>
+        <details class="compact-disclosure evidence-disclosure">
+          <summary>Ghi kết quả &amp; evidence</summary>
         <div class="evidence-block">
           <form class="evidence-form" id="evidenceForm" novalidate>
             <div class="field-grid">
@@ -444,7 +545,9 @@
             <p class="evidence-help" id="evidenceHelp" aria-live="polite">PASS chỉ được ghi khi Done test và evidence đều có dữ liệu xác minh.</p>
           </form>
         </div>
-      </article>
+        </details>
+        </article>
+      </section>
     </section>
 
     <section id="progressPanel" class="workspace progress-panel" role="tabpanel" aria-labelledby="progressTab" hidden>
@@ -478,16 +581,18 @@
 
   <!-- <footer class="foot-line shell"><p>CHALLENGE.md · PLAN.md · LESSONS.md · ASSESSMENTS.md · PROGRESS.md</p></footer> -->
 
-  <aside class="action-bar" aria-label="Ngày">
+  <aside class="action-bar" id="dayActionBar" aria-label="Ngày" hidden>
     <span class="action-copy" id="actionCopy">Ngày 1 · NOT_STARTED</span>
     <div class="action-group">
+      <button class="btn" id="previousButton" type="button" disabled>Ngày trước</button>
       <button class="btn btn-primary" id="nextButton" type="button" disabled>Ngày tiếp theo</button>
     </div>
   </aside>
 
   <script src="content-data.js"></script>
+  <script src="supplemental-data.js"></script>
   <script>
-    const documentPayloads = Object.fromEntries((window.CHALLENGE_CONTENT || []).map(file => [file.name, file.base64]));
+    const documentPayloads = Object.fromEntries([...(window.CHALLENGE_CONTENT || []), ...(window.CHALLENGE_SUPPLEMENTAL || [])].map(file => [file.name, file.base64]));
     const documents = {};
     function readDocument(name) {
       if (!(name in documents)) {
@@ -497,7 +602,7 @@
       }
       return documents[name];
     }
-    const documentOrder = ["CHALLENGE.md", "PLAN.md", "LESSONS.md", "COVERAGE_MAP.md", "LESSON_TEMPLATE.md", "ASSESSMENTS.md", "PROGRESS.md", "ASSESSMENT_KEYS.md"];
+    const documentOrder = ["CHALLENGE.md", "PLAN.md", "LESSONS.md", "SUPPLEMENTAL_RESOURCES.md", "DAILY_APPLIED_ASSESSMENTS.md", "RESEARCH_LEDGER.md", "COVERAGE_MAP.md", "LESSON_TEMPLATE.md", "ASSESSMENTS.md", "PROGRESS.md", "ASSESSMENT_KEYS.md"];
     let activeDocument = "CHALLENGE.md";
 
     function parseDayContracts(markdown) {
@@ -632,9 +737,21 @@
     let storageError = "";
     let state = loadState();
     let visibleDay = currentDay();
+    let activeRoute = { kind: "overview" };
+    let routeNoticeText = "";
 
-    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","assessmentSource","documentRail","documentTitle","documentNotice","documentContent"];
+    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","previousButton","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","resourceSource","appliedAssessmentSource","assessmentSource","assessmentGateMessage","documentRail","documentTitle","documentNotice","documentContent","overviewView","dayDetailView","routeNotice","phaseMap","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
     const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+    const lessonShell = el.dayDetailView.querySelector(".lesson-panel");
+    const dayBrief = document.createElement("div"); dayBrief.className = "day-brief";
+    const dayWork = document.createElement("div"); dayWork.className = "day-work";
+    [".day-heading",".now-step",".contract-disclosure"].forEach(selector => dayBrief.append(lessonShell.querySelector(selector)));
+    [".embedded-content",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
+    lessonShell.append(dayBrief,dayWork);
+    const sourceDisclosures = [...document.querySelectorAll(".embedded-content > details.source-disclosure")];
+    sourceDisclosures.forEach(disclosure => disclosure.addEventListener("toggle", () => {
+      if (disclosure.open) sourceDisclosures.forEach(item => { if (item !== disclosure) item.open = false; });
+    }));
 
     function freshState() { return { schema: 2, events: [], drafts: {}, assessmentUnlocks: [] }; }
     function eventId() { return globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`; }
@@ -730,13 +847,52 @@
         const button = document.createElement("button");
         button.type = "button";
         button.className = "day-button";
-        button.textContent = String(day).padStart(2, "0");
-        button.disabled = !isUnlocked(day);
-        button.dataset.state = isComplete(day) ? "complete" : terminalStatuses.includes(dayStatus(day)) ? "recorded" : day === visibleDay ? "current" : "idle";
-        button.setAttribute("aria-label", `Ngày ${day} — ${outcome} — ${dayStatus(day)}`);
-        if (day === visibleDay) button.setAttribute("aria-current", "step");
-        button.addEventListener("click", () => { visibleDay = day; render(); document.getElementById("dayTitle").focus({ preventScroll: true }); });
+        const unlocked = isUnlocked(day);
+        const status = dayStatus(day);
+        const visualState = !unlocked ? "locked" : isComplete(day) ? "complete" : status === "BLOCKED" ? "blocked" : terminalStatuses.includes(status) ? "recorded" : "available";
+        button.dataset.state = visualState;
+        const number = document.createElement("span");
+        number.className = "day-number";
+        number.textContent = String(day).padStart(2, "0");
+        const stateLabel = document.createElement("span");
+        stateLabel.className = "day-state";
+        stateLabel.textContent = !unlocked ? "LOCKED" : status === "NOT_STARTED" ? "AVAILABLE" : status;
+        button.append(number, stateLabel);
+        const lockReason = day > 1 ? `Hoàn thành Ngày ${day - 1} với PASS để mở.` : "";
+        button.setAttribute("aria-label", `Ngày ${day} — ${outcome} — ${stateLabel.textContent}${lockReason ? ` — ${lockReason}` : ""}`);
+        button.setAttribute("aria-disabled", String(!unlocked));
+        button.addEventListener("click", () => {
+          if (!unlocked) {
+            routeNoticeText = lockReason;
+            el.routeNotice.textContent = routeNoticeText;
+            return;
+          }
+          navigateToDay(day);
+        });
         return button;
+      }));
+    }
+
+    function renderPhaseMap() {
+      const phases = [];
+      days.forEach(entry => {
+        let phase = phases.at(-1);
+        if (!phase || phase.name !== entry.phase) {
+          phase = { name: entry.phase, days: [] };
+          phases.push(phase);
+        }
+        phase.days.push(entry.day);
+      });
+      el.phaseMap.replaceChildren(...phases.map(phase => {
+        const row = document.createElement("div");
+        row.className = "phase-row";
+        const title = document.createElement("strong");
+        title.textContent = phase.name;
+        const range = document.createElement("span");
+        const passed = phase.days.filter(isComplete).length;
+        range.textContent = `${phase.days[0]}–${phase.days.at(-1)} · ${passed}/${phase.days.length}`;
+        row.append(title, range);
+        return row;
       }));
     }
 
@@ -751,13 +907,30 @@
       el.dayDone.textContent = done;
       el.dayEvidence.textContent = evidence;
       el.dayStretch.textContent = stretch;
+      el.detailStatus.textContent = dayStatus(day);
+      el.nowStepCopy.textContent = minimum;
       const lessonSection = extractSection(readDocument("LESSONS.md"), 2, `Ngày ${day} —`);
       const planSection = extractSection(readDocument("PLAN.md"), 3, `Ngày ${day} —`);
+      const resourceSection = extractSection(readDocument("SUPPLEMENTAL_RESOURCES.md"), 2, `Ngày ${day} —`);
+      const appliedAssessmentSection = extractSection(readDocument("DAILY_APPLIED_ASSESSMENTS.md"), 2, `Ngày ${day} —`);
       const assessmentSection = assessmentHeading(day) ? extractSection(readDocument("ASSESSMENTS.md"), 2, assessmentHeading(day)) : "";
-      el.lessonSource.innerHTML = renderMarkdown(lessonSection);
-      el.planSource.innerHTML = renderMarkdown(planSection);
+      const assessmentLocked = Boolean(assessmentSection) && !terminalStatuses.includes(dayStatus(day));
       el.assessmentSource.hidden = !assessmentSection;
       el.assessmentSource.innerHTML = assessmentSection ? renderMarkdown(assessmentSection) : "";
+      el.assessmentGateMessage.hidden = !assessmentLocked;
+      el.assessmentGateMessage.textContent = assessmentLocked ? "Assessment đang được khóa theo đúng thứ tự: hoàn thành và lưu một trạng thái kết thúc trước khi mở bài học, kế hoạch, tài nguyên và phần luyện bổ trợ của ngày này." : "";
+      [el.lessonSource, el.planSource, el.resourceSource, el.appliedAssessmentSource].forEach(surface => { surface.hidden = assessmentLocked; });
+      el.lessonSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">BÀI HỌC GỐC</p>${renderMarkdown(lessonSection)}`;
+      el.planSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">DAILY CONTRACT</p>${renderMarkdown(planSection)}`;
+      el.resourceSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">TÀI NGUYÊN BÙ LỖ HỔNG · tối đa 15 phút, tính trong Target</p>${renderMarkdown(resourceSection)}`;
+      el.appliedAssessmentSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">STRETCH / DIAGNOSTIC TÙY CHỌN · không phải điều kiện PASS</p>${renderMarkdown(appliedAssessmentSection)}`;
+      sourceDisclosures.forEach(disclosure => {
+        const surface = disclosure.querySelector(".content-surface");
+        disclosure.hidden = surface.hidden || !surface.innerHTML.trim();
+        disclosure.open = false;
+      });
+      const primarySource = sourceDisclosures.find(disclosure => !disclosure.hidden);
+      if (primarySource) primarySource.open = true;
       const draft = getDraft(day);
       el.statusSelect.value = validStatuses.includes(draft.status) && draft.status !== "PASS" ? draft.status : "IN_PROGRESS";
       el.timeSpent.value = draft.timeMinutes ?? "";
@@ -774,6 +947,7 @@
       el.passButton.textContent = isComplete(day) ? "PASS đã ghi" : "Ghi PASS";
       el.passButton.disabled = isComplete(day);
       el.passButton.dataset.state = isComplete(day) ? "success" : "default";
+      el.previousButton.disabled = day === 1;
       el.nextButton.disabled = !isComplete(day) || day === 30;
       el.nextButton.hidden = day === 30;
       el.actionCopy.textContent = `Ngày ${day} · ${dayStatus(day)}`;
@@ -871,7 +1045,9 @@
       if (!document.getElementById("documentPanel").hidden) el.documentTitle.focus({ preventScroll: true });
     }
     function render() {
-      renderDayRail(); renderLesson(); renderProgress(); renderHistory(); renderSummary(); renderStorageMessage();
+      renderDayRail(); renderPhaseMap();
+      if (activeRoute.kind === "day") renderLesson();
+      renderProgress(); renderHistory(); renderSummary(); renderStorageMessage();
       if (activeDocument === "ASSESSMENT_KEYS.md") {
         if (hasAssessmentUnlock(visibleDay)) {
           el.documentContent.innerHTML = renderMarkdown(assessmentKeySection(visibleDay));
@@ -882,6 +1058,54 @@
           renderDocumentRail();
         }
       }
+    }
+
+    function routeFromLocation() {
+      if (!location.hash || location.hash === "#overview") return { kind: "overview" };
+      const match = /^#day\/(\d{2})$/.exec(location.hash);
+      if (!match) return { kind: "invalid" };
+      const day = Number(match[1]);
+      if (day < 1 || day > 30) return { kind: "invalid" };
+      return { kind: "day", day };
+    }
+    function replaceOverviewRoute(message = "") {
+      routeNoticeText = message;
+      history.replaceState(null, "", "#overview");
+      return { kind: "overview" };
+    }
+    function applyRoute({ focus = false } = {}) {
+      let route = routeFromLocation();
+      if (route.kind === "invalid") route = replaceOverviewRoute("Đường dẫn ngày không hợp lệ. Đã quay về lộ trình 30 ngày.");
+      if (route.kind === "day" && !isUnlocked(route.day)) route = replaceOverviewRoute(`Ngày ${route.day} đang khóa. Hoàn thành Ngày ${route.day - 1} với PASS để mở.`);
+      activeRoute = route;
+      if (route.kind === "day") visibleDay = route.day;
+      document.body.dataset.route = route.kind;
+      el.overviewView.hidden = route.kind !== "overview";
+      el.dayDetailView.hidden = route.kind !== "day";
+      el.dayActionBar.hidden = route.kind !== "day" || document.getElementById("learnPanel").hidden;
+      el.routeNotice.textContent = routeNoticeText;
+      render();
+      if (focus) {
+        const target = route.kind === "day" ? el.dayTitle : document.querySelector(`.day-button:nth-child(${visibleDay})`) || document.getElementById("dayRailTitle");
+        target.focus({ preventScroll: true });
+      }
+    }
+    function navigateToDay(day, { replace = false } = {}) {
+      if (!isUnlocked(day)) return;
+      routeNoticeText = "";
+      if (activeRoute.kind === "day") syncDraft();
+      selectTab(0);
+      history[replace ? "replaceState" : "pushState"](null, "", `#day/${String(day).padStart(2, "0")}`);
+      applyRoute({ focus: true });
+      window.scrollTo({ top: document.getElementById("learnPanel").offsetTop - 72, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }
+    function navigateToOverview() {
+      if (activeRoute.kind === "day") syncDraft();
+      routeNoticeText = "";
+      selectTab(0);
+      history.pushState(null, "", "#overview");
+      applyRoute({ focus: true });
+      document.querySelector(`.day-button:nth-child(${visibleDay})`)?.focus({ preventScroll: true });
     }
 
     function syncDraft() {
@@ -937,13 +1161,15 @@
       appendProgress(el.statusSelect.value);
     });
     el.passButton.addEventListener("click", () => appendProgress("PASS"));
+    el.previousButton.addEventListener("click", () => {
+      if (visibleDay <= 1) return;
+      navigateToDay(visibleDay - 1);
+    });
     el.nextButton.addEventListener("click", () => {
       if (!isComplete(visibleDay) || visibleDay >= 30) return;
-      visibleDay += 1;
-      render();
-      document.getElementById("dayTitle").focus({ preventScroll: true });
-      window.scrollTo({ top: document.getElementById("learnPanel").offsetTop - 72, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      navigateToDay(visibleDay + 1);
     });
+    el.backToOverview.addEventListener("click", navigateToOverview);
 
     el.exportButton.addEventListener("click", () => {
       const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
@@ -993,10 +1219,14 @@
     });
     function selectTab(active) {
       tabs.forEach((tab, index) => { const selected = index === active; tab.setAttribute("aria-selected", String(selected)); tab.tabIndex = selected ? 0 : -1; panels[index].hidden = !selected; });
+      el.dayActionBar.hidden = active !== 0 || activeRoute.kind !== "day";
     }
 
+    window.addEventListener("popstate", () => { selectTab(0); applyRoute({ focus: true }); });
+    window.addEventListener("hashchange", () => { selectTab(0); applyRoute({ focus: true }); });
+    if (!location.hash) history.replaceState(null, "", "#overview");
     openDocument(activeDocument);
-    render();
+    applyRoute();
   </script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 # 30-Day Data Structures & Algorithms Challenge
 
-Status: `READY_FOR_SETUP` — roadmap, assessments và finish line đã khóa; chưa bắt đầu cho tới khi ngôn ngữ, lịch và thời lượng thực tế được ghi vào `PROGRESS.md`.
+Status: `READY` — roadmap, assessments, finish line và setup đã khóa; Day 1 có thể bắt đầu khi người học chủ động mở challenge.
 
 Authority files: `CHALLENGE.md`, `PLAN.md`, `ASSESSMENTS.md`, `ASSESSMENT_KEYS.md`, `FINAL_ASSESSMENT.md`, `FINAL_ASSESSMENT_KEYS.md`, `PROGRESS.md`.
 
 Assessment gate: `RESOLVED` — Form A và Form B cùng keys đã được tách để chấm Baseline mà không làm lộ Final.
 
-Setup gate: `PENDING` — cần khóa `LANGUAGE`, `PROBLEM_SOURCE`, `SESSION_TYPE` và `NORMAL_MINUTES` trước Ngày 1.
+Setup gate: `RESOLVED` — `LANGUAGE = Python 3`, `PROBLEM_SOURCE = LeetCode public`, `SESSION_TYPE = 30 completed sessions`, `NORMAL_MINUTES = 120`.
 
 ## Primary outcome
 
@@ -20,13 +20,13 @@ Không nằm trong finish line của vòng 30 ngày này: advanced graph algorit
 
 ## Các biến phải đóng băng ở Ngày 1
 
-- `LANGUAGE`: một ngôn ngữ chính dùng cho toàn bộ implementation và mock interview.
-- `PROBLEM_SOURCE`: mặc định LeetCode public; nếu đổi nguồn phải khóa trước Baseline.
+- `LANGUAGE`: Python 3 dùng cho toàn bộ implementation và mock interview.
+- `PROBLEM_SOURCE`: LeetCode public; nếu đổi nguồn phải khóa lại trước Baseline.
 - `BASELINE`: điểm từ bài baseline trong `PLAN.md`.
-- `SESSION_TYPE`: 30 ngày lịch liên tiếp hoặc 30 buổi hoàn thành.
-- `NORMAL_MINUTES`: mặc định tạm thời 120 phút học thực/ngày.
+- `SESSION_TYPE`: 30 buổi hoàn thành; ngày nghỉ không được ghi như một buổi đã hoàn thành.
+- `NORMAL_MINUTES`: 120 phút học thực/buổi.
 
-Nếu chưa có lựa chọn khác, challenge dùng 120 phút/ngày, review 150 phút, Day 30 tối đa 180 phút và minimum recovery 40 phút. Đây là workload thiết kế tạm thời, không phải dữ liệu về quỹ thời gian thật của người học.
+Challenge dùng 120 phút/buổi thường, review 150 phút, Day 30 tối đa 180 phút và minimum recovery 40 phút.
 
 ## Learning loop bắt buộc
 
@@ -136,24 +136,24 @@ Ngày 7/14/23/29 là review có retrieval, reimplementation và mixed problems. 
 | Prefix Sum | 2D Prefix Sum | 11 | 14, 27, 29 |
 | Prefix Sum | Range Sum Query | 10 | 14, 27 |
 | Prefix Sum | Subarray Sum | 11 | 14, 26, 29 |
-| Sorting | Insertion Sort | 15 | 16, 23 |
-| Sorting | Merge Sort | 15 | 16, 23, 30 |
-| Sorting | Quick Sort | 16 | 23, 30 |
-| Sorting | Bucket Sort | 16 | 23, 29 |
+| Sorting | Insertion Sort | 16 | 17, 23 |
+| Sorting | Merge Sort | 16 | 17, 23, 30 |
+| Sorting | Quick Sort | 17 | 23, 30 |
+| Sorting | Bucket Sort | 17 | 23, 29 |
 | Linked List | Singly Linked List | 6 | 9, 21, 23 |
 | Linked List | Doubly Linked List | 6 | 7, 23, 30 |
 | Sliding Window | Fixed Window | 12 | 14, 29 |
 | Sliding Window | Variable Window | 13 | 14, 29, 30 |
 | Sliding Window | Maximum / Minimum | 12 | 14, 29 |
 | Sliding Window | Substring Problems | 13 | 14, 29, 30 |
-| Binary Search | Search Array | 17 | 18, 23, 30 |
-| Binary Search | Search Range | 18 | 23, 29, 30 |
+| Binary Search | Search Array | 18 | 19, 23, 30 |
+| Binary Search | Search Range | 19 | 23, 29, 30 |
 | Tree | Binary Tree | 20 | 21, 23, 30 |
 | Tree | Binary Search Tree | 21 | 23, 29, 30 |
 | Tree | BST Insert / Remove | 21 | 23, 30 |
 | Tree | DFS / BFS | 20 | 21, 23, 28, 30 |
-| Recursion | Factorial | 19 | 20, 23 |
-| Recursion | Fibonacci | 19 | 23, 26, 30 |
+| Recursion | Factorial | 15 | 16, 20, 23 |
+| Recursion | Fibonacci | 15 | 16, 23, 26, 30 |
 | Heap | Heap Properties | 22 | 23, 29 |
 | Heap | Push / Pop | 22 | 23, 29, 30 |
 | Backtracking | Tree Maze | 24 | 25, 29, 30 |

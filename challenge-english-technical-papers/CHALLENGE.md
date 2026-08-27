@@ -1,8 +1,8 @@
 # 30-Day Challenge: English for Technical Documents and Papers
 
-Status: `READY_FOR_BASELINE` — workload đã đóng băng; Baseline Ngày 1 quyết định cách phân bổ độ khó, không thay đổi trần thời gian.
+Status: `READY_FOR_ORIENTATION` — Ngày 1 là orientation + reading diagnostic; speaking snapshot chỉ thực hiện ở Ngày 6 sau khi người học đã có sentence frames cơ bản.
 
-Workload gate: `RESOLVED` — target 120 phút/ngày, review 150 phút và hard cap 180 phút/ngày.
+Workload gate: `RESOLVED` — workload tăng dần 60–120 phút theo phase, review 90–150 phút và hard cap 180 phút/ngày.
 
 Authority files: `PLAN.md`, `LESSONS.md`, `EXERCISES.md`, `EXERCISE_KEYS.md`, `PRACTICE_PAPER.md`, `CHUNKS.md`, `CHUNK_LEDGER.md`, `ASSESSMENTS.md`, `ASSESSMENT_KEYS.md`, `PROGRESS.md`.
 
@@ -12,12 +12,15 @@ Từ mức tự báo cáo band 1.0, sau 30 buổi bạn có thể đọc có chi
 
 ## Workload đã đóng băng — evidence-informed
 
-- **Mục tiêu ngày thường:** 120 phút học thực, không tính giờ nghỉ.
-- **Cách chia mặc định:** 3 block × 40 phút: (1) reading/sentence decoding, (2) retrieval + writing, (3) listening + speaking. Nghỉ 10–15 phút giữa các block.
-- **Ngày review 7/14/21/28:** 150 phút gồm assessment, sửa lỗi và retrieval; vẫn chia thành các block không quá 50 phút.
+- **Ngày 1:** 60 phút orientation + reading diagnostic, không kiểm tra speaking.
+- **Ngày 2–7:** target 75 phút; ưu tiên sentence foundations và speaking rất ngắn bằng frames.
+- **Ngày 8–14:** target 90 phút; thêm sentence decoding và micro-speaking.
+- **Ngày 15–21:** target 105 phút; đọc paper theo function và nói tối đa 90 giây.
+- **Ngày 22–29:** target 120 phút; tích hợp paraphrase, speaking và Q&A.
+- **Ngày review 7/14/21/28:** lần lượt tối đa 90/120/135/150 phút gồm assessment, sửa lỗi và retrieval; vẫn chia thành block không quá 50 phút.
 - **Ngày final 30:** tối đa 180 phút gồm 120 phút hai bài locked assessment và tối đa 60 phút để chuẩn bị evidence, chấm, debrief; không luyện nhồi trước khi thi.
 - **Trần cứng:** 180 phút học/ngày. Phần vượt quá mục tiêu 120 phút chỉ được là tối đa 60 phút exposure nhẹ như nghe lại audio, đọc lướt hoặc xem lại chunk; không thêm bài tập nặng và không bắt buộc để `PASS`.
-- **Minimum recovery:** 30 phút để giữ chuỗi khi có ngày quá tải; không dùng minimum hai ngày liên tiếp trừ khi bị ốm hoặc có sự cố thực tế.
+- **Minimum recovery:** 25 phút ở Ngày 1–14 và 30 phút từ Ngày 15; không dùng minimum hai ngày liên tiếp trừ khi bị ốm hoặc có sự cố thực tế.
 - Cột `Phút` trong `PROGRESS.md` ghi thời gian học thực, không tính thời gian nghỉ.
 
 ### Cơ sở nghiên cứu và giới hạn của kết luận
@@ -29,7 +32,7 @@ Không có nguồn dưới đây xác lập một con số phút/ngày tối ưu
 3. Meta-analysis về retrieval practice cho thấy tự gọi lại kiến thức thường giúp retention tốt hơn chỉ đọc lại, đặc biệt khi dùng recall thay vì recognition; vì vậy mỗi ngày có block retrieval, không chỉ input thụ động ([Rowland, 2014](https://doi.org/10.1037/a0037559)).
 4. Tổng quan và dữ liệu deliberate practice của Ericsson và cộng sự ghi nhận lợi ích giảm khi luyện tập nặng vượt khoảng 2 giờ/ngày trong các nghiên cứu được họ tổng hợp, các phiên hiệu quả thường có thời lượng giới hạn và cần phục hồi. Tuy nhiên mẫu chủ yếu thuộc âm nhạc, thể thao và kỹ năng perceptual-motor, nên không được coi là ngưỡng riêng cho học ngoại ngữ ([Ericsson et al., 1993](https://doi.org/10.1037/0033-295X.100.3.363)).
 
-Vì vậy, **120 phút mục tiêu + 180 phút trần** là quyết định thiết kế bảo thủ cho challenge này, không phải một “định luật” đã được thử nghiệm trực tiếp. Sau mỗi review, có thể giảm độ khó hoặc đổi tỷ lệ hoạt động; không tăng trần thời gian để bù điểm yếu.
+Vì vậy, challenge dùng **workload tăng dần 60→120 phút + trần 180 phút**, không coi 120 phút là mức bắt buộc ngay từ ngày đầu. Sau mỗi review có thể giảm độ khó hoặc đổi tỷ lệ hoạt động; không tăng trần thời gian để bù điểm yếu.
 
 ## Giả định có thể thay đổi
 
@@ -43,12 +46,12 @@ Vì vậy, **120 phút mục tiêu + 180 phút trần** là quyết định thi�
 
 Challenge đạt `PASS` khi đồng thời đạt:
 
-1. Đọc first-pass một đoạn technical English 250–350 từ trong 20 phút, không dịch từng từ.
+1. Đọc first-pass một đoạn technical English 180–250 từ trong 20 phút, không dịch từng từ.
 2. Xác định đúng topic, purpose, problem, method/evidence, main result và limitation với ít nhất 70% rubric.
 3. Paraphrase được 5 câu quan trọng bằng tiếng Anh đơn giản mà không đổi nghĩa chính.
-4. Trình bày 3 phút từ tối đa 8 keywords, không đọc nguyên script.
+4. Trình bày 2–3 phút từ tối đa 8 keywords, không đọc nguyên script.
 5. Trả lời được ít nhất 4/5 câu hỏi follow-up bằng câu hoàn chỉnh hoặc dùng clarification phrase phù hợp.
-6. Có ít nhất 80 `ACTIVE` chunks đã dùng đúng và retrieval ở hai ngày khác; nhận ra đúng meaning của ít nhất 140/160 chunks trong bank.
+6. Có ít nhất 40 `ACTIVE` chunks đã dùng đúng và retrieval ở hai ngày khác; nhận ra đúng meaning của ít nhất 90/120 chunks trong bank được chỉ định cho vòng này.
 7. Pronunciation đủ hiểu: listener độc lập hoặc cùng một ASR configuration ghi đúng ít nhất 80% content words. Self-transcript chỉ dùng chẩn đoán, không phải acceptance evidence.
 
 Kết quả cuối là `PASS`, `PARTIAL` hoặc `FAIL` dựa trên evidence, không dựa vào cảm giác.
@@ -59,15 +62,17 @@ Kết quả cuối là `PASS`, `PARTIAL` hoặc `FAIL` dựa trên evidence, kh�
 - First pass đọc để hiểu cấu trúc; second pass mới tra từ khóa.
 - Mỗi ngày dùng fixed exercise/passages; sentence deconstruction, chunk retrieval và speaking không phụ thuộc việc tự chọn nội dung.
 - Không dịch toàn bộ paper. Chỉ dịch có chọn lọc để kiểm tra meaning.
+- Speaking tăng theo thang: frames 20–30 giây → 45–60 giây → 90 giây → 2–3 phút. Không yêu cầu bài nói dài trước khi dạy cấu trúc nói.
 - Mỗi bài nói theo vòng: chuẩn bị keywords → nói → nghe lại/transcribe → sửa → nói lại.
 - Paper được học theo rhetorical function, không ghi nhớ một paper cụ thể.
 - Reference audio trong `audio/` dùng để shadowing; không dùng TTS làm giám khảo pronunciation.
 
-## Baseline routing
+## Staged diagnostic routing
 
-- `≥70/100`: giữ 120 phút, tăng độ dài passage nhanh hơn; không tăng trần thời gian.
-- `40–69`: track chuẩn 120 phút.
-- `<40`: vẫn giữ tổng 120 phút nhưng chỉ 90 phút effort cao + 30 phút guided/light exposure trong 14 ngày đầu; giữ passage 80–150 từ, không bỏ speaking và dùng sentence frames nhiều hơn.
+- **Ngày 1:** Reading Diagnostic Form A chỉ đo reading anchor; không dùng điểm này để phán người học “không có khả năng speaking”.
+- **Ngày 6:** speaking snapshot 20–30 giây sau khi đã học frames; dùng để chọn pronunciation/fluency drill, không hồi tố thay đổi điểm Ngày 1.
+- Reading `≥70/100`: giữ progression chuẩn. `40–69`: tăng Vietnamese scaffolding. `<40`: giữ passage 40–100 từ đến Review 2 và dùng lựa chọn/marking trước open response.
+- Speaking snapshot chưa tạo được câu hoàn chỉnh: giữ frames và read-aloud đến Ngày 14; không ép retell dài.
 
 ## Recovery
 

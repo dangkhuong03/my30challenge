@@ -7,10 +7,10 @@ Không sửa kết quả cũ. Sau mỗi buổi, thêm một dòng và cập nh�
 | Field | Value |
 |---|---|
 | Start date | `PENDING` |
-| Schedule type | `PENDING`: 30 calendar days / 30 completed sessions |
-| Primary language | `PENDING` |
-| Problem source | `PENDING` — default LeetCode public |
-| Normal minutes | `PENDING` — draft default 120 |
+| Schedule type | 30 completed sessions |
+| Primary language | Python 3 |
+| Problem source | LeetCode public |
+| Normal minutes | 120 |
 | Minimum minutes | 40 |
 | Baseline score | `NOT_TAKEN` |
 

@@ -27,13 +27,13 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 |---|---|---:|
 | M13 | Coupon collector: expectation và asymptotics | 6 |
 | M14 | Birthday-collision approximation và assumptions | 6 |
-| M15 | Poisson MLE, unbiasedness, Fisher information, CRLB | 7 |
+| M15 | Poisson MLE, unbiasedness, Fisher information, CRLB | 6 |
 | M16 | Two-proportion power và sample-size derivation | 8 |
 | M17 | Diễn giải p-value bằng repeated-sampling semantics | 8 |
 | M18 | Bayes dưới rare base rate và precision lesson | 6 |
 | M19 | So sánh Chebyshev với Hoeffding theo assumptions | 9 |
-| M20 | Maximum order statistic và unbiased endpoint estimator | 7 |
-| M21 | Sufficiency, completeness, Rao–Blackwell/Lehmann–Scheffé và UMVU | 7 |
+| M20 | Maximum order statistic và unbiased endpoint estimator | 6 |
+| M21 | Sufficiency, completeness, Rao–Blackwell/Lehmann–Scheffé và UMVU | 6 |
 | M22 | Tạo và chẩn đoán Simpson reversal | 10 |
 | M23 | Incident triage, measurement artifacts và uncertainty communication | 10 |
 | M24 | Bootstrap validity, non-smooth/tail/dependent-data failure | 9 |
@@ -42,7 +42,7 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 | M27 | Indicator variables cho expectation và variance | 6 |
 | M28 | Length-biased sampling/inspection paradox | 10 |
 | M29 | Proportion SE, CI sample size và paired binary comparison | 8 |
-| M30 | Wilks likelihood-ratio test và degrees of freedom | 7 |
+| M30 | Wilks likelihood-ratio test và degrees of freedom | 6 |
 
 ## Statistical Modelling — M31–M45
 
@@ -56,13 +56,13 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 | M36 | Censoring bias, Kaplan–Meier và hazard | 12 |
 | M37 | Beta–Binomial posterior và tính posterior comparison probability | 8 |
 | M38 | Adaptive test-set overfitting và evaluation protocol repair | 13 |
-| M39 | High-dimensional cosine concentration và dimensional interpretation | 14 |
+| M39 | High-dimensional cosine concentration và dimensional interpretation | 13 |
 | M40 | Count GLM, link choice, overdispersion và coefficient interpretation | 11 |
 | M41 | Prediction-time leakage audit | 13 |
-| M42 | Cold-start ranking, exploration và offline launch evaluation | 14 |
+| M42 | Cold-start ranking, exploration và offline launch evaluation | 13 |
 | M43 | Uplift/CATE, randomized training data và bốn response segments | 13 |
 | M44 | ROC vs PR dưới extreme imbalance | 11 |
-| M45 | Bradley–Terry likelihood, identifiability và model limitations | 14 |
+| M45 | Bradley–Terry likelihood, identifiability và model limitations | 13 |
 
 ## Reinforcement Learning — M46–M65
 
@@ -95,10 +95,10 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 |---|---|---:|
 | M66 | Streaming pipeline, chunking/prosody, backpressure và TTFA SLO | 23 |
 | M67 | Atomic debit-plus-enqueue với idempotency/outbox/recovery | 20 |
-| M68 | Lazy token bucket, O(1) state và boundary behavior | 21 |
-| M69 | Mixed-duration GPU scheduling, fairness và utilization | 21 |
+| M68 | Lazy token bucket, O(1) state và boundary behavior | 20 |
+| M69 | Mixed-duration GPU scheduling, fairness và utilization | 20 |
 | M70 | Durable DAG engine, leases, retries, checkpoint và side effects | 22 |
-| M71 | Little’s law, worker count, utilization và p99 queueing | 21 |
+| M71 | Little’s law, worker count, utilization và p99 queueing | 20 |
 | M72 | Order-of-magnitude storage/egress estimate và cost levers | 5 |
 | M73 | Saga, compensation và non-compensatable effects | 20 |
 | M74 | Semantic cache key, normalization, versioning, CDN và hit-rate reasoning | 23 |
@@ -112,7 +112,7 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 | M82 | Stable API response contract cho sync/async work | 23 |
 | M83 | Composed reliability, idempotent retry và retry isolation | 20 |
 | M84 | Document-aware chunking, hybrid retrieval, reranking, citation eval | 23 |
-| M85 | Agent control loop, verified termination, anti-loop và budgets | 28 |
+| M85 | Agent control loop, verified termination, anti-loop và budgets | 27 |
 | M86 | Cycle detection và dependency-based incremental recompute | 22 |
 | M87 | Bounded fan-out, partial failure, cost cap và checkpoint | 22 |
 | M88 | Immutable workflow versions và in-flight semantics | 22 |
@@ -125,7 +125,7 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 | M95 | Copy-on-write checkpoint và irreversible-effect taxonomy | 24 |
 | M96 | GUI action verification và ambiguous-outcome retry semantics | 24 |
 | M97 | Noisy canary regression detection và attribution | 9 |
-| M98 | Overload admission, priority, graceful degradation và retry storms | 21 |
+| M98 | Overload admission, priority, graceful degradation và retry storms | 20 |
 | M99 | Spatial/temporal quality axes, human sampling và release escape hatch | 25 |
 | M100 | Causal-vs-observational decision memo và cheap de-risking test | 26 |
 
@@ -135,8 +135,8 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 |---|---|---:|
 | P1 | Tách execution-token saving khỏi schema/context-discovery cost | 27 |
 | P2 | Reconcile stable tool interface, masking và progressive disclosure | 27 |
-| P3 | Phân biệt durable object, append-only transcript và recent recitation | 28 |
-| P4 | Durable session, context policy và active context responsibilities | 28 |
+| P3 | Phân biệt durable object, append-only transcript và recent recitation | 27 |
+| P4 | Durable session, context policy và active context responsibilities | 27 |
 | P5 | Token scope không thay credential-isolation boundary | 24 |
 | P6 | Outcome grading vs legitimate control/ordering checks | 25 |
 | P7 | Regression health vs capability-suite saturation | 25 |
@@ -144,13 +144,33 @@ Ký hiệu: `M` = `de-luyen-tap.md`; `P` = `ai-agent-system-design-exam.pdf`.
 | P9 | KV-cache cost model cho stable append-only prefix | 27 |
 | P10 | pass@k vs pass^k và per-trial reliability threshold | 9 |
 | P11 | Token saving vs sandbox total-cost break-even | 5 |
-| P12 | Percentage latency claims, strict bounds và stratification | 21 |
+| P12 | Percentage latency claims, strict bounds và stratification | 20 |
 | P13 | Large-tool topology: direct/code/discovery/masking/contracts | 27 |
 | P14 | Prompt-injection-resistant data and credential architecture | 24 |
 | P15 | Intent/result protocol cho external unknown outcome | 20 |
-| P16 | Bounded Goal lifecycle, authority, budgets và evidence | 28 |
+| P16 | Bounded Goal lifecycle, authority, budgets và evidence | 27 |
 | P17 | Capability/regression/human eval release program | 25 |
 | P18 | Full managed-agent architecture synthesis | 29 |
+
+## Evaluator và evidence mapping hai chiều
+
+Mapping này là normative và áp dụng cho **từng dòng ID**, không phải blanket coverage:
+
+1. Với một ID có cột `Ngày = N`, lesson authority là `LESSONS.md` mục `Ngày N`.
+2. Evaluator transfer bắt buộc là `DAILY_APPLIED_ASSESSMENTS.md` mục `Ngày N`; review evaluator gần nhất sau first-learn là Form trong `ASSESSMENTS.md` ở Ngày 7/14/21/28, hoặc Final Ngày 30.
+3. Evidence bắt buộc là artifact có ID trong tên hoặc heading: `day-N/<ID>-attempt`, gồm answer/design, assumptions, derivation hoặc flow, failure/boundary, verification và self-grade theo rubric. Không có artifact này thì ID chỉ là `TAUGHT`, chưa phải `COVERED` hay mastery.
+4. Reverse audit bắt đầu từ mỗi evaluator Ngày N: evaluator chỉ được chấm các ID có `Ngày = N` hoặc ID được liệt kê trong review window tương ứng; evidence phải trỏ ngược về ID. Một artifact tích hợp có thể trỏ nhiều ID nhưng phải ghi contribution riêng của từng ID.
+
+| Evaluator window | Requirement rows được phép đo | Evidence index |
+|---|---|---|
+| Daily N | M/P có `Ngày = N` | `day-N/evidence-index.md` |
+| Review 1 — Ngày 7 | M1–M30 đã first-learn | `review-01.md` |
+| Review 2 — Ngày 14 | M31–M45 và recovery M1–M30 | `review-02.md` |
+| Review 3 — Ngày 21 | M46–M65 và recovery trước đó | `review-03.md` |
+| Review 4 — Ngày 28 | M66–M100, P1–P17 và recovery trước đó | `review-04.md` |
+| Final — Ngày 30 | mẫu tích hợp M1–M100/P1–P18; không thay daily evidence còn thiếu | `final-day-30.md` |
+
+Validation hai chiều: scan 118 ID → resolve đúng lesson/evaluator/evidence rule; sau đó scan mọi daily/review evaluator → ít nhất một ID hợp lệ và artifact pointer. Không được suy PASS từ việc ID chỉ xuất hiện trong manifest.
 
 ## Validation rule
 

@@ -2,6 +2,17 @@
 
 Đọc capsule tương ứng trước phần practice trong `PLAN.md`. Đây là kiến thức lõi, không phải lời giải cho câu nguồn. Mỗi drill đổi domain hoặc assumption; checkpoint chỉ nêu điều phải xuất hiện, không thay lời giải đầy đủ.
 
+## Cách dùng worked reasoning
+
+Mỗi ngày phải chọn đúng một mẫu dưới đây trước khi làm Drill A/B; mẫu là quy trình suy luận, không phải đáp án cho đề nguồn.
+
+- **Proof:** ghi assumptions và claim → chọn direct/contradiction/contraposition/induction → nối từng bước với theorem có điều kiện → kiểm tra boundary/equality → thử phá claim bằng counterexample khi bỏ một assumption.
+- **Quantitative:** khai báo biến và units → viết công thức tổng quát → thay số từng bước → đổi units một lần ở cuối → sanity-check bằng lower/upper bound và scale → nêu assumption làm kết quả đổi nhiều nhất.
+- **Statistical claim:** định nghĩa estimand/population → nêu sampling/identification assumptions → derive estimator hoặc test statistic → kiểm tra bias/variance/support → phân biệt observed effect với causal conclusion.
+- **System design:** chốt requirement/constraint/SLO → vẽ data và control flow → chỉ owner của state/invariant → trace một happy path và một failure path → gắn observability/postcondition → nêu trade-off và residual risk.
+
+Một attempt chỉ đủ điều kiện `Done` khi artifact cho thấy các bước trung gian trên; kết quả cuối không có derivation/flow được ghi `PARTIAL`.
+
 ## Ngày 1 — Answer architecture
 
 **Theory.** Một đáp án tốt bắt đầu từ loại claim: proof cần chuỗi suy luận; quantitative cần assumptions–formula–units–sanity; design cần invariants–state–interfaces–failures–verification. Component list hoặc numeric result không có justification chỉ là assertion.
@@ -56,25 +67,27 @@
 - **Drill B:** Estimate monthly storage và token-vs-sandbox break-even với inputs mới.
 - **Checkpoint:** bound trước, formula tổng quát, units và sensitivity.
 
-## Ngày 6 — Probability patterns
+## Ngày 6 — Probability và estimation foundations
+
+**Phân tầng trong 120 phút.** Core hôm nay chỉ gồm conditioning/Bayes, indicators, covariance-vs-independence và một MLE có bias/regularity check. Coupon collector, birthday collision, length bias, order statistics, sufficiency/completeness, Fisher/CRLB và LRT được đọc như recognition map; chúng chỉ trở thành independent retrieval trong Review 1 và các ngày 8–10. Không cộng thêm bài ngoài timebox.
 
 **Theory.** Conditioning chia sample space theo thông tin. Bayes: posterior odds = prior odds × likelihood ratio. Coupon collector cộng waiting times hình học. Birthday collision dùng approximation từ số cặp. Indicator variables tuyến tính hóa expectation; zero covariance không suy ra independence. Sampling tại random time tạo length bias vì interval dài dễ bị gặp hơn.
 
+Estimation nối data với parameter: MLE tối đa log-likelihood; Fisher information đo curvature; CRLB chỉ áp dưới conditions; order statistics có sampling distribution riêng; sufficiency/completeness hỗ trợ Rao–Blackwell và UMVU; likelihood-ratio inference cần tách exact claim khỏi Wilks asymptotic claim.
+
 **Example mới.** Fraud rate 0.2% với detector tốt vẫn có thể cho precision thấp nếu false-positive rate lớn so với base rate.
 
+**Worked quantitative reasoning.** Với 100.000 giao dịch, prevalence 0,2% cho 200 fraud. Nếu sensitivity 90% thì có 180 true positives; false-positive rate 1% trên 99.800 giao dịch tạo khoảng 998 false positives. Precision là `180/(180+998) ≈ 15,3%`. Units đều là giao dịch; kết quả nằm trong `[0,1]` và thấp là hợp lý vì false-positive base lớn hơn true-fraud base. Assumption nhạy nhất là false-positive rate.
+
 - **Drill A:** Tính posterior với prevalence và rates mới.
-- **Drill B:** Dùng indicators tính mean/variance số người tự nhận lại tên trong permutation nhỏ.
-- **Checkpoint:** ghi denominator và independence assumptions.
+- **Drill B:** Derive một MLE mới, kiểm tra bias/regularity và sufficient statistic.
+- **Checkpoint:** ghi denominator, independence assumptions và phân biệt estimator/estimate/distribution.
 
-## Ngày 7 — Estimation theory
+## Ngày 7 — Review 1
 
-**Theory.** MLE tối đa likelihood/log-likelihood. Score có kỳ vọng zero dưới regularity; Fisher information đo curvature. CRLB áp cho unbiased estimators dưới conditions. Order statistic như sample maximum có distribution riêng và thường cần bias correction khi estimate endpoint. Rao–Blackwell cải thiện estimator qua conditioning trên sufficient statistic; nếu statistic còn complete, Lehmann–Scheffé cho UMVU duy nhất. Likelihood-ratio statistic có asymptotic chi-square khi Wilks conditions giữ.
+Không học topic mới. Làm assessment closed-book trước; sau khi lưu trạng thái kết thúc mới mở lesson/tài nguyên để phân loại lỗi và chọn recovery drill.
 
-**Example mới.** Với exponential samples, derive rate MLE và kiểm tra bias thay vì mặc định MLE unbiased.
-
-- **Drill A:** Tìm sufficient statistic bằng factorization cho Bernoulli sample.
-- **Drill B:** Xác định df của nested-model LRT và nêu boundary case làm Wilks hỏng.
-- **Checkpoint:** phân biệt exact finite-sample claim với asymptotic claim.
+Retrieval bắt buộc sau assessment: chọn một trong coupon/birthday/length bias và một trong order statistics/sufficiency/Fisher–CRLB/LRT. Mỗi retrieval phải dùng worked quantitative template, có assumptions, derivation, units hoặc scale check và error repair; không cần làm toàn bộ enrichment trong cùng review.
 
 ## Ngày 8 — Inference và experiments
 
@@ -126,25 +139,27 @@
 - **Drill B:** Hand-trace HMM hai state ba observations và rescale.
 - **Checkpoint:** censoring assumption và state semantics được nêu.
 
-## Ngày 13 — Causality, leakage và uplift
+## Ngày 13 — Causality, leakage, ranking và preferences
+
+**Phân tầng trong 120 phút.** Core là prediction-vs-causality, prediction-time leakage và một DAG/estimand. Uplift, propensity/IV, cosine concentration, cold start và Bradley–Terry là recognition map; Review 2 chọn đúng một causal extension và một ranking extension để retrieve. Không yêu cầu fit tất cả mô hình trong ngày này.
 
 **Theory.** Prediction hỏi `Y`; causality hỏi contrast giữa potential outcomes. Observed association lẫn selection/confounding. Propensity methods cần conditional ignorability/positivity; IV cần relevance, exclusion và independence. Uplift dự đoán treatment effect, không phải churn risk, và phân nhóm persuadable, sure thing, lost cause, sleeping dog. Feature chỉ hợp lệ nếu tồn tại ở prediction time. Repeated tuning trên test set biến test thành training signal.
 
+Ranking cần assumptions riêng: random-vector cosine phụ thuộc dimension; cold start cần prior/context và exploration; Bradley–Terry dùng logistic difference của latent qualities và cần identifiability constraint; pairwise preference có thể vi phạm transitivity/context independence.
+
 **Example mới.** Retry count sau inference không thể dự đoán failure tại submission.
 
+**Worked statistical/design reasoning.** Requirement là dự đoán failure tại thời điểm submit. `retry_count_after_inference` chưa tồn tại tại prediction time, nên vi phạm temporal availability dù tương quan cao. Flow hợp lệ chỉ dùng feature có timestamp không muộn hơn submit; offline split phải mô phỏng boundary đó. Failure mode là training–serving skew; monitor bằng feature-availability audit và online missing-rate. Bỏ feature có thể giảm AUC nhưng đổi lại estimate deployable và tránh leakage.
+
 - **Drill A:** Audit 10 features bằng timestamp boundary.
-- **Drill B:** Vẽ causal DAG và nêu untestable assumption của strategy chọn.
-- **Checkpoint:** estimand, intervention và identification rõ.
+- **Drill B:** Vẽ causal DAG, rồi viết Bradley–Terry likelihood cho ba items và đặt anchor.
+- **Checkpoint:** estimand, identification và ranking identifiability rõ.
 
-## Ngày 14 — Ranking, embeddings và preferences
+## Ngày 14 — Review 2
 
-**Theory.** Random unit-vector dot products tập trung quanh 0 với variance xấp xỉ `1/d`; cùng cosine có mức bất thường khác theo dimension. Cold start dùng content/context/prior và controlled exploration. Bradley–Terry dùng logistic difference của latent qualities; adding a constant không đổi probabilities nên cần identifiability constraint. Pairwise judgment giảm scale-calibration burden nhưng có thể vi phạm transitivity/context independence.
+Không học topic mới. Làm assessment closed-book trước; sau khi lưu trạng thái kết thúc mới mở lesson/tài nguyên để phân loại lỗi và chọn recovery drill.
 
-**Example mới.** Rank new tutorials bằng metadata prior rồi Thompson exploration có guardrails.
-
-- **Drill A:** So ý nghĩa cosine 0.15 ở hai dimensions mới.
-- **Drill B:** Viết BT likelihood cho ba items và đặt anchor.
-- **Checkpoint:** uncertainty và model weakness được nêu.
+Retrieval bắt buộc sau assessment: một task causal trong propensity/IV/uplift và một task ranking trong cosine/cold-start/Bradley–Terry. Artifact phải nêu estimand hoặc identifiability constraint, một failure assumption và error repair; hai task thay cho enrichment khác nếu chạm timebox.
 
 ## Ngày 15 — MDP và Bellman
 
@@ -196,25 +211,21 @@
 - **Drill B:** Red-team ba proxy rewards và thiết kế detection.
 - **Checkpoint:** proxy, true goal và residual risk tách biệt.
 
-## Ngày 20 — Correctness through failure
+## Ngày 20 — Correctness, queueing và overload
 
 **Theory.** Idempotency gắn nhiều retries vào một logical operation. End-to-end reliability của independent sequential stages là product của stage reliabilities; retry chỉ cải thiện khi failure attempts thực sự independent và operation idempotent. Transactional outbox atomically ghi business state và message intent; worker publish/reconcile sau. Saga dùng local transactions và compensations khi không có 2PC. Nếu remote effect có thể committed trước crash, state là unknown chứ không phải failed; cần lookup bằng operation ID hoặc manual reconciliation. Locks/conditional update xử lý race nhưng phải nói isolation assumption.
+
+Queueing nối correctness với capacity: `L=lambda W`; safe worker count cần target utilization. Khi rho gần 1, tail tăng phi tuyến. Admission control, bounded queue, backpressure, token bucket và fair scheduling ngăn overload biến thành stale work/retry storm.
 
 **Example mới.** Debit subscription và enqueue export dùng ledger entry + outbox trong một DB transaction.
 
 - **Drill A:** Liệt kê mọi crash window và recovery.
-- **Drill B:** Thiết kế fallback khi vendor không hỗ trợ idempotency/read-by-ID.
-- **Checkpoint:** exact consistency guarantee, ordering và concurrency rõ.
+- **Drill B:** Thiết kế fallback khi vendor không hỗ trợ idempotency/read-by-ID, rồi tính worker count và overload policy.
+- **Checkpoint:** consistency, units, ordering, fairness và cancellation rõ.
 
-## Ngày 21 — Queueing và overload
+## Ngày 21 — Review 3
 
-**Theory.** Little: `L=lambda W`. Worker minimum theo offered load; safe count chia thêm target utilization. Khi rho tiến 1, queue wait/tail tăng phi tuyến. Token bucket tích lũy burst credit nhưng giữ long-run rate. Admission control và bounded queue giữ latency/cost; unbounded queue biến overload thành stale work và retry storm. Scheduler cần class queues, aging/fair-share và preemption boundary. Một phần trăm giảm latency chỉ cho bound ở percentile được đo; production claim phải stratify theo workload, model, region, payload và warm/cold path.
-
-**Example mới.** 80 req/s × 150 ms = 12 concurrent service slots trước headroom.
-
-- **Drill A:** Tính worker count ở 65% utilization.
-- **Drill B:** Thiết kế GPU policy cho jobs 5 giây và 40 phút.
-- **Checkpoint:** units, fairness, starvation và cancellation semantics.
+Không học topic mới. Làm assessment closed-book trước; sau khi lưu trạng thái kết thúc mới mở lesson/tài nguyên để phân loại lỗi và chọn recovery drill.
 
 ## Ngày 22 — Durable workflow engines
 
@@ -266,25 +277,21 @@
 - **Drill B:** Viết memo ba options có strongest counterargument.
 - **Checkpoint:** causal status, uncertainty và guardrail rõ.
 
-## Ngày 27 — Context và tool topology
+## Ngày 27 — Context, tool topology và lifecycle
 
 **Theory.** Code mode giảm model-visible intermediate execution tokens; schema cost chỉ giảm nếu API surface được tìm/load có chọn lọc. Tool masking giữ stable interface/object positions trong run trong khi discovery quyết định detail nào vào attention. Stable append-only prefix tối đa KV reuse; timestamp sớm phá cache. Direct tools phù hợp simple/high-risk controls; code sandbox phù hợp deterministic loops/joins nhưng thêm isolation/ops cost.
+
+Durable session giữ events/artifacts; context policy chọn bounded representation cho một call. Goal contract phải chứa outcome, verification, constraints, authority, budget và stop condition. External effect cần durable intent, operation ID, result/reconciliation; concurrent wake cần compare-and-set ownership.
 
 **Example mới.** 600 operations được expose qua search/read API plus code executor, còn `publish` là direct approval-gated tool.
 
 - **Drill A:** Tính cached/uncached cost qua 12 turns với prefix mới.
-- **Drill B:** Thiết kế topology và nêu principal downside.
-- **Checkpoint:** tách schema, transcript, intermediate-data và sandbox costs.
+- **Drill B:** Thiết kế topology, rồi trace crash trước/trong/sau external call và hai concurrent wake calls.
+- **Checkpoint:** tách cost layers và chỉ đúng durable authority/source of truth.
 
-## Ngày 28 — Session, Goal và recovery
+## Ngày 28 — Review 4
 
-**Theory.** Durable session giữ full events/artifacts; context policy chọn/restores summary; active context là bounded serialization cho một call. Recitation file có thể mutable bên ngoài nhưng mỗi injected representation được append như event. Goal contract gồm outcome, verification, constraints, authority, budget, iteration và blocked stop. External operation cần durable intent trước call, operation ID, result/reconciliation sau call. Wake phải concurrency-safe.
-
-**Example mới.** Hai workers wake cùng session; compare-and-set lease chỉ cho một continuation owner.
-
-- **Drill A:** Trace crash trước call, trong call, sau commit và trước result log.
-- **Drill B:** Viết Goal lifecycle có anti-spin và user-only authority.
-- **Checkpoint:** không dùng model memory/self-report làm source of truth.
+Không học topic mới. Làm assessment closed-book trước; sau khi lưu trạng thái kết thúc mới mở lesson/tài nguyên để phân loại lỗi và chọn recovery drill.
 
 ## Ngày 29 — Managed-agent synthesis
 

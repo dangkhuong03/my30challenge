@@ -13,29 +13,29 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 | 3 | Nối algebra với geometry | Trace 1 matrix nhỏ | 2 derivations + 2 hình | Giải thích rank/spectrum/sparsity | `day-03.md` | Biến thể 3D |
 | 4 | Tự derive calculus/convex results | 1 gradient derivation | 2 derivations + stability drill | Đúng điều kiện convex/unique | `day-04.md` | Prove bằng hai cách |
 | 5 | Estimate có bounds, units và candidate reduction | 2 estimates | Counting + LSH + cost break-even | Có complexity, units, sanity | `day-05.md` | Sensitivity analysis |
-| 6 | Dùng conditioning đúng | 2 probability drills | 4 patterns + teach-back | Đúng base rate/dependence | `day-06.md` | Tạo paradox mới |
-| 7 | Dùng estimation theory đúng và Review 1 | 1 MLE + quiz 5 câu | Lesson 45' + review 75' | Quiz Ngày 2–6 ≥70% | `review-01.md` | Prove efficiency |
+| 6 | Dùng probability và estimation đúng | 1 probability + 1 MLE drill | 3 probability patterns + estimation foundations | Đúng base rate/dependence/estimator semantics | `day-06.md` | Tạo paradox mới |
+| 7 | Review 1 thuần, không học topic mới | Quiz 5 câu | Review 150': assessment khóa 75' + chấm, error taxonomy và recovery | Quiz Ngày 2–6 ≥70% | `review-01.md` | Recovery drill theo lỗi |
 | 8 | Thiết kế inference hợp lệ | 1 p-value + 1 power drill | Experiment memo + paired/Bayes | Không sai semantics | `day-08.md` | Sequential caveat |
 | 9 | Chọn bound/reliability evaluator đúng | 2 method-selection drills | Bounds/bootstrap/pass metrics/canary | Nêu validity/failure | `day-09.md` | Derive alternate bound |
 | 10 | Điều tra metric không overclaim | 1 Simpson + 1 artifact | Incident plan + bias drills | Có evidence-to-kill mỗi hypothesis | `day-10.md` | 10-minute oral brief |
 | 11 | Chọn model/metric từ data process | 2 metric drills | Calibration/GLM/imbalance set | Có decision consequence | `day-11.md` | Recalibration design |
 | 12 | Xử lý temporal/latent/censored data | 1 hand trace | AR + HMM + survival traces | Đúng state/time assumptions | `day-12.md` | Numerical scaling demo |
-| 13 | Tách causal/predictive claims | 1 leakage audit | DAG + uplift + honest eval | Nêu identification assumption | `day-13.md` | Construct non-identifiability |
-| 14 | So sánh/ranking đúng và Review 2 | 1 BT drill + quiz | Lesson 60' + review 90' | Domain score ≥70% | `review-02.md` | Alternative pairwise model |
+| 13 | Tách causal claims và thiết kế ranking đúng | 1 leakage audit + 1 ranking trace | DAG/uplift + embedding/preference drill | Nêu identification và identifiability assumption | `day-13.md` | Construct non-identifiability |
+| 14 | Review 2 thuần, không học topic mới | Quiz modelling | Closed-book review 150' | Domain score ≥70% | `review-02.md` | Recovery drill theo lỗi |
 | 15 | Dựng và giải Bellman equations | 1 MDP nhỏ | Solve + contraction proof | Equation và convergence đúng | `day-15.md` | POMDP counterexample |
 | 16 | Phân biệt TD control methods | 1 update trace | Q/SARSA/triad/shaping set | Giải thích từ update target | `day-16.md` | Off-policy failure trace |
 | 17 | Derive policy-gradient objectives | 1 REINFORCE derivation | REINFORCE/GAE/PPO/entropy | Đúng bias–variance behavior | `day-17.md` | Derive baseline optimum |
 | 18 | Chọn bandit/OPE/offline method | 2 selection drills | UCB/TS/IS/CQL set | Nhận diện support mismatch | `day-18.md` | Doubly robust sketch |
 | 19 | Thiết kế reward khó bị game | 1 reward audit | RLHF + POMDP + reward spec | Có KL/counter-metrics/eval | `day-19.md` | Red-team reward |
-| 20 | Giữ correctness qua crash/retry | 1 failure trace | Payment/job + saga + unknown outcome | Bao phủ mọi crash window | `day-20.md` | API không idempotency |
-| 21 | Điều khiển queue/overload và Review 3 | 1 capacity calc + quiz | Lesson 60' + review 90' | Systems-so-far ≥70% | `review-03.md` | Tail-latency argument |
+| 20 | Giữ correctness và kiểm soát overload | 1 failure trace + capacity calc | Crash/retry + queue/admission design | Bao phủ crash window và overload policy | `day-20.md` | API không idempotency |
+| 21 | Review 3 thuần, không học topic mới | Quiz RL/Systems | Closed-book review 150' | RL/Systems-so-far ≥70% | `review-03.md` | Recovery drill theo lỗi |
 | 22 | Xây durable workflow state machine | 1 DAG trace | Leases/fanout/version/wait design | Restart không lặp effect | `day-22.md` | Live migration critique |
 | 23 | Thiết kế serving/data paths có cost | 1 API + 1 retrieval drill | Streaming/cache/LSH/RAG/cost | Contracts và estimates đúng | `day-23.md` | Compare retrieval ablation |
 | 24 | Xác lập security boundary thực | 1 threat model | Sandbox/data-flow/GUI verification | Code không thấy secret | `day-24.md` | Residual-risk register |
 | 25 | Tạo eval/release gate đáng tin | 1 metric drill | Suites/graders/reliability/video gate | Có floors và escape hatch | `day-25.md` | Grader calibration plan |
 | 26 | Ra quyết định product có bằng chứng | 1 hypothesis tree | SLO/Goodhart/decision/deprecation | Phân loại causal/observational | `day-26.md` | Pre-mortem |
-| 27 | Tối ưu context/tool topology đúng layer | 1 cache calc | Tool topology + cache cost + boundary | Stable prefix/interface rõ | `day-27.md` | Operational downside memo |
-| 28 | Khôi phục long-running agent và Review 4 | 1 lifecycle trace + quiz | Lesson 45' + review 105' | Agent architecture ≥70% | `review-04.md` | Two concurrent wake calls |
+| 27 | Thiết kế context, tool và lifecycle đúng layer | 1 cache calc + lifecycle trace | Topology/cache + session/goal/recovery | Stable interface và durable authority rõ | `day-27.md` | Two concurrent wake calls |
+| 28 | Review 4 thuần, không học topic mới | Quiz agent architecture | Closed-book review 150' | Agent architecture ≥70% | `review-04.md` | Recovery drill theo lỗi |
 | 29 | Tích hợp managed-agent architecture | Vẽ state owners + 3 flows | Full capstone trong 180' | Mọi arrow có contract | `capstone-day-29.md` | Oral defense 3 trade-offs |
 | 30 | Chứng minh mastery trên đề mới | Làm full final; không rút gọn | Final 210' + self-grade | Đạt finish line hoặc ghi đúng fail | `final-day-30.md` | Oral defense ngẫu nhiên |
 
@@ -44,7 +44,7 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 ### Ngày 1 — Baseline và cấu trúc câu trả lời
 
 - **Học:** phân loại proof, calculation, short synthesis, design; cách ghi assumptions và unsupported claims.
-- **Target 120':** làm 10 bài mới cân bằng năm nhóm, closed-book; chấm theo rubric trong `LESSON_TEMPLATE.md`.
+- **Target 210':** làm 10 bài mới cân bằng năm nhóm, closed-book; chấm theo rubric trong `LESSON_TEMPLATE.md` và ghi error taxonomy. Assessment khóa là phần chính của timebox này, không cộng thêm workload ngoài 210 phút.
 - **Minimum 45':** làm 5 bài, ít nhất một quantitative và một design.
 - **Done:** có điểm theo nhóm và error taxonomy: knowledge, setup, algebra, causal, architecture, communication.
 - **Evidence:** `baseline-day-01.md`. **Stretch:** oral defense một câu design.
@@ -79,19 +79,18 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 
 ## Phase 2 — Probability, statistics và modelling
 
-### Ngày 6 — Probability patterns
+### Ngày 6 — Probability và estimation foundations
 
-- **Học:** conditioning, Bayes/base rate, occupancy/coupon collector, collisions, covariance vs dependence, length bias.
-- **Practice:** diagnostic alert ở prevalence mới; fixed points bằng indicators; inspection paradox trong support tickets.
-- **Done:** giải thích được vì sao high sensitivity chưa bảo đảm high precision.
-- **Evidence:** ba lời giải + teach-back 90 giây.
+- **Học:** core gồm conditioning, Bayes/base rate, indicators, covariance vs dependence và một MLE; các mục collision/length bias/order statistics/sufficiency/Fisher–CRLB/LRT là recognition map để retrieve ở Ngày 7–10.
+- **Practice:** diagnostic alert ở prevalence mới; fixed points bằng indicators; derive một MLE và kiểm tra bias/regularity assumptions. Dừng khi hết 120 phút, không cộng enrichment.
+- **Done:** giải thích base-rate effect và phân biệt estimator, estimate, sampling distribution, efficiency.
+- **Evidence:** probability drills + estimation derivation + teach-back 90 giây.
 
-### Ngày 7 — Estimation, likelihood + Review 1
+### Ngày 7 — Review 1
 
-- **Học:** MLE, bias, sufficiency, Fisher information, CRLB, order statistics, likelihood-ratio tests.
-- **Practice:** derive MLE/Fisher information cho mô hình count khác; hiệu chỉnh estimator từ maximum.
-- **Done:** phân biệt estimator, estimate, sampling distribution và efficiency.
-- **Review:** closed-book quiz Ngày 2–6; nếu dưới 70%, thêm recovery drills vào các ngày tương lai.
+- **Học:** không có topic mới; đóng tài liệu trước khi bắt đầu.
+- **Practice:** review 150 phút gồm assessment khóa 75 phút, chấm, error taxonomy và recovery; retrieve một probability extension và một estimation extension đã defer từ Ngày 6.
+- **Done:** đạt ≥70% hoặc tạo recovery drills nhắm đúng lỗi cho kế hoạch tương lai.
 - **Evidence:** `review-01.md`.
 
 ### Ngày 8 — Experiments và inference
@@ -129,18 +128,17 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 - **Done:** phân biệt temporal dependence, latent state và censoring.
 - **Evidence:** ba hand traces.
 
-### Ngày 13 — Causality, leakage và honest evaluation
+### Ngày 13 — Causality, leakage, ranking và preferences
 
-- **Học:** potential outcomes, confounding, ignorability, IV/propensity boundaries, uplift, post-outcome leakage, test-set overfitting.
-- **Practice:** audit feature set mới theo prediction-time boundary; thiết kế uplift experiment.
-- **Done:** tách prediction claim khỏi causal claim và nêu untestable assumption.
-- **Evidence:** leakage audit + DAG nhân quả.
+- **Học:** core gồm prediction-vs-causality, confounding, prediction-time leakage và một DAG/estimand; uplift/propensity/IV và ranking topics là recognition map cho Review 2.
+- **Practice:** audit feature set theo prediction-time boundary và dựng một DAG; chỉ làm thêm một causal hoặc ranking extension nếu còn trong 120 phút.
+- **Done:** tách prediction khỏi causal claim và nêu identification/identifiability assumptions.
+- **Evidence:** leakage audit + DAG + ranking/preference trace.
 
-### Ngày 14 — Ranking, embeddings và subjective quality + Review 2
+### Ngày 14 — Review 2
 
-- **Học:** concentration on sphere, cold start, exploration, Bradley–Terry, pairwise preference, ranking identifiability.
-- **Practice:** fit/interpret một pairwise model nhỏ; đánh giá similarity ở hai dimensions mới.
-- **Review:** unseen modelling set.
+- **Học:** không có topic mới; đóng tài liệu trước khi bắt đầu.
+- **Practice:** review 150 phút gồm assessment khóa 90 phút, chấm, error taxonomy và recovery; retrieve một causal extension và một ranking extension đã defer từ Ngày 13.
 - **Done:** score nhóm Statistics/Modelling ≥70%.
 - **Evidence:** `review-02.md`.
 
@@ -183,19 +181,18 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 
 ## Phase 4 — Product, systems và agent architecture
 
-### Ngày 20 — Correctness qua crashes và retries
+### Ngày 20 — Correctness, queueing và overload
 
-- **Học:** atomicity, isolation, race interleavings, idempotency keys, transactional outbox, saga/compensation, unknown outcome, ordering.
-- **Practice:** thiết kế payment + async job cho domain mới; reconcile API không hỗ trợ idempotency.
-- **Done:** nêu consistency guarantee chính xác và mọi crash window.
-- **Evidence:** sequence diagram + failure matrix.
+- **Học:** atomicity, isolation, idempotency/outbox/saga/unknown outcome; Little’s law, utilization/p99, backpressure, token bucket, admission control, fairness và retry storms.
+- **Practice:** thiết kế payment + async job; tính capacity và overload policy cho mixed-duration jobs.
+- **Done:** nêu consistency guarantee, mọi crash window, units và tail/fairness trade-off.
+- **Evidence:** sequence diagram + failure matrix + capacity sheet.
 
-### Ngày 21 — Queueing, scheduling, overload + Review 3
+### Ngày 21 — Review 3
 
-- **Học:** Little’s law, utilization/p99, M/M/c intuition, backpressure, token bucket, admission control, fairness, preemption, retry storms.
-- **Practice:** capacity plan bằng số mới; scheduler cho mixed-duration jobs.
-- **Review:** closed-book quiz Ngày 15–20.
-- **Done:** giải thích tail collapse và score RL/Systems-so-far ≥70%.
+- **Học:** không có topic mới; đóng tài liệu trước khi bắt đầu.
+- **Practice:** review 150 phút gồm assessment khóa 90 phút, chấm, error taxonomy và recovery; closed-book quiz Ngày 15–20 và failure-design oral defense.
+- **Done:** score RL/Systems-so-far ≥70% hoặc có recovery drills cụ thể.
 - **Evidence:** `review-03.md`.
 
 ### Ngày 22 — Durable workflow engines
@@ -233,19 +230,18 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 - **Done:** memo có reversal condition, counter-metric và boundary nơi chính sách không an toàn.
 - **Evidence:** `day-26.md`.
 
-### Ngày 27 — Context và tool topology
+### Ngày 27 — Context, tool topology và lifecycle
 
-- **Học:** direct tools vs code mode, schema/token costs, tool search/filesystem discovery, masking, stable interface, KV-cache prefix, append-only transcript, recitation, deterministic joins.
-- **Practice:** topology cho hàng trăm operations với discovery và high-risk direct tools; cost model cache mới.
-- **Done:** phân biệt token cost chắc chắn giảm và cost chỉ giảm khi có discovery/progressive disclosure.
-- **Evidence:** topology diagram + quantitative model.
+- **Học:** direct tools vs code mode, discovery/masking/stable interface, KV cache, transcript/recitation; durable session, active context, goal contract, budgets, anti-spin, intent/result và concurrency-safe wake.
+- **Practice:** topology cho hàng trăm operations; cost model cache; crash-recovery trace và bounded goal.
+- **Done:** phân biệt đúng cost layer, durable state, authority và recovery boundary.
+- **Evidence:** topology diagram + quantitative model + lifecycle trace.
 
-### Ngày 28 — Long-running agent lifecycle + Review 4
+### Ngày 28 — Review 4
 
-- **Học:** durable session vs active context, restorable compaction, goal contract, budgets, anti-spin, pause/wake, authority, event log, intent/result protocol, human approval.
-- **Practice:** crash-recovery trace có external side effect unknown; thiết kế bounded goal mới.
-- **Review:** closed-book quiz Ngày 22–27.
-- **Done:** khôi phục từ durable state và score Agent Architecture ≥70%.
+- **Học:** không có topic mới; đóng tài liệu trước khi bắt đầu.
+- **Practice:** review 150 phút gồm assessment khóa 105 phút, chấm, error taxonomy và recovery; closed-book quiz Ngày 22–27 và agent-architecture oral defense.
+- **Done:** score Agent Architecture ≥70% hoặc có recovery drills cụ thể.
 - **Evidence:** `review-04.md`.
 
 ### Ngày 29 — Capstone synthesis
@@ -257,7 +253,7 @@ Ma trận này là contract vận hành; phần lesson phía dưới giải thí
 
 ### Ngày 30 — Final unseen mock và closure
 
-- **Target:** closed-book mock mới, có đủ proof, quantitative, statistics, RL, product/system và agent architecture.
+- **Target 210':** closed-book mock mới, có đủ proof, quantitative, statistics, RL, product/system và agent architecture; self-grade/debrief nằm trong cùng timebox này.
 - **Minimum:** không áp dụng; đây là verification surface bắt buộc.
 - **Done:** chấm theo finish line trong `CHALLENGE.md`, review lỗi trước khi xem lời giải.
 - **Evidence:** đề, bài làm, rubric theo câu, score theo nhóm, error log và kết luận `PASS/PARTIAL/FAIL` trong `final-day-30.md`.

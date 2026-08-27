@@ -88,6 +88,13 @@ Audio IDs được tạo trong `audio/`.
 
 `The agent checked the file.` `The agent checks the file.` `The result is safe.` `The result is saved.`
 
+### D06-D — Staged speaking snapshot
+
+1. Đọc D06-A một lần và giữ recording đầu.
+2. Chọn ba frames: `X is Y.`, `X uses Y.`, `X needs Y.`
+3. Điền từ đã học rồi nói 20–30 giây. Được nhìn keywords; không viết script dài.
+4. Ghi `understood / partly understood / not understood` từ listener cố định hoặc cùng ASR config. Không gán IELTS band.
+
 ## D07 — Review 1
 
 Làm fixed `R1` trong `ASSESSMENTS.md`.
@@ -159,7 +166,7 @@ First pass không dictionary; second pass tra tối đa 8 terms.
 
 > A useful evaluation task must have a clear end state. If success depends only on the model saying “done,” the score may be unreliable. A stronger test checks the environment. For a file task, the evaluator can confirm that the file exists, has the expected name, and contains the required information. For a form task, the evaluator may look for a durable confirmation record. These checks are called postconditions because they describe what must be true after an action. Postconditions do not need to inspect every internal step. They focus on the result that matters to the user. However, a weak postcondition can still create a false success. Checking that a file exists is not enough when the task also requires correct contents. The evaluator must therefore connect each important requirement to an observable check. When no reliable check exists, the result should remain uncertain instead of being guessed.
 
-Tasks: one-sentence guess; 5 blocking terms; main claim; two examples; limitation; 4-sentence English summary.
+Tasks: one-sentence guess; tối đa 8 blocking terms; label ba câu là claim/evidence/contrast/example; main claim; two examples; limitation; 3-sentence English summary.
 
 ## D14 — Review 2
 
@@ -171,7 +178,7 @@ Không đọc `Paper map key`. Với `PRACTICE_PAPER.md`, viết một câu func
 
 ## D16 — Abstract moves
 
-Annotate abstract của `PRACTICE_PAPER.md` bằng B–P–M–R–C. Viết lại mỗi move bằng một câu A2-level English. Thu summary 90 giây.
+Annotate abstract của `PRACTICE_PAPER.md` bằng B–P–M–R–C. Viết lại mỗi move bằng một câu A2-level English theo fixed frame. Thu summary 60 giây; 90 giây là Stretch.
 
 ## D17 — Introduction argument
 
@@ -267,8 +274,8 @@ Làm fixed `R4` trong `ASSESSMENTS.md`.
 
 ## D29 — Full synthesis
 
-Skim/read `PRACTICE_PAPER.md`, create paper map, eight-keyword notes and five-minute talk. Mỗi factual spoken claim phải có pointer `section + sentence/number`. Optional: repeat on your own paper.
+Skim/read `PRACTICE_PAPER.md`, create paper map, eight-keyword notes and three-minute talk. Mỗi factual spoken claim phải có pointer `section + sentence/number`. Optional Stretch: five-minute talk hoặc repeat trên paper riêng.
 
 ## D30 — Final
 
-Làm `Matched Form B` trước, sau đó `Locked Stretch Form` trong `ASSESSMENTS.md`. Không mở corresponding keys cho đến khi khóa answers/audio.
+Làm `Reading Anchor Form B` trước, sau đó `Final Integrated Form` trong `ASSESSMENTS.md`. Cả hai là assessment bắt buộc và được đặt tên đúng vai trò; phần Stretch chỉ là 5-minute talk. Không mở corresponding keys cho đến khi khóa answers/audio.

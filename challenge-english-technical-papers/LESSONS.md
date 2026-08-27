@@ -1,10 +1,12 @@
 # Lessons — English for Technical Papers
 
+Mỗi ngày, chạy phần tương ứng trong `SCAFFOLD_MAP.md` để giữ đúng thứ tự beginner: mục tiêu nhỏ → mẫu/giải thích tiếng Việt → noticing → guided practice → independent attempt → feedback/error repair → evidence. Map chỉ tổ chức lại workload hiện có trong timebox; nội dung chuyên môn của ngày vẫn nằm trong file này.
+
 ## Phase 1 — Build sentences you can see and say
 
-### Ngày 1 — Baseline
+### Ngày 1 — Orientation và reading diagnostic
 
-Không học trước. Làm `Baseline` trong `ASSESSMENTS.md`, ghi cả điều bạn đoán và điều bạn chắc. Speaking recording không được xóa hoặc thu lại.
+Đây là orientation + **reading diagnostic**, không phải bài thi đủ bốn kỹ năng. Đọc hướng dẫn tiếng Việt, làm `Reading Diagnostic Form A` trong `ASSESSMENTS.md`, được phép chọn `I do not know`. Không speaking và không dùng điểm Ngày 1 để kết luận khả năng nói.
 
 ### Ngày 2 — Sentence skeleton
 
@@ -37,12 +39,15 @@ Không học trước. Làm `Baseline` trong `ASSESSMENTS.md`, ghi cả điều 
 - Ưu tiên content words, final consonants và word stress; accent bản địa không phải mục tiêu.
 - Chia thought groups bằng `/`: `The model / uses past data / to predict failure.`
 - Shadowing: nghe `audio/d06_thought_groups.mp3` → pause → bắt chước rhythm → record → so sánh.
+- Speaking snapshot đầu tiên: dùng ba frame đã học (`X is Y`, `X uses Y`, `X needs Y`) để nói 20–30 giây. Giữ bản thu đầu; đây là mốc chẩn đoán sau scaffolding, không phải IELTS score.
 
 ### Ngày 7 — Review
 
-Retrieve frames không nhìn tài liệu, đọc một đoạn mới và nói 60 giây. Chỉ thêm recovery drills cho lỗi xuất hiện ít nhất hai lần.
+Retrieve frames không nhìn tài liệu, đọc một đoạn mới và nói 20–30 giây bằng frames. Chỉ thêm recovery drills cho lỗi xuất hiện ít nhất hai lần.
 
 ## Phase 2 — Decode technical sentences
+
+Trong Ngày 8–14, dành 5 phút **bên trong Target** để nói lại một câu/đoạn vừa giải mã bằng từ khóa, không đọc script. Đây là micro-output của bài học, không cộng thêm thời lượng.
 
 ### Ngày 8 — Technical noun stacks
 
@@ -67,6 +72,7 @@ Retrieve frames không nhìn tài liệu, đọc một đoạn mới và nói 60
 - Relative clause mô tả noun: `a model that predicts failures`.
 - Complement clause là nội dung claim: `The results show that X improves Y.`
 - Đặt ngoặc quanh clause phụ, đọc main clause trước, sau đó gắn details lại.
+- Micro-paraphrase: giữ actor, modal và cause/contrast; chỉ tách một câu dài thành 2–3 câu ngắn, chưa yêu cầu đổi toàn bộ wording.
 
 ### Ngày 12 — Word families
 
@@ -80,13 +86,15 @@ Retrieve frames không nhìn tài liệu, đọc một đoạn mới và nói 60
 1. First pass: title, first/last sentence, repeated terms; không tra từ.
 2. Viết one-sentence guess.
 3. Second pass: chỉ tra từ chặn main meaning hoặc lặp ≥3 lần.
-4. Đọc lại và sửa summary. Mục tiêu là meaning, không phải 100% vocabulary.
+4. Label từng câu chính là `claim`, `evidence`, `contrast` hoặc `example` rồi viết summary ba câu. Mục tiêu là meaning, không phải 100% vocabulary.
 
 ### Ngày 14 — Review
 
-Passage mới 150–180 từ: chunk noun phrases, mark verbs/connectors/passives, rồi nói 90 giây bằng 6 keywords.
+Passage mới 100–130 từ: chunk noun phrases, mark verbs/connectors/passives, rồi nói 45–60 giây bằng fixed frame và 6 keywords.
 
 ## Phase 3 — Read a paper by rhetorical function
+
+Trong Ngày 15–21, dành 5 phút **bên trong Target** để nói chức năng và main meaning của phần vừa đọc, không đọc script. Đây là micro-output của bài học, không cộng thêm thời lượng.
 
 ### Ngày 15 — Paper anatomy
 
@@ -101,6 +109,8 @@ Passage mới 150–180 từ: chunk noun phrases, mark verbs/connectors/passives
 Đánh dấu `B-P-M-R-C`: Background, Problem, Method, Result, Conclusion. Không phải abstract nào cũng đủ hoặc theo đúng thứ tự; missing move cũng là information.
 
 Summary frame: `This paper studies __. The problem is __. The authors use __. They find __. This matters because __.`
+
+Chỉ micro-paraphrase từng move bằng câu ngắn theo frame đã học; không yêu cầu faithful paraphrase nâng cao của Ngày 24.
 
 ### Ngày 17 — Introduction argument
 
@@ -126,9 +136,11 @@ Biến prose thành `Input → Processing/Model → Training/Procedure → Outpu
 
 ### Ngày 21 — Review
 
-Map một abstract lạ, giải thích từng move và nói 2 phút. Chấm meaning trước grammar; grammar chỉ bị trừ mạnh khi làm đổi meaning.
+Map một abstract lạ, giải thích từng move và nói tối đa 90 giây. Chấm meaning trước grammar; grammar chỉ bị trừ mạnh khi làm đổi meaning.
 
 ## Phase 4 — Turn reading into speaking
+
+Trong Ngày 22–24, dành 5 phút **bên trong Target** để nói lại paragraph map hoặc paraphrase vừa tạo, không đọc script. Đây là micro-output của bài học, không cộng thêm thời lượng.
 
 ### Ngày 22 — Long-sentence surgery
 
@@ -172,4 +184,4 @@ Skim toàn paper → đọc abstract/introduction/conclusion → chọn một Me
 
 ### Ngày 30 — Final
 
-Làm Matched Form B rồi Locked Stretch trong `ASSESSMENTS.md`. Giữ annotations, notes, recording, self-transcript chẩn đoán và listener/ASR result độc lập làm evidence.
+Làm Reading Anchor Form B rồi Final Integrated Form trong `ASSESSMENTS.md`. Giữ annotations, notes, recording, self-transcript chẩn đoán và listener/ASR result độc lập làm evidence. Bài nói 5 phút là Stretch tùy chọn.

@@ -1,6 +1,6 @@
 # Active Chunk Bank
 
-Chunk chỉ được tính `ACTIVE` sau khi được dùng đúng trong một câu viết hoặc recording và retrieval ở `D+2` và `D+7`. Chunks 1–80 là production bank; chunks 81–160 là recognition bank. Finish line yêu cầu 80 active và nhận ra đúng ít nhất 140/160.
+Chunk chỉ được tính `ACTIVE` sau khi được dùng đúng trong một câu viết hoặc recording và retrieval ở `D+2` và `D+7`. Chunks 1–40 là production bank bắt buộc của vòng beginner; chunks 41–120 là recognition bank được chỉ định. Chunks 121–160 là backlog, không thuộc finish line. Finish line yêu cầu 40 active và nhận ra đúng ít nhất 90/120.
 
 ## Describing a topic
 
@@ -193,28 +193,28 @@ Chunk chỉ được tính `ACTIVE` sau khi được dùng đúng trong một c�
 
 | Introduce | Chunks | Retrieval 1 | Retrieval 2 |
 |---:|---:|---:|---:|
-| 2 | 1–4 | 4 | 9 |
-| 3 | 5–8 | 5 | 10 |
-| 4 | 9–12 | 6 | 11 |
-| 5 | 13–16 | 7 | 12 |
-| 6 | 17–20 | 8 | 13 |
-| 7 | 21–24 | 9 | 14 |
-| 8 | 25–28 | 10 | 15 |
-| 9 | 29–32 | 11 | 16 |
-| 10 | 33–36 | 12 | 17 |
-| 11 | 37–40 | 13 | 18 |
-| 12 | 41–44 | 14 | 19 |
-| 13 | 45–48 | 15 | 20 |
-| 14 | 49–52 | 16 | 21 |
-| 15 | 53–56 | 17 | 22 |
-| 16 | 57–60 | 18 | 23 |
-| 17 | 61–64 | 19 | 24 |
-| 18 | 65–68 | 20 | 25 |
-| 19 | 69–72 | 21 | 26 |
-| 20 | 73–76 | 22 | 27 |
-| 21 | 77–80 | 23 | 28 |
+| 2 | 1–2 | 4 | 9 |
+| 3 | 3–4 | 5 | 10 |
+| 4 | 5–6 | 6 | 11 |
+| 5 | 7–8 | 7 | 12 |
+| 6 | 9–10 | 8 | 13 |
+| 7 | 11–12 | 9 | 14 |
+| 8 | 13–14 | 10 | 15 |
+| 9 | 15–16 | 11 | 16 |
+| 10 | 17–18 | 12 | 17 |
+| 11 | 19–20 | 13 | 18 |
+| 12 | 21–22 | 14 | 19 |
+| 13 | 23–24 | 15 | 20 |
+| 14 | 25–26 | 16 | 21 |
+| 15 | 27–28 | 17 | 22 |
+| 16 | 29–30 | 18 | 23 |
+| 17 | 31–32 | 19 | 24 |
+| 18 | 33–34 | 20 | 25 |
+| 19 | 35–36 | 21 | 26 |
+| 20 | 37–38 | 22 | 27 |
+| 21 | 39–40 | 23 | 28 |
 
-Ngày 22–28 chạy recognition sets 81–160 theo blocks 12/12/12/12/12/10/10 và ghi số đúng, không tự tính là `ACTIVE`.
+Ngày 22–28 chạy recognition sets 41–120 theo blocks 12/12/12/12/12/10/10 và ghi số đúng, không tự tính là `ACTIVE`. Chunks 121–160 là backlog sau challenge.
 
 ## Daily activation rule
 

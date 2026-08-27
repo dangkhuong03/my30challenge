@@ -4,7 +4,7 @@ Không sửa kết quả cũ; thêm một dòng sau mỗi buổi.
 
 | Buổi | Ngày | Status | Phút | Reading score | Speaking score | Active chunks | Recognition | Listener/ASR | Evidence | Lỗi chính | Next action |
 |---:|---|---|---:|---:|---:|---:|---:|---|---|---|---|
-| 1 | — | NOT_STARTED | — | — | — | 0 | — | — | — | — | Làm baseline |
+| 1 | — | NOT_STARTED | — | — | — | 0 | — | — | — | — | Làm orientation + reading diagnostic |
 
 Status hợp lệ: `IN_PROGRESS`, `PASS`, `PARTIAL`, `SKIPPED`, `BLOCKED`.
 

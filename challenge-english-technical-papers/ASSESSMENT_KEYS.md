@@ -2,13 +2,13 @@
 
 Mở từng section sau khi khóa assessment tương ứng.
 
-## Form A
+## Reading Diagnostic Form A
 
-- Topic/purpose: safe bounded tool-using agent behavior.
-- S1: agent/receives/goal. S3: agent/does not continue. S6: agent/should not repeat/action.
-- Unclear risky retry may duplicate/cause unexpected effect; verify first.
+- Topic/purpose: rules for a safe bounded agent.
+- S1: agent/receives/task. S2: it/uses/tool và it/checks/result.
+- Limits: time limit and step limit.
 - Human approval: publishing information or spending money.
-- Key details include goal→action/tool→observation, time/cost/step limits, verification, human approval.
+- Main meaning may be written in Vietnamese or simple English but must preserve limits, checking and approval.
 
 ## R1
 
@@ -34,18 +34,18 @@ Mở từng section sau khi khóa assessment tương ứng.
 - Limitation/cost: more expense and ownership/secrecy burden.
 - Transfer claim: evidence is more honest beyond familiar tasks, not guaranteed perfect evaluation.
 
-## Form B
+## Reading Anchor Form B
 
-- Topic/purpose: reliable recoverable workflow around tool/external actions.
-- S1: workflow/receives/request. S3: workflow/does not trust/messages. S6: workflow/looks up/ID.
-- Operation ID supports lookup/reconciliation and prevents blind duplicate retry.
+- Topic/purpose: controls for a reliable workflow.
+- S1: workflow/receives/request. S2: it/calls/tool và it/records/result.
+- Limits: cost limit and step limit.
 - Human approval: messages and customer-data changes.
-- Unknown means effect may or may not have happened; failure means confirmed not achieved.
+- Main meaning must preserve limits, operation-ID checking and human approval.
 
-## Stretch Form
+## Final Integrated Form
 
 - Problem: context-only storage loses durable decisions/evidence across pause/crash.
-- Mechanism: session owns events/files/approvals/IDs/goal; context policy selects bounded representation; worker lease serializes continuation; intent/result records support reconciliation.
+- Mechanism: session owns events/files/approvals/IDs/goal; active context selects bounded information; intent/result records support reconciliation.
 - Benefit: resume with less lost work/duplication.
 - Trade-offs: storage, coordination, recovery costs; authority remains separate.
 - Core boundary: durable session ≠ active context ≠ approval authority.
@@ -53,4 +53,4 @@ Mở từng section sau khi khóa assessment tương ứng.
 
 ## Independent intelligibility protocol
 
-Listener/ASR must not see the intended script before scoring. Fix microphone, room, distance and ASR model/config across baseline/final. Content-word accuracy = correctly recovered target content words divided by target content words. Self-transcript is diagnostic only.
+Listener/ASR must not see the intended script before scoring. Fix microphone, room, distance and ASR model/config từ speaking snapshot Ngày 6 đến Final. Content-word accuracy = correctly recovered target content words divided by target content words. Self-transcript is diagnostic only.

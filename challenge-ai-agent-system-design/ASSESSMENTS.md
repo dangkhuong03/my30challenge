@@ -2,6 +2,8 @@
 
 Không mở `ASSESSMENT_KEYS.md` trước khi hoàn tất và khóa bài làm. Không dùng AI, internet hoặc tài liệu. Viết assumptions; calculation phải có units; design phải có state, interfaces, failures và verification.
 
+Workload authority: Baseline và Final có tổng timebox 210 phút, bao gồm làm bài và self-grade/debrief. Review Days 7/14/21/28 có tổng timebox 150 phút; assessment khóa lần lượt chiếm 75/90/90/105 phút, thời gian còn lại dùng để chấm, ghi error taxonomy và recovery. Không cộng assessment thêm một lần ngoài Target của ngày.
+
 ## Scoring protocol
 
 - Baseline và Final: 10 tasks × 10 điểm = 100.
