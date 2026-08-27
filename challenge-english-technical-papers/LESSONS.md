@@ -1,6 +1,6 @@
 # Lessons — English for Technical Papers
 
-Mỗi ngày, chạy phần tương ứng trong `SCAFFOLD_MAP.md` để giữ đúng thứ tự beginner: mục tiêu nhỏ → mẫu/giải thích tiếng Việt → noticing → guided practice → independent attempt → feedback/error repair → evidence. Map chỉ tổ chức lại workload hiện có trong timebox; nội dung chuyên môn của ngày vẫn nằm trong file này.
+Mỗi ngày, bắt đầu bằng **Daily Mission** tương ứng trong `SCAFFOLD_MAP.md`, sau đó dùng lesson này làm input/ngôn ngữ hỗ trợ. Flow là input → notice → imitate → recall → produce → interact → feedback → retry → reuse. Grammar và reading analysis không phải đích cuối; chúng chuẩn bị cho Mission Challenge trong cùng timebox. Nội dung chuyên môn của ngày vẫn nằm trong file này.
 
 ## Phase 1 — Build sentences you can see and say
 

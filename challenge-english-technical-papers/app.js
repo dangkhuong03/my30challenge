@@ -11,13 +11,22 @@
     }
     return cache[name];
   };
-  const ids = ["challengeTitle","challengeLede","passCount","currentDayReadout","runStatus","railOutput","dayGrid","dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","dailySources","audioSources","evidenceForm","statusSelect","timeSpent","doneTest","evidence","mainError","nextAction","verified","passButton","formMessage","progressList","historyList","exportButton","importButton","importInput","storageMessage","documentRail","documentTitle","documentNotice","documentContent","footerCopy","actionCopy","previousButton","nextButton","overviewView","dayDetailView","routeNotice","phaseRibbon","chunkSummary","chunkDueCopy","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
+  const ids = [
+    "challengeTitle","challengeLede","passCount","currentDayReadout","runStatus","railOutput","dayGrid","dayPhase","dayTitle",
+    "dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","dailySources","audioSources","evidenceForm",
+    "statusSelect","timeSpent","doneTest","meaningScore","outputDuration","responseLatency","supportLevel","interactionTurns","repairResult",
+    "evidence","mainError","nextAction","verified","passButton","formMessage","progressList","historyList","exportButton","importButton",
+    "importInput","storageMessage","documentRail","documentTitle","documentNotice","documentContent","actionCopy","previousButton","nextButton",
+    "overviewView","dayDetailView","routeNotice","phaseRibbon","chunkSummary","chunkDueCopy","backToOverview","detailStatus","nowStepCopy",
+    "dayActionBar","missionShell","missionKind","missionSupport","missionChallenge","missionPass","learningLoop","loopPanel","loopPosition",
+    "loopTitle","loopBody","targetChunks","mistakesDue","stageResourceButton","loopNextButton"
+  ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const lessonShell = el.dayDetailView.querySelector(".lesson");
   const dayBrief = document.createElement("div"); dayBrief.className = "day-brief";
   const dayWork = document.createElement("div"); dayWork.className = "day-work";
   [".lesson-head",".start-here",".contract-disclosure"].forEach(selector => dayBrief.append(lessonShell.querySelector(selector)));
-  ["#dailySources","#audioSources",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
+  [".day-materials",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
   lessonShell.append(dayBrief,dayWork);
   const escapeHtml = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   function renderInline(value) {
@@ -116,14 +125,40 @@
     if (result.length !== 30 || result.some((entry, index) => entry.day !== index + 1)) throw new Error("Daily Contract không đủ 30 ngày theo đúng thứ tự.");
     return result;
   }
+  function parseMission(day) {
+    const source = selectorContent(config.missionFile,{level:2,pattern:"Ngày {day} —"},day);
+    const heading = source.split(/\r?\n/).find(line => /^##\s/.test(line))?.replace(/^##\s+/,"") || `Ngày ${day}`;
+    const fields = {};
+    source.split(/\r?\n/).forEach(line => {
+      const match = line.match(/^- \*\*([^*]+):\*\*\s*(.+)$/);
+      if (match) fields[match[1].trim()] = match[2].trim();
+    });
+    return { heading, fields };
+  }
+  function parseChunkBank() {
+    const source = readFile(config.chunksFile); const chunks = new Map(); const schedule = [];
+    source.split(/\r?\n/).forEach(line => {
+      const chunk = line.match(/^(\d+)\.\s+`([^`]+)`/); if (chunk) chunks.set(Number(chunk[1]),chunk[2]);
+      const row = line.match(/^\|\s*(\d+)\s*\|\s*([\d, ]+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|$/);
+      if (row && Number(row[1]) >= 2 && Number(row[1]) <= 21) schedule.push({ introduce:Number(row[1]), ids:row[2].split(",").map(value => Number(value.trim())), r1:Number(row[3]), r2:Number(row[4]) });
+    });
+    return { chunks, schedule };
+  }
   const days = parseDays();
+  const chunkBank = parseChunkBank();
+  const loopSteps = [
+    { key:"mission", label:"Mission" }, { key:"learn", label:"Learn" }, { key:"practice", label:"Practice" },
+    { key:"recall", label:"Recall" }, { key:"produce", label:"Produce" }, { key:"interact", label:"Interact" },
+    { key:"feedback", label:"Feedback" }, { key:"retry", label:"Retry" }, { key:"retain", label:"Retain" }
+  ];
   const validStatuses = ["IN_PROGRESS","PASS","PARTIAL","SKIPPED","BLOCKED"];
   const storageKey = `challenge:${config.slug}:v1`; let storageError = "";
   const freshState = () => ({ schema:1, events:[], drafts:{}, unlocks:[] });
   const eventId = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  const optionalNumber = value => value === null || value === "" || value === undefined ? null : Number(value);
   function sanitizeEvent(event) {
     if (!event || !validStatuses.includes(event.status) || !Number.isInteger(Number(event.day)) || Number(event.day) < 1 || Number(event.day) > 30) return null;
-    return { id:String(event.id || eventId()), timestamp:String(event.timestamp || new Date().toISOString()), session:Number(event.session) || 1, day:Number(event.day), status:event.status, timeMinutes:event.timeMinutes === null || event.timeMinutes === "" ? null : Number(event.timeMinutes), doneTest:String(event.doneTest || ""), evidence:String(event.evidence || ""), mainError:String(event.mainError || ""), nextAction:String(event.nextAction || ""), verification:String(event.verification || "self-reported") };
+    return { id:String(event.id || eventId()), timestamp:String(event.timestamp || new Date().toISOString()), session:Number(event.session) || 1, day:Number(event.day), status:event.status, timeMinutes:optionalNumber(event.timeMinutes), doneTest:String(event.doneTest || ""), meaningScore:optionalNumber(event.meaningScore), outputDuration:optionalNumber(event.outputDuration), responseLatency:optionalNumber(event.responseLatency), supportLevel:String(event.supportLevel || ""), interactionTurns:optionalNumber(event.interactionTurns), repairResult:String(event.repairResult || ""), evidence:String(event.evidence || ""), mainError:String(event.mainError || ""), nextAction:String(event.nextAction || ""), verification:String(event.verification || "self-reported") };
   }
   function normalizeState(value) {
     if (!value || value.schema !== 1 || !Array.isArray(value.events)) return null;
@@ -133,7 +168,7 @@
     try { const value = localStorage.getItem(storageKey); return value ? normalizeState(JSON.parse(value)) || freshState() : freshState(); }
     catch { storageError = "Không đọc được localStorage. Hãy dùng Xuất progress để giữ bản sao."; return freshState(); }
   }
-  let state = loadState(); let visibleDay = 1; let activeDocument = config.challengeFile;
+  let state = loadState(); let visibleDay = 1; let activeDocument = config.challengeFile; let activeLoopStep = 0;
   let activeRoute = {kind:"overview"}; let routeNoticeText = "";
   function saveState() {
     try { localStorage.setItem(storageKey, JSON.stringify(state)); storageError = ""; renderStorage(); return true; }
@@ -149,7 +184,7 @@
   const currentDay = () => Math.min(contiguousPasses() + 1, 30);
   const isUnlocked = day => day <= Math.min(contiguousPasses() + 1, 30);
   const nextSession = () => state.events.reduce((max,event) => Math.max(max,event.session),0) + 1;
-  const defaultDraft = () => ({ status:"IN_PROGRESS", timeMinutes:"", doneTest:"", evidence:"", mainError:"", nextAction:"", verified:false });
+  const defaultDraft = () => ({ status:"IN_PROGRESS", timeMinutes:"", doneTest:"", meaningScore:"", outputDuration:"", responseLatency:"", supportLevel:"", interactionTurns:"", repairResult:"", evidence:"", mainError:"", nextAction:"", verified:false });
   const draftForDay = day => state.drafts[day] || defaultDraft();
   function renderDayRail() {
     el.dayGrid.replaceChildren(...days.map(entry => {
@@ -160,6 +195,7 @@
       const title = document.createElement("span"); title.className = "day-label"; title.textContent = entry.title;
       const stateLabel = document.createElement("span"); stateLabel.className = "day-state"; stateLabel.textContent = !unlocked ? "LOCKED" : status === "NOT_STARTED" ? "AVAILABLE" : status;
       button.append(number,title,stateLabel);
+      if ([7,14,21,28,30].includes(entry.day)) { const marker=document.createElement("span"); marker.className="day-marker"; marker.textContent=entry.day===30?"FINAL":"BOSS"; button.append(marker); button.dataset.kind=entry.day===30?"final":"boss"; }
       const lockReason = entry.day > 1 ? `Hoàn thành Ngày ${entry.day - 1} với PASS để mở.` : "";
       button.setAttribute("aria-label", `Ngày ${entry.day} — ${entry.outcome} — ${stateLabel.textContent}${lockReason ? ` — ${lockReason}` : ""}`);
       button.setAttribute("aria-disabled",String(!unlocked));
@@ -168,18 +204,77 @@
     }));
   }
   function renderPhaseRibbon() {
-    const phases = [];
-    days.forEach(entry => { let phase = phases.at(-1); if (!phase || phase.name !== entry.phase) { phase = {name:entry.phase,days:[]}; phases.push(phase); } phase.days.push(entry.day); });
+    const phases = (config.journeyPhases || []).map(phase => ({name:phase.label,days:days.filter(entry => entry.day >= phase.from && entry.day <= phase.to).map(entry => entry.day)}));
     el.phaseRibbon.replaceChildren(...phases.map(phase => { const item=document.createElement("div"); item.className="phase-note"; const title=document.createElement("strong"); title.textContent=phase.name; const range=document.createElement("span"); range.textContent=`Ngày ${phase.days[0]}–${phase.days.at(-1)} · ${phase.days.filter(isPass).length}/${phase.days.length}`; item.append(title,range); return item; }));
   }
-  function chunkDue(day) {
+  function chunkTasks(day) {
     const tasks = [];
-    if (day >= 2 && day <= 21) tasks.push(`activate Group ${day - 1}`);
-    if (day >= 4 && day <= 23) tasks.push(`D-2 Group ${day - 3}`);
-    if (day >= 9 && day <= 28) tasks.push(`D-7 Group ${day - 8}`);
-    if (day >= 22 && day <= 28) { const ranges = [[41,52],[53,64],[65,76],[77,88],[89,100],[101,110],[111,120]]; const range=ranges[day-22]; tasks.push(`recognition ${range[0]}–${range[1]}`); }
-    if (day >= 29) tasks.push("chỉ dùng chunks đã ACTIVE");
-    return tasks.length ? tasks.join(" · ") : "chưa có chunk retrieval";
+    chunkBank.schedule.filter(item => item.introduce === day).forEach(item => tasks.push({label:"Activate",ids:item.ids}));
+    chunkBank.schedule.filter(item => item.r1 === day).forEach(item => tasks.push({label:"D+2",ids:item.ids}));
+    chunkBank.schedule.filter(item => item.r2 === day).forEach(item => tasks.push({label:"D+7",ids:item.ids}));
+    if (day >= 22 && day <= 28) { const ranges=[[41,52],[53,64],[65,76],[77,88],[89,100],[101,110],[111,120]]; tasks.push({label:"Recognition",range:ranges[day-22]}); }
+    if (day >= 29) tasks.push({label:"Retain",text:"Chỉ dùng chunks đã ACTIVE"});
+    return tasks;
+  }
+  function chunkDue(day) {
+    const tasks = chunkTasks(day).map(task => task.ids ? `${task.label} #${task.ids.join("/#")}` : task.range ? `${task.label} ${task.range[0]}–${task.range[1]}` : task.text);
+    return tasks.length ? tasks.join(" · ") : "Chưa có chunk retrieval";
+  }
+  function splitFeedback(value) {
+    const parts = String(value || "").split(";").map(part => part.trim()).filter(Boolean);
+    return { feedback:parts[0] || value || "Chưa có feedback instruction.", retry:parts.slice(1).join("; ") || "Áp dụng correction rồi thực hiện lại output liên quan; không chỉ đọc đáp án." };
+  }
+  function errorsDue(day) {
+    const items = state.events.filter(event => event.mainError && [1,3].includes(day - event.day)).map(event => ({ day:event.day, error:event.mainError, due:day-event.day===1?"D+1":"D+3" }));
+    return items.filter((item,index,array) => array.findIndex(candidate => candidate.error === item.error && candidate.due === item.due) === index);
+  }
+  function renderChunkCards(day,mode) {
+    el.targetChunks.replaceChildren();
+    const tasks = chunkTasks(day).filter(task => mode === "learn" ? task.label === "Activate" : mode === "recall" ? task.label !== "Activate" : false);
+    if (!tasks.length) return;
+    const heading=document.createElement("h4"); heading.textContent=mode === "learn" ? "Production chunks" : "Retrieval queue"; el.targetChunks.append(heading);
+    tasks.forEach(task => {
+      const group=document.createElement("div"); group.className="chunk-task"; const label=document.createElement("strong"); label.textContent=task.label; group.append(label);
+      if (task.ids) task.ids.forEach(id => { const code=document.createElement("code"); code.textContent=`#${id} ${chunkBank.chunks.get(id) || ""}`; group.append(code); });
+      else { const copy=document.createElement("span"); copy.textContent=task.range?`Chunks ${task.range[0]}–${task.range[1]}`:task.text; group.append(copy); }
+      el.targetChunks.append(group);
+    });
+  }
+  function renderMistakesDue(day) {
+    const items=errorsDue(day); el.mistakesDue.replaceChildren(); const heading=document.createElement("h4"); heading.textContent="Mistakes to fix"; el.mistakesDue.append(heading);
+    if (!items.length) { const empty=document.createElement("p"); empty.textContent="Chưa có lỗi D+1/D+3 được ghi trong progress. Không tạo dữ liệu giả."; el.mistakesDue.append(empty); return; }
+    const list=document.createElement("ul"); items.forEach(item => { const row=document.createElement("li"); row.textContent=`${item.due} · từ Ngày ${item.day}: ${item.error}`; list.append(row); }); el.mistakesDue.append(list);
+  }
+  function stageResource(step) {
+    const assessmentLocked=(config.assessmentGateDays || []).includes(visibleDay)&&!terminalStatuses.includes(statusForDay(visibleDay));
+    if (step.key === "learn") return visibleDay===1 ? {file:"LESSONS.md",label:"Mở hướng dẫn diagnostic"} : assessmentLocked ? {file:"ASSESSMENTS.md",label:"Mở assessment trước"} : {file:"LESSONS.md",label:"Mở bài học gốc"};
+    if (step.key === "practice") return assessmentLocked ? {file:"ASSESSMENTS.md",label:"Hoàn thành assessment trước"} : {file:"EXERCISES.md",label:"Mở bài tập cố định"};
+    if (step.key === "recall") return {file:config.errorLedgerFile,label:"Mở Error Ledger",docs:true};
+    if (["feedback","retry","retain"].includes(step.key)) return {evidence:true,label:"Ghi feedback & retry"};
+    return null;
+  }
+  function renderLoopStep(index) {
+    activeLoopStep=Math.max(0,Math.min(index,loopSteps.length-1)); const step=loopSteps[activeLoopStep]; const mission=parseMission(visibleDay),f=mission.fields,repair=splitFeedback(f["Feedback & Retry"]);
+    const content={ mission:["Mission Challenge",f["Mission Challenge / PASS"]], learn:["Input + target language",f["Input + Target language"]], practice:["Notice + imitate",f["Imitate / Controlled"]], recall:["Recall from memory",f["Recall + Reuse"]], produce:["Independent production",f.Production], interact:["Two-way interaction",f.Interaction], feedback:["Feedback",repair.feedback], retry:["Retry",repair.retry], retain:["Retain the result",f.Evidence] }[step.key];
+    [...el.learningLoop.children].forEach((button,buttonIndex) => { button.setAttribute("aria-current",buttonIndex===activeLoopStep?"step":"false"); button.dataset.state=buttonIndex<activeLoopStep?"visited":buttonIndex===activeLoopStep?"current":"upcoming"; });
+    el.loopPosition.textContent=`Bước ${activeLoopStep+1}/${loopSteps.length}`; el.loopTitle.textContent=content[0]; el.loopBody.innerHTML=`<p>${renderInline(content[1] || "Chưa có dữ liệu cho bước này.")}</p>`;
+    renderChunkCards(visibleDay,step.key); el.mistakesDue.replaceChildren(); if(step.key==="recall")renderMistakesDue(visibleDay);
+    const resource=stageResource(step); el.stageResourceButton.hidden=!resource; el.stageResourceButton.disabled=false; if(resource){el.stageResourceButton.textContent=resource.label;el.stageResourceButton.dataset.file=resource.file||"";el.stageResourceButton.dataset.action=resource.docs?"docs":resource.evidence?"evidence":"source";}
+    el.loopNextButton.hidden=activeLoopStep===loopSteps.length-1; el.loopNextButton.textContent=activeLoopStep<loopSteps.length-1?`Tiếp: ${loopSteps[activeLoopStep+1].label}`:"";
+  }
+  function renderMission(day) {
+    const mission=parseMission(day),f=mission.fields,isBoss=[7,14,21,28].includes(day),isFinal=day===30;
+    el.missionShell.dataset.kind=isFinal?"final":isBoss?"boss":"daily"; el.missionKind.textContent=isFinal?"FINAL INTERACTION":isBoss?"BOSS FIGHT":"TODAY'S MISSION";
+    const ability=f["Required ability + support"] || "",support=ability.match(/`(S[1-4](?:→S[1-4])?)`/)?.[1] || ability.match(/\bS[1-4](?:→S[1-4])?\b/)?.[0] || "Support";
+    el.nowStepCopy.innerHTML=renderInline(f["Mission / Why"] || days[day-1].outcome); el.missionSupport.textContent=support; el.missionSupport.title=ability; document.getElementById("missionAbility").innerHTML=renderInline(ability); el.missionChallenge.innerHTML=renderInline(f["Production"] || ""); el.missionPass.innerHTML=renderInline(f["Mission Challenge / PASS"] || days[day-1].done); el.chunkDueCopy.textContent=chunkDue(day);
+    el.learningLoop.replaceChildren(...loopSteps.map((step,index) => { const button=document.createElement("button"); button.type="button"; button.className="loop-step"; button.textContent=step.label; button.addEventListener("click",()=>renderLoopStep(index)); return button; }));
+    activeLoopStep=0; renderLoopStep(0);
+  }
+  function openStageResource() {
+    const action=el.stageResourceButton.dataset.action,file=el.stageResourceButton.dataset.file;
+    if(action==="evidence"){const disclosure=document.querySelector(".evidence-disclosure");disclosure.open=true;disclosure.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});return;}
+    if(action==="docs"){selectTab(2);openDocument(file);return;}
+    const surface=[...el.dailySources.querySelectorAll(".markdown[data-source]")].find(item=>item.dataset.source===file); if(!surface){el.formMessage.textContent="Tài liệu này mở sau assessment theo đúng gate của ngày.";el.formMessage.dataset.state="error";return;} const disclosure=surface.closest("details");disclosure.open=true;disclosure.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   }
   function renderDailySources(day) {
     const assessmentLocked = (config.assessmentGateDays || []).includes(day) && !terminalStatuses.includes(statusForDay(day));
@@ -210,9 +305,9 @@
   function renderLesson() {
     const entry = days[visibleDay - 1]; el.dayPhase.textContent = entry.phase; el.dayTitle.textContent = `Ngày ${entry.day} — ${entry.title}`; el.dayTitle.tabIndex = -1;
     el.dayOutcome.textContent = entry.outcome; el.dayMinimum.textContent = entry.minimum; el.dayTarget.textContent = entry.target; el.dayDone.textContent = entry.done; el.dayEvidence.textContent = entry.evidence; el.dayStretch.textContent = entry.stretch;
-    el.detailStatus.textContent = statusForDay(entry.day); el.nowStepCopy.textContent = entry.minimum; el.chunkDueCopy.textContent = `Chunk due: ${chunkDue(entry.day)}`;
-    renderDailySources(entry.day); const draft = draftForDay(entry.day); el.statusSelect.value = draft.status; el.timeSpent.value = draft.timeMinutes; el.doneTest.value = draft.doneTest; el.evidence.value = draft.evidence; el.mainError.value = draft.mainError; el.nextAction.value = draft.nextAction; el.verified.checked = draft.verified;
-    [el.statusSelect,el.timeSpent,el.doneTest,el.evidence,el.mainError,el.nextAction].forEach(field => field.setAttribute("aria-invalid","false"));
+    el.detailStatus.textContent = statusForDay(entry.day); renderMission(entry.day);
+    renderDailySources(entry.day); const draft = draftForDay(entry.day); el.statusSelect.value = draft.status; el.timeSpent.value = draft.timeMinutes ?? ""; el.doneTest.value = draft.doneTest ?? ""; el.meaningScore.value=draft.meaningScore ?? ""; el.outputDuration.value=draft.outputDuration ?? ""; el.responseLatency.value=draft.responseLatency ?? ""; el.supportLevel.value=draft.supportLevel ?? ""; el.interactionTurns.value=draft.interactionTurns ?? ""; el.repairResult.value=draft.repairResult ?? ""; el.evidence.value = draft.evidence ?? ""; el.mainError.value = draft.mainError ?? ""; el.nextAction.value = draft.nextAction ?? ""; el.verified.checked = Boolean(draft.verified);
+    [el.statusSelect,el.timeSpent,el.doneTest,el.meaningScore,el.outputDuration,el.responseLatency,el.supportLevel,el.interactionTurns,el.repairResult,el.evidence,el.mainError,el.nextAction].forEach(field => field.setAttribute("aria-invalid","false"));
     const latest = latestEvent(entry.day); el.formMessage.dataset.state = "idle"; el.formMessage.textContent = latest ? `Log gần nhất: ${latest.status} · ${latest.timestamp}` : "PASS cần Done test, evidence và xác nhận tự kiểm tra.";
     el.passButton.disabled = isPass(entry.day); el.passButton.textContent = isPass(entry.day) ? "PASS đã ghi" : "Ghi PASS"; el.passButton.dataset.state = isPass(entry.day) ? "success" : "default";
     el.previousButton.disabled = entry.day === 1; el.nextButton.disabled = !isPass(entry.day) || entry.day === 30; el.nextButton.hidden = entry.day === 30; el.actionCopy.textContent = `Ngày ${entry.day} · ${statusForDay(entry.day)}`;
@@ -220,9 +315,9 @@
   function renderProgress() {
     el.progressList.replaceChildren(...days.map(entry => { const item = document.createElement("li"); item.className = "progress-item"; const day = document.createElement("span"); day.textContent = `Ngày ${entry.day}`; const title = document.createElement("strong"); title.textContent = entry.outcome; const status = document.createElement("span"); status.className = "progress-state"; status.dataset.state = statusForDay(entry.day); status.textContent = statusForDay(entry.day); item.append(day,title,status); return item; }));
     if (!state.events.length) { const item = document.createElement("li"); item.className = "history-item"; item.textContent = "Chưa có log."; el.historyList.replaceChildren(item); }
-    else el.historyList.replaceChildren(...[...state.events].sort(compareEvents).reverse().map(event => { const item = document.createElement("li"); item.className = "history-item"; const meta = document.createElement("div"); meta.className = "history-meta"; meta.textContent = `Buổi ${event.session} · Ngày ${event.day} · ${event.status} · ${event.timestamp}`; const detail = document.createElement("p"); detail.textContent = `Thời gian: ${event.timeMinutes === null ? "—" : `${event.timeMinutes}'`} · Done test: ${event.doneTest || "—"} · Evidence: ${event.evidence || "—"} · Lỗi: ${event.mainError || "—"} · Next: ${event.nextAction || "—"} · ${event.verification}`; item.append(meta,detail); return item; }));
+    else el.historyList.replaceChildren(...[...state.events].sort(compareEvents).reverse().map(event => { const item = document.createElement("li"); item.className = "history-item"; const meta = document.createElement("div"); meta.className = "history-meta"; meta.textContent = `Buổi ${event.session} · Ngày ${event.day} · ${event.status} · ${event.timestamp}`; const performance=document.createElement("p"); performance.className="performance-metrics"; performance.textContent=`Meaning ${event.meaningScore ?? "—"}% · Output ${event.outputDuration ?? "—"}s · Latency ${event.responseLatency ?? "—"}s · Support ${event.supportLevel || "—"} · Turns ${event.interactionTurns ?? "—"} · Repair ${event.repairResult || "—"}`; const detail = document.createElement("p"); detail.textContent = `Thời gian: ${event.timeMinutes === null ? "—" : `${event.timeMinutes}'`} · Done test: ${event.doneTest || "—"} · Evidence: ${event.evidence || "—"} · Lỗi: ${event.mainError || "—"} · Next: ${event.nextAction || "—"} · ${event.verification}`; item.append(meta,performance,detail); return item; }));
   }
-  function renderSummary() { const passes = days.filter(entry => isPass(entry.day)).length; const today=currentDay(); el.passCount.textContent = passes; el.currentDayReadout.textContent = String(today).padStart(2,"0"); el.railOutput.textContent = `${passes}/30`; el.chunkSummary.textContent = `Chunk plan · Ngày ${today}: ${chunkDue(today)}`; el.runStatus.textContent = statusForDay(30) === "PASS" ? "PASS" : state.events.length ? "IN_PROGRESS" : "DRAFT"; }
+  function renderSummary() { const passes = days.filter(entry => isPass(entry.day)).length; const today=currentDay(); const phase=(config.journeyPhases||[]).find(item=>today>=item.from&&today<=item.to); el.passCount.textContent = passes; el.currentDayReadout.textContent = String(today).padStart(2,"0"); el.railOutput.textContent = `${passes}/30`; el.chunkSummary.textContent = `${phase?.label || "30-day journey"} · supported English → independent English · ${chunkDue(today)}`; el.runStatus.textContent = statusForDay(30) === "PASS" ? "PASS" : state.events.length ? "IN_PROGRESS" : "DRAFT"; }
   function renderStorage() { if (!el.storageMessage) return; el.storageMessage.textContent = storageError || "Progress được lưu trên trình duyệt này."; el.storageMessage.dataset.state = storageError ? "error" : "idle"; }
   function hasUnlock(name,day) { return state.unlocks.some(item => item.name === name && item.day === day); }
   function protectedContent(name,day) {
@@ -263,21 +358,22 @@
   }
   function navigateToDay(day,{replace=false}={}) { if(!isUnlocked(day))return; routeNoticeText=""; if(activeRoute.kind==="day")syncDraft(); selectTab(0); history[replace?"replaceState":"pushState"](null,"",`#day/${String(day).padStart(2,"0")}`); applyRoute({focus:true}); window.scrollTo({top:document.getElementById("learnPanel").offsetTop-72,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); }
   function navigateToOverview(){if(activeRoute.kind==="day")syncDraft();routeNoticeText="";selectTab(0);history.pushState(null,"","#overview");applyRoute({focus:true});document.querySelector(`.day-button:nth-child(${visibleDay})`)?.focus({preventScroll:true});}
-  function syncDraft() { if(activeRoute.kind!=="day")return; state.drafts[visibleDay] = { status:el.statusSelect.value,timeMinutes:el.timeSpent.value,doneTest:el.doneTest.value,evidence:el.evidence.value,mainError:el.mainError.value,nextAction:el.nextAction.value,verified:el.verified.checked }; saveState(); }
-  [el.statusSelect,el.timeSpent,el.doneTest,el.evidence,el.mainError,el.nextAction,el.verified].forEach(field => field.addEventListener("input",syncDraft));
-  function formMessage(message,stateName,invalid=[]) { [el.statusSelect,el.timeSpent,el.doneTest,el.evidence,el.mainError,el.nextAction].forEach(field => field.setAttribute("aria-invalid",String(invalid.includes(field)))); el.formMessage.textContent = message; el.formMessage.dataset.state = stateName; invalid[0]?.focus(); }
+  function syncDraft() { if(activeRoute.kind!=="day")return; state.drafts[visibleDay] = { status:el.statusSelect.value,timeMinutes:el.timeSpent.value,doneTest:el.doneTest.value,meaningScore:el.meaningScore.value,outputDuration:el.outputDuration.value,responseLatency:el.responseLatency.value,supportLevel:el.supportLevel.value,interactionTurns:el.interactionTurns.value,repairResult:el.repairResult.value,evidence:el.evidence.value,mainError:el.mainError.value,nextAction:el.nextAction.value,verified:el.verified.checked }; saveState(); }
+  [el.statusSelect,el.timeSpent,el.doneTest,el.meaningScore,el.outputDuration,el.responseLatency,el.supportLevel,el.interactionTurns,el.repairResult,el.evidence,el.mainError,el.nextAction,el.verified].forEach(field => field.addEventListener("input",syncDraft));
+  function formMessage(message,stateName,invalid=[]) { [el.statusSelect,el.timeSpent,el.doneTest,el.meaningScore,el.outputDuration,el.responseLatency,el.supportLevel,el.interactionTurns,el.repairResult,el.evidence,el.mainError,el.nextAction].forEach(field => field.setAttribute("aria-invalid",String(invalid.includes(field)))); el.formMessage.textContent = message; el.formMessage.dataset.state = stateName; invalid[0]?.focus(); }
   function appendProgress(status) {
     syncDraft(); const draft = draftForDay(visibleDay); const evidence = draft.evidence.trim(); const doneTest = draft.doneTest.trim();
     if (status === "PASS" && (!evidence || !doneTest || !draft.verified)) return formMessage("PASS cần Done test, evidence và xác nhận tự kiểm tra.","error",[!doneTest && el.doneTest,!evidence && el.evidence].filter(Boolean));
     if (["IN_PROGRESS","PARTIAL"].includes(status) && !evidence) return formMessage(`${status} cần evidence của phần đã làm.`,"error",[el.evidence]);
-    if (status === "BLOCKED" && !draft.mainError.trim()) return formMessage("BLOCKED cần blocker cụ thể.","error",[el.mainError]);
-    if (status === "SKIPPED" && !draft.nextAction.trim()) return formMessage("SKIPPED cần next action.","error",[el.nextAction]);
-    state.events.push(sanitizeEvent({id:eventId(),timestamp:new Date().toISOString(),session:nextSession(),day:visibleDay,status,timeMinutes:draft.timeMinutes,doneTest,evidence,mainError:draft.mainError.trim(),nextAction:draft.nextAction.trim(),verification:status === "PASS" ? "self-reported" : "not-verified"})); delete state.drafts[visibleDay]; saveState(); render(); formMessage(`Đã thêm log ${status}. Log cũ không bị sửa.`,"success");
+    if (status === "BLOCKED" && !(draft.mainError||"").trim()) return formMessage("BLOCKED cần blocker cụ thể.","error",[el.mainError]);
+    if (status === "SKIPPED" && !(draft.nextAction||"").trim()) return formMessage("SKIPPED cần next action.","error",[el.nextAction]);
+    state.events.push(sanitizeEvent({id:eventId(),timestamp:new Date().toISOString(),session:nextSession(),day:visibleDay,status,timeMinutes:draft.timeMinutes,doneTest,meaningScore:draft.meaningScore,outputDuration:draft.outputDuration,responseLatency:draft.responseLatency,supportLevel:draft.supportLevel,interactionTurns:draft.interactionTurns,repairResult:draft.repairResult,evidence,mainError:(draft.mainError||"").trim(),nextAction:(draft.nextAction||"").trim(),verification:status === "PASS" ? "self-reported" : "not-verified"})); delete state.drafts[visibleDay]; saveState(); render(); formMessage(`Đã thêm log ${status}. Log cũ không bị sửa.`,"success");
   }
   el.evidenceForm.addEventListener("submit",event => { event.preventDefault(); appendProgress(el.statusSelect.value); }); el.passButton.addEventListener("click",() => appendProgress("PASS"));
   el.previousButton.addEventListener("click",() => { if(visibleDay<=1)return; navigateToDay(visibleDay-1); });
   el.nextButton.addEventListener("click",() => { if (!isPass(visibleDay) || visibleDay >= 30) return; navigateToDay(visibleDay+1); });
   el.backToOverview.addEventListener("click",navigateToOverview);
+  el.loopNextButton.addEventListener("click",()=>renderLoopStep(activeLoopStep+1)); el.stageResourceButton.addEventListener("click",openStageResource);
   el.exportButton.addEventListener("click",() => { const blob = new Blob([JSON.stringify(state,null,2)],{type:"application/json"}); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `${config.slug}-progress.json`; link.click(); URL.revokeObjectURL(url); });
   el.importButton.addEventListener("click",() => el.importInput.click()); el.importInput.addEventListener("change",async event => { const file = event.target.files?.[0]; if (!file) return; try { const imported = normalizeState(JSON.parse(await file.text())); if (!imported) throw new Error("invalid"); const ids = new Set(state.events.map(item => item.id)); state.events.push(...imported.events.filter(item => !ids.has(item.id))); state.drafts = {...imported.drafts,...state.drafts}; const unlocks = new Set(state.unlocks.map(item => `${item.name}:${item.day}:${item.timestamp}`)); state.unlocks.push(...imported.unlocks.filter(item => !unlocks.has(`${item.name}:${item.day}:${item.timestamp}`))); saveState(); visibleDay = currentDay(); render(); el.storageMessage.textContent = "Đã hợp nhất progress; log hiện có được giữ nguyên."; el.storageMessage.dataset.state = "success"; } catch { el.storageMessage.textContent = "File progress không hợp lệ; dữ liệu hiện có được giữ nguyên."; el.storageMessage.dataset.state = "error"; } finally { event.target.value = ""; } });
   const tabs = [document.getElementById("learnTab"),document.getElementById("progressTab"),document.getElementById("docsTab")]; const panels = [document.getElementById("learnPanel"),document.getElementById("progressPanel"),document.getElementById("docsPanel")];

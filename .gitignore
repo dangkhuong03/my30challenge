@@ -12,6 +12,7 @@ node_modules/
 dist/
 coverage/
 .cache/
+.hallmark/
 
 # Generated browser/audit evidence
 audit-evidence/

@@ -4,7 +4,22 @@ Status: `READY_FOR_ORIENTATION` — Ngày 1 là orientation + reading diagnostic
 
 Workload gate: `RESOLVED` — workload tăng dần 60–120 phút theo phase, review 90–150 phút và hard cap 180 phút/ngày.
 
-Authority files: `PLAN.md`, `LESSONS.md`, `EXERCISES.md`, `EXERCISE_KEYS.md`, `PRACTICE_PAPER.md`, `CHUNKS.md`, `CHUNK_LEDGER.md`, `ASSESSMENTS.md`, `ASSESSMENT_KEYS.md`, `PROGRESS.md`.
+Authority files: `PLAN.md`, `LESSONS.md`, `SCAFFOLD_MAP.md`, `EXERCISES.md`, `EXERCISE_KEYS.md`, `PRACTICE_PAPER.md`, `CHUNKS.md`, `CHUNK_LEDGER.md`, `ERROR_LEDGER.md`, `ASSESSMENTS.md`, `ASSESSMENT_KEYS.md`, `PROGRESS.md`.
+
+## North Star — dùng tiếng Anh để hoàn thành nhiệm vụ
+
+Mỗi ngày trả lời câu hỏi **“Hôm nay người học phải làm được gì bằng tiếng Anh?”**, không chỉ “học nội dung gì”. Grammar, vocabulary, reading, audio và quiz là phương tiện. Ngày chỉ được `PASS` khi có một Mission Challenge quan sát được bằng reading, writing, speaking hoặc interaction.
+
+Daily loop mặc định: `INPUT → NOTICE → IMITATE → RECALL → PRODUCE → INTERACT → FEEDBACK → RETRY`; khi phù hợp thêm `APPLY → RETAIN`. Day 1 là ngoại lệ có chủ đích: chỉ đo reading và thực hiện một quyết định từ English input, không suy speaking score.
+
+Support giảm theo bốn mức:
+
+- `S4`: model/script ngắn + Vietnamese explanation.
+- `S3`: sentence frames, không có full script.
+- `S2`: tối đa 8 keywords.
+- `S1`: không script; input/câu hỏi mới và phải tự clarify hoặc repair.
+
+Day 7/14/21/28 là cumulative **Boss Fight** trong review timebox hiện có. Không cộng thêm bài hoặc thời gian; Boss Fight thay phần review production cũ.
 
 ## Mục tiêu thực tế
 
@@ -51,7 +66,7 @@ Challenge đạt `PASS` khi đồng thời đạt:
 3. Paraphrase được 5 câu quan trọng bằng tiếng Anh đơn giản mà không đổi nghĩa chính.
 4. Trình bày 2–3 phút từ tối đa 8 keywords, không đọc nguyên script.
 5. Trả lời được ít nhất 4/5 câu hỏi follow-up bằng câu hoàn chỉnh hoặc dùng clarification phrase phù hợp.
-6. Có ít nhất 40 `ACTIVE` chunks đã dùng đúng và retrieval ở hai ngày khác; nhận ra đúng meaning của ít nhất 90/120 chunks trong bank được chỉ định cho vòng này.
+6. Có đủ 40 chunks trong **production schedule** được dùng đúng và retrieval ở hai ngày khác; schedule bắt buộc gồm language để mô tả paper lẫn clarification/repair. Nhận ra đúng meaning của ít nhất 90/120 chunks trong bank được chỉ định cho vòng này.
 7. Pronunciation đủ hiểu: listener độc lập hoặc cùng một ASR configuration ghi đúng ít nhất 80% content words. Self-transcript chỉ dùng chẩn đoán, không phải acceptance evidence.
 
 Kết quả cuối là `PASS`, `PARTIAL` hoặc `FAIL` dựa trên evidence, không dựa vào cảm giác.
@@ -64,6 +79,8 @@ Kết quả cuối là `PASS`, `PARTIAL` hoặc `FAIL` dựa trên evidence, kh�
 - Không dịch toàn bộ paper. Chỉ dịch có chọn lọc để kiểm tra meaning.
 - Speaking tăng theo thang: frames 20–30 giây → 45–60 giây → 90 giây → 2–3 phút. Không yêu cầu bài nói dài trước khi dạy cấu trúc nói.
 - Mỗi bài nói theo vòng: chuẩn bị keywords → nói → nghe lại/transcribe → sửa → nói lại.
+- Interaction theo vòng: nghe/đọc prompt → trả lời → nhận follow-up hoặc misunderstanding → clarify/repair → tiếp tục. Prepared monologue không tự đủ để `PASS` ở ngày có interaction.
+- Feedback ưu tiên `CRITICAL` (đổi meaning/khó hiểu) → `REPEATED` → `MINOR`; mọi correction quan trọng phải có immediate retry và lịch lại trong `ERROR_LEDGER.md`.
 - Paper được học theo rhetorical function, không ghi nhớ một paper cụ thể.
 - Reference audio trong `audio/` dùng để shadowing; không dùng TTS làm giám khảo pronunciation.
 

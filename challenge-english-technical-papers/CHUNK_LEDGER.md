@@ -4,26 +4,26 @@ Một group chỉ `ACTIVE` khi cả hai chunks có written/oral use, Retrieval 1
 
 | Group | Chunks | Introduce evidence | Spoken evidence | R1 score /2 | R2 score /2 | Status | Repair |
 |---:|---:|---|---|---:|---:|---|---|
-| 1 | 1–2 | — | — | — | — | NOT_STARTED | — |
-| 2 | 3–4 | — | — | — | — | NOT_STARTED | — |
-| 3 | 5–6 | — | — | — | — | NOT_STARTED | — |
-| 4 | 7–8 | — | — | — | — | NOT_STARTED | — |
-| 5 | 9–10 | — | — | — | — | NOT_STARTED | — |
-| 6 | 11–12 | — | — | — | — | NOT_STARTED | — |
-| 7 | 13–14 | — | — | — | — | NOT_STARTED | — |
-| 8 | 15–16 | — | — | — | — | NOT_STARTED | — |
-| 9 | 17–18 | — | — | — | — | NOT_STARTED | — |
-| 10 | 19–20 | — | — | — | — | NOT_STARTED | — |
-| 11 | 21–22 | — | — | — | — | NOT_STARTED | — |
-| 12 | 23–24 | — | — | — | — | NOT_STARTED | — |
-| 13 | 25–26 | — | — | — | — | NOT_STARTED | — |
-| 14 | 27–28 | — | — | — | — | NOT_STARTED | — |
-| 15 | 29–30 | — | — | — | — | NOT_STARTED | — |
-| 16 | 31–32 | — | — | — | — | NOT_STARTED | — |
-| 17 | 33–34 | — | — | — | — | NOT_STARTED | — |
-| 18 | 35–36 | — | — | — | — | NOT_STARTED | — |
-| 19 | 37–38 | — | — | — | — | NOT_STARTED | — |
-| 20 | 39–40 | — | — | — | — | NOT_STARTED | — |
+| 1 | 1, 7 | — | — | — | — | NOT_STARTED | — |
+| 2 | 2, 8 | — | — | — | — | NOT_STARTED | — |
+| 3 | 14, 18 | — | — | — | — | NOT_STARTED | — |
+| 4 | 64, 67 | — | — | — | — | NOT_STARTED | — |
+| 5 | 61, 62 | — | — | — | — | NOT_STARTED | — |
+| 6 | 68, 70 | — | — | — | — | NOT_STARTED | — |
+| 7 | 11, 20 | — | — | — | — | NOT_STARTED | — |
+| 8 | 21, 24 | — | — | — | — | NOT_STARTED | — |
+| 9 | 25, 26 | — | — | — | — | NOT_STARTED | — |
+| 10 | 27, 28 | — | — | — | — | NOT_STARTED | — |
+| 11 | 29, 30 | — | — | — | — | NOT_STARTED | — |
+| 12 | 71, 74 | — | — | — | — | NOT_STARTED | — |
+| 13 | 63, 65 | — | — | — | — | NOT_STARTED | — |
+| 14 | 66, 69 | — | — | — | — | NOT_STARTED | — |
+| 15 | 31, 32 | — | — | — | — | NOT_STARTED | — |
+| 16 | 46, 49 | — | — | — | — | NOT_STARTED | — |
+| 17 | 39, 40 | — | — | — | — | NOT_STARTED | — |
+| 18 | 35, 37 | — | — | — | — | NOT_STARTED | — |
+| 19 | 51, 53 | — | — | — | — | NOT_STARTED | — |
+| 20 | 72, 75 | — | — | — | — | NOT_STARTED | — |
 
 ## Recognition ledger
 

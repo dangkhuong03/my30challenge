@@ -15,17 +15,20 @@ Mở từng section sau khi khóa assessment tương ứng.
 - Process: check file → find topic/write → review → retry max two → store accepted result.
 - Limit controls cost/time; human review catches fluent but factually wrong output.
 - Modals: can/cannot/may/must. Summary must preserve order and two controls.
+- Interaction: hai câu trả lời phải giữ đúng process/controls; clarification hợp lệ rồi retry được tính là repair, không phải lỗi nội dung.
 
 ## R2
 
 - Main idea: accepted response is not final proof; verify postconditions and reconcile unknown outcomes before risky retry.
 - Logic: accepted **however** not available; may process/fail; **therefore** checks; unclear → wait/reconcile; important for non-repeatable effects.
 - Limitation: existence alone does not verify contents, correctness or usability.
+- Interaction: câu trả lời sau interruption phải quay lại đúng claim; repair phải phân biệt request accepted với final file available.
 
 ## R3
 
 - B: timeout/retry problem. P: two-state labels duplicate effects. M: three states + operation-ID reconciliation on 200 orders. R: duplicates 14→2; unresolved 1→6; time +9%. C: suggests benefit with provider-support limitation.
 - Do not claim proof, significance or universal applicability.
+- Interaction: justification phải nêu ít nhất một benefit và một cost; extrapolation phải giữ provider-support assumption thay vì biến kết quả thành quy luật chung.
 
 ## R4
 
@@ -33,6 +36,7 @@ Mở từng section sau khi khóa assessment tương ứng.
 - Design: separate regression/capability, hidden final set, repeated runs, multiple reliability metrics and human grading.
 - Limitation/cost: more expense and ownership/secrecy burden.
 - Transfer claim: evidence is more honest beyond familiar tasks, not guaranteed perfect evaluation.
+- Interaction: deliberate misunderstanding chỉ được coi là repaired khi người học bác claim sai và thay bằng claim phù hợp với passage.
 
 ## Reading Anchor Form B
 
@@ -50,6 +54,7 @@ Mở từng section sau khi khóa assessment tương ứng.
 - Trade-offs: storage, coordination, recovery costs; authority remains separate.
 - Core boundary: durable session ≠ active context ≠ approval authority.
 - Reject claims that larger context alone solves recovery or that restored context grants permission.
+- Follow-ups: clarification phải làm rõ khái niệm; repair phải khôi phục đúng boundary; justification phải dùng evidence/trade-off; extrapolation phải được gắn nhãn assumption; responsibility answer phải giữ human approval độc lập với recovery.
 
 ## Independent intelligibility protocol
 

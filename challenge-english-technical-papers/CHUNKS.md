@@ -1,6 +1,6 @@
 # Active Chunk Bank
 
-Chunk chỉ được tính `ACTIVE` sau khi được dùng đúng trong một câu viết hoặc recording và retrieval ở `D+2` và `D+7`. Chunks 1–40 là production bank bắt buộc của vòng beginner; chunks 41–120 là recognition bank được chỉ định. Chunks 121–160 là backlog, không thuộc finish line. Finish line yêu cầu 40 active và nhận ra đúng ít nhất 90/120.
+Chunk chỉ được tính `ACTIVE` sau khi được dùng đúng trong một câu viết hoặc recording và retrieval ở `D+2` và `D+7`. Production bank bắt buộc gồm đúng 40 chunks được chỉ định trong `Activation schedule`; bank này cố ý trộn mô tả paper với clarification, repair và uncertainty. Recognition pool là toàn bộ chunks 1–120. Chunks 121–160 là backlog, không thuộc finish line. Finish line yêu cầu 40 production chunks `ACTIVE` và nhận ra đúng ít nhất 90/120.
 
 ## Describing a topic
 
@@ -193,28 +193,28 @@ Chunk chỉ được tính `ACTIVE` sau khi được dùng đúng trong một c�
 
 | Introduce | Chunks | Retrieval 1 | Retrieval 2 |
 |---:|---:|---:|---:|
-| 2 | 1–2 | 4 | 9 |
-| 3 | 3–4 | 5 | 10 |
-| 4 | 5–6 | 6 | 11 |
-| 5 | 7–8 | 7 | 12 |
-| 6 | 9–10 | 8 | 13 |
-| 7 | 11–12 | 9 | 14 |
-| 8 | 13–14 | 10 | 15 |
-| 9 | 15–16 | 11 | 16 |
-| 10 | 17–18 | 12 | 17 |
-| 11 | 19–20 | 13 | 18 |
-| 12 | 21–22 | 14 | 19 |
-| 13 | 23–24 | 15 | 20 |
-| 14 | 25–26 | 16 | 21 |
-| 15 | 27–28 | 17 | 22 |
-| 16 | 29–30 | 18 | 23 |
-| 17 | 31–32 | 19 | 24 |
-| 18 | 33–34 | 20 | 25 |
-| 19 | 35–36 | 21 | 26 |
-| 20 | 37–38 | 22 | 27 |
-| 21 | 39–40 | 23 | 28 |
+| 2 | 1, 7 | 4 | 9 |
+| 3 | 2, 8 | 5 | 10 |
+| 4 | 14, 18 | 6 | 11 |
+| 5 | 64, 67 | 7 | 12 |
+| 6 | 61, 62 | 8 | 13 |
+| 7 | 68, 70 | 9 | 14 |
+| 8 | 11, 20 | 10 | 15 |
+| 9 | 21, 24 | 11 | 16 |
+| 10 | 25, 26 | 12 | 17 |
+| 11 | 27, 28 | 13 | 18 |
+| 12 | 29, 30 | 14 | 19 |
+| 13 | 71, 74 | 15 | 20 |
+| 14 | 63, 65 | 16 | 21 |
+| 15 | 66, 69 | 17 | 22 |
+| 16 | 31, 32 | 18 | 23 |
+| 17 | 46, 49 | 19 | 24 |
+| 18 | 39, 40 | 20 | 25 |
+| 19 | 35, 37 | 21 | 26 |
+| 20 | 51, 53 | 22 | 27 |
+| 21 | 72, 75 | 23 | 28 |
 
-Ngày 22–28 chạy recognition sets 41–120 theo blocks 12/12/12/12/12/10/10 và ghi số đúng, không tự tính là `ACTIVE`. Chunks 121–160 là backlog sau challenge.
+Ngày 22–28 chạy recognition sets 41–120 theo blocks 12/12/12/12/12/10/10 và ghi số đúng; một recognition hit không tự tính là `ACTIVE`. Chunks 1–40 được kiểm tra lại trong bài học và Boss Fight. Chunks 121–160 là backlog sau challenge.
 
 ## Daily activation rule
 
