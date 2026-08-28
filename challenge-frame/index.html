@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="A 90-hour IELTS Academic bridge from beginner foundations toward evidence-based Band 4.0 readiness." />
+    <title>30-Day IELTS Academic 4.0 Bridge</title>
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="styles/frame.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#lesson-workspace">Skip to today’s lesson</a>
+
+    <header class="app-nav" aria-label="Challenge and lesson navigation">
+      <div class="app-nav__main">
+        <a class="app-nav__brand" href="#lesson-workspace" aria-label="30-Day IELTS Academic 4.0 Bridge home" data-challenge-home>
+          <span class="app-nav__mark" aria-hidden="true" data-challenge-mark>30</span>
+          <span class="app-nav__name" data-challenge-short-title>IELTS 4.0 Bridge</span>
+        </a>
+
+        <nav class="app-nav__links" aria-label="Challenge navigation" data-primary-navigation>
+          <a href="#lesson-workspace">Today</a>
+          <a href="#day-overview">30 days</a>
+          <a href="#progress-panel">Progress</a>
+        </nav>
+
+        <div class="app-nav__actions">
+          <button class="button button--quiet mobile-days-trigger" type="button" data-open-days>
+            All days
+          </button>
+          <button class="button button--primary" type="button" data-resume>Resume</button>
+        </div>
+      </div>
+
+      <div class="section-nav-wrap">
+        <nav class="section-nav" aria-label="Lesson sections" data-section-navigation></nav>
+        <button class="section-nav-hint" type="button" data-section-nav-hint hidden aria-label="Show more lesson steps">More →</button>
+      </div>
+    </header>
+
+    <main class="app-shell" id="app-shell">
+      <aside class="day-rail" id="day-overview" aria-labelledby="day-overview-title">
+        <div class="day-rail__header">
+          <div>
+            <p class="context-label">Challenge map</p>
+            <h2 id="day-overview-title" data-challenge-map-title>Thirty days</h2>
+          </div>
+          <span class="day-rail__count" data-day-count>30</span>
+        </div>
+
+        <ol class="day-grid" data-day-grid aria-label="Challenge days"></ol>
+
+        <div class="state-key" aria-label="Day state legend">
+          <span><i class="state-dot state-dot--complete" aria-hidden="true"></i>Complete</span>
+          <span><i class="state-dot state-dot--active" aria-hidden="true"></i>Today</span>
+          <span><i class="state-dot state-dot--available" aria-hidden="true"></i>Available</span>
+          <span><i class="state-dot state-dot--locked" aria-hidden="true"></i>Locked</span>
+        </div>
+
+        <div class="progress-note day-rail__note">
+          <strong>One action each day.</strong>
+          <p>Complete the mission, save evidence, receive feedback, and retry.</p>
+        </div>
+      </aside>
+
+      <article class="lesson-workspace" id="lesson-workspace" aria-labelledby="lesson-title">
+        <div class="lesson-loading" data-loading-state hidden aria-live="polite">
+          <span class="skeleton skeleton--short"></span>
+          <span class="skeleton skeleton--title"></span>
+          <span class="skeleton skeleton--body"></span>
+        </div>
+
+        <div data-lesson-content>
+          <header class="lesson-hero">
+            <div class="lesson-hero__copy">
+              <p class="challenge-title" data-challenge-title>30-Day IELTS Academic 4.0 Bridge</p>
+              <div class="lesson-meta">
+                <span data-day-label>Day 2</span>
+                <span aria-hidden="true">·</span>
+                <span data-day-time>180 min</span>
+                <span class="status-badge" data-day-status>In progress</span>
+              </div>
+              <h1 id="lesson-title" data-lesson-title>Today’s lesson title</h1>
+              <p class="lesson-objective" data-lesson-objective>
+                A single observable action supplied by the challenge content layer.
+              </p>
+            </div>
+
+            <div class="lesson-hero__measure" aria-label="Daily progress">
+              <span class="measure-value" data-daily-progress>0/7</span>
+              <span class="measure-label">completion checks</span>
+            </div>
+          </header>
+
+          <div data-lesson-sections>
+          <section class="lesson-section lesson-section--lead" id="retrieval" data-section-id="retrieval" aria-labelledby="retrieval-title">
+            <header class="section-heading">
+              <h2 id="retrieval-title" data-section-title>Retrieval</h2>
+              <p data-section-description>Recall previously learned language before looking at notes.</p>
+            </header>
+            <div class="lesson-card" data-slot="retrieval"></div>
+          </section>
+
+          <section class="lesson-section" id="listening" data-section-id="listening" aria-labelledby="listening-title">
+            <header class="section-heading">
+              <h2 id="listening-title" data-section-title>Supported listening</h2>
+              <p data-section-description>Listen, check the transcript, and speak along with the model.</p>
+            </header>
+            <div class="lesson-card" data-slot="listening"></div>
+          </section>
+
+          <section class="lesson-section" id="learn" data-section-id="learn" aria-labelledby="learn-title">
+            <header class="section-heading">
+              <h2 id="learn-title" data-section-title>Phrase and form focus</h2>
+              <p data-section-description>Learn reusable phrases and one small language pattern needed for today’s task.</p>
+            </header>
+            <div class="lesson-card lesson-card--wide" data-slot="lesson"></div>
+          </section>
+
+          <section class="lesson-section" id="resources" data-section-id="resources" aria-labelledby="resources-title">
+            <header class="section-heading">
+              <h2 id="resources-title" data-section-title>Resources</h2>
+              <p data-section-description>Use free, verified, level-appropriate learning materials.</p>
+            </header>
+            <div class="resource-list" data-resource-list></div>
+            <div class="empty-state" data-resource-empty hidden>
+              <span class="empty-state__mark" aria-hidden="true">—</span>
+              <h3>No resources assigned</h3>
+              <p>The content layer has not provided resources for this day.</p>
+            </div>
+          </section>
+
+          <section class="lesson-section ai-coach-section" id="ai-support" data-section-id="ai-support" aria-labelledby="ai-support-title">
+            <header class="section-heading">
+              <h2 id="ai-support-title" data-section-title>AI lesson coach</h2>
+              <p data-section-description>Copy the day-specific tutor prompt into your preferred AI assistant.</p>
+            </header>
+            <div class="ai-coach-card">
+              <div class="ai-coach-card__intro">
+                <div>
+                  <p class="lesson-card__eyebrow">Day-specific tutor</p>
+                  <h3 data-ai-prompt-title>Teach this lesson step by step</h3>
+                  <p data-ai-prompt-summary>The AI explains language, helps with pronunciation, checks understanding, and evaluates submitted work.</p>
+                </div>
+                <button class="button button--secondary" type="button" data-copy-ai-prompt>Copy AI prompt</button>
+              </div>
+              <label class="sr-only" for="ai-support-prompt">AI support prompt for this day</label>
+              <textarea id="ai-support-prompt" class="ai-prompt" rows="12" readonly data-ai-support-prompt></textarea>
+              <p class="field-help">Nothing is sent automatically. Copying places this prompt on your clipboard only.</p>
+            </div>
+          </section>
+
+          <section class="lesson-section" id="practice" data-section-id="practice" aria-labelledby="practice-title">
+            <header class="section-heading">
+              <h2 id="practice-title" data-section-title>Practical task practice</h2>
+              <p data-section-description>Repeat the task with decreasing support across three attempts.</p>
+            </header>
+            <ol class="practice-steps" data-practice-steps></ol>
+            <div class="assessment-stations" data-assessment-stations hidden></div>
+          </section>
+
+          <section class="mission-panel" id="mission" data-section-id="mission" aria-labelledby="mission-title">
+            <div>
+              <p class="context-label">Required action</p>
+              <h2 id="mission-title" data-section-title>Today’s practical mission</h2>
+              <p data-section-description data-mission-copy>Complete one observable real-world action in English.</p>
+            </div>
+            <dl class="mission-panel__criteria">
+              <div><dt>Evidence</dt><dd data-evidence-requirement>Defined per challenge</dd></div>
+              <div><dt>PASS</dt><dd data-pass-criteria>Observable task success</dd></div>
+            </dl>
+          </section>
+
+          <section class="lesson-section evidence-section" id="evidence" data-section-id="evidence" aria-labelledby="evidence-title">
+            <header class="section-heading">
+              <h2 id="evidence-title" data-section-title>Evidence</h2>
+              <p data-section-description>Attach or describe what proves the mission was completed.</p>
+            </header>
+
+            <form class="evidence-form" data-evidence-form novalidate>
+              <div class="field-group">
+                <label for="evidence-note">Evidence note</label>
+                <textarea id="evidence-note" name="evidence-note" rows="5" placeholder="Example: Audio saved as day-01-attempt.mp3." aria-describedby="evidence-help"></textarea>
+                <p class="field-help" id="evidence-help" data-evidence-help>Add a note or choose a local file reference before saving.</p>
+              </div>
+
+              <div class="file-field">
+                <label class="file-button" for="evidence-file">Choose evidence file</label>
+                <input id="evidence-file" name="evidence-file" type="file" data-evidence-file />
+                <span data-file-name>No file selected</span>
+              </div>
+
+              <button class="button button--primary evidence-submit" type="submit" data-evidence-submit>
+                <span data-submit-label>Save evidence</span>
+              </button>
+            </form>
+
+            <div class="submission-result" data-submission-result hidden tabindex="-1">
+              <strong>Evidence recorded for this day.</strong>
+              <p>Only progress metadata is saved in this browser. File contents are never uploaded.</p>
+            </div>
+          </section>
+
+          <section class="lesson-section feedback-section" id="feedback" data-section-id="feedback" aria-labelledby="feedback-title">
+            <header class="section-heading">
+              <h2 id="feedback-title" data-section-title>Feedback and retry</h2>
+              <p data-section-description>Keep up to two important corrections and make one improved attempt.</p>
+            </header>
+            <div class="feedback-grid">
+              <div><span>Focus</span><p data-feedback-copy>Keep no more than two important corrections.</p></div>
+              <div><span>Carry forward</span><p>Write one correction in your evidence note, then make the improved attempt.</p></div>
+            </div>
+            <div class="checkpoint-card" data-checkpoint-card hidden></div>
+            <button class="button button--secondary" type="button" data-retry>Start retry</button>
+          </section>
+          </div>
+        </div>
+
+        <nav class="lesson-pager" aria-label="Day navigation">
+          <button class="button button--secondary" type="button" data-previous-day>Previous day</button>
+          <button class="button button--quiet" type="button" data-today>Today</button>
+          <button class="button button--primary" type="button" data-next-day>Next day</button>
+        </nav>
+      </article>
+
+      <aside class="progress-panel" id="progress-panel" aria-labelledby="progress-title">
+        <header>
+          <p class="context-label">Capability record</p>
+          <h2 id="progress-title">Progress</h2>
+        </header>
+
+        <div class="progress-ring" role="img" aria-label="3 percent complete" data-progress-ring>
+          <span data-progress-value>3%</span>
+        </div>
+
+        <dl class="progress-summary">
+          <div><dt>Completed</dt><dd data-completed-count>1 / 30</dd></div>
+          <div><dt>Current support</dt><dd data-current-support>Not recorded</dd></div>
+          <div><dt>Last evidence</dt><dd data-last-evidence>None</dd></div>
+        </dl>
+
+        <div class="progress-fields">
+          <label for="support-level">Support level</label>
+          <select id="support-level" data-support-level>
+            <option value="">Not recorded</option>
+            <option value="I0">I0 · Full mediation</option>
+            <option value="I1">I1 · Guided support</option>
+            <option value="I2">I2 · Strategic support</option>
+            <option value="I3">I3 · Timed familiar independence</option>
+            <option value="I4">I4 · Timed transfer</option>
+          </select>
+
+          <label for="comprehension-score">Comprehension</label>
+          <select id="comprehension-score" data-comprehension-score>
+            <option value="">Not recorded</option>
+            <option value="0">0 / 5</option><option value="1">1 / 5</option>
+            <option value="2">2 / 5</option><option value="3">3 / 5</option>
+            <option value="4">4 / 5</option><option value="5">5 / 5</option>
+          </select>
+
+          <label for="response-latency">Response latency</label>
+          <div class="number-field"><input id="response-latency" type="number" min="0" max="120" step="0.1" inputmode="decimal" data-response-latency /><span>seconds</span></div>
+
+          <label for="score-method">Score provenance</label>
+          <select id="score-method" data-score-method>
+            <option value="">Not recorded</option>
+            <option value="raw-key">Raw score with supplied key</option>
+            <option value="diagnostic-rubric">Diagnostic rubric review</option>
+            <option value="qualified-human">Qualified human evaluator</option>
+            <option value="not-scored">Practice only / not scored</option>
+          </select>
+        </div>
+
+        <fieldset class="daily-checks">
+          <legend>Daily checks</legend>
+          <label><input type="checkbox" data-check="recall" /><span data-check-label="recall">R · Recall</span></label>
+          <label><input type="checkbox" data-check="input" /><span data-check-label="input">I · Input</span></label>
+          <label><input type="checkbox" data-check="language" /><span data-check-label="language">L · Language</span></label>
+          <label><input type="checkbox" data-check="practice" /><span data-check-label="practice">P · Practice</span></label>
+          <label><input type="checkbox" data-check="mission" /><span data-check-label="mission">M · Mission</span></label>
+          <label><input type="checkbox" data-check="evidence" /><span data-check-label="evidence">E · Evidence</span></label>
+          <label><input type="checkbox" data-check="feedback" /><span data-check-label="feedback">F · Feedback and retry</span></label>
+        </fieldset>
+
+        <div class="progress-note">
+          <strong data-completion-heading>Mission, evidence, and retry are required.</strong>
+          <p data-completion-copy>A normal day requires M, E, F and at least five of seven checks.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="frame-footer">
+      <p><strong>IELTS Academic 4.0 Bridge</strong> · 90 core hours · Progress stays in this browser</p>
+    </footer>
+
+    <div class="mobile-pager" aria-label="Mobile day navigation">
+      <button class="button button--secondary" type="button" data-previous-day>Previous</button>
+      <button class="button button--quiet mobile-pager__today" type="button" data-today data-mobile-day-label>Day 2</button>
+      <button class="button button--primary" type="button" data-next-day>Next</button>
+    </div>
+
+    <dialog class="days-dialog" data-days-dialog aria-labelledby="days-dialog-title">
+      <div class="days-dialog__header">
+        <div><p class="context-label">Challenge map</p><h2 id="days-dialog-title" data-days-dialog-title>All 30 days</h2></div>
+        <button class="icon-button" type="button" data-close-days aria-label="Close day navigator">×</button>
+      </div>
+      <ol class="day-grid day-grid--dialog" data-mobile-day-grid aria-label="Challenge days"></ol>
+      <div class="state-key state-key--dialog" aria-label="Day state legend">
+        <span><i class="state-dot state-dot--complete" aria-hidden="true"></i>Complete</span>
+        <span><i class="state-dot state-dot--active" aria-hidden="true"></i>Today</span>
+        <span><i class="state-dot state-dot--locked" aria-hidden="true"></i>Locked</span>
+      </div>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" data-toast hidden></div>
+    <div class="sr-only" aria-live="polite" data-live-region></div>
+
+    <script src="data/english-30-day-content.js"></script>
+    <script src="data/challenge-data.js"></script>
+    <script src="scripts/frame.js"></script>
+  </body>
+</html>

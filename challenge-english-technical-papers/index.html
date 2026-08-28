@@ -36,30 +36,54 @@
       <section class="detail-view" id="dayDetailView" hidden>
         <nav class="detail-nav" aria-label="Điều hướng ngày"><button class="back-link" id="backToOverview" type="button">← 30-day journey</button><span id="detailStatus">NOT_STARTED</span></nav>
         <article class="lesson session-studio">
-          <header class="mission-control">
-            <div class="mission-day"><span id="missionKind">TODAY'S MISSION</span><strong id="missionDayReadout">01 / 30</strong></div>
-            <div class="mission-phase"><span id="dayPhase"></span><small id="bossDistance"></small></div>
-            <div class="mission-support"><span>SUPPORT</span><strong id="missionSupport"></strong></div>
-          </header>
-          <section class="mission-brief" id="missionShell" aria-labelledby="dayTitle">
-            <div class="brief-main"><p class="kicker">Do English</p><h1 id="dayTitle"></h1><p class="mission-statement" id="nowStepCopy"></p><p class="mission-ability" id="missionAbility"></p></div>
-            <aside class="pass-brief"><span>PASS REQUIREMENT</span><p id="missionPass"></p><button class="button primary" id="startSessionButton" type="button">Start session</button></aside>
-          </section>
-
-          <div class="session-shell" id="sessionShell" hidden>
-            <nav class="learning-loop" id="learningLoop" aria-label="Training loop trong ngày"></nav>
-            <section class="loop-panel" id="loopPanel" aria-live="polite">
-              <header class="stage-head"><div><span id="loopMode">TRAIN</span><small id="loopPosition"></small></div><h2 id="loopTitle"></h2></header>
-              <div class="stage-content"><div id="loopBody"></div><div id="targetChunks" class="target-chunks"></div><div id="mistakesDue" class="mistakes-due"></div></div>
-              <div class="recall-cover" id="recallCover" hidden><p>Closed-book mode</p><button class="button" id="revealRecallButton" type="button">Reveal / check</button></div>
-              <div class="performance-timer" id="performanceTimer" hidden><span id="timerReadout">00:00</span><div><button class="button" id="timerToggle" type="button">Start timer</button><button class="text-button" id="timerReset" type="button">Reset</button></div></div>
-              <footer class="loop-actions"><button class="button" id="stageResourceButton" type="button" hidden></button><button class="button primary" id="loopNextButton" type="button">Complete step</button></footer>
+          <div class="editor-window">
+            <div class="window-titlebar" aria-hidden="true"><span class="window-dot" data-tone="lock"></span><span class="window-dot" data-tone="run"></span><span class="window-dot" data-tone="pass"></span></div>
+            <header class="mission-control">
+              <div class="mission-day"><span id="missionKind">TODAY'S MISSION</span><strong id="missionDayReadout">01 / 30</strong></div>
+              <div class="mission-phase"><span id="dayPhase"></span><small id="bossDistance"></small></div>
+              <div class="mission-support"><span>SUPPORT</span><strong id="missionSupport"></strong></div>
+            </header>
+            <section class="mission-brief" id="missionShell" aria-labelledby="dayTitle">
+              <div class="brief-main"><p class="kicker">Do English</p><h1 id="dayTitle"></h1><p class="mission-statement" id="nowStepCopy"></p><p class="mission-ability" id="missionAbility"></p></div>
+              <aside class="pass-brief"><span>PASS REQUIREMENT</span><p id="missionPass"></p><button class="button primary" id="startSessionButton" type="button">Start session</button></aside>
             </section>
-            <aside class="mission-proof"><div><span>MISSION CHALLENGE</span><p id="missionChallenge"></p></div><div><span>RETENTION</span><p id="chunkDueCopy"></p></div><details class="contract-disclosure"><summary>Session contract</summary><dl class="contract"><div><dt>Outcome</dt><dd id="dayOutcome"></dd></div><div><dt>Minimum</dt><dd id="dayMinimum"></dd></div><div><dt>Target</dt><dd id="dayTarget"></dd></div><div><dt>Done when</dt><dd id="dayDone"></dd></div><div><dt>Evidence</dt><dd id="dayEvidence"></dd></div><div><dt>Stretch</dt><dd id="dayStretch"></dd></div></dl></details></aside>
+
+            <div class="session-shell" id="sessionShell" hidden>
+              <nav class="learning-loop" id="learningLoop" aria-label="Training loop trong ngày"></nav>
+              <section class="loop-panel" id="loopPanel" aria-live="polite">
+                <header class="stage-head"><div><span id="loopMode">TRAIN</span><small id="loopPosition"></small></div><h2 id="loopTitle"></h2></header>
+                <div class="stage-content"><div id="loopBody"></div><div id="targetChunks" class="target-chunks"></div><div id="mistakesDue" class="mistakes-due"></div></div>
+                <div class="recall-cover" id="recallCover" hidden><p>Closed-book mode</p><button class="button" id="revealRecallButton" type="button">Reveal / check</button></div>
+                <div class="performance-timer" id="performanceTimer" hidden><span id="timerReadout">00:00</span><div><button class="button" id="timerToggle" type="button">Start timer</button><button class="text-button" id="timerReset" type="button">Reset</button></div></div>
+                <footer class="loop-actions"><button class="button" id="stageResourceButton" type="button" hidden></button><button class="button primary" id="loopNextButton" type="button">Complete step</button></footer>
+              </section>
+              <aside class="mission-proof"><div><span>MISSION CHALLENGE</span><p id="missionChallenge"></p></div><div><span>RETENTION</span><p id="chunkDueCopy"></p></div><details class="contract-disclosure"><summary>Session contract</summary><dl class="contract"><div><dt>Outcome</dt><dd id="dayOutcome"></dd></div><div><dt>Minimum</dt><dd id="dayMinimum"></dd></div><div><dt>Target</dt><dd id="dayTarget"></dd></div><div><dt>Done when</dt><dd id="dayDone"></dd></div><div><dt>Evidence</dt><dd id="dayEvidence"></dd></div><div><dt>Stretch</dt><dd id="dayStretch"></dd></div></dl></details></aside>
+            </div>
           </div>
 
           <section class="day-materials" aria-labelledby="materialsTitle"><header><span>SOURCE DESK</span><h2 id="materialsTitle">Material for this mission</h2></header><div id="dailySources" class="daily-sources"></div><div id="audioSources" class="audio-sources"></div></section>
-          <section class="evidence-box" id="missionCheck" aria-labelledby="evidenceTitle"><header><span>MISSION CHECK</span><h2 id="evidenceTitle">Record what actually happened</h2></header><form id="evidenceForm" novalidate><div class="field-grid"><label>Trạng thái<select id="statusSelect"><option>IN_PROGRESS</option><option>PARTIAL</option><option>SKIPPED</option><option>BLOCKED</option></select></label><label>Thời gian học (phút)<input id="timeSpent" type="number" min="0" step="1"></label></div><label>Score / Done test<input id="doneTest" type="text" aria-describedby="formMessage"></label><div class="metric-grid"><label>Meaning (%)<input id="meaningScore" type="number" min="0" max="100" step="1" inputmode="numeric"></label><label>Output (giây)<input id="outputDuration" type="number" min="0" step="1" inputmode="numeric"></label><label>Latency (giây)<input id="responseLatency" type="number" min="0" step="0.1" inputmode="decimal"></label><label>Support<select id="supportLevel"><option value="">Chưa ghi</option><option>S4</option><option>S3</option><option>S2</option><option>S1</option></select></label><label>Interaction turns<input id="interactionTurns" type="number" min="0" step="1" inputmode="numeric"></label><label>Repair<select id="repairResult"><option value="">Chưa ghi</option><option>N/A</option><option>FAILED</option><option>REPAIRED_WITH_PROMPT</option><option>REPAIRED_INDEPENDENTLY</option></select></label></div><label>Evidence<textarea id="evidence" aria-describedby="formMessage"></textarea></label><div class="field-grid"><label>Things I'm fixing<input id="mainError" type="text"></label><label>Next action<input id="nextAction" type="text"></label></div><label class="check"><input id="verified" type="checkbox"><span>Tôi đã đối chiếu PASS criteria và evidence; đây là self-check, không phải đánh giá độc lập.</span></label><div class="form-actions"><button class="button" type="submit">Save attempt</button><button class="button primary" id="passButton" type="button">Record PASS</button></div><p id="formMessage" class="message" aria-live="polite">PASS cần Done test, evidence và xác nhận tự kiểm tra.</p></form></section>
+          <section class="evidence-box" id="missionCheck" aria-labelledby="evidenceTitle">
+            <header><span>MISSION CHECK</span><h2 id="evidenceTitle">Record what actually happened</h2></header>
+            <form id="evidenceForm" novalidate>
+              <fieldset class="evidence-group"><legend>Trạng thái phiên học</legend>
+                <div class="field-grid"><label>Trạng thái<select id="statusSelect"><option>IN_PROGRESS</option><option>PARTIAL</option><option>SKIPPED</option><option>BLOCKED</option></select></label><label>Thời gian học (phút)<input id="timeSpent" type="number" min="0" step="1"></label></div>
+                <label>Score / Done test<input id="doneTest" type="text" aria-describedby="formMessage"></label>
+              </fieldset>
+
+              <fieldset class="evidence-group"><legend>Đo lường kết quả</legend>
+                <div class="metric-grid"><label>Meaning (%)<input id="meaningScore" type="number" min="0" max="100" step="1" inputmode="numeric"></label><label>Output (giây)<input id="outputDuration" type="number" min="0" step="1" inputmode="numeric"></label><label>Latency (giây)<input id="responseLatency" type="number" min="0" step="0.1" inputmode="decimal"></label><label>Support<select id="supportLevel"><option value="">Chưa ghi</option><option>S4</option><option>S3</option><option>S2</option><option>S1</option></select></label><label>Interaction turns<input id="interactionTurns" type="number" min="0" step="1" inputmode="numeric"></label><label>Repair<select id="repairResult"><option value="">Chưa ghi</option><option>N/A</option><option>FAILED</option><option>REPAIRED_WITH_PROMPT</option><option>REPAIRED_INDEPENDENTLY</option></select></label></div>
+              </fieldset>
+
+              <fieldset class="evidence-group"><legend>Bằng chứng &amp; bước tiếp theo</legend>
+                <label>Evidence<textarea id="evidence" aria-describedby="formMessage"></textarea></label>
+                <div class="field-grid"><label>Things I'm fixing<input id="mainError" type="text"></label><label>Next action<input id="nextAction" type="text"></label></div>
+              </fieldset>
+
+              <label class="check"><input id="verified" type="checkbox"><span>Tôi đã đối chiếu PASS criteria và evidence; đây là self-check, không phải đánh giá độc lập.</span></label>
+              <div class="form-actions"><button class="button" type="submit">Save attempt</button><button class="button primary" id="passButton" type="button">Record PASS</button></div>
+              <p id="formMessage" class="message" aria-live="polite">PASS cần Done test, evidence và xác nhận tự kiểm tra.</p>
+            </form>
+          </section>
         </article>
       </section>
     </section>

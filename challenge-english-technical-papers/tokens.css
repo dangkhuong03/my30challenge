@@ -1,32 +1,41 @@
-/* Hallmark · tokens: Hum Editorial · paper: warm-cream · accents: pear-cyan-coral */
+/* Design tokens · direction: "the paper is the build"
+ * A technical-English trainer for engineers, styled like the editor they
+ * already live in: dark title bar, light canvas, monospace headlines,
+ * status colors borrowed from a CI pipeline (lint → build → test → ship).
+ */
 :root {
-  --color-paper: oklch(97% 0.012 95);
-  --color-paper-2: oklch(94% 0.016 95);
-  --color-paper-3: oklch(91% 0.020 95);
-  --color-ink: oklch(20% 0.012 250);
-  --color-ink-2: oklch(31% 0.014 250);
-  --color-neutral: oklch(43% 0.014 250);
-  --color-muted: oklch(38% 0.014 250);
-  --color-rule: oklch(82% 0.025 95);
-  --color-rule-2: oklch(69% 0.035 95);
-  --color-accent: oklch(86% 0.18 95);
-  --color-accent-deep: oklch(66% 0.16 95);
-  --color-accent-2: oklch(58% 0.15 235);
-  --color-accent-2-soft: oklch(92% 0.045 235);
-  --color-accent-3: oklch(57% 0.20 18);
-  --color-accent-ink: oklch(20% 0.012 250);
-  --color-success: oklch(40% 0.12 148);
-  --color-success-soft: oklch(92% 0.04 148);
-  --color-error: oklch(43% 0.17 26);
-  --color-focus: oklch(20% 0.05 250);
-  --color-dark: oklch(20% 0.012 250);
-  --color-on-dark: oklch(96% 0.012 95);
-  --font-display: "Plus Jakarta Sans", "Trebuchet MS", ui-sans-serif, sans-serif;
-  --font-body: "Plus Jakarta Sans", "Trebuchet MS", ui-sans-serif, sans-serif;
-  --font-mono: "JetBrains Mono", "Cascadia Code", ui-monospace, monospace;
-  --text-xs: .75rem; --text-sm: .875rem; --text-base: 1rem; --text-md: 1.25rem; --text-lg: 1.563rem; --text-xl: 1.953rem; --text-2xl: 2.441rem; --text-display: clamp(2.25rem, 6vw, 4.25rem);
-  --space-3xs: .125rem; --space-2xs: .25rem; --space-xs: .5rem; --space-sm: .75rem; --space-md: 1rem; --space-lg: 1.5rem; --space-xl: 2.5rem; --space-2xl: 4rem; --space-3xl: 6rem;
-  --layout-topbar: 4rem; --layout-tabs: 3.5rem; --layout-actionbar: 5.5rem; --layout-gutter: 1rem;
-  --radius-sm: .5rem; --radius-md: .75rem; --radius-lg: 1.25rem; --radius-round: 999rem; --rule-thin: 1px;
-  --ease-out: cubic-bezier(.16,1,.3,1); --ease-in-out: cubic-bezier(.65,0,.35,1); --dur-micro: 120ms; --dur-short: 220ms;
+  /* Surfaces */
+  --color-ink:        oklch(21% 0.025 258);   /* editor chrome / dark UI */
+  --color-ink-2:       oklch(31% 0.022 258);   /* border/hover on dark chrome */
+  --color-on-dark:    oklch(96% 0.008 250);   /* text on dark chrome */
+  --color-paper:      oklch(99% 0.003 240);   /* canvas */
+  --color-paper-2:     oklch(95.5% 0.006 240); /* panel / hover surface */
+  --color-neutral:    oklch(74% 0.01 240);    /* disabled */
+  --color-muted:      oklch(47% 0.016 250);   /* secondary text */
+  --color-rule:       oklch(90% 0.007 240);   /* hairline */
+  --color-rule-2:      oklch(83% 0.011 240);   /* stronger hairline */
+  --color-shadow:     oklch(20% 0.02 258 / 12%);
+
+  /* Pipeline signal colors (also used by app.css: train/perform/improve/proof) */
+  --color-accent:     oklch(60% 0.16 252);    /* primary interactive — "cursor blue" */
+  --color-focus:      oklch(66% 0.19 252);
+  --color-error:      oklch(56% 0.20 24);     /* fail / gate */
+  --color-success:    oklch(58% 0.135 152);   /* pass / merged */
+  --color-success-soft: oklch(94% 0.03 152);
+
+  /* Type */
+  --font-display: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-body:    "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --text-xs:  .72rem;
+  --text-sm:  .85rem;
+  --text-base: .98rem;
+  --text-md:  1.15rem;
+  --text-lg:  1.4rem;
+  --text-xl:  1.85rem;
+
+  /* Rhythm */
+  --rule-thin: 1px;
+  --dur-micro: 140ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
 }
