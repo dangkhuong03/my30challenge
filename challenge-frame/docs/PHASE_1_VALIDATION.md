@@ -40,7 +40,7 @@ The source learning specification, `ENGLISH_30_DAY_CHALLENGE_SPEC.md`, was treat
 | Vertical reachability | PASS | The end of the document is reachable at every tested size. Side rails use bounded internal scrolling where required. |
 | Runtime errors | PASS | No page exceptions or console errors were recorded. |
 | WCAG contrast sample | PASS | All high-risk semantic color pairs passed their applicable 4.5:1 text or 3:1 focus threshold. |
-| Hallmark slop audit | PASS | All 58 gates were reviewed; no open gate remains. |
+| Visual quality audit | PASS | All 58 design gates were reviewed; no open gate remains. |
 
 ## Responsive Test Sizes
 

@@ -1,7 +1,7 @@
 # Phase 3 V2 Integration and Validation
 
 **Status:** PASS  
-**Date:** 28 August 2026  
+**Date:** 29 August 2026  
 **Scope:** Approved IELTS Academic V2 content integrated into the reusable frame
 
 ## Outcome
@@ -17,23 +17,29 @@ The approved specification and Phase 2 source documents were not changed during 
 
 - `scripts/build-content-data.mjs` parses the V2 Markdown and rejects missing or unordered days and missing required fields.
 - `data/english-30-day-content.js` is regenerated from the approved Markdown; it contains 30 days, five assessments, and nine audited resources.
+- Every generated day contains a self-contained `aiSupportPrompt` that turns an AI assistant into a day-specific tutor. It teaches in small steps, explains meaning and pronunciation, checks understanding, limits feedback, creates changed retries, and evaluates submitted evidence against the daily pass condition.
+- Assessment prompts require the learner to declare `ANSWERS LOCKED`; before that declaration, AI is restricted to procedure, timing, permitted support, and technical setup.
 - `data/challenge-data.js` now identifies the IELTS Academic bridge and exposes `Input` and `Language` instead of the obsolete `Listen` and `Phrases` labels.
 - Assessment days dynamically replace normal navigation labels with Briefing, Validity, Assessment, Components, Outcome, Evidence, and Score & review.
 - The progress panel now records seven completion checks and score provenance.
 - Normal completion requires saved evidence, M/E/F, and at least five of seven checks.
 - Assessment completion requires all seven assessment checks and saved evidence.
 - Day focus now scrolls to a visible centred heading; a regression check prevents the fixed header from covering it.
+- Sequential unlock is enforced: the first incomplete day is active, completed days remain reviewable, and every later day is locked. Completion unlocks only the next day and the policy persists after reload.
 
 ## Automated Browser Results
 
 Local Chrome headless returned **PASS** for:
 
 - all 30 day titles and canonical outcomes;
+- all 30 AI tutor prompts and the five assessment guardrails;
+- copy-prompt success or a keyboard-accessible manual-copy fallback when clipboard permission is blocked;
 - all normal-day Input, Language, Practice, Resources, Mission, Evidence, pass, and Feedback bindings;
 - four component cards and validity conditions on every assessment day;
 - bounded Previous/Next navigation and Resume to the first incomplete day;
 - empty-evidence validation, evidence recording, progress update, and persistence after reload;
 - normal Day 1 completion with seven checks;
+- fresh-state locking of Days 2–30, refusal to open locked Day 30, unlock of only Day 2 after Day 1, and persistence of 28 remaining locks;
 - rejection of incomplete Day 30 assessment evidence and completion only at 7/7;
 - one unified header and no duplicate lesson navigation shell;
 - zero runtime or console errors.
@@ -51,7 +57,7 @@ Every viewport had no document-level horizontal overflow, no visible interactive
 
 ## Visual Inspection
 
-Desktop, mobile, and Day 30 assessment captures were inspected. The normal-day frame preserves the approved three-region desktop workbench and intentional mobile flow. Assessment navigation and the full-mock title render without being hidden by the fixed header.
+Desktop, mobile, AI Coach, and Day 30 assessment captures were inspected. The AI prompt remains readable inside a bounded textarea, the copy control becomes full-width on mobile, and locked days remain visually distinct. The normal-day frame preserves the approved three-region desktop workbench and intentional mobile flow. Assessment navigation and the full-mock title render without being hidden by the fixed header.
 
 The in-app browser connection could not initialize because its supplied sandbox metadata omitted a required policy field. Browser evidence therefore comes from the installed local Chrome headless runtime, and this distinction is retained rather than reporting in-app verification.
 
@@ -68,6 +74,7 @@ The in-app browser connection could not initialize because its supplied sandbox 
 - Evidence notes and selected file contents are not uploaded; only completion metadata is stored in local storage.
 - External resource access may change and must be rechecked before deployment.
 - A static UI cannot supply two untouched mocks or a qualified human Writing/Speaking evaluator.
+- The frame copies prompts but does not send them to an AI provider; the learner chooses the assistant and controls transmission.
 - `IELTS 4.0 READY` remains dependent on the approved two-mock rule; only an official Test Report Form can verify an official band.
 
 ## Final Decision

@@ -84,7 +84,7 @@
     liveRegion: document.querySelector("[data-live-region]")
   };
 
-  const statusLabels = { completed: "Completed", active: "In progress", available: "Available" };
+  const statusLabels = { completed: "Completed", active: "In progress", available: "Available", locked: "Locked" };
 
   function getDay(number) {
     return data.days.find((day) => day.number === number);
@@ -126,6 +126,7 @@
   function getEffectiveDayState(day) {
     if (getDayRecord(day.number).completed) return "completed";
     if (day.number === state.currentDay) return "active";
+    if (day.number > state.currentDay) return "locked";
     return "available";
   }
 
@@ -213,6 +214,7 @@
     button.dataset.day = String(day.number);
     button.dataset.state = dayState;
     button.setAttribute("aria-label", `${day.label}: ${day.title}. ${statusLabels[dayState]}`);
+    if (dayState === "locked") button.setAttribute("aria-disabled", "true");
     if (day.number === state.selectedDay) button.setAttribute("aria-current", "step");
     item.appendChild(button);
     return item;
@@ -440,6 +442,14 @@
     elements.scoreMethod.value = record.scoreMethod ?? "";
   }
 
+  function updateSelectedDayChrome(day) {
+    const dayState = getEffectiveDayState(day);
+    elements.dayStatus.textContent = statusLabels[dayState];
+    elements.dayStatus.dataset.status = dayState;
+    document.querySelectorAll("[data-previous-day]").forEach((button) => { button.disabled = day.number === 1; });
+    document.querySelectorAll("[data-next-day]").forEach((button) => { button.disabled = day.number === data.challenge.durationDays || day.number + 1 > state.currentDay; });
+  }
+
   function renderSelectedDay(options = {}) {
     const day = getDay(state.selectedDay);
     const record = getDayRecord(day.number);
@@ -447,12 +457,9 @@
     elements.dayLabel.textContent = day.label;
     elements.mobileDayLabel.textContent = day.label;
     elements.dayTime.textContent = `${day.estimatedMinutes} min`;
-    elements.dayStatus.textContent = statusLabels[dayState];
-    elements.dayStatus.dataset.status = dayState;
+    updateSelectedDayChrome(day);
     elements.lessonTitle.textContent = day.title;
     elements.lessonObjective.textContent = day.objective;
-    document.querySelectorAll("[data-previous-day]").forEach((button) => { button.disabled = day.number === 1; });
-    document.querySelectorAll("[data-next-day]").forEach((button) => { button.disabled = day.number === data.challenge.durationDays; });
     renderDailyContent(day);
     renderProgressInputs(record);
     resetEvidenceForm(record);
@@ -467,7 +474,13 @@
   }
 
   function selectDay(number, options = {}) {
-    if (!getDay(number)) return;
+    const day = getDay(number);
+    if (!day) return;
+    if (getEffectiveDayState(day) === "locked") {
+      showToast(`Day ${number} is locked. Complete Day ${state.currentDay} first.`);
+      announce(`Day ${number} is locked. Complete Day ${state.currentDay} first.`);
+      return;
+    }
     state.selectedDay = number;
     renderSelectedDay({ focusHeading: options.focusHeading !== false });
     if (elements.daysDialog.open) elements.daysDialog.close();
@@ -485,6 +498,7 @@
     saveProgress();
     renderDayGrids();
     renderProgress();
+    updateSelectedDayChrome(getDay(state.selectedDay));
     if (message) announce(message);
   }
 

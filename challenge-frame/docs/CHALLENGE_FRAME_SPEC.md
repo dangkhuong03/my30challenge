@@ -338,6 +338,21 @@ The reusable frame supports two content shapes without duplicating the layout:
 
 The same semantic regions are relabelled for an assessment day, and the section navigation is regenerated from the active kind. Challenge-specific component names and completion rules remain configuration/adapter responsibilities rather than fixed frame copy.
 
+### Optional AI Coach extension
+
+A challenge may supply one `aiSupportPrompt` per day. The reusable frame owns only the display, read-only prompt surface, copy interaction, clipboard-failure fallback, and privacy message. The content adapter owns tutor instructions and assessment restrictions.
+
+For learning challenges, a useful prompt should:
+
+- teach one small step at a time rather than complete the mission for the learner;
+- explain meaning, usage, and pronunciation at the learner's level;
+- check understanding before advancing;
+- evaluate only submitted work against explicit evidence and pass conditions;
+- limit corrections and require a changed retry;
+- state scoring provenance and uncertainty.
+
+Assessment prompts must separate invigilation from review. Before answers are locked, AI may clarify procedure but must not explain tested language, suggest ideas, correct responses, or reveal answers. Copying a prompt must never transmit it automatically.
+
 ## 7. Navigation Model
 
 ### Direct day navigation
@@ -361,6 +376,8 @@ The actual unlock rule is configurable. Common policies include:
 - calendar date;
 - instructor release;
 - unrestricted browsing with completion restrictions.
+
+The IELTS integration uses strict sequential completion: completed days remain reviewable, the first incomplete day is active, and every later day is locked. A locked selection must not change the lesson and must announce which day must be completed first. Completing the active day unlocks exactly the next day.
 
 ### Previous and next
 

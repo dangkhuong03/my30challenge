@@ -155,33 +155,17 @@ try {
   assert(initial.language.includes("Primary skill") && initial.language.includes("Integrated foundation"), "Day 1 Language did not bind.");
   assert(initial.resources >= 1, "Day 1 resource did not render.");
   assert(initial.aiCoachSections === 1 && initial.aiPrompt.includes("patient English tutor for Day 1") && initial.aiPrompt.includes("how to read or say a word"), "Day 1 AI tutor prompt did not bind.");
-  assert(!initial.placeholderCopy && initial.disabledDays === 0, "Placeholder or locked demo state remains.");
+  assert(!initial.placeholderCopy && initial.disabledDays === 29, "Sequential lock state is incorrect on a fresh challenge.");
   assert(initial.headerShells === 1 && initial.sectionNavInsideHeader && initial.sectionNavInsideLesson === 0, "Challenge and lesson navigation are not unified in one header shell.");
 
   const allDays = await evaluate(`(() => {
-    const failures = [];
-    for (const day of window.CHALLENGE_FRAME_DATA.days) {
-      document.querySelector('[data-day="' + day.number + '"]').click();
-      const rendered = {
-        title: document.querySelector('[data-lesson-title]').textContent,
-        objective: document.querySelector('[data-lesson-objective]').textContent,
-        kind: day.kind,
-        input: document.querySelector("[data-slot='listening']").textContent,
-        language: document.querySelector("[data-slot='lesson']").textContent,
-        practice: document.querySelectorAll('[data-practice-steps] > li').length,
-        components: document.querySelectorAll('.station-card').length,
-        resources: document.querySelectorAll('[data-resource-list] .resource-row').length,
-        aiPrompt: document.querySelector('[data-ai-support-prompt]').value,
-        mission: document.querySelector('[data-mission-copy]').textContent,
-        evidence: document.querySelector('[data-evidence-requirement]').textContent,
-        pass: document.querySelector('[data-pass-criteria]').textContent,
-        feedback: document.querySelector('[data-feedback-copy]').textContent
-      };
-      const bodyValid = day.kind === 'assessment' ? rendered.components === 4 : rendered.practice >= 2 && rendered.input && rendered.language;
-      if (rendered.title !== day.title || rendered.objective !== day.objective || !bodyValid || rendered.resources !== day.resources.length || rendered.aiPrompt !== day.aiSupportPrompt || !rendered.mission || !rendered.evidence || !rendered.pass || !rendered.feedback) {
-        failures.push({ day: day.number, rendered });
-      }
-    }
+    const failures = window.CHALLENGE_FRAME_DATA.days.filter(day => {
+      const common = day.title && day.objective && day.dailyScore && day.nextRetrieval && day.aiSupportPrompt;
+      const body = day.kind === 'assessment'
+        ? day.components?.length === 4 && day.validity && day.evidenceRequirement && day.score && day.review && day.aiSupportPrompt.includes('ANSWERS LOCKED')
+        : day.recall && day.input && day.language && day.practice?.length >= 2 && day.mission && day.evidenceRequirement && day.passCriteria && day.feedback;
+      return !common || !body;
+    }).map(day => day.number);
     return { checked: window.CHALLENGE_FRAME_DATA.days.length, failures };
   })()`);
   assert(allDays.checked === 30 && allDays.failures.length === 0, `Daily binding failures: ${JSON.stringify(allDays.failures)}`);
@@ -193,19 +177,9 @@ try {
   assert(aiCopy.label === 'Prompt copied' || (aiCopy.toast.includes('blocked') && aiCopy.selected), "AI prompt copy action produced no visible success or fallback state.");
 
   await evaluate(`document.querySelector('[data-day="30"]').click()`);
-  await new Promise((resolveDelay) => setTimeout(resolveDelay, 500));
-  const day30 = await evaluate(`(() => ({
-    title: document.querySelector('[data-lesson-title]').textContent,
-    stations: document.querySelectorAll('.station-card').length,
-    validity: document.querySelector("[data-slot='listening']").textContent,
-    nextDisabled: document.querySelector('[data-next-day]').disabled,
-    titleTop: Math.round(document.querySelector('[data-lesson-title]').getBoundingClientRect().top),
-    headerBottom: Math.round(document.querySelector('.app-nav').getBoundingClientRect().bottom)
-  }))()`);
-  assert(day30.title === "Full IELTS Academic Mock 2 and Decision", "Day 30 title did not bind.");
-  assert(day30.stations === 4 && day30.validity.includes("Different untouched test") && day30.nextDisabled, "Day 30 assessment contract is incomplete.");
-  assert(day30.titleTop >= day30.headerBottom, "Focused Day 30 title is hidden behind the fixed header.");
-  await capture(join(temporaryDirectory, "phase3-day30-desktop.png"));
+  await new Promise((resolveDelay) => setTimeout(resolveDelay, 100));
+  const lockAttempt = await evaluate(`(() => ({ title: document.querySelector('[data-lesson-title]').textContent, toast: document.querySelector('[data-toast]').textContent, nextDisabled: document.querySelector('[data-next-day]').disabled }))()`);
+  assert(lockAttempt.title === "Build Complete Personal Sentences" && lockAttempt.toast.includes("locked") && lockAttempt.nextDisabled, "A future locked day opened before the current day was completed.");
 
   await evaluate(`document.querySelector('[data-day="1"]').click()`);
   await evaluate(`document.querySelector('[data-evidence-form]').requestSubmit()`);
@@ -231,10 +205,14 @@ try {
     percent: document.querySelector('[data-progress-value]').textContent,
     state: document.querySelector('[data-day="1"]').dataset.state,
     heading: document.querySelector('[data-completion-heading]').textContent,
-    support: document.querySelector('[data-current-support]').textContent
+    support: document.querySelector('[data-current-support]').textContent,
+    day2State: document.querySelector('[data-day="2"]').dataset.state,
+    day3Locked: document.querySelector('[data-day="3"]').getAttribute('aria-disabled'),
+    nextDisabled: document.querySelector('[data-next-day]').disabled
   }))()`);
   assert(completion.completed === "1 / 30" && completion.percent === "3%", "Completion totals did not update.");
   assert(completion.state === "completed" && completion.heading === "Day complete." && completion.support === "I2", "Completion state or support did not update.");
+  assert(completion.day2State === "active" && completion.day3Locked === "true" && !completion.nextDisabled, "Completing Day 1 did not unlock only Day 2.");
 
   const reload = waitForLoad();
   await command("Page.reload", { ignoreCache: true });
@@ -243,10 +221,13 @@ try {
   const persistence = await evaluate(`(() => ({
     title: document.querySelector('[data-lesson-title]').textContent,
     completed: document.querySelector('[data-completed-count]').textContent,
-    day1: document.querySelector('[data-day="1"]').dataset.state
+    day1: document.querySelector('[data-day="1"]').dataset.state,
+    day2: document.querySelector('[data-day="2"]').dataset.state,
+    locked: document.querySelectorAll('[data-day-grid] [aria-disabled="true"]').length
   }))()`);
   assert(persistence.title === "Capture Personal Details", "Resume did not advance to the first incomplete day.");
   assert(persistence.completed === "1 / 30" && persistence.day1 === "completed", "Progress did not persist across reload.");
+  assert(persistence.day2 === "active" && persistence.locked === 28, "Sequential lock state did not persist after reload.");
 
   const responsive = [];
   for (const [width, height] of [[320, 900], [375, 900], [414, 900], [768, 900], [1280, 900], [1280, 800]]) {
@@ -288,12 +269,70 @@ try {
       await new Promise((resolveDelay) => setTimeout(resolveDelay, 350));
       const sectionNavAfter = await evaluate(`document.querySelector('[data-section-navigation]').scrollLeft`);
       assert(sectionNavAdvance.hintVisible && sectionNavAfter > sectionNavAdvance.before, "Mobile lesson-section overflow control did not advance the navigation.");
+      await evaluate(`document.querySelector('#ai-support').scrollIntoView({ block: 'start' })`);
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 350));
+      assert(await evaluate(`document.querySelector('[data-copy-ai-prompt]').getBoundingClientRect().width >= 44 && document.querySelector('[data-ai-support-prompt]').value.length > 1000`), "Mobile AI Coach is missing or unusable.");
+      await capture(join(temporaryDirectory, "phase3-ai-mobile-375.png"));
     }
-    if (width === 1280 && height === 900) await capture(join(temporaryDirectory, "phase3-desktop-1280.png"));
+    if (width === 1280 && height === 900) {
+      await capture(join(temporaryDirectory, "phase3-desktop-1280.png"));
+      await evaluate(`document.querySelector('#ai-support').scrollIntoView({ block: 'center' })`);
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 350));
+      await capture(join(temporaryDirectory, "phase3-ai-desktop-1280.png"));
+    }
   }
 
+  await evaluate(`(() => {
+    const checks = { recall: true, input: true, language: true, practice: true, mission: true, evidence: true, feedback: true };
+    const progress = {};
+    for (let day = 1; day <= 29; day += 1) progress[day] = { checks, support: 'I3', comprehension: '', latency: '', scoreMethod: 'not-scored', evidenceSaved: true, evidenceSavedAt: day, completed: true };
+    localStorage.setItem(window.CHALLENGE_FRAME_DATA.challenge.progressStorageKey, JSON.stringify(progress));
+  })()`);
+  const unlockReload = waitForLoad();
+  await command("Page.reload", { ignoreCache: true });
+  await unlockReload;
+  await new Promise((resolveDelay) => setTimeout(resolveDelay, 120));
   await setViewport(1280, 900);
+
+  const renderedAllDays = await evaluate(`(() => {
+    const failures = [];
+    for (const day of window.CHALLENGE_FRAME_DATA.days) {
+      document.querySelector('[data-day="' + day.number + '"]').click();
+      const rendered = {
+        title: document.querySelector('[data-lesson-title]').textContent,
+        objective: document.querySelector('[data-lesson-objective]').textContent,
+        practice: document.querySelectorAll('[data-practice-steps] > li').length,
+        components: document.querySelectorAll('.station-card').length,
+        resources: document.querySelectorAll('[data-resource-list] .resource-row').length,
+        aiPrompt: document.querySelector('[data-ai-support-prompt]').value,
+        mission: document.querySelector('[data-mission-copy]').textContent,
+        evidence: document.querySelector('[data-evidence-requirement]').textContent,
+        pass: document.querySelector('[data-pass-criteria]').textContent,
+        feedback: document.querySelector('[data-feedback-copy]').textContent
+      };
+      const bodyValid = day.kind === 'assessment' ? rendered.components === 4 : rendered.practice >= 2;
+      if (rendered.title !== day.title || rendered.objective !== day.objective || !bodyValid || rendered.resources !== day.resources.length || rendered.aiPrompt !== day.aiSupportPrompt || !rendered.mission || !rendered.evidence || !rendered.pass || !rendered.feedback) failures.push(day.number);
+    }
+    return { checked: window.CHALLENGE_FRAME_DATA.days.length, failures };
+  })()`);
+  assert(renderedAllDays.checked === 30 && renderedAllDays.failures.length === 0, `Rendered day failures: ${JSON.stringify(renderedAllDays.failures)}`);
+
   await evaluate(`document.querySelector('[data-day="30"]').click()`);
+  await new Promise((resolveDelay) => setTimeout(resolveDelay, 500));
+  const day30 = await evaluate(`(() => ({
+    title: document.querySelector('[data-lesson-title]').textContent,
+    stations: document.querySelectorAll('.station-card').length,
+    validity: document.querySelector("[data-slot='listening']").textContent,
+    aiGuard: document.querySelector('[data-ai-support-prompt]').value.includes('Before I write ANSWERS LOCKED'),
+    nextDisabled: document.querySelector('[data-next-day]').disabled,
+    titleTop: Math.round(document.querySelector('[data-lesson-title]').getBoundingClientRect().top),
+    headerBottom: Math.round(document.querySelector('.app-nav').getBoundingClientRect().bottom)
+  }))()`);
+  assert(day30.title === "Full IELTS Academic Mock 2 and Decision", "Day 30 title did not bind.");
+  assert(day30.stations === 4 && day30.validity.includes("Different untouched test") && day30.aiGuard && day30.nextDisabled, "Day 30 assessment contract is incomplete.");
+  assert(day30.titleTop >= day30.headerBottom, "Focused Day 30 title is hidden behind the fixed header.");
+  await capture(join(temporaryDirectory, "phase3-day30-desktop.png"));
+
   await evaluate(`(() => {
     const note = document.querySelector('#evidence-note');
     note.value = 'Complete Mock 2 provenance package saved locally.';
@@ -317,13 +356,15 @@ try {
     initial,
     allDays,
     aiCopy,
+    lockAttempt,
+    renderedAllDays,
     day30,
     completion,
     persistence,
     assessmentCompletion,
     responsive,
     runtimeErrors,
-    screenshots: [join(temporaryDirectory, "phase3-mobile-375.png"), join(temporaryDirectory, "phase3-desktop-1280.png"), join(temporaryDirectory, "phase3-day30-desktop.png")]
+    screenshots: [join(temporaryDirectory, "phase3-mobile-375.png"), join(temporaryDirectory, "phase3-desktop-1280.png"), join(temporaryDirectory, "phase3-ai-mobile-375.png"), join(temporaryDirectory, "phase3-ai-desktop-1280.png"), join(temporaryDirectory, "phase3-day30-desktop.png")]
   }, null, 2));
 } finally {
   socket.close();
