@@ -1,0 +1,959 @@
+{
+  "schemaVersion": 1,
+  "source": "AUDIT_REPORT.md",
+  "records": [
+    {
+      "day": 1,
+      "auditStatus": "FAIL",
+      "questionIds": [],
+      "gapIds": [
+        "G04",
+        "G05",
+        "G06",
+        "G08",
+        "G09",
+        "G12",
+        "G15"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L44",
+        "PLAN.md#L11",
+        "LESSONS.md#L16",
+        "DAILY_APPLIED_ASSESSMENTS.md#L7",
+        "LESSONS.md#L18",
+        "LESSONS.md#L20",
+        "ASSESSMENTS.md#L19",
+        "LESSONS.md#L32",
+        "ASSESSMENTS.md#L55",
+        "ASSESSMENTS.md#L23",
+        "ASSESSMENTS.md#L51",
+        "ASSESSMENTS.md#L27",
+        "ASSESSMENTS.md#L35",
+        "ASSESSMENTS.md#L47",
+        "ASSESSMENT_KEYS.md#L48",
+        "ASSESSMENTS.md#L39"
+      ],
+      "rawMarkdown": "### Day 1 — FAIL\n\nEvidence: [PLAN.md:44–51](PLAN.md#L44), matrix row [PLAN.md:11](PLAN.md#L11); [LESSONS.md:16–27](LESSONS.md#L16); optional [DAILY_APPLIED_ASSESSMENTS.md:7–12](DAILY_APPLIED_ASSESSMENTS.md#L7).\n\n- **Capability outcome:** Có baseline theo năm domain. **Required knowledge:** Answer types; algebra and five-domain diagnostic prerequisites.\n- **First-principles explanation:** [L18](LESSONS.md#L18) separates proof, calculation and design; it is orientation, not pre-baseline teaching. **Original example quality:** [L20](LESSONS.md#L20) email invariant is a sketch; [A1](ASSESSMENTS.md#L19) is later repeated verbatim in [L32](LESSONS.md#L32).\n- **Independent practice:** [A1](ASSESSMENTS.md#L19)–[A10](ASSESSMENTS.md#L55) are executable but domain allocation contradicts scoring. **Transfer practice:** [A2](ASSESSMENTS.md#L23) regularization and [A9](ASSESSMENTS.md#L51) unknown outcome add useful constraints; [A3](ASSESSMENTS.md#L27)/[A5](ASSESSMENTS.md#L35)/[A8](ASSESSMENTS.md#L47) are close variants. **Advanced/adversarial practice:** [A10](ASSESSMENTS.md#L55) combines tools, security and recovery before instruction, legitimate diagnostic difficulty.\n- **Observable Done criteria:** Có điểm và error taxonomy. **Required learner evidence:** `baseline-day-01.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Closed-book answer reconstruction is required by the assessment protocol; no completed answers or oral record supplied. **Feedback and retry:** [K48](ASSESSMENT_KEYS.md#L48) presumes retry-count dependence not specified in [A6](ASSESSMENTS.md#L39); baseline domains are 2/3/2/2/1; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 210 minutes includes grading; baseline learner proficiency UNKNOWN; diagnostic domain routing unreliable. **Optional stretch:** Oral defense 1 design. **Status rationale:** Diagnostic scoring and domain comparability are inconsistent (G05/G09)."
+    },
+    {
+      "day": 2,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M1",
+        "M5"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G08",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L52",
+        "PLAN.md#L12",
+        "LESSONS.md#L28",
+        "DAILY_APPLIED_ASSESSMENTS.md#L13",
+        "LESSONS.md#L30",
+        "LESSONS.md#L32",
+        "ASSESSMENTS.md#L19",
+        "LESSONS.md#L36",
+        "LESSONS.md#L37",
+        "DAILY_APPLIED_ASSESSMENTS.md#L15"
+      ],
+      "rawMarkdown": "### Day 2 — PARTIAL\n\nEvidence: [PLAN.md:52–58](PLAN.md#L52), matrix row [PLAN.md:12](PLAN.md#L12); [LESSONS.md:28–39](LESSONS.md#L28); optional [DAILY_APPLIED_ASSESSMENTS.md:13–18](DAILY_APPLIED_ASSESSMENTS.md#L13).\n\n- **Capability outcome:** Viết proof không nhảy bước. **Required knowledge:** Logical implication; rational closure; Jensen domain.\n- **First-principles explanation:** [L30](LESSONS.md#L30) defines proof strategies and conditional use of Jensen; no full inequality derivation. **Original example quality:** [L32](LESSONS.md#L32) is a short valid closure proof and repeats baseline [A1](ASSESSMENTS.md#L19).\n- **Independent practice:** Odd-square proof [L36](LESSONS.md#L36) is materially different algebra practice. **Transfer practice:** [L37](LESSONS.md#L37) dropped positivity is changed-assumption critique, but inequality unspecified. **Advanced/adversarial practice:** [DAA15](DAILY_APPLIED_ASSESSMENTS.md#L15) comparison of true/false claims is optional and self-selected.\n- **Observable Done criteria:** ≥2 lời giải rubric 3/4. **Required learner evidence:** `day-02.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** Generic 0–4 rubric cannot adjudicate arbitrary chosen proofs without reliable key/reviewer; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for three proof forms and inequalities requires prior algebra; no skill diagnostic per prerequisite. **Optional stretch:** Bỏ assumption và phá claim. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 3,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M3",
+        "M4",
+        "M7",
+        "M11",
+        "M12"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G08",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L59",
+        "PLAN.md#L13",
+        "LESSONS.md#L40",
+        "DAILY_APPLIED_ASSESSMENTS.md#L19",
+        "LESSONS.md#L42",
+        "LESSONS.md#L44",
+        "LESSONS.md#L46",
+        "LESSONS.md#L47",
+        "LESSONS.md#L1",
+        "LESSONS.md#L2",
+        "DAILY_APPLIED_ASSESSMENTS.md#L21"
+      ],
+      "rawMarkdown": "### Day 3 — PARTIAL\n\nEvidence: [PLAN.md:59–65](PLAN.md#L59), matrix row [PLAN.md:13](PLAN.md#L13); [LESSONS.md:40–49](LESSONS.md#L40); optional [DAILY_APPLIED_ASSESSMENTS.md:19–24](DAILY_APPLIED_ASSESSMENTS.md#L19).\n\n- **Capability outcome:** Nối algebra với geometry. **Required knowledge:** Rank/nullspace; spectral theorem; SVD; norms.\n- **First-principles explanation:** [L42](LESSONS.md#L42) gives useful image/eigen/norm intuition, omits full proofs and degenerate cases. **Original example quality:** [L44](LESSONS.md#L44) supplies projection direction but no actual matrix or calculation.\n- **Independent practice:** [L46](LESSONS.md#L46) plane projection requires learner to invent instance. **Transfer practice:** [L47](LESSONS.md#L47) [L1](LESSONS.md#L1)/[L2](LESSONS.md#L2) constraint line closely repeats M12; [DAA21](DAILY_APPLIED_ASSESSMENTS.md#L21) scale change is materially different but optional. **Advanced/adversarial practice:** Optional 3D/stretch lacks oblique/nilpotent negative cases.\n- **Observable Done criteria:** Giải thích rank/spectrum/sparsity. **Required learner evidence:** `day-03.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** No specific evaluator for rank-one zero-spectrum boundary or sparsity degeneracies; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes across matrix fundamentals and sparse geometry is dense; D2 does not establish these prerequisites. **Optional stretch:** Biến thể 3D. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 4,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M2",
+        "M6",
+        "M8",
+        "M10"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G08",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L66",
+        "PLAN.md#L14",
+        "LESSONS.md#L50",
+        "DAILY_APPLIED_ASSESSMENTS.md#L25",
+        "LESSONS.md#L52",
+        "LESSONS.md#L54",
+        "LESSONS.md#L56",
+        "LESSONS.md#L57",
+        "ASSESSMENTS.md#L23",
+        "DAILY_APPLIED_ASSESSMENTS.md#L27",
+        "ASSESSMENTS.md#L61"
+      ],
+      "rawMarkdown": "### Day 4 — PARTIAL\n\nEvidence: [PLAN.md:66–72](PLAN.md#L66), matrix row [PLAN.md:14](PLAN.md#L14); [LESSONS.md:50–59](LESSONS.md#L50); optional [DAILY_APPLIED_ASSESSMENTS.md:25–30](DAILY_APPLIED_ASSESSMENTS.md#L25).\n\n- **Capability outcome:** Tự derive calculus/convex results. **Required knowledge:** Riemann integration; chain rule; matrix Hessian; PSD.\n- **First-principles explanation:** [L52](LESSONS.md#L52) summarizes convergence, covariance Hessian and stable softmax without derivation. **Original example quality:** [L54](LESSONS.md#L54) says derive weighted loss: an assignment, not worked reasoning.\n- **Independent practice:** [L56](LESSONS.md#L56) Riemann sum leaves data unspecified; [L57](LESSONS.md#L57) LSE proof is source subcase. **Transfer practice:** [A2](ASSESSMENTS.md#L23) rank-deficient ridge changes uniqueness; optional [DAA27](DAILY_APPLIED_ASSESSMENTS.md#L27) numerical failure is useful. **Advanced/adversarial practice:** Extreme-input stable pseudocode optional; not all calculus capabilities covered.\n- **Observable Done criteria:** Đúng điều kiện convex/unique. **Required learner evidence:** `day-04.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [A2](ASSESSMENTS.md#L23) has a real key; [R1.3](ASSESSMENTS.md#L61) weighted ridge only generic grading; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes spans single/multivariable calculus and numerical stability; missing independent mastery of each. **Optional stretch:** Prove bằng hai cách. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 5,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M9",
+        "M72",
+        "M79",
+        "M81"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G08",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L73",
+        "PLAN.md#L15",
+        "LESSONS.md#L60",
+        "DAILY_APPLIED_ASSESSMENTS.md#L31",
+        "LESSONS.md#L62",
+        "LESSONS.md#L64",
+        "LESSONS.md#L66",
+        "DAILY_APPLIED_ASSESSMENTS.md#L33"
+      ],
+      "rawMarkdown": "### Day 5 — PARTIAL\n\nEvidence: [PLAN.md:73–81](PLAN.md#L73), matrix row [PLAN.md:15](PLAN.md#L15); [LESSONS.md:60–69](LESSONS.md#L60); optional [DAILY_APPLIED_ASSESSMENTS.md:31–36](DAILY_APPLIED_ASSESSMENTS.md#L31).\n\n- **Capability outcome:** Estimate có bounds, units và candidate reduction. **Required knowledge:** Counting; asymptotics; LSH; units; cost models.\n- **First-principles explanation:** [L62](LESSONS.md#L62) connects comparison information, candidate filtering and multiplicative cost. **Original example quality:** [L64](LESSONS.md#L64) gives clip count only, no duration/bitrate or worked total.\n- **Independent practice:** [L66–67](LESSONS.md#L66) ask lower bound, dedup, storage and break-even with missing inputs. **Transfer practice:** Token versus sandbox total-cost boundary is meaningful; scaled dedup alone is not. **Advanced/adversarial practice:** [DAA33](DAILY_APPLIED_ASSESSMENTS.md#L33) sensitivity and alternative strategy comparison optional.\n- **Observable Done criteria:** Có complexity, units, sanity. **Required learner evidence:** `day-05.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** No exact bounds/candidate-cost key; global sanity template is not numerical feedback; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for sorting proof, approximate search and economics likely dense; probability needed for LSH taught next day. **Optional stretch:** Sensitivity analysis. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 6,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M13",
+        "M14",
+        "M15",
+        "M18",
+        "M20",
+        "M21",
+        "M26",
+        "M27",
+        "M30"
+      ],
+      "gapIds": [
+        "G01",
+        "G02",
+        "G03",
+        "G06",
+        "G07",
+        "G08",
+        "G11",
+        "G12",
+        "G14",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L82",
+        "PLAN.md#L16",
+        "LESSONS.md#L70",
+        "DAILY_APPLIED_ASSESSMENTS.md#L37",
+        "LESSONS.md#L74",
+        "LESSONS.md#L72",
+        "LESSONS.md#L80",
+        "LESSONS.md#L82",
+        "LESSONS.md#L83",
+        "DAILY_APPLIED_ASSESSMENTS.md#L39",
+        "PLAN.md#L87"
+      ],
+      "rawMarkdown": "### Day 6 — PARTIAL\n\nEvidence: [PLAN.md:82–88](PLAN.md#L82), matrix row [PLAN.md:16](PLAN.md#L16); [LESSONS.md:70–85](LESSONS.md#L70); optional [DAILY_APPLIED_ASSESSMENTS.md:37–42](DAILY_APPLIED_ASSESSMENTS.md#L37).\n\n- **Capability outcome:** Dùng probability và estimation đúng. **Required knowledge:** Conditioning; indicators; covariance; likelihood; estimation vocabulary.\n- **First-principles explanation:** [L74–76](LESSONS.md#L74) mix mechanisms and theorem names; [L72](LESSONS.md#L72) defers many benchmark necessities. **Original example quality:** [L80](LESSONS.md#L80) is an actual complete Bayes calculation with units and sanity check.\n- **Independent practice:** [L82](LESSONS.md#L82) changes rates; [L83](LESSONS.md#L83) arbitrary MLE selection has no distribution. **Transfer practice:** Posterior rates alone are superficial; [DAA39](DAILY_APPLIED_ASSESSMENTS.md#L39) simulation changes representation but optional. **Advanced/adversarial practice:** Regularity/counterexample checking named; no supplied irregular estimator.\n- **Observable Done criteria:** Đúng base rate/dependence/estimator semantics. **Required learner evidence:** `day-06.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** [PLAN87](PLAN.md#L87) explicitly requests a 90-second teach-back; no recording/transcript or comprehension check supplied. **Feedback and retry:** Deferred topics lack worked solutions and do not all return; generic checkpoint cannot repair them; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120-minute cap explicit; seven-plus extension topics cannot be assumed mastered from recognition. **Optional stretch:** Tạo paradox mới. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 7,
+      "auditStatus": "PARTIAL",
+      "questionIds": [],
+      "gapIds": [
+        "G02",
+        "G06",
+        "G07",
+        "G08",
+        "G12",
+        "G13",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L89",
+        "PLAN.md#L17",
+        "LESSONS.md#L86",
+        "DAILY_APPLIED_ASSESSMENTS.md#L43",
+        "LESSONS.md#L88",
+        "LESSONS.md#L90",
+        "DAILY_APPLIED_ASSESSMENTS.md#L45",
+        "ASSESSMENTS.md#L63",
+        "ASSESSMENT_KEYS.md#L81"
+      ],
+      "rawMarkdown": "### Day 7 — PARTIAL\n\nEvidence: [PLAN.md:89–95](PLAN.md#L89), matrix row [PLAN.md:17](PLAN.md#L17); [LESSONS.md:86–91](LESSONS.md#L86); optional [DAILY_APPLIED_ASSESSMENTS.md:43–48](DAILY_APPLIED_ASSESSMENTS.md#L43).\n\n- **Capability outcome:** Review 1 thuần, không học topic mới. **Required knowledge:** Retrieve proof, matrices, calculus, counting, estimation.\n- **First-principles explanation:** [L88](LESSONS.md#L88) requires closed-book assessment first; review appropriately adds no new lesson. **Original example quality:** No new worked example required before review; corrective worked examples absent afterward.\n- **Independent practice:** R1 has five prompts, several with self-created inputs. **Transfer practice:** [L90](LESSONS.md#L90) selects one probability and one estimation extension, no complete allocation. **Advanced/adversarial practice:** [DAA45](DAILY_APPLIED_ASSESSMENTS.md#L45) changed error-driven retry optional; [R1.5](ASSESSMENTS.md#L63) UMVU demands unworked foundations.\n- **Observable Done criteria:** Quiz Ngày 2–6 ≥70%. **Required learner evidence:** `review-01.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Closed-book answer reconstruction is required by the assessment protocol; no completed answers or oral record supplied. **Feedback and retry:** Only [K81](ASSESSMENT_KEYS.md#L81) generic rubric; explicit chosen recovery task not assigned or adjudicated; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 150=75 assessment+75 grading/recovery; choosing two extensions leaves others without scheduled practice. **Optional stretch:** Recovery drill theo lỗi. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 8,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M16",
+        "M17",
+        "M25",
+        "M29",
+        "M37"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G07",
+        "G08",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L96",
+        "PLAN.md#L18",
+        "LESSONS.md#L92",
+        "DAILY_APPLIED_ASSESSMENTS.md#L49",
+        "LESSONS.md#L94",
+        "LESSONS.md#L96",
+        "LESSONS.md#L98",
+        "DAILY_APPLIED_ASSESSMENTS.md#L51",
+        "ASSESSMENTS.md#L101",
+        "ASSESSMENTS.md#L31"
+      ],
+      "rawMarkdown": "### Day 8 — PARTIAL\n\nEvidence: [PLAN.md:96–102](PLAN.md#L96), matrix row [PLAN.md:18](PLAN.md#L18); [LESSONS.md:92–101](LESSONS.md#L92); optional [DAILY_APPLIED_ASSESSMENTS.md:49–54](DAILY_APPLIED_ASSESSMENTS.md#L49).\n\n- **Capability outcome:** Thiết kế inference hợp lệ. **Required knowledge:** Null distributions; power; paired covariance; multiplicity; Beta prior.\n- **First-principles explanation:** [L94](LESSONS.md#L94) gives correct semantics and conjugacy summaries, not complete formulas. **Original example quality:** [L96](LESSONS.md#L96) search-query pairing is explanatory sketch without variance arithmetic.\n- **Independent practice:** [L98–99](LESSONS.md#L98) sample-size and Beta tasks mostly benchmark number variants. **Transfer practice:** [DAA51](DAILY_APPLIED_ASSESSMENTS.md#L51) confounder/stopping/decision table meaningful but optional. **Advanced/adversarial practice:** Integrated [F3](ASSESSMENTS.md#L101) later adds Simpson and multiplicity.\n- **Observable Done criteria:** Không sai semantics. **Required learner evidence:** `day-08.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** No numeric power/posterior/multiplicity key; [A4](ASSESSMENTS.md#L31) key covers only pairing and reuse; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes covers multiple inference frameworks; D6 estimation foundation incomplete. **Optional stretch:** Sequential caveat. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 9,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M19",
+        "M24",
+        "M91",
+        "M92",
+        "M97"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G07",
+        "G08",
+        "G12",
+        "G14",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L103",
+        "PLAN.md#L19",
+        "LESSONS.md#L102",
+        "DAILY_APPLIED_ASSESSMENTS.md#L55",
+        "LESSONS.md#L104",
+        "LESSONS.md#L106",
+        "LESSONS.md#L108",
+        "LESSONS.md#L109",
+        "DAILY_APPLIED_ASSESSMENTS.md#L57"
+      ],
+      "rawMarkdown": "### Day 9 — PARTIAL\n\nEvidence: [PLAN.md:103–109](PLAN.md#L103), matrix row [PLAN.md:19](PLAN.md#L19); [LESSONS.md:102–111](LESSONS.md#L102); optional [DAILY_APPLIED_ASSESSMENTS.md:55–60](DAILY_APPLIED_ASSESSMENTS.md#L55).\n\n- **Capability outcome:** Chọn bound/reliability evaluator đúng. **Required knowledge:** Variance/boundedness; resampling; counting estimators; noisy tests.\n- **First-principles explanation:** [L104](LESSONS.md#L104) identifies assumptions, metric distinctions and failure modes. **Original example quality:** [L106](LESSONS.md#L106) warns against single canary failure but gives no test statistic/decision.\n- **Independent practice:** [L108](LESSONS.md#L108) bounded/unbounded method choice; [L109](LESSONS.md#L109) flake policy. **Transfer practice:** Changed boundedness and ambiguous failure are meaningful reasoning transfer. **Advanced/adversarial practice:** [DAA57](DAILY_APPLIED_ASSESSMENTS.md#L57) simulated outcomes and validator optional, not supplied benchmark data.\n- **Observable Done criteria:** Nêu validity/failure. **Required learner evidence:** `day-09.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** No pass@k bias proof, bounds calculation or statistical alarm key; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes spans six statistical/evaluation mechanisms; missing mandatory computations. **Optional stretch:** Derive alternate bound. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 10,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M22",
+        "M23",
+        "M28"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G07",
+        "G08",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L110",
+        "PLAN.md#L20",
+        "LESSONS.md#L112",
+        "DAILY_APPLIED_ASSESSMENTS.md#L61",
+        "LESSONS.md#L114",
+        "LESSONS.md#L116",
+        "LESSONS.md#L118",
+        "DAILY_APPLIED_ASSESSMENTS.md#L63",
+        "LESSONS.md#L120"
+      ],
+      "rawMarkdown": "### Day 10 — PARTIAL\n\nEvidence: [PLAN.md:110–116](PLAN.md#L110), matrix row [PLAN.md:20](PLAN.md#L20); [LESSONS.md:112–121](LESSONS.md#L112); optional [DAILY_APPLIED_ASSESSMENTS.md:61–66](DAILY_APPLIED_ASSESSMENTS.md#L61).\n\n- **Capability outcome:** Điều tra metric không overclaim. **Required knowledge:** Mixtures; selection/length bias; telemetry pipelines.\n- **First-principles explanation:** [L114](LESSONS.md#L114) explains mixing and observational selection plus evidence-first triage. **Original example quality:** [L116](LESSONS.md#L116) qualitative Simpson example lacks numerical table.\n- **Independent practice:** [L118–119](LESSONS.md#L118) same reversal/four-artifact tasks as source. **Transfer practice:** [DAA63](DAILY_APPLIED_ASSESSMENTS.md#L63) causal-story discrimination adds demand but dashboard absent. **Advanced/adversarial practice:** Timed incident brief in PLAN stretch; no evolving evidence injection.\n- **Observable Done criteria:** Có evidence-to-kill mỗi hypothesis. **Required learner evidence:** `day-10.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [L120](LESSONS.md#L120) bans causal overclaim but no factual incident answer key; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes plausible for memo practice with prior statistics; length-bias derivation remains unallocated. **Optional stretch:** 10-minute oral brief. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 11,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M31",
+        "M32",
+        "M40",
+        "M44"
+      ],
+      "gapIds": [
+        "G01",
+        "G02",
+        "G06",
+        "G07",
+        "G08",
+        "G12",
+        "G14",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L117",
+        "PLAN.md#L21",
+        "LESSONS.md#L122",
+        "DAILY_APPLIED_ASSESSMENTS.md#L67",
+        "LESSONS.md#L124",
+        "LESSONS.md#L126",
+        "LESSONS.md#L128",
+        "DAILY_APPLIED_ASSESSMENTS.md#L69"
+      ],
+      "rawMarkdown": "### Day 11 — PARTIAL\n\nEvidence: [PLAN.md:117–123](PLAN.md#L117), matrix row [PLAN.md:21](PLAN.md#L21); [LESSONS.md:122–131](LESSONS.md#L122); optional [DAILY_APPLIED_ASSESSMENTS.md:67–72](DAILY_APPLIED_ASSESSMENTS.md#L67).\n\n- **Capability outcome:** Chọn model/metric từ data process. **Required knowledge:** Bias/variance; calibration; GLM links; imbalance/cost.\n- **First-principles explanation:** [L124](LESSONS.md#L124) states decomposition, metric and link principles; not derivations. **Original example quality:** [L126](LESSONS.md#L126) same-AUC overspend example has no probabilities/costs.\n- **Independent practice:** [L128–129](LESSONS.md#L128) threshold and log-link exercises lack supplied data. **Transfer practice:** Optional [DAA69](DAILY_APPLIED_ASSESSMENTS.md#L69) asymmetric cost plus calibration changes decision demand. **Advanced/adversarial practice:** Negative mean, skewed exposure and calibration shift cases not required.\n- **Observable Done criteria:** Có decision consequence. **Required learner evidence:** `day-11.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** No worked decomposition or calibration repair; source M40 ambiguity needs explicit rubric; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for several model families/metrics; prerequisites in likelihood and expectations not verified. **Optional stretch:** Recalibration design. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 12,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M33",
+        "M34",
+        "M36"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G07",
+        "G08",
+        "G11",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L124",
+        "PLAN.md#L22",
+        "LESSONS.md#L132",
+        "DAILY_APPLIED_ASSESSMENTS.md#L73",
+        "LESSONS.md#L134",
+        "LESSONS.md#L136",
+        "LESSONS.md#L138",
+        "DAILY_APPLIED_ASSESSMENTS.md#L75"
+      ],
+      "rawMarkdown": "### Day 12 — PARTIAL\n\nEvidence: [PLAN.md:124–130](PLAN.md#L124), matrix row [PLAN.md:22](PLAN.md#L22); [LESSONS.md:132–141](LESSONS.md#L132); optional [DAILY_APPLIED_ASSESSMENTS.md:73–78](DAILY_APPLIED_ASSESSMENTS.md#L73).\n\n- **Capability outcome:** Xử lý temporal/latent/censored data. **Required knowledge:** AR processes; HMMs; survival and censoring.\n- **First-principles explanation:** [L134](LESSONS.md#L134) gives intuition but no AR formulas, forward recurrence or KM expression. **Original example quality:** [L136](LESSONS.md#L136) repeats active-subscriber censoring context without event table.\n- **Independent practice:** [L138–139](LESSONS.md#L138) AR derivation/HMM trace lack actual parameters. **Transfer practice:** Longer HMM sequence mostly superficial; informative censoring not tested. **Advanced/adversarial practice:** [DAA75](DAILY_APPLIED_ASSESSMENTS.md#L75) scaling/risk-set criterion optional; no hidden-state adversarial data.\n- **Observable Done criteria:** Đúng state/time assumptions. **Required learner evidence:** `day-12.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** Three hand traces promised by [PLAN22](PLAN.md#L22)/129 but two capsule drills omit KM calculation; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for three distinct model classes is dense; review only reassesses HMM explicitly. **Optional stretch:** Numerical scaling demo. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 13,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M35",
+        "M38",
+        "M39",
+        "M41",
+        "M42",
+        "M43",
+        "M45"
+      ],
+      "gapIds": [
+        "G01",
+        "G02",
+        "G03",
+        "G06",
+        "G07",
+        "G08",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L131",
+        "PLAN.md#L23",
+        "LESSONS.md#L142",
+        "DAILY_APPLIED_ASSESSMENTS.md#L79",
+        "LESSONS.md#L146",
+        "LESSONS.md#L148",
+        "LESSONS.md#L152",
+        "LESSONS.md#L154",
+        "LESSONS.md#L155",
+        "DAILY_APPLIED_ASSESSMENTS.md#L81"
+      ],
+      "rawMarkdown": "### Day 13 — PARTIAL\n\nEvidence: [PLAN.md:131–137](PLAN.md#L131), matrix row [PLAN.md:23](PLAN.md#L23); [LESSONS.md:142–157](LESSONS.md#L142); optional [DAILY_APPLIED_ASSESSMENTS.md:79–84](DAILY_APPLIED_ASSESSMENTS.md#L79).\n\n- **Capability outcome:** Tách causal claims và thiết kế ranking đúng. **Required knowledge:** Causal identification; timestamps; ranking likelihood/geometry.\n- **First-principles explanation:** [L146](LESSONS.md#L146) causal assumptions and availability rule; [L148](LESSONS.md#L148) ranking only condensed labels. **Original example quality:** [L152](LESSONS.md#L152) is a worked leakage causal chain, near-direct M41 retry-feature reuse.\n- **Independent practice:** [L154](LESSONS.md#L154) needs ten features not provided; [L155](LESSONS.md#L155) DAG and BT likelihood. **Transfer practice:** No fixed changed-context feature table; elective D14 extension cannot guarantee cosine/cold-start/uplift. **Advanced/adversarial practice:** [DAA81](DAILY_APPLIED_ASSESSMENTS.md#L81) post-treatment/causal split optional; no rigorous non-identifiability example.\n- **Observable Done criteria:** Nêu identification và identifiability assumption. **Required learner evidence:** `day-13.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** Core/recognition routing conflicts with required ranking trace and R2 BT test; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120-minute cap acknowledges overload; sampling extensions does not establish all required capabilities. **Optional stretch:** Construct non-identifiability. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 14,
+      "auditStatus": "PARTIAL",
+      "questionIds": [],
+      "gapIds": [
+        "G01",
+        "G02",
+        "G06",
+        "G07",
+        "G08",
+        "G12",
+        "G13",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L138",
+        "PLAN.md#L24",
+        "LESSONS.md#L158",
+        "DAILY_APPLIED_ASSESSMENTS.md#L85",
+        "LESSONS.md#L160",
+        "LESSONS.md#L162",
+        "DAILY_APPLIED_ASSESSMENTS.md#L87"
+      ],
+      "rawMarkdown": "### Day 14 — PARTIAL\n\nEvidence: [PLAN.md:138–146](PLAN.md#L138), matrix row [PLAN.md:24](PLAN.md#L24); [LESSONS.md:158–163](LESSONS.md#L158); optional [DAILY_APPLIED_ASSESSMENTS.md:85–90](DAILY_APPLIED_ASSESSMENTS.md#L85).\n\n- **Capability outcome:** Review 2 thuần, không học topic mới. **Required knowledge:** Retrieve inference, modeling and causal/ranking boundaries.\n- **First-principles explanation:** [L160](LESSONS.md#L160) keeps assessment first; no new lesson appropriate. **Original example quality:** Correction examples/key not supplied beyond generic rubric.\n- **Independent practice:** R2 includes self-made confusion matrix, HMM, feature audit, BT likelihood. **Transfer practice:** [L162](LESSONS.md#L162) requires one causal and one ranking extension but no guaranteed assignment of all topics. **Advanced/adversarial practice:** [DAA87](DAILY_APPLIED_ASSESSMENTS.md#L87) explicitly allows surface-details-only retry, below audit transfer standard.\n- **Observable Done criteria:** Domain score ≥70%. **Required learner evidence:** `review-02.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Closed-book answer reconstruction is required by the assessment protocol; no completed answers or oral record supplied. **Feedback and retry:** No criterion ensuring misconception repaired on materially changed task; BT may be tested before learned; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 150=90 assessment+60 grading/recovery; two extensions compete with five corrections. **Optional stretch:** Recovery drill theo lỗi. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 15,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M46",
+        "M47",
+        "M48",
+        "M56",
+        "M62"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G08",
+        "G09",
+        "G12",
+        "G14",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L147",
+        "PLAN.md#L25",
+        "LESSONS.md#L164",
+        "DAILY_APPLIED_ASSESSMENTS.md#L91",
+        "LESSONS.md#L166",
+        "LESSONS.md#L168",
+        "LESSONS.md#L170",
+        "LESSONS.md#L171",
+        "ASSESSMENTS.md#L39",
+        "ASSESSMENTS.md#L109",
+        "DAILY_APPLIED_ASSESSMENTS.md#L93"
+      ],
+      "rawMarkdown": "### Day 15 — PARTIAL\n\nEvidence: [PLAN.md:147–153](PLAN.md#L147), matrix row [PLAN.md:25](PLAN.md#L25); [LESSONS.md:164–173](LESSONS.md#L164); optional [DAILY_APPLIED_ASSESSMENTS.md:91–96](DAILY_APPLIED_ASSESSMENTS.md#L91).\n\n- **Capability outcome:** Dựng và giải Bellman equations. **Required knowledge:** MDP/POMDP; value equations; norms; contraction.\n- **First-principles explanation:** [L166](LESSONS.md#L166) gives component list and contraction rationale, not complete derivation. **Original example quality:** [L168](LESSONS.md#L168) support MDP is unsolved and lacks transition/reward data.\n- **Independent practice:** [L170](LESSONS.md#L170) equations and [L171](LESSONS.md#L171) iteration derivation need learner-defined inputs. **Transfer practice:** [A6](ASSESSMENTS.md#L39) terminal model differs from source loop; [F5](ASSESSMENTS.md#L109) remains browser domain. **Advanced/adversarial practice:** Optional [DAA93](DAILY_APPLIED_ASSESSMENTS.md#L93) state non-Markov/gamma stress check.\n- **Observable Done criteria:** Equation và convergence đúng. **Required learner evidence:** `day-15.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [A6](ASSESSMENTS.md#L39) key is concrete but conditional Markov wording weak; no contraction proof key; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for modeling, exact solving and fixed-point proof assumes comfort with probability/norms. **Optional stretch:** POMDP counterexample. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 16,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M49",
+        "M55",
+        "M57"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G08",
+        "G09",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L154",
+        "PLAN.md#L26",
+        "LESSONS.md#L174",
+        "DAILY_APPLIED_ASSESSMENTS.md#L97",
+        "LESSONS.md#L176",
+        "LESSONS.md#L178",
+        "LESSONS.md#L180",
+        "LESSONS.md#L181",
+        "DAILY_APPLIED_ASSESSMENTS.md#L99"
+      ],
+      "rawMarkdown": "### Day 16 — PARTIAL\n\nEvidence: [PLAN.md:154–160](PLAN.md#L154), matrix row [PLAN.md:26](PLAN.md#L26); [LESSONS.md:174–183](LESSONS.md#L174); optional [DAILY_APPLIED_ASSESSMENTS.md:97–102](DAILY_APPLIED_ASSESSMENTS.md#L97).\n\n- **Capability outcome:** Phân biệt TD control methods. **Required knowledge:** TD targets; exploration; approximation; potential shaping.\n- **First-principles explanation:** [L176](LESSONS.md#L176) explains target difference and telescoping but not equations/boundaries. **Original example quality:** [L178](LESSONS.md#L178) destructive automation is already the benchmark setting.\n- **Independent practice:** [L180](LESSONS.md#L180) transition trace unspecified; [L181](LESSONS.md#L181) repeats shaping proof. **Transfer practice:** No forced novel trajectory; optional [DAA99](DAILY_APPLIED_ASSESSMENTS.md#L99) failure test could transfer. **Advanced/adversarial practice:** Off-policy divergence stretch and shaping edge cases lack fixed instances.\n- **Observable Done criteria:** Giải thích từ update target. **Required learner evidence:** `day-16.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** R3 generic rubric; no update table or terminal-potential answer key; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for four algorithms/stability topics; no foundational numeric TD worked example. **Optional stretch:** Off-policy failure trace. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 17,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M50",
+        "M51",
+        "M60",
+        "M63"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G08",
+        "G09",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L161",
+        "PLAN.md#L27",
+        "LESSONS.md#L184",
+        "DAILY_APPLIED_ASSESSMENTS.md#L103",
+        "LESSONS.md#L186",
+        "LESSONS.md#L188",
+        "LESSONS.md#L190",
+        "LESSONS.md#L191",
+        "DAILY_APPLIED_ASSESSMENTS.md#L105"
+      ],
+      "rawMarkdown": "### Day 17 — PARTIAL\n\nEvidence: [PLAN.md:161–167](PLAN.md#L161), matrix row [PLAN.md:27](PLAN.md#L27); [LESSONS.md:184–193](LESSONS.md#L184); optional [DAILY_APPLIED_ASSESSMENTS.md:103–108](DAILY_APPLIED_ASSESSMENTS.md#L103).\n\n- **Capability outcome:** Derive policy-gradient objectives. **Required knowledge:** Score gradients; returns; baseline; GAE; PPO; entropy.\n- **First-principles explanation:** [L186](LESSONS.md#L186) conceptual summary; lacks objectives and residual sums. **Original example quality:** [L188](LESSONS.md#L188) ambiguous negative-advantage statement, no branch calculation.\n- **Independent practice:** [L190](LESSONS.md#L190) baseline invariance and [L191](LESSONS.md#L191) GAE endpoints repeat benchmark tasks. **Transfer practice:** Optional [DAA105](DAILY_APPLIED_ASSESSMENTS.md#L105) variance/diagnostics adds demand; no actual trajectory. **Advanced/adversarial practice:** PPO sign and baseline optimum named but no calibrated adversarial values.\n- **Observable Done criteria:** Đúng bias–variance behavior. **Required learner evidence:** `day-17.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** R3 checks REINFORCE/GAE only; PPO/entropy not specifically scored; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for multiple advanced estimators/objectives; high prerequisite load and sparse worked support. **Optional stretch:** Derive baseline optimum. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 18,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M52",
+        "M53",
+        "M58",
+        "M59",
+        "M64"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G08",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L168",
+        "PLAN.md#L28",
+        "LESSONS.md#L194",
+        "DAILY_APPLIED_ASSESSMENTS.md#L109",
+        "LESSONS.md#L196",
+        "LESSONS.md#L198",
+        "LESSONS.md#L200",
+        "LESSONS.md#L201",
+        "DAILY_APPLIED_ASSESSMENTS.md#L111",
+        "ASSESSMENTS.md#L113"
+      ],
+      "rawMarkdown": "### Day 18 — PARTIAL\n\nEvidence: [PLAN.md:168–174](PLAN.md#L168), matrix row [PLAN.md:28](PLAN.md#L28); [LESSONS.md:194–203](LESSONS.md#L194); optional [DAILY_APPLIED_ASSESSMENTS.md:109–114](DAILY_APPLIED_ASSESSMENTS.md#L109).\n\n- **Capability outcome:** Chọn bandit/OPE/offline method. **Required knowledge:** Concentration; Bayesian updating; change of measure; support.\n- **First-principles explanation:** [L196](LESSONS.md#L196) connects UCB, posterior sampling and extrapolation; proof steps absent. **Original example quality:** [L198](LESSONS.md#L198) homepage versus onboarding is a concise conceptual example.\n- **Independent practice:** [L200](LESSONS.md#L200) UCB radius and [L201](LESSONS.md#L201) nearly deterministic support mismatch. **Transfer practice:** Removal of logged support genuinely changes solvability. **Advanced/adversarial practice:** [DAA111](DAILY_APPLIED_ASSESSMENTS.md#L111) weights/ESS plus ship/collect/abstain optional.\n- **Observable Done criteria:** Nhận diện support mismatch. **Required learner evidence:** `day-18.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [F6](ASSESSMENTS.md#L113) has useful OPE criteria; no UCB regret/TS trace key; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for bandit proof, Bayesian algorithm, OPE and offline RL; practical log data absent. **Optional stretch:** Doubly robust sketch. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 19,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M54",
+        "M61",
+        "M65"
+      ],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L175",
+        "PLAN.md#L29",
+        "LESSONS.md#L204",
+        "DAILY_APPLIED_ASSESSMENTS.md#L115",
+        "LESSONS.md#L206",
+        "LESSONS.md#L208",
+        "LESSONS.md#L210",
+        "LESSONS.md#L211",
+        "DAILY_APPLIED_ASSESSMENTS.md#L117"
+      ],
+      "rawMarkdown": "### Day 19 — PARTIAL\n\nEvidence: [PLAN.md:175–183](PLAN.md#L175), matrix row [PLAN.md:29](PLAN.md#L29); [LESSONS.md:204–213](LESSONS.md#L204); optional [DAILY_APPLIED_ASSESSMENTS.md:115–120](DAILY_APPLIED_ASSESSMENTS.md#L115).\n\n- **Capability outcome:** Thiết kế reward khó bị game. **Required knowledge:** Preference learning; KL; partial observability; reward validity.\n- **First-principles explanation:** [L206](LESSONS.md#L206) connects reward proxy, distributional control and verified outcome. **Original example quality:** [L208](LESSONS.md#L208) ticket closure and reopen guardrail is a useful causal sketch.\n- **Independent practice:** [L210](LESSONS.md#L210) objectives; [L211](LESSONS.md#L211) three-proxy red team. **Transfer practice:** Different proxy goals invite genuine cross-domain reasoning. **Advanced/adversarial practice:** [DAA117](DAILY_APPLIED_ASSESSMENTS.md#L117) five attack paths with prevention control optional.\n- **Observable Done criteria:** Có KL/counter-metrics/eval. **Required learner evidence:** `day-19.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** Checkpoint separates true goal/proxy/risk but gives no equation key or attack adjudication; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes plausible for reward memo with strong prerequisites; full POMDP formalization not independently drilled. **Optional stretch:** Red-team reward. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 20,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M67",
+        "M68",
+        "M69",
+        "M71",
+        "M73",
+        "M76",
+        "M83",
+        "M98"
+      ],
+      "gapIds": [
+        "G01",
+        "G02",
+        "G03",
+        "G06",
+        "G08",
+        "G10",
+        "G11",
+        "G12",
+        "G14",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L184",
+        "PLAN.md#L30",
+        "LESSONS.md#L214",
+        "DAILY_APPLIED_ASSESSMENTS.md#L121",
+        "LESSONS.md#L216",
+        "LESSONS.md#L220",
+        "LESSONS.md#L222",
+        "LESSONS.md#L223",
+        "DAILY_APPLIED_ASSESSMENTS.md#L123",
+        "ASSESSMENTS.md#L121"
+      ],
+      "rawMarkdown": "### Day 20 — PARTIAL\n\nEvidence: [PLAN.md:184–190](PLAN.md#L184), matrix row [PLAN.md:30](PLAN.md#L30); [LESSONS.md:214–225](LESSONS.md#L214); optional [DAILY_APPLIED_ASSESSMENTS.md:121–126](DAILY_APPLIED_ASSESSMENTS.md#L121).\n\n- **Capability outcome:** Giữ correctness và kiểm soát overload. **Required knowledge:** Atomicity/isolation; outbox/saga; queueing; scheduling; rate limits.\n- **First-principles explanation:** [L216–218](LESSONS.md#L216) contain substantive failure and capacity principles, but token bucket only named. **Original example quality:** [L220](LESSONS.md#L220) debit/enqueue export closely restates benchmark billing path.\n- **Independent practice:** [L222](LESSONS.md#L222) crash-window list and [L223](LESSONS.md#L223) fallback/capacity require invented data. **Transfer practice:** Vendor lacking lookup/idempotency is genuine changed-feasibility transfer. **Advanced/adversarial practice:** [DAA123](DAILY_APPLIED_ASSESSMENTS.md#L123) four failure-injection tests optional; no scheduler/limiter stress trace.\n- **Observable Done criteria:** Bao phủ crash window và overload policy. **Required learner evidence:** `day-20.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** R3/[F8](ASSESSMENTS.md#L121) criteria help effects; no token-bucket, race-interleaving or queue-tail evaluator; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes spans correctness and overload; nine-plus mechanisms cannot all be inferred from one diagram. **Optional stretch:** API không idempotency. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 21,
+      "auditStatus": "PARTIAL",
+      "questionIds": [],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G12",
+        "G13",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L191",
+        "PLAN.md#L31",
+        "LESSONS.md#L226",
+        "DAILY_APPLIED_ASSESSMENTS.md#L127",
+        "LESSONS.md#L228",
+        "DAILY_APPLIED_ASSESSMENTS.md#L129",
+        "ASSESSMENT_KEYS.md#L81"
+      ],
+      "rawMarkdown": "### Day 21 — PARTIAL\n\nEvidence: [PLAN.md:191–197](PLAN.md#L191), matrix row [PLAN.md:31](PLAN.md#L31); [LESSONS.md:226–229](LESSONS.md#L226); optional [DAILY_APPLIED_ASSESSMENTS.md:127–132](DAILY_APPLIED_ASSESSMENTS.md#L127).\n\n- **Capability outcome:** Review 3 thuần, không học topic mới. **Required knowledge:** Retrieve RL and first systems mechanisms.\n- **First-principles explanation:** [L228](LESSONS.md#L228) assessment-first review; no new content. **Original example quality:** No worked correction set supplied.\n- **Independent practice:** R3 contraction, TD, policy gradient, OPE and debit/enqueue. **Transfer practice:** R3 mostly repeats named derivations; effect integration stronger. **Advanced/adversarial practice:** [DAA129](DAILY_APPLIED_ASSESSMENTS.md#L129) changed failure scenario tied to actual error optional.\n- **Observable Done criteria:** RL/Systems-so-far ≥70%. **Required learner evidence:** `review-03.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Closed-book answer reconstruction is required by the assessment protocol; no completed answers or oral record supplied. **Feedback and retry:** Generic [K81](ASSESSMENT_KEYS.md#L81); no changed-problem reassessment gate; coverage-window contradicts systems item; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 150=90 assessment+60 grading/recovery; heavy proofs plus design under time cap. **Optional stretch:** Recovery drill theo lỗi. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 22,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M70",
+        "M86",
+        "M87",
+        "M88",
+        "M89"
+      ],
+      "gapIds": [
+        "G01",
+        "G03",
+        "G06",
+        "G08",
+        "G10",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L198",
+        "PLAN.md#L32",
+        "LESSONS.md#L230",
+        "DAILY_APPLIED_ASSESSMENTS.md#L133",
+        "LESSONS.md#L232",
+        "LESSONS.md#L234",
+        "LESSONS.md#L236",
+        "LESSONS.md#L237",
+        "DAILY_APPLIED_ASSESSMENTS.md#L135",
+        "ASSESSMENTS.md#L121",
+        "DAILY_APPLIED_ASSESSMENTS.md#L137"
+      ],
+      "rawMarkdown": "### Day 22 — PARTIAL\n\nEvidence: [PLAN.md:198–204](PLAN.md#L198), matrix row [PLAN.md:32](PLAN.md#L32); [LESSONS.md:230–239](LESSONS.md#L230); optional [DAILY_APPLIED_ASSESSMENTS.md:133–138](DAILY_APPLIED_ASSESSMENTS.md#L133).\n\n- **Capability outcome:** Xây durable workflow state machine. **Required knowledge:** Durable state; claims; graphs; versions; human waits.\n- **First-principles explanation:** [L232](LESSONS.md#L232) explains state ownership, keys and limits; many transition details omitted. **Original example quality:** [L234](LESSONS.md#L234) map20k successes/cursor is sketch and mostly count change.\n- **Independent practice:** [L236](LESSONS.md#L236) transitions and [L237](LESSONS.md#L237) descendants need actual graph/version data. **Transfer practice:** [DAA135](DAILY_APPLIED_ASSESSMENTS.md#L135) crash+lease+human wait is meaningful integration, optional. **Advanced/adversarial practice:** [F8](ASSESSMENTS.md#L121) complex workflow; virtual-clock testing and stale-worker fencing need explicit practice.\n- **Observable Done criteria:** Restart không lặp effect. **Required learner evidence:** `day-22.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [DAA137](DAILY_APPLIED_ASSESSMENTS.md#L137) stale write criterion useful; no concrete reference transition system; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for six workflow capabilities; strong D20 dependency, not measured. **Optional stretch:** Live migration critique. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 23,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M66",
+        "M74",
+        "M79",
+        "M81",
+        "M82",
+        "M84"
+      ],
+      "gapIds": [
+        "G01",
+        "G06",
+        "G08",
+        "G10",
+        "G11",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L205",
+        "PLAN.md#L33",
+        "LESSONS.md#L240",
+        "DAILY_APPLIED_ASSESSMENTS.md#L139",
+        "LESSONS.md#L242",
+        "LESSONS.md#L244",
+        "LESSONS.md#L246",
+        "LESSONS.md#L247",
+        "DAILY_APPLIED_ASSESSMENTS.md#L141",
+        "LESSONS.md#L248"
+      ],
+      "rawMarkdown": "### Day 23 — PARTIAL\n\nEvidence: [PLAN.md:205–211](PLAN.md#L205), matrix row [PLAN.md:33](PLAN.md#L33); [LESSONS.md:240–249](LESSONS.md#L240); optional [DAILY_APPLIED_ASSESSMENTS.md:139–144](DAILY_APPLIED_ASSESSMENTS.md#L139).\n\n- **Capability outcome:** Thiết kế serving/data paths có cost. **Required knowledge:** HTTP contracts; streaming; cache; LSH; RAG; costs.\n- **First-principles explanation:** [L242](LESSONS.md#L242) contains mechanism summaries across distinct systems. **Original example quality:** [L244](LESSONS.md#L244) held-out query/citation evaluation is design sketch, not worked retrieval results.\n- **Independent practice:** [L246](LESSONS.md#L246) dedup pipeline and [L247](LESSONS.md#L247) ablation lack corpus/queries. **Transfer practice:** [DAA141](DAILY_APPLIED_ASSESSMENTS.md#L141) retrieval API combines provenance/backpressure/cost, optional. **Advanced/adversarial practice:** Five contract tests optional; audio prosody/serving overlap not taught.\n- **Observable Done criteria:** Contracts và estimates đúng. **Required learner evidence:** `day-23.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [L248](LESSONS.md#L248) checkpoint includes API/cache/units not actually demanded in core drills; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes overloaded across serving/data disciplines; earlier LSH revisit useful but no deeper fixed example. **Optional stretch:** Compare retrieval ablation. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 24,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M80",
+        "M95",
+        "M96"
+      ],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G10",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L212",
+        "PLAN.md#L34",
+        "LESSONS.md#L250",
+        "DAILY_APPLIED_ASSESSMENTS.md#L145",
+        "LESSONS.md#L252",
+        "LESSONS.md#L254",
+        "LESSONS.md#L256",
+        "LESSONS.md#L257",
+        "DAILY_APPLIED_ASSESSMENTS.md#L147",
+        "ASSESSMENTS.md#L125"
+      ],
+      "rawMarkdown": "### Day 24 — PARTIAL\n\nEvidence: [PLAN.md:212–218](PLAN.md#L212), matrix row [PLAN.md:34](PLAN.md#L34); [LESSONS.md:250–259](LESSONS.md#L250); optional [DAILY_APPLIED_ASSESSMENTS.md:145–150](DAILY_APPLIED_ASSESSMENTS.md#L145).\n\n- **Capability outcome:** Xác lập security boundary thực. **Required knowledge:** Trust boundaries; credentials; rollback; verified actions.\n- **First-principles explanation:** [L252](LESSONS.md#L252) explains structural secret separation and unknown-effect handling. **Original example quality:** [L254](LESSONS.md#L254) invoice exfiltration control is an original attack sketch.\n- **Independent practice:** [L256](LESSONS.md#L256) threat classes and [L257](LESSONS.md#L257) submit-order postcondition. **Transfer practice:** Untrusted-data to authorized payment/email context can transfer. **Advanced/adversarial practice:** [DAA147](DAILY_APPLIED_ASSESSMENTS.md#L147) attack tests optional; process/memory rollback absent.\n- **Observable Done criteria:** Code không thấy secret. **Required learner evidence:** `day-24.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** R4/[F9](ASSESSMENTS.md#L125) concrete categories but no supplied attacks/traces or acceptance evidence; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for threat model and action design feasible for experienced learner; OS/network foundations unverified. **Optional stretch:** Residual-risk register. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 25,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M90",
+        "M93",
+        "M97",
+        "M99"
+      ],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G10",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L219",
+        "PLAN.md#L35",
+        "LESSONS.md#L260",
+        "DAILY_APPLIED_ASSESSMENTS.md#L151",
+        "LESSONS.md#L262",
+        "LESSONS.md#L264",
+        "LESSONS.md#L266",
+        "LESSONS.md#L267",
+        "DAILY_APPLIED_ASSESSMENTS.md#L153"
+      ],
+      "rawMarkdown": "### Day 25 — PARTIAL\n\nEvidence: [PLAN.md:219–225](PLAN.md#L219), matrix row [PLAN.md:35](PLAN.md#L35); [LESSONS.md:260–269](LESSONS.md#L260); optional [DAILY_APPLIED_ASSESSMENTS.md:151–156](DAILY_APPLIED_ASSESSMENTS.md#L151).\n\n- **Capability outcome:** Tạo eval/release gate đáng tin. **Required knowledge:** Construct-valid evaluation; reliability; calibrated human grading.\n- **First-principles explanation:** [L262](LESSONS.md#L262) gives suite distinction, video axes and floors. **Original example quality:** [L264](LESSONS.md#L264) canary statement repeats D9 without new data.\n- **Independent practice:** [L266](LESSONS.md#L266) gate matrix and [L267](LESSONS.md#L267) human/automatic allocation. **Transfer practice:** Crossing agent and video quality demands transferable judgment, but tasks self-selected. **Advanced/adversarial practice:** [DAA153](DAILY_APPLIED_ASSESSMENTS.md#L153) adversarial/flaky/canary combined suite optional.\n- **Observable Done criteria:** Có floors và escape hatch. **Required learner evidence:** `day-25.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** No verifiable fixture set, grader calibration data or run-count calculation; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for test design plausible; actual build/test loop and human feedback not budgeted concretely. **Optional stretch:** Grader calibration plan. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 26,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M75",
+        "M77",
+        "M78",
+        "M94",
+        "M100"
+      ],
+      "gapIds": [
+        "G02",
+        "G06",
+        "G08",
+        "G10",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L226",
+        "PLAN.md#L36",
+        "LESSONS.md#L270",
+        "DAILY_APPLIED_ASSESSMENTS.md#L157",
+        "LESSONS.md#L272",
+        "LESSONS.md#L274",
+        "LESSONS.md#L276",
+        "LESSONS.md#L277",
+        "DAILY_APPLIED_ASSESSMENTS.md#L159"
+      ],
+      "rawMarkdown": "### Day 26 — PARTIAL\n\nEvidence: [PLAN.md:226–232](PLAN.md#L226), matrix row [PLAN.md:36](PLAN.md#L36); [LESSONS.md:270–279](LESSONS.md#L270); optional [DAILY_APPLIED_ASSESSMENTS.md:157–162](DAILY_APPLIED_ASSESSMENTS.md#L157).\n\n- **Capability outcome:** Ra quyết định product có bằng chứng. **Required knowledge:** Causal product judgment; SLO; Goodhart; expected value; versioning.\n- **First-principles explanation:** [L272](LESSONS.md#L272) links hypotheses, user value and reversibility; omits deprecation mechanics. **Original example quality:** [L274](LESSONS.md#L274) reliability versus feature memo has no actual evidence or numbers.\n- **Independent practice:** [L276](LESSONS.md#L276) five hypotheses and [L277](LESSONS.md#L277) three-option memo mirror benchmark structures. **Transfer practice:** D19 reward gaming to team/product metrics is genuine conceptual transfer. **Advanced/adversarial practice:** [DAA159](DAILY_APPLIED_ASSESSMENTS.md#L159) pre-mortem/reversible rollout optional.\n- **Observable Done criteria:** Phân loại causal/observational. **Required learner evidence:** `day-26.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** Generic checkpoint cannot score investment arithmetic or customer deprecation; no concrete input packet; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes for product memo plausible; deprecation remains only plan label. **Optional stretch:** Pre-mortem. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 27,
+      "auditStatus": "PARTIAL",
+      "questionIds": [
+        "M85"
+      ],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G10",
+        "G11",
+        "G12",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L233",
+        "PLAN.md#L37",
+        "LESSONS.md#L280",
+        "DAILY_APPLIED_ASSESSMENTS.md#L163",
+        "LESSONS.md#L282",
+        "LESSONS.md#L286",
+        "LESSONS.md#L288",
+        "LESSONS.md#L289",
+        "LESSONS.md#L290",
+        "ASSESSMENTS.md#L87",
+        "ASSESSMENTS.md#L125"
+      ],
+      "rawMarkdown": "### Day 27 — PARTIAL\n\nEvidence: [PLAN.md:233–239](PLAN.md#L233), matrix row [PLAN.md:37](PLAN.md#L37); [LESSONS.md:280–291](LESSONS.md#L280); optional [DAILY_APPLIED_ASSESSMENTS.md:163–168](DAILY_APPLIED_ASSESSMENTS.md#L163).\n\n- **Capability outcome:** Thiết kế context, tool và lifecycle đúng layer. **Required knowledge:** Context budgets; tool topology; durable sessions; goals.\n- **First-principles explanation:** [L282–284](LESSONS.md#L282) distinguish cost layers, interface stability, history and authority. **Original example quality:** [L286](LESSONS.md#L286) 600 operations mostly scales PDF topology question.\n- **Independent practice:** [L288](LESSONS.md#L288) twelve-turn cost and [L289](LESSONS.md#L289) topology/crash/wake lack numeric prefix/rates. **Transfer practice:** Concurrent wake and unknown external result are material constraint changes. **Advanced/adversarial practice:** PLAN two-wake stretch; no explicit oscillation/goal-exhaustion trace.\n- **Observable Done criteria:** Stable interface và durable authority rõ. **Required learner evidence:** `day-27.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Global reconstruction template applies, but no separately calibrated daily no-notes teach-back/defense evaluator or learner record is supplied. **Feedback and retry:** [L290](LESSONS.md#L290) checks ownership; [R4.5](ASSESSMENTS.md#L87)/[F9](ASSESSMENTS.md#L125) omit full anti-spin and stopping proof; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 120 minutes combines four PDF capabilities with benchmark loop design; inputs/prerequisites unspecified. **Optional stretch:** Two concurrent wake calls. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 28,
+      "auditStatus": "PARTIAL",
+      "questionIds": [],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G12",
+        "G13",
+        "G15",
+        "G17"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L240",
+        "PLAN.md#L38",
+        "LESSONS.md#L292",
+        "DAILY_APPLIED_ASSESSMENTS.md#L169",
+        "LESSONS.md#L294",
+        "DAILY_APPLIED_ASSESSMENTS.md#L171",
+        "ASSESSMENT_KEYS.md#L81"
+      ],
+      "rawMarkdown": "### Day 28 — PARTIAL\n\nEvidence: [PLAN.md:240–246](PLAN.md#L240), matrix row [PLAN.md:38](PLAN.md#L38); [LESSONS.md:292–295](LESSONS.md#L292); optional [DAILY_APPLIED_ASSESSMENTS.md:169–174](DAILY_APPLIED_ASSESSMENTS.md#L169).\n\n- **Capability outcome:** Review 4 thuần, không học topic mới. **Required knowledge:** Retrieve workflow, retrieval, security, eval and lifecycle.\n- **First-principles explanation:** [L294](LESSONS.md#L294) keeps assessment before resource access. **Original example quality:** No new example appropriate; no worked corrective variants.\n- **Independent practice:** R4 five integrated designs, several close to benchmark/PDF. **Transfer practice:** Integration changes combinations; factor/scale changes alone insufficient. **Advanced/adversarial practice:** [DAA171](DAILY_APPLIED_ASSESSMENTS.md#L171) failure-boundary variant meaningful but optional.\n- **Observable Done criteria:** Agent architecture ≥70%. **Required learner evidence:** `review-04.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Closed-book answer reconstruction is required by the assessment protocol; no completed answers or oral record supplied. **Feedback and retry:** Generic [K81](ASSESSMENT_KEYS.md#L81); agency/security domain-only Done wording conflicts with mixed assessment; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 150=105 assessment+45 grading/recovery; about21 minutes per substantial design before corrections. **Optional stretch:** Recovery drill theo lỗi. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 29,
+      "auditStatus": "PARTIAL",
+      "questionIds": [],
+      "gapIds": [
+        "G06",
+        "G08",
+        "G12",
+        "G15",
+        "G17",
+        "G18"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L247",
+        "PLAN.md#L39",
+        "LESSONS.md#L296",
+        "DAILY_APPLIED_ASSESSMENTS.md#L175",
+        "LESSONS.md#L298",
+        "LESSONS.md#L300",
+        "LESSONS.md#L302",
+        "LESSONS.md#L303",
+        "DAILY_APPLIED_ASSESSMENTS.md#L177"
+      ],
+      "rawMarkdown": "### Day 29 — PARTIAL\n\nEvidence: [PLAN.md:247–253](PLAN.md#L247), matrix row [PLAN.md:39](PLAN.md#L39); [LESSONS.md:296–305](LESSONS.md#L296); optional [DAILY_APPLIED_ASSESSMENTS.md:175–180](DAILY_APPLIED_ASSESSMENTS.md#L175).\n\n- **Capability outcome:** Tích hợp managed-agent architecture. **Required knowledge:** Managed-agent state/trust/verification contracts.\n- **First-principles explanation:** [L298](LESSONS.md#L298) lists ownership and failure outcomes; no worked complete architecture. **Original example quality:** [L300](LESSONS.md#L300) multi-tenant media sketch closely follows PDF capstone.\n- **Independent practice:** [L302](LESSONS.md#L302) annotate full architecture; [L303](LESSONS.md#L303) defend three trade-offs. **Transfer practice:** Learner-selected requirements offer possibility, not evidence of previously unseen constraints. **Advanced/adversarial practice:** [DAA177](DAILY_APPLIED_ASSESSMENTS.md#L177) bottleneck and alternative comparison optional.\n- **Observable Done criteria:** Mọi arrow có contract. **Required learner evidence:** `capstone-day-29.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** [L303](LESSONS.md#L303) requires defending three trade-offs; [PLAN39](PLAN.md#L39)/252 make oral defense/self-grade available, but no independent challenge questions or defense record supplied. **Feedback and retry:** Only design-template self-rubric; no supplied scale/SLO/threat packet or adversarial review; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 180 minutes capstone; synthesis concentrated on systems, little math/statistics/RL reconstruction. **Optional stretch:** Oral defense 3 trade-offs. **Status rationale:** Activities exist, but the listed instruction, independence, evaluator or evidence gaps prevent PASS."
+    },
+    {
+      "day": 30,
+      "auditStatus": "FAIL",
+      "questionIds": [],
+      "gapIds": [
+        "G04",
+        "G05",
+        "G06",
+        "G08",
+        "G11",
+        "G12",
+        "G13",
+        "G15"
+      ],
+      "evidenceReferences": [
+        "PLAN.md#L254",
+        "PLAN.md#L40",
+        "LESSONS.md#L306",
+        "DAILY_APPLIED_ASSESSMENTS.md#L181",
+        "LESSONS.md#L308",
+        "ASSESSMENTS.md#L93",
+        "ASSESSMENTS.md#L129",
+        "ASSESSMENTS.md#L117",
+        "ASSESSMENTS.md#L121",
+        "ASSESSMENTS.md#L97"
+      ],
+      "rawMarkdown": "### Day 30 — FAIL\n\nEvidence: [PLAN.md:254–260](PLAN.md#L254), matrix row [PLAN.md:40](PLAN.md#L40); [LESSONS.md:306–308](LESSONS.md#L306); optional [DAILY_APPLIED_ASSESSMENTS.md:181–185](DAILY_APPLIED_ASSESSMENTS.md#L181).\n\n- **Capability outcome:** Chứng minh mastery trên đề mới. **Required knowledge:** Closed-book proof, stats, RL, systems and architecture.\n- **First-principles explanation:** [L308](LESSONS.md#L308) correctly treats final as verification, not new instruction. **Original example quality:** No pre-final worked example appropriate; published Form B and keys contaminate novelty.\n- **Independent practice:** [F1](ASSESSMENTS.md#L93)–[F10](ASSESSMENTS.md#L129) substantial but sample a fraction of benchmark subparts. **Transfer practice:** [F7](ASSESSMENTS.md#L117)/[F8](ASSESSMENTS.md#L121)/[F10](ASSESSMENTS.md#L129) integrate constraints; [F2](ASSESSMENTS.md#L97) Poisson near-direct; no fresh protected form. **Advanced/adversarial practice:** Integrated tasks exist; difficulty not calibrated against baseline and no random perturbation defense.\n- **Observable Done criteria:** Đạt finish line hoặc ghi đúng fail. **Required learner evidence:** `final-day-30.md`; actual artifact/result **UNKNOWN**. This is the plan's requested evidence, not evidence found on disk.\n- **Teach-back/reconstruction:** Closed-book answer reconstruction is required by the assessment protocol; no completed answers or oral record supplied. **Feedback and retry:** Keys provide partial-point rubrics; three statistics baseline tasks versus two final; no all-100 evidence gate; common error-log/retry provisions exist, but no completed changed retry is supplied.\n- **Workload/prerequisite fit:** 210 minutes includes self-grade/debrief; less than21 minutes average answer time; actual feasibility UNKNOWN. **Optional stretch:** Oral defense ngẫu nhiên. **Status rationale:** Published sampled final cannot establish all-capability independent/unseen acceptance (G04/G05/G12)."
+    }
+  ]
+}

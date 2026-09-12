@@ -1,5 +1,7 @@
 # 30-Day Challenge: AI Agent System Design Foundations
 
+> Rebuild authority: `remediation/FULL_REBUILD_CONTRACT.md`. The product is a complete 30-day learning system; historical lesson text and gap closure are not acceptance evidence by themselves.
+
 Status: `DRAFT` — cần làm baseline Ngày 1 để đóng băng mức xuất phát.
 
 Authority files:
@@ -8,6 +10,7 @@ Authority files:
 - `LESSONS.md`: theory, mechanisms, examples và transfer drills.
 - `PLAN.md`: daily contracts.
 - `ASSESSMENTS.md` và `ASSESSMENT_KEYS.md`: verification surfaces tách đề/đáp án.
+- `remediation/PHASE1_ASSESSMENT_CONTRACT.md`: canonical domains, evaluator authority, sealed-final, import và recovery gates.
 - `PROGRESS.md`: append-only execution evidence.
 
 ## Kết quả chính
@@ -25,16 +28,17 @@ Sau 30 buổi, có thể giải thích, tính toán, chứng minh và thiết k�
 
 Challenge đạt `PASS` khi đồng thời thỏa:
 
-1. Làm một đề tổng hợp mới trong điều kiện đóng, đạt ít nhất 80%.
-2. Không nhóm nào dưới 70%: toán–thống kê, statistical modelling, RL, product/system engineering, agent architecture.
+1. Làm sealed parallel final trong điều kiện đóng, đạt ít nhất 80%; packet ID và SHA-256 phải được ghi trước attempt, còn prompt/key không nằm trong repository hoặc learner-visible payload.
+2. Không domain nào dưới 70% (14/20): Foundations, Statistics/Modelling, Reinforcement Learning, Systems/Product, Agent Architecture.
 3. Mọi câu định lượng có công thức, đơn vị, phép tính và sanity check.
 4. Mọi câu thiết kế nêu rõ assumption, state owner, interface, invariant, failure behavior, security boundary, verification và trade-off phù hợp.
 5. Có thể phân biệt những khái niệm dễ lẫn bằng cơ chế và boundary, không chỉ bằng khẩu hiệu.
 6. Giải được ít nhất hai transfer drills cho mỗi module trong bối cảnh chưa xuất hiện trong đề nguồn.
+7. Capability evidence ledger M1–M100 không còn mandatory subpart chưa được kiểm chứng; final 10 task không thay thế ledger này.
 
 “Module” ở đây là mỗi lesson capsule Ngày 2–29 trong `LESSONS.md`. Mỗi capsule đã có đúng hai transfer drills; mastery yêu cầu tự làm trước khi xem checkpoint.
 
-Không thể cam kết trước rằng việc học đủ 30 ngày tự động bảo đảm trả lời hoàn hảo. Bằng chứng final mock mới quyết định `PASS`, `PARTIAL` hay `FAIL`.
+Không thể cam kết trước rằng việc học đủ 30 ngày tự động bảo đảm trả lời hoàn hảo. Sealed final, cumulative M1–M100 evidence và delayed transfer cùng quyết định `PASS`, `PARTIAL` hay `FAIL`.
 
 ## Baseline routing và tính khả thi
 
@@ -75,3 +79,5 @@ Việc routing chỉ thay workload tương lai, không sửa điểm baseline.
 ## Recovery
 
 Không học bù gấp đôi. Nếu bỏ lỡ, tiếp tục ở buổi kế tiếp; chỉ gộp phần review trùng lặp. Lịch này tính theo 30 buổi hoàn thành. Kết quả cũ không được sửa hoặc nâng thành `PASS` khi chưa có evidence.
+
+Review dưới 70% phải được ghi `FAIL`, sau đó làm recovery nhắm đúng root cause và một changed retest. Chỉ event `PASS` mới, có Done test và evidence, mới mở buổi kế tiếp; event fail cũ được giữ nguyên. Imported events luôn là `imported-unverified` cho đến khi có event xác minh mới tại chỗ.

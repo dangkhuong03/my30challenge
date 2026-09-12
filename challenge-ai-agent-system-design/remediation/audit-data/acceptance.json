@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "source": "AUDIT_REPORT.md",
+  "records": [
+    {
+      "id": "AC01",
+      "requirement": "1. All 100 questions map to explicitly taught capabilities, not labels ([audit-musk.md:159](audit-musk.md#L159))",
+      "auditStatus": "FAIL",
+      "evidenceAndConclusion": "Matrix has seven FAIL capabilities; [L72–76](LESSONS.md#L72)/144–148 are recognition-only for key requirements, [L218](LESSONS.md#L218) only names token bucket, [PLAN228](PLAN.md#L228) only names deprecation. 100 identifiers do not establish semantic teaching.",
+      "evidenceReferences": [
+        "audit-musk.md#L159",
+        "LESSONS.md#L72",
+        "LESSONS.md#L218",
+        "PLAN.md#L228"
+      ]
+    },
+    {
+      "id": "AC02",
+      "requirement": "2. Learner practices capabilities through materially different examples ([audit-musk.md:160](audit-musk.md#L160))",
+      "auditStatus": "FAIL",
+      "evidenceAndConclusion": "[L47](LESSONS.md#L47)/57/82/98/138/150 repeat structures or change surface details; compulsory coverage incomplete. [PROGRESS7](PROGRESS.md#L7) contains no practice outcomes.",
+      "evidenceReferences": [
+        "audit-musk.md#L160",
+        "LESSONS.md#L47",
+        "PROGRESS.md#L7"
+      ]
+    },
+    {
+      "id": "AC03",
+      "requirement": "3. Curriculum tests transfer to unfamiliar contexts and representations ([audit-musk.md:161](audit-musk.md#L161))",
+      "auditStatus": "PARTIAL",
+      "evidenceAndConclusion": "[L108](LESSONS.md#L108)/201/223 and [DAA135](DAILY_APPLIED_ASSESSMENTS.md#L135) offer substantive changes; [DAA3](DAILY_APPLIED_ASSESSMENTS.md#L3) makes diagnostic tests optional; full published final is accessible through [index.html:1063](index.html#L1063).",
+      "evidenceReferences": [
+        "audit-musk.md#L161",
+        "LESSONS.md#L108",
+        "DAILY_APPLIED_ASSESSMENTS.md#L135",
+        "DAILY_APPLIED_ASSESSMENTS.md#L3",
+        "index.html#L1063"
+      ]
+    },
+    {
+      "id": "AC04",
+      "requirement": "4. Difficult/advanced work requires synthesis, diagnosis, design or evaluation ([audit-musk.md:162](audit-musk.md#L162))",
+      "auditStatus": "PARTIAL",
+      "evidenceAndConclusion": "[PLAN247–252](PLAN.md#L247) and [ASSESSMENTS.md:115–129](ASSESSMENTS.md#L115) genuinely request integration. No completed evidence or calibrated advanced performance; mathematical/statistical synthesis underrepresented. This condition is present in design but not demonstrated.",
+      "evidenceReferences": [
+        "audit-musk.md#L162",
+        "PLAN.md#L247",
+        "ASSESSMENTS.md#L115"
+      ]
+    },
+    {
+      "id": "AC05",
+      "requirement": "5. Daily completion is based on observable learner-produced evidence ([audit-musk.md:163](audit-musk.md#L163))",
+      "auditStatus": "PARTIAL",
+      "evidenceAndConclusion": "[PLAN9–40](PLAN.md#L9) names artifacts; [L14](LESSONS.md#L14) requires reasoning; [index.html:1153–1174](index.html#L1153) accepts evidence text and self-check, while 779–796 imports empty-evidence PASS. Artifacts themselves absent.",
+      "evidenceReferences": [
+        "audit-musk.md#L163",
+        "PLAN.md#L9",
+        "LESSONS.md#L14",
+        "index.html#L1153"
+      ]
+    },
+    {
+      "id": "AC06",
+      "requirement": "6. Misconceptions trigger correction/retry, not only answer exposure ([audit-musk.md:164](audit-musk.md#L164))",
+      "auditStatus": "PARTIAL",
+      "evidenceAndConclusion": "[PROGRESS11–22](PROGRESS.md#L11) error template and [DAA45](DAILY_APPLIED_ASSESSMENTS.md#L45)/87/129/171 recovery tasks; optional status, generic [K81](ASSESSMENT_KEYS.md#L81) and surface-only [DAA87](DAILY_APPLIED_ASSESSMENTS.md#L87) prevent reliable repair proof.",
+      "evidenceReferences": [
+        "audit-musk.md#L164",
+        "PROGRESS.md#L11",
+        "DAILY_APPLIED_ASSESSMENTS.md#L45",
+        "ASSESSMENT_KEYS.md#L81",
+        "DAILY_APPLIED_ASSESSMENTS.md#L87"
+      ]
+    },
+    {
+      "id": "AC07",
+      "requirement": "7. Knowledge revisited and integrated across challenge ([audit-musk.md:165](audit-musk.md#L165))",
+      "auditStatus": "PARTIAL",
+      "evidenceAndConclusion": "Reviews at 7/14/21/28 and final [F8](ASSESSMENTS.md#L121)/[F10](ASSESSMENTS.md#L129); [L90](LESSONS.md#L90)/162 selective retrieval leaves uncovered requirements; no delayed results.",
+      "evidenceReferences": [
+        "audit-musk.md#L165",
+        "ASSESSMENTS.md#L121",
+        "ASSESSMENTS.md#L129",
+        "LESSONS.md#L90"
+      ]
+    },
+    {
+      "id": "AC08",
+      "requirement": "8. Difficulty and independence increase ([audit-musk.md:166](audit-musk.md#L166))",
+      "auditStatus": "PARTIAL",
+      "evidenceAndConclusion": "Later integrated designs add complexity; no explicit fading or calibrated parallel forms; baseline domain imbalance makes comparisons unreliable.",
+      "evidenceReferences": [
+        "audit-musk.md#L166"
+      ]
+    },
+    {
+      "id": "AC09",
+      "requirement": "9. Final provides credible benchmark/novel-variant evidence without memorized key ([audit-musk.md:167](audit-musk.md#L167))",
+      "auditStatus": "FAIL",
+      "evidenceAndConclusion": "Fixed exposed ten-task Form B, near-original [F2](ASSESSMENTS.md#L97), no all-100 subpart acceptance, no sealed novel variants or learner final evidence; [index.html:1046](index.html#L1046) accepts an unfinished attempt for key access.",
+      "evidenceReferences": [
+        "audit-musk.md#L167",
+        "ASSESSMENTS.md#L97",
+        "index.html#L1046"
+      ]
+    }
+  ]
+}

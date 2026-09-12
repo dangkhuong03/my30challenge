@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "source": "AUDIT_REPORT.md",
+  "records": [
+    {
+      "id": "C01",
+      "observation": "[COVERAGE_MAP160](COVERAGE_MAP.md#L160) calls the daily applied evaluator mandatory; [DAA3](DAILY_APPLIED_ASSESSMENTS.md#L3) explicitly says optional, not a PASS condition, and allows substitution for a transfer drill. The app says optional at [index.html:947](index.html#L947).",
+      "auditStatus": "FAIL",
+      "consequence": "There is no coherent per-capability mandatory evaluator contract. Counting the optional task as compulsory would weaken evidentiary rigor.",
+      "evidenceReferences": [
+        "COVERAGE_MAP.md#L160",
+        "DAILY_APPLIED_ASSESSMENTS.md#L3",
+        "index.html#L947"
+      ]
+    },
+    {
+      "id": "C02",
+      "observation": "[CHALLENGE35](CHALLENGE.md#L35) says every Day 2–29 capsule has exactly two drills; the four review capsules contain no A/B drills. There are 24 non-review capsules in that interval, with 48 A/B drills, not 56.",
+      "auditStatus": "FAIL",
+      "consequence": "Preserve review days; clarify what “module” means instead of inventing eight missing drills.",
+      "evidenceReferences": [
+        "CHALLENGE.md#L35"
+      ]
+    },
+    {
+      "id": "C03",
+      "observation": "[ASSESSMENTS.md:9–11](ASSESSMENTS.md#L9) assumes two tasks per domain. [A1](ASSESSMENTS.md#L19)–[A2](ASSESSMENTS.md#L23) are Foundations; [A3](ASSESSMENTS.md#L27)–[A5](ASSESSMENTS.md#L35) Statistics/Modelling; [A6](ASSESSMENTS.md#L39)–[A7](ASSESSMENTS.md#L43) RL; [A8](ASSESSMENTS.md#L47)–[A9](ASSESSMENTS.md#L51) Systems; [A10](ASSESSMENTS.md#L55) Architecture.",
+      "auditStatus": "FAIL",
+      "consequence": "Baseline maxima are 20/30/20/20/10, not five lots of 20. [A1](ASSESSMENTS.md#L19)–[A10](ASSESSMENTS.md#L55) still total 100. Baseline-versus-final domain comparison and routing are not reliable as written.",
+      "evidenceReferences": [
+        "ASSESSMENTS.md#L9",
+        "ASSESSMENTS.md#L19",
+        "ASSESSMENTS.md#L23",
+        "ASSESSMENTS.md#L27",
+        "ASSESSMENTS.md#L35",
+        "ASSESSMENTS.md#L39",
+        "ASSESSMENTS.md#L43",
+        "ASSESSMENTS.md#L47",
+        "ASSESSMENTS.md#L51",
+        "ASSESSMENTS.md#L55"
+      ]
+    },
+    {
+      "id": "C04",
+      "observation": "[CHALLENGE29](CHALLENGE.md#L29) separately names mathematics/statistics and statistical modelling; [ASSESSMENTS.md:10](ASSESSMENTS.md#L10) and final keys combine Statistics/Modelling and use Foundations for mathematics.",
+      "auditStatus": "PARTIAL",
+      "consequence": "Five-domain partition needs one explicit definition. Do not silently recategorize causal [A5](ASSESSMENTS.md#L35) as architecture.",
+      "evidenceReferences": [
+        "CHALLENGE.md#L29",
+        "ASSESSMENTS.md#L10",
+        "ASSESSMENTS.md#L35"
+      ]
+    },
+    {
+      "id": "C05",
+      "observation": "[COVERAGE_MAP162](COVERAGE_MAP.md#L162)/169 restricts Review 3 to its listed RL/recovery window; [ASSESSMENTS.md:79](ASSESSMENTS.md#L79) explicitly tests debit/enqueue taught on D20. M37 is assigned D8 but Review 2 window labels M31–M45 without an executable semantic selection.",
+      "auditStatus": "PARTIAL",
+      "consequence": "Window labels and reverse mapping do not agree reliably with actual questions.",
+      "evidenceReferences": [
+        "COVERAGE_MAP.md#L162",
+        "ASSESSMENTS.md#L79"
+      ]
+    },
+    {
+      "id": "C06",
+      "observation": "[PLAN93](PLAN.md#L93)/195/244 allow below-threshold review work with a recovery plan in their Done wording; matrix/keys retain thresholds. App unlocks next day only after PASS.",
+      "auditStatus": "PARTIAL",
+      "consequence": "Recovery progression is ambiguous. A recovery plan must not be treated as a passing assessment.",
+      "evidenceReferences": [
+        "PLAN.md#L93"
+      ]
+    },
+    {
+      "id": "C07",
+      "observation": "Root companion [Lo_trinh_hoc_100_cau_de_thi.md:283–285](../Lo_trinh_hoc_100_cau_de_thi.md#L283),307–309,335–337,360–361,407–409,581 recommends using original questions during learning. [CHALLENGE63](CHALLENGE.md#L63) reserves them for coverage/final.",
+      "auditStatus": "FAIL",
+      "consequence": "Companion is a conflicting supplementary route, not evidence of independent challenge exercises.",
+      "evidenceReferences": [
+        "../Lo_trinh_hoc_100_cau_de_thi.md#L283",
+        "CHALLENGE.md#L63"
+      ]
+    },
+    {
+      "id": "C08",
+      "observation": "No learner artifacts, time logs, score sheets, attempts, evidence indexes or progress exports were found in the audited challenge.",
+      "auditStatus": "UNKNOWN",
+      "consequence": "Cannot infer completion, transfer, retention, baseline proficiency or actual workload.",
+      "evidenceReferences": []
+    },
+    {
+      "id": "C09",
+      "observation": "Supplemental link availability/free status is dated 2026-08-26; readings are optional and broadly selected.",
+      "auditStatus": "UNKNOWN",
+      "consequence": "Full external-course instruction/completion is not supplied. This audit does not credit linked course catalogs as completed local lessons or reassess every historical popularity claim.",
+      "evidenceReferences": []
+    }
+  ]
+}

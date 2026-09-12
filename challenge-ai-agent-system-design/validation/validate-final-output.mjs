@@ -1,0 +1,10 @@
+import { read, result } from "./lib.mjs";
+const out=result("final-output-system"),lessons=read("LESSONS.md"),plan=read("PLAN.md"),assessments=read("ASSESSMENTS.md"),keys=read("ASSESSMENT_KEYS.md"),challenge=read("CHALLENGE.md"),progress=read("PROGRESS.md");
+const lessonStart=lessons.search(/^## [^\r\n]* 30 [^\r\n]*$/m),lesson=lessonStart>=0?lessons.slice(lessonStart):"";
+for(const h of ["Outcome and learning tree","Prerequisites and earlier retrieval","First principles and worked reconstruction","Independent practice","Material transfer and advanced variant","Evaluator, feedback and retrieval","Done and evidence"]) lesson.includes(`### ${h}`)?out.pass(`lesson:${h}`,"Present"):out.fail(`lesson:${h}`,"Missing");
+const planStart=plan.search(/^### [^\r\n]* 30 [^\r\n]*$/m),dayPlan=planStart>=0?plan.slice(planStart):"";
+for(const field of ["Outcome:","Minimum action:","Target action","Done when:","Evidence:","Stretch:"]) dayPlan.includes(field)?out.pass(`plan:${field}`,"Present"):out.fail(`plan:${field}`,"Missing");
+for(const [code,text] of [["sealed","Sealed Parallel Form"],["hash","SHA-256"],["total","≥80"],["floors","≥14/20"],["inventory","M1–M100"],["no-prompt","Không lưu prompt"]]) (assessments.includes(text)||lesson.includes(text)||dayPlan.includes(text)||challenge.includes(text))?out.pass(`contract:${code}`,text):out.fail(`contract:${code}`,`${text} missing`);
+keys.includes("Public Calibration Form B không thể tạo Day 30 `PASS`")?out.pass("public-not-final","Public form cannot establish final PASS"):out.fail("public-not-final","Public/final boundary missing");
+progress.includes("final-day-30")||progress.includes("Day 30")?out.pass("evidence-route","Progress authority exposes final evidence route"):out.fail("evidence-route","Final evidence route missing from PROGRESS.md");
+out.pending("sealed-attempt","No evaluator-issued sealed packet or learner attempt was evaluated; curriculum readiness does not imply mastery");out.finish();

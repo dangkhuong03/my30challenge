@@ -9,8 +9,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
+  <script>
+    globalThis.MathJax = {
+      tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]], processEscapes: true },
+      options: { enableMenu: false },
+      startup: {
+        typeset: false,
+        ready() {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => window.dispatchEvent(new Event("mathjax-ready")));
+        }
+      }
+    };
+  </script>
+  <script defer src="vendor/mathjax/tex-svg.js"></script>
   <style>
-    /* Hallmark · genre: modern-minimal · macrostructure: Map/Diagram overview + Workbench detail · theme: Cobalt · designed-as-app */
+    /* Hallmark · genre: modern-minimal · macrostructure: Map overview + Technical Study Reader · theme: Cobalt · designed-as-app */
     /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; overflow-x: clip; }
@@ -198,7 +212,7 @@
     .day-button:active:not(:disabled) { transform: translateY(1px); }
 
     .lesson-panel { min-width: 0; }
-    .day-heading { padding-bottom: var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .day-heading { padding-bottom: var(--space-sm); border-bottom: var(--rule-thin) solid var(--color-rule); }
     .day-heading h2 { margin: 0; font-size: clamp(var(--text-xl), 5vw, var(--text-2xl)); line-height: 1.15; letter-spacing: -0.025em; overflow-wrap: anywhere; }
     .phase { margin: 0 0 var(--space-sm); color: var(--color-accent); font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
     .contract { display: grid; gap: 0; margin: 0; }
@@ -221,7 +235,6 @@
       white-space: nowrap;
       transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
     }
-    .embedded-content { display: grid; gap: var(--space-xl); margin-top: var(--space-2xl); }
     .content-surface { min-width: 0; padding: clamp(var(--space-md), 3vw, var(--space-xl)); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper); }
     .content-surface > :first-child { margin-top: 0; }
     .content-surface > :last-child { margin-bottom: 0; }
@@ -326,11 +339,11 @@
     .day-button[data-state="locked"] { cursor: help; opacity: 0.55; }
     .day-button[data-state="blocked"] { border-color: var(--color-error); color: var(--color-error); }
     .day-detail-view { width: min(100%, 76rem); margin-inline: auto; padding: var(--space-md) clamp(var(--space-md), 4vw, var(--space-xl)) var(--space-3xl); }
-    .detail-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding-block: var(--space-sm) var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule); }
+    .detail-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding-block: var(--space-xs) var(--space-sm); border-bottom: var(--rule-thin) solid var(--color-rule); }
     .back-link { min-height: 2.75rem; padding: 0; border: 0; background: transparent; color: var(--color-accent); cursor: pointer; font-weight: 700; white-space: nowrap; }
     .detail-nav span { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--text-xs); white-space: nowrap; }
-    .day-detail-view .lesson-panel { padding-top: var(--space-xl); }
-    .now-step { display: grid; grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr); gap: var(--space-lg); margin-block: var(--space-xl); padding-block: var(--space-lg); border-block: var(--rule-thin) solid var(--color-accent); }
+    .day-detail-view .lesson-panel { padding-top: var(--space-md); }
+    .now-step { display: grid; grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr); gap: var(--space-md); margin-block: var(--space-md); padding-block: var(--space-sm); border-block: var(--rule-thin) solid var(--color-accent); }
     .now-step h3, .now-step p { margin: 0; }
     .now-step h3 { font-size: var(--text-sm); }
     .now-step p { max-width: 68ch; }
@@ -384,7 +397,7 @@
       .phase-map { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rule-thin); }
       .phase-row { padding-inline: var(--space-md); }
       .day-detail-view .lesson-panel { display: grid; grid-template-columns: minmax(14rem, 0.3fr) minmax(0, 1fr); column-gap: var(--space-2xl); }
-      .day-detail-view .day-heading, .day-detail-view .now-step, .day-detail-view .contract, .day-detail-view .embedded-content, .day-detail-view .evidence-block { grid-column: 2; }
+      .day-detail-view .day-heading, .day-detail-view .now-step, .day-detail-view .contract, .day-detail-view .learning-flow { grid-column: 2; }
     }
     @media (min-width: 90rem) { .workspace { grid-template-columns: 18rem minmax(0, 1fr); } }
     @media (max-width: 39.999rem) {
@@ -400,18 +413,70 @@
       .action-group { width: 100%; justify-content: flex-end; }
     }
     /* Hallmark · compact Day Detail · reasoning split · content preserved */
-    .compact-disclosure, .source-disclosure { min-width: 0; border-block-end: var(--rule-thin) solid var(--color-rule); }
-    .compact-disclosure > summary, .source-disclosure > summary { position: relative; display: block; min-height: 2.75rem; padding: var(--space-sm) calc(var(--space-lg) + var(--space-xs)) var(--space-sm) var(--space-sm); overflow: hidden; color: var(--color-ink); font-weight: 700; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; list-style: none; }
-    .compact-disclosure > summary::-webkit-details-marker, .source-disclosure > summary::-webkit-details-marker { display: none; }
-    .compact-disclosure > summary::after, .source-disclosure > summary::after { position: absolute; inset-inline-end: var(--space-sm); content: "+"; color: var(--color-accent); font-family: var(--font-mono); }
-    .compact-disclosure[open] > summary::after, .source-disclosure[open] > summary::after { content: "−"; }
-    .compact-disclosure[open] > summary, .source-disclosure[open] > summary { background: var(--color-paper-3); }
+    .compact-disclosure { min-width: 0; border-block-end: var(--rule-thin) solid var(--color-rule); }
+    .compact-disclosure > summary { position: relative; display: block; min-height: 2.75rem; padding: var(--space-sm) calc(var(--space-lg) + var(--space-xs)) var(--space-sm) var(--space-sm); overflow: hidden; color: var(--color-ink); font-weight: 700; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; list-style: none; }
+    .compact-disclosure > summary::-webkit-details-marker { display: none; }
+    .compact-disclosure > summary::after { position: absolute; inset-inline-end: var(--space-sm); content: "+"; color: var(--color-accent); font-family: var(--font-mono); }
+    .compact-disclosure[open] > summary::after { content: "−"; }
+    .compact-disclosure[open] > summary { background: var(--color-paper-3); }
     .contract-disclosure { margin-top: var(--space-sm); border-block-start: var(--rule-thin) solid var(--color-rule); }
     .contract-disclosure .contract-row { padding-block: var(--space-sm); }
-    .embedded-content { gap: 0; margin-top: 0; border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .embedded-content { display: grid; gap: 0; margin-top: var(--space-md); border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .source-disclosure { min-width: 0; border-block-end: var(--rule-thin) solid var(--color-rule); }
+    .source-disclosure > summary { position: relative; display: block; min-height: 2.75rem; padding: var(--space-sm) calc(var(--space-lg) + var(--space-xs)) var(--space-sm) var(--space-sm); overflow: hidden; color: var(--color-ink); font-weight: 700; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; list-style: none; }
+    .source-disclosure > summary::-webkit-details-marker { display: none; }
+    .source-disclosure > summary::after { position: absolute; inset-inline-end: var(--space-sm); content: "+"; color: var(--color-accent); font-family: var(--font-mono); }
+    .source-disclosure[open] > summary::after { content: "−"; }
+    .source-disclosure[open] > summary { background: var(--color-paper-3); }
     .source-disclosure > .content-surface { padding: var(--space-md); border: 0; border-block-start: var(--rule-thin) solid var(--color-rule); border-radius: 0; background: var(--color-paper); }
     .evidence-disclosure { margin-top: var(--space-md); border-block-start: var(--rule-thin) solid var(--color-rule); }
     .evidence-disclosure .evidence-block { margin: 0; padding: var(--space-md); border: 0; border-radius: 0; }
+    .content-surface { min-width: 0; }
+    .content-surface > :first-child { margin-block-start: 0; }
+    .content-surface > :last-child { margin-block-end: 0; }
+    .content-surface p, .content-surface li { max-width: 72ch; }
+    .content-surface p { margin-block: 0.8em; }
+    .content-surface li + li { margin-block-start: var(--space-xs); }
+    .content-surface h3, .content-surface h4, .content-surface h5, .content-surface h6 { max-width: 32ch; margin-block: 1.8em 0.65em; line-height: 1.2; letter-spacing: -0.018em; overflow-wrap: anywhere; }
+    .content-surface h3 { font-size: var(--text-xl); }
+    .content-surface h4 { font-size: var(--text-lg); }
+    .content-surface h5, .content-surface h6 { font-size: var(--text-md); }
+    .content-surface code { padding: 0.12em 0.35em; border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-sm); background: var(--color-paper-3); color: var(--color-ink); font-family: var(--font-mono); font-size: 0.92em; overflow-wrap: anywhere; }
+    .content-surface .math-inline-source { color: var(--color-ink); font-family: var(--font-body); font-size: 1.04em; }
+    .content-surface .math-display-source { display: block; max-width: 100%; margin-block: var(--space-sm); padding: var(--space-sm); overflow-x: auto; border-block: var(--rule-thin) solid var(--color-rule); color: var(--color-ink); font-family: var(--font-body); font-size: 1.04em; text-align: center; }
+    .content-surface mjx-container { color: var(--color-ink); }
+    .content-surface mjx-container[display="true"] { max-width: 100%; margin: var(--space-sm) 0 !important; padding: var(--space-xs) 0; overflow-x: auto; overflow-y: hidden; text-align: center !important; }
+    .code-figure { max-width: 100%; margin: var(--space-lg) 0; border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-ink); overflow: hidden; }
+    .code-caption { display: flex; min-height: 2.5rem; align-items: center; justify-content: space-between; gap: var(--space-md); padding-inline: var(--space-md); border-block-end: var(--rule-thin) solid var(--color-neutral); color: var(--color-paper-2); font-family: var(--font-mono); font-size: var(--text-xs); }
+    .copy-code { min-height: 2rem; padding-inline: var(--space-sm); border: 0; background: transparent; color: inherit; cursor: pointer; font-family: var(--font-body); font-weight: 600; white-space: nowrap; }
+    .copy-code:hover { color: var(--color-accent); }
+    .copy-code:disabled { opacity: 0.55; cursor: wait; }
+    .code-figure pre { max-width: 100%; margin: 0; padding: var(--space-md); overflow: auto; background: transparent; color: var(--color-paper-2); font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.65; tab-size: 2; }
+    .code-figure pre code { padding: 0; border: 0; border-radius: 0; background: transparent; color: inherit; font-size: inherit; overflow-wrap: normal; white-space: pre; }
+    .table-scroll { max-width: 100%; margin-block: var(--space-lg); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); overflow: auto; }
+    .content-surface table { width: 100%; min-width: 36rem; border-collapse: collapse; font-size: var(--text-sm); }
+    .content-surface th, .content-surface td { padding: var(--space-sm); border-block-end: var(--rule-thin) solid var(--color-rule); text-align: start; vertical-align: top; }
+    .content-surface th { position: sticky; inset-block-start: 0; background: var(--color-paper-3); color: var(--color-ink); font-weight: 700; }
+    .content-surface blockquote { max-width: 68ch; margin: var(--space-lg) 0; padding: var(--space-sm) var(--space-md); border-inline-start: 3px solid var(--color-accent); background: var(--color-paper-2); }
+    .assessment-gate-message { margin: var(--space-md); padding: var(--space-md); border-inline-start: 3px solid var(--color-accent); background: var(--color-paper-2); }
+    .learning-flow { display: grid; gap: var(--space-xl); }
+    .learning-block { min-width: 0; border-block-start: 2px solid var(--color-ink); }
+    .learning-block-head { position: relative; display: block; padding: var(--space-sm) calc(var(--space-xl) + var(--space-sm)) var(--space-sm) 0; cursor: pointer; list-style: none; }
+    .learning-block-head::-webkit-details-marker { display: none; }
+    .learning-block-head::after { position: absolute; inset-block-start: 50%; inset-inline-end: var(--space-sm); content: "+"; color: var(--color-accent); font-family: var(--font-mono); font-size: var(--text-md); transform: translateY(-50%); }
+    .learning-block[open] > .learning-block-head::after { content: "−"; }
+    .learning-block[open] > .learning-block-head { margin-block-end: var(--space-sm); border-block-end: var(--rule-thin) solid var(--color-rule); }
+    .learning-step { display: block; margin-block-end: var(--space-xs); color: var(--color-accent); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .learning-summary-copy { display: block; min-width: 0; }
+    .learning-summary-copy strong { display: block; max-width: 28ch; color: var(--color-ink); font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.1; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+    .learning-summary-copy small { display: block; max-width: 65ch; margin-block-start: var(--space-xs); color: var(--color-neutral); font-size: var(--text-sm); line-height: 1.45; }
+    .learning-block > .content-surface, .supporting-content .content-surface, .assessment-surface > .content-surface { padding-inline: 0; border: 0; border-radius: 0; }
+    .supporting-content { display: grid; gap: var(--space-lg); margin-block-start: var(--space-lg); padding-block-start: var(--space-md); border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .supporting-content section { min-width: 0; }
+    .supporting-content h4, .assessment-surface > h4 { margin: 0 0 var(--space-sm); color: var(--color-ink); font-family: var(--font-display); font-size: var(--text-md); line-height: 1.2; }
+    .assessment-surface { margin-block-start: var(--space-lg); padding-block-start: var(--space-md); border-block-start: var(--rule-thin) solid var(--color-rule); }
+    .assessment-gate-message { margin-inline: 0; }
+    .evidence-continue-block .evidence-block { margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
     .day-brief, .day-work { min-width: 0; }
     @media (max-width: 39.999rem) {
       body[data-route="day"] .day-detail-view { padding-top: var(--space-sm); }
@@ -419,15 +484,16 @@
       body[data-route="day"] .day-heading { padding-bottom: var(--space-md); }
       body[data-route="day"] .day-heading h2 { font-size: clamp(var(--text-lg), 8vw, var(--text-xl)); }
       .now-step { margin: var(--space-md) 0; padding: var(--space-sm); }
-      .source-disclosure > .content-surface { padding-inline: 0; }
+    }
+    @media (min-width: 40rem) {
+      .supporting-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (min-width: 60rem) {
-      body[data-route="day"]:has(#learnTab[aria-selected="true"]) { height: 100dvh; overflow: hidden; padding-bottom: 0; }
-      body[data-route="day"] .day-detail-view { display: flex; width: min(100%, 86rem); height: calc(100dvh - var(--layout-topbar) - var(--layout-tabs) - var(--layout-actionbar)); max-width: none; flex-direction: column; padding-block: var(--space-sm); overflow: hidden; }
+      body[data-route="day"] .day-detail-view { display: flex; width: min(100%, 86rem); max-width: none; flex-direction: column; padding-block: var(--space-sm); }
       body[data-route="day"] .detail-nav { flex: 0 0 auto; margin-bottom: var(--space-sm); padding-bottom: var(--space-xs); }
-      body[data-route="day"] .lesson-panel { display: grid; min-height: 0; grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 1fr); gap: clamp(var(--space-lg), 4vw, var(--space-2xl)); overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; padding-inline-end: var(--space-xs); }
-      body[data-route="day"] .day-brief, body[data-route="day"] .day-work { align-self: start; }
-      .day-work .evidence-disclosure { margin-bottom: var(--space-lg); }
+      body[data-route="day"] .lesson-panel { display: grid; min-height: 0; grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 1fr); gap: clamp(var(--space-lg), 4vw, var(--space-2xl)); padding-inline-end: var(--space-xs); }
+      body[data-route="day"] .day-brief { position: sticky; inset-block-start: calc(var(--layout-tabs) + var(--space-md)); align-self: start; }
+      body[data-route="day"] .day-work { min-width: 0; align-self: start; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -510,17 +576,38 @@
           <a class="source-link" href="ASSESSMENTS.md">ASSESSMENTS.md</a>
           <a class="source-link" href="PROGRESS.md">PROGRESS.md</a>
         </nav> -->
-        <div class="embedded-content">
-          <details class="source-disclosure" data-source-panel="assessment"><summary>Assessment của ngày</summary><section class="content-surface" id="assessmentSource" hidden></section></details>
-          <p class="evidence-help" id="assessmentGateMessage" hidden></p>
-          <details class="source-disclosure" data-source-panel="lesson" open><summary>Bài học chính</summary><section class="content-surface" id="lessonSource"></section></details>
-          <details class="source-disclosure" data-source-panel="plan"><summary>Daily contract chi tiết</summary><section class="content-surface" id="planSource"></section></details>
-          <details class="source-disclosure" data-source-panel="resource"><summary>Tài nguyên bổ trợ</summary><section class="content-surface" id="resourceSource"></section></details>
-          <details class="source-disclosure" data-source-panel="practice"><summary>Transfer practice tùy chọn</summary><section class="content-surface" id="appliedAssessmentSource"></section></details>
-        </div>
-        <details class="compact-disclosure evidence-disclosure">
-          <summary>Ghi kết quả &amp; evidence</summary>
-        <div class="evidence-block">
+        <div class="learning-flow">
+          <details class="learning-block learn-build-block" id="learnBuildBlock" open>
+            <summary class="learning-block-head">
+              <span class="learning-step">01</span>
+              <span class="learning-summary-copy"><strong>Learn &amp; Build</strong><small>Hiểu cơ chế, dựng lại từ nguyên lý đầu tiên rồi áp dụng vào một ví dụ mới.</small></span>
+            </summary>
+            <div class="content-surface lesson-content" id="lessonSource"></div>
+            <div class="supporting-content">
+              <section aria-labelledby="planSourceTitle"><h4 id="planSourceTitle">Kế hoạch thực hành</h4><div class="content-surface" id="planSource"></div></section>
+              <section aria-labelledby="resourceSourceTitle"><h4 id="resourceSourceTitle">Tài nguyên bổ trợ</h4><div class="content-surface" id="resourceSource"></div></section>
+            </div>
+          </details>
+
+          <details class="learning-block practice-verify-block" id="practiceVerifyBlock">
+            <summary class="learning-block-head">
+              <span class="learning-step" id="practiceStep">02</span>
+              <span class="learning-summary-copy"><strong>Practice &amp; Verify</strong><small id="practiceVerifyLead">Làm bài độc lập, chuyển giao sang tình huống mới và kiểm chứng bằng rubric.</small></span>
+            </summary>
+            <div class="content-surface" id="appliedAssessmentSource"></div>
+            <p class="evidence-help assessment-gate-message" id="assessmentGateMessage" hidden></p>
+            <section class="assessment-surface" id="assessmentWrap" aria-labelledby="assessmentTitle">
+              <h4 id="assessmentTitle">Assessment của ngày</h4>
+              <div class="content-surface" id="assessmentSource" hidden></div>
+            </section>
+          </details>
+
+          <details class="learning-block evidence-continue-block" id="evidenceContinueBlock">
+            <summary class="learning-block-head">
+              <span class="learning-step">03</span>
+              <span class="learning-summary-copy"><strong>Evidence &amp; Continue</strong><small>Ghi kết quả quan sát được, lỗi chính và hành động tiếp theo.</small></span>
+            </summary>
+            <div class="evidence-block">
           <form class="evidence-form" id="evidenceForm" novalidate>
             <div class="field-grid">
               <div class="field">
@@ -528,6 +615,7 @@
                 <select id="statusSelect">
                   <option value="IN_PROGRESS">IN_PROGRESS</option>
                   <option value="PARTIAL">PARTIAL</option>
+                  <option value="FAIL">FAIL</option>
                   <option value="SKIPPED">SKIPPED</option>
                   <option value="BLOCKED">BLOCKED</option>
                 </select>
@@ -565,8 +653,9 @@
             </div>
             <p class="evidence-help" id="evidenceHelp" aria-live="polite">PASS chỉ được ghi khi Done test và evidence đều có dữ liệu xác minh.</p>
           </form>
+            </div>
+          </details>
         </div>
-        </details>
         </article>
       </section>
     </section>
@@ -610,8 +699,9 @@
     </div>
   </aside>
 
-  <script src="content-data.js"></script>
+  <script src="content-data.js?v=full-rebuild-v1"></script>
   <script src="supplemental-data.js"></script>
+  <script src="day-data.js?v=day-schema-v1"></script>
   <script>
     const documentPayloads = Object.fromEntries([...(window.CHALLENGE_CONTENT || []), ...(window.CHALLENGE_SUPPLEMENTAL || [])].map(file => [file.name, file.base64]));
     const documents = {};
@@ -623,7 +713,7 @@
       }
       return documents[name];
     }
-    const documentOrder = ["CHALLENGE.md", "PLAN.md", "LESSONS.md", "SUPPLEMENTAL_RESOURCES.md", "DAILY_APPLIED_ASSESSMENTS.md", "RESEARCH_LEDGER.md", "COVERAGE_MAP.md", "LESSON_TEMPLATE.md", "ASSESSMENTS.md", "PROGRESS.md", "ASSESSMENT_KEYS.md"];
+    const documentOrder = ["CHALLENGE.md", "PLAN.md", "LESSONS.md", "SUPPLEMENTAL_RESOURCES.md", "DAILY_APPLIED_ASSESSMENTS.md", "RESEARCH_LEDGER.md", "COVERAGE_MAP.md", "LESSON_TEMPLATE.md", "PROGRESS.md", "ASSESSMENT_KEYS.md"];
     let activeDocument = "CHALLENGE.md";
 
     function parseDayContracts(markdown) {
@@ -645,17 +735,68 @@
       if (parsed.length !== 30 || parsed.some((entry, index) => entry.day !== index + 1 || !entry.title)) throw new Error("PLAN.md không có đủ contract cho 30 ngày.");
       return parsed;
     }
-    const days = parseDayContracts(readDocument("PLAN.md"));
+    const days = Array.isArray(window.CHALLENGE_DAYS) && window.CHALLENGE_DAYS.length === 30
+      ? window.CHALLENGE_DAYS
+      : parseDayContracts(readDocument("PLAN.md"));
 
     function escapeHtml(value) {
       return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
     }
+    function toLatexMath(value) {
+      let latex = String(value).trim();
+      const matrix = latex.match(/^\[\[(.+)\]\]$/);
+      if (matrix) {
+        const rows = matrix[1].split(/\]\s*,\s*\[/).map(row => row.split("\\,").join(",").split(",").map(cell => cell.trim()).join(" & "));
+        return `\\begin{bmatrix}${rows.join(" \\\\ ")}\\end{bmatrix}`;
+      }
+      const vector = latex.match(/^\[([+\-0-9.,\s]+)\]$/);
+      if (vector) return `\\begin{bmatrix}${vector[1].split(",").map(cell => cell.trim()).join(" & ")}\\end{bmatrix}`;
+      latex = latex
+        .replace(/\|\|([^|]+)\|\|/g, "\\lVert $1 \\rVert")
+        .replace(/([0-9]+|[A-Za-z]|[λμσ])\s*\/\s*([0-9]+|[A-Za-z])/g, "\\frac{$1}{$2}")
+        .replace(/√\(([^)]+)\)/g, "\\sqrt{$1}")
+        .replace(/√([A-Za-z0-9]+)/g, "\\sqrt{$1}")
+        .replaceAll("λ̂", "\\hat{\\lambda}").replaceAll("p_hat", "\\hat{p}")
+        .replaceAll("²", "^{2}").replaceAll("³", "^{3}").replaceAll("ᵀ", "^{\\mathsf T}")
+        .replaceAll("λ", "\\lambda ").replaceAll("μ", "\\mu ").replaceAll("σ", "\\sigma ")
+        .replaceAll("α", "\\alpha ").replaceAll("β", "\\beta ").replaceAll("γ", "\\gamma ")
+        .replaceAll("δ", "\\delta ").replaceAll("ε", "\\varepsilon ").replaceAll("θ", "\\theta ")
+        .replaceAll("φ", "\\phi ").replaceAll("π", "\\pi ").replaceAll("τ", "\\tau ")
+        .replaceAll("ℓ", "\\ell ").replaceAll("χ", "\\chi ").replaceAll("∇", "\\nabla ").replaceAll("Ω", "\\Omega ")
+        .replaceAll("Σ", "\\sum ").replaceAll("∑", "\\sum ").replaceAll("Π", "\\prod ").replaceAll("∏", "\\prod ")
+        .replaceAll("≤", "\\le ").replaceAll("≥", "\\ge ").replaceAll("≠", "\\ne ")
+        .replaceAll("≈", "\\approx ").replaceAll("∞", "\\infty ").replaceAll("→", "\\to ")
+        .replaceAll("⊂", "\\subset ").replaceAll("⊕", "\\oplus ")
+        .replaceAll("×", "\\times ").replaceAll("·", "\\cdot ").replaceAll("...", "\\ldots ")
+        .replace(/\b(Beta|Uniform|Poisson|Var|diag|ceil|log|exp|max|min)\b/g, "\\operatorname{$1}");
+      return latex;
+    }
+    function isMathematicalCode(value) {
+      const content = String(value).trim();
+      if (!content || /(?:\.md|\.json)$/.test(content) || /^(?:GET|POST|PUT|PATCH|DELETE)\s+\//.test(content)) return false;
+      if (/^(?:P[23]-|M\d+$|day-|review-|final-|baseline-|remediation\/)/.test(content)) return false;
+      if (/^(?:PASS|PARTIAL|FAIL|PENDING|BLOCKED|SKIPPED|IN_PROGRESS|UNKNOWN|WAITING|SUCCEEDED|FAILED|INTENT|Explanation|Reasoning|Correctness|Transfer|Target|Stretch|Must-pass)$/i.test(content)) return false;
+      if (/^[A-Za-z]$/.test(content) || /^[α-ωΑ-Ω]$/.test(content)) return true;
+      const wordCount = (content.match(/[A-Za-z]{2,}/g) || []).length;
+      if (wordCount > 4 && !/[=<>≤≥≈∑∏√∞∇⊂⊕]/.test(content)) return false;
+      return /(?:[=<>±×÷∑∏√∞≤≥≈≠∇⊂⊕]|\^|_[A-Za-z0-9]|[α-ωΑ-Ωℓχ]|\d\s*[+*/]\s*[.\dA-Za-z(]|\b(?:log|exp|sqrt|argmax|argmin|pass@k|Beta|Uniform|Poisson|Var|diag|ceil|P\(|E\[|O\()\b|^\[[+\-0-9.,\s]+\]$)/i.test(content);
+    }
     function renderInline(value) {
       const code = [];
-      let output = escapeHtml(value).replace(/`([^`]+)`/g, (_, content) => {
-        const index = code.push(`<code>${content}</code>`) - 1;
+      const tokenized = String(value).replace(/`([^`]+)`/g, (_, content) => {
+        const looksMathematical = isMathematicalCode(content);
+        if (looksMathematical) {
+          const latex = toLatexMath(content);
+          const display = latex.length > 34 || /\\(?:begin|sum|prod|lVert|frac).*\\(?:sum|prod|rVert|frac)/.test(latex);
+          const delimiters = display ? [`\\[`, `\\]`] : [`\\(`, `\\)`];
+          const className = display ? "math-display-source" : "math-inline-source";
+          const index = code.push(`<span class="${className}" data-math-source="${escapeHtml(content)}">${delimiters[0]}${escapeHtml(latex)}${delimiters[1]}</span>`) - 1;
+          return `\u0000${index}\u0000`;
+        }
+        const index = code.push(`<code>${escapeHtml(content)}</code>`) - 1;
         return `\u0000${index}\u0000`;
       });
+      let output = escapeHtml(tokenized);
       output = output
         .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
         .replace(/\*([^*]+)\*/g, "<em>$1</em>")
@@ -665,7 +806,9 @@
           const external = /^https?:\/\//.test(decodedHref);
           return `<a href="${allowed ? href : "#"}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${label}</a>`;
         });
-      return output.replace(/\u0000(\d+)\u0000/g, (_, index) => code[Number(index)]);
+      return output
+        .replace(/\u0000(\d+)\u0000/g, (_, index) => code[Number(index)])
+        .replace(/(<span class="math-display-source"[^>]*>[\s\S]*?<\/span>),\s*/g, "$1");
     }
     function tableCells(line) {
       return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(cell => cell.trim());
@@ -688,10 +831,11 @@
         const fence = line.match(/^```(.*)$/);
         if (fence) {
           const body = [];
+          const language = fence[1].trim().replace(/[^A-Za-z0-9_+#.-]/g, "") || "text";
           index += 1;
           while (index < lines.length && !/^```/.test(lines[index])) body.push(lines[index++]);
           if (index < lines.length) index += 1;
-          output.push(`<pre><code>${escapeHtml(body.join("\n"))}</code></pre>`);
+          output.push(`<figure class="code-figure"><figcaption class="code-caption"><span>${escapeHtml(language)}</span><button class="copy-code" type="button">Sao chép</button></figcaption><pre><code class="language-${escapeHtml(language)}">${escapeHtml(body.join("\n"))}</code></pre></figure>`);
           continue;
         }
         const heading = line.match(/^(#{1,6})\s+(.*)$/);
@@ -735,6 +879,15 @@
       }
       return output.join("\n");
     }
+    function typesetMath(targets) {
+      const candidates = targets && typeof targets !== "string" && Symbol.iterator in Object(targets) ? [...targets] : [targets];
+      const elements = [...new Set(candidates.filter(Boolean))];
+      if (!elements.length || !globalThis.MathJax?.typesetPromise) return;
+      globalThis.MathJax.typesetPromise(elements).catch(() => {
+        elements.forEach(element => element.dataset.mathStatus = "fallback");
+      });
+    }
+    window.addEventListener("mathjax-ready", () => typesetMath(document.querySelectorAll(".content-surface")));
     function extractSection(markdown, level, headingText) {
       const lines = String(markdown || "").replace(/\r\n/g, "\n").split("\n");
       const marker = "#".repeat(level) + " ";
@@ -749,11 +902,25 @@
       const match = readDocument("ASSESSMENTS.md").split(/\r?\n/).find(line => line.startsWith("## ") && new RegExp(`Ngày ${day}(?!\\d)`).test(line));
       return match ? match.slice(3).trim() : "";
     }
+    function extractDailyEvaluators(lessonSection) {
+      const assessment = readDocument("ASSESSMENTS.md");
+      const capabilityIds = [...new Set(String(lessonSection || "").match(/\b(?:M(?:[1-9]|[1-9]\d|100)|P(?:[1-9]|1[0-8]))\b/g) || [])];
+      const blocks = [];
+      capabilityIds.forEach(id => {
+        const evaluator = assessment.includes(`P2-${id}`) ? `P2-${id}` : assessment.includes(`P3-${id}`) ? `P3-${id}` : "";
+        if (!evaluator) return;
+        const headingBlock = extractSection(assessment, 3, evaluator);
+        if (headingBlock) { blocks.push(headingBlock); return; }
+        const line = assessment.split(/\r?\n/).find(item => item.includes(`**${evaluator}:**`));
+        if (line) blocks.push(`### ${evaluator}\n\n${line.replace(/^\s*-\s*\*\*[^*]+:\*\*\s*/, "")}`);
+      });
+      return blocks.join("\n\n");
+    }
 
     const storageKey = "challenge-ai-agent-system-design:v2";
     const legacyStorageKey = "challenge-ai-agent-system-design:v1";
-    const validStatuses = ["IN_PROGRESS", "PASS", "PARTIAL", "SKIPPED", "BLOCKED"];
-    const terminalStatuses = ["PASS", "PARTIAL", "SKIPPED", "BLOCKED"];
+    const validStatuses = ["IN_PROGRESS", "PASS", "PARTIAL", "FAIL", "SKIPPED", "BLOCKED"];
+    const terminalStatuses = ["PASS", "PARTIAL", "FAIL", "SKIPPED", "BLOCKED"];
     const initialState = { schema: 2, events: [], drafts: {}, assessmentUnlocks: [] };
     let storageError = "";
     let state = loadState();
@@ -761,37 +928,51 @@
     let activeRoute = { kind: "overview" };
     let routeNoticeText = "";
 
-    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","previousButton","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","resourceSource","appliedAssessmentSource","assessmentSource","assessmentGateMessage","documentRail","documentTitle","documentNotice","documentContent","overviewView","dayDetailView","routeNotice","phaseMap","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
+    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","previousButton","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","resourceSource","appliedAssessmentSource","assessmentSource","assessmentGateMessage","assessmentWrap","learnBuildBlock","practiceVerifyBlock","practiceStep","practiceVerifyLead","documentRail","documentTitle","documentNotice","documentContent","overviewView","dayDetailView","routeNotice","phaseMap","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
     const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
     const lessonShell = el.dayDetailView.querySelector(".lesson-panel");
     const dayBrief = document.createElement("div"); dayBrief.className = "day-brief";
     const dayWork = document.createElement("div"); dayWork.className = "day-work";
     [".day-heading",".now-step",".contract-disclosure"].forEach(selector => dayBrief.append(lessonShell.querySelector(selector)));
-    [".embedded-content",".evidence-disclosure"].forEach(selector => dayWork.append(lessonShell.querySelector(selector)));
+    dayWork.append(lessonShell.querySelector(".learning-flow"));
     lessonShell.append(dayBrief,dayWork);
-    const sourceDisclosures = [...document.querySelectorAll(".embedded-content > details.source-disclosure")];
-    sourceDisclosures.forEach(disclosure => disclosure.addEventListener("toggle", () => {
-      if (disclosure.open) sourceDisclosures.forEach(item => { if (item !== disclosure) item.open = false; });
-    }));
+    document.addEventListener("click", async event => {
+      const button = event.target.closest(".copy-code");
+      if (!button) return;
+      const code = button.closest(".code-figure")?.querySelector("pre code")?.textContent || "";
+      if (!code) return;
+      const originalLabel = button.textContent;
+      button.disabled = true;
+      try {
+        await navigator.clipboard.writeText(code);
+        button.textContent = "Đã chép";
+      } catch {
+        button.textContent = "Không thể chép";
+      }
+      window.setTimeout(() => {
+        button.textContent = originalLabel;
+        button.disabled = false;
+      }, 1400);
+    });
 
     function freshState() { return { schema: 2, events: [], drafts: {}, assessmentUnlocks: [] }; }
     function eventId() { return globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`; }
-    function sanitizeEvent(event) {
+    function sanitizeEvent(event, imported = false) {
       if (!event || !Number.isInteger(Number(event.day)) || Number(event.day) < 1 || Number(event.day) > 30 || !validStatuses.includes(event.status)) return null;
       return {
         id: String(event.id || eventId()), timestamp: String(event.timestamp || new Date().toISOString()), session: Number(event.session) || 1,
         day: Number(event.day), status: event.status, timeMinutes: event.timeMinutes === null || event.timeMinutes === "" ? null : Number.isFinite(Number(event.timeMinutes)) && Number(event.timeMinutes) >= 0 ? Number(event.timeMinutes) : null,
         doneTest: String(event.doneTest || ""), evidence: String(event.evidence || ""), mainError: String(event.mainError || ""), nextAction: String(event.nextAction || ""),
-        verification: String(event.verification || "self-reported"), origin: String(event.origin || "app")
+        verification: imported ? "imported-unverified" : String(event.verification || "self-reported"), origin: imported ? `import:${String(event.origin || "unknown")}` : String(event.origin || "app")
       };
     }
-    function normalizeState(value) {
+    function normalizeState(value, imported = false) {
       if (!value || value.schema !== 2 || !Array.isArray(value.events)) return null;
       return {
         schema: 2,
-        events: value.events.map(sanitizeEvent).filter(Boolean),
+        events: value.events.map(event => sanitizeEvent(event, imported)).filter(Boolean),
         drafts: value.drafts && typeof value.drafts === "object" ? value.drafts : {},
-        assessmentUnlocks: Array.isArray(value.assessmentUnlocks) ? value.assessmentUnlocks.filter(item => item && Number.isInteger(Number(item.day))).map(item => ({ day: Number(item.day), timestamp: String(item.timestamp || "") })) : []
+        assessmentUnlocks: imported ? [] : Array.isArray(value.assessmentUnlocks) ? value.assessmentUnlocks.filter(item => item && Number.isInteger(Number(item.day))).map(item => ({ day: Number(item.day), timestamp: String(item.timestamp || "") })) : []
       };
     }
     function migrateLegacy(value) {
@@ -842,7 +1023,10 @@
     }
     function latestEvent(day) { return eventsForDay(day).sort(compareEvents).at(-1) || null; }
     function nextSession() { return state.events.reduce((max, event) => Math.max(max, event.session), 0) + 1; }
-    function isComplete(day) { return latestEvent(day)?.status === "PASS"; }
+    function isComplete(day) {
+      const event = latestEvent(day);
+      return event?.status === "PASS" && Boolean(event.doneTest.trim()) && Boolean(event.evidence.trim()) && event.verification === "self-reported" && event.origin === "app";
+    }
     function dayStatus(day) {
       return latestEvent(day)?.status || "NOT_STARTED";
     }
@@ -930,28 +1114,36 @@
       el.dayStretch.textContent = stretch;
       el.detailStatus.textContent = dayStatus(day);
       el.nowStepCopy.textContent = minimum;
-      const lessonSection = extractSection(readDocument("LESSONS.md"), 2, `Ngày ${day} —`);
-      const planSection = extractSection(readDocument("PLAN.md"), 3, `Ngày ${day} —`);
-      const resourceSection = extractSection(readDocument("SUPPLEMENTAL_RESOURCES.md"), 2, `Ngày ${day} —`);
-      const appliedAssessmentSection = extractSection(readDocument("DAILY_APPLIED_ASSESSMENTS.md"), 2, `Ngày ${day} —`);
-      const assessmentSection = assessmentHeading(day) ? extractSection(readDocument("ASSESSMENTS.md"), 2, assessmentHeading(day)) : "";
-      const assessmentLocked = Boolean(assessmentSection) && !terminalStatuses.includes(dayStatus(day));
+      const content = days[visibleDay - 1].content || {};
+      const lessonSection = content.lesson || "";
+      const planSection = content.plan || "";
+      const resourceSection = content.resources || "";
+      const appliedAssessmentSection = content.practice || "";
+      const assessmentSection = content.assessment || "";
+      const assessmentLocked = Boolean(assessmentSection) && Boolean(days[visibleDay - 1].assessmentFirst) && !terminalStatuses.includes(dayStatus(day));
       el.assessmentSource.hidden = !assessmentSection;
+      el.assessmentWrap.hidden = !assessmentSection;
       el.assessmentSource.innerHTML = assessmentSection ? renderMarkdown(assessmentSection) : "";
       el.assessmentGateMessage.hidden = !assessmentLocked;
-      el.assessmentGateMessage.textContent = assessmentLocked ? "Assessment đang được khóa theo đúng thứ tự: hoàn thành và lưu một trạng thái kết thúc trước khi mở bài học, kế hoạch, tài nguyên và phần luyện bổ trợ của ngày này." : "";
-      [el.lessonSource, el.planSource, el.resourceSource, el.appliedAssessmentSource].forEach(surface => { surface.hidden = assessmentLocked; });
-      el.lessonSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">BÀI HỌC GỐC</p>${renderMarkdown(lessonSection)}`;
-      el.planSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">DAILY CONTRACT</p>${renderMarkdown(planSection)}`;
-      el.resourceSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">TÀI NGUYÊN BÙ LỖ HỔNG · tối đa 15 phút, tính trong Target</p>${renderMarkdown(resourceSection)}`;
-      el.appliedAssessmentSource.innerHTML = assessmentLocked ? "" : `<p class="eyebrow">STRETCH / DIAGNOSTIC TÙY CHỌN · không phải điều kiện PASS</p>${renderMarkdown(appliedAssessmentSection)}`;
-      sourceDisclosures.forEach(disclosure => {
-        const surface = disclosure.querySelector(".content-surface");
-        disclosure.hidden = surface.hidden || !surface.innerHTML.trim();
-        disclosure.open = false;
-      });
-      const primarySource = sourceDisclosures.find(disclosure => !disclosure.hidden);
-      if (primarySource) primarySource.open = true;
+      el.assessmentGateMessage.textContent = assessmentLocked ? "Bước 00 là assessment closed-book. Hãy hoàn thành và lưu attempt trước khi tự mở Learn & Build; nội dung bài vẫn được giữ nguyên và không bị xóa." : "";
+      el.learnBuildBlock.hidden = false;
+      const previousFlowDay = el.dayDetailView.dataset.flowDay;
+      if (previousFlowDay !== String(day)) {
+        el.learnBuildBlock.open = !assessmentLocked;
+        el.practiceVerifyBlock.open = assessmentLocked;
+        el.evidenceContinueBlock.open = false;
+      }
+      el.dayDetailView.dataset.flowDay = String(day);
+      el.practiceStep.textContent = assessmentLocked ? "00" : "02";
+      el.practiceVerifyLead.textContent = assessmentLocked
+        ? "Làm assessment closed-book và lưu attempt trước khi tự mở nội dung học hoặc phần chữa."
+        : "Làm bài độc lập, chuyển giao sang tình huống mới và kiểm chứng bằng rubric.";
+      [el.lessonSource, el.planSource, el.resourceSource, el.appliedAssessmentSource].forEach(surface => { surface.hidden = false; });
+      el.lessonSource.innerHTML = `<p class="eyebrow">BÀI HỌC GỐC</p>${renderMarkdown(lessonSection)}`;
+      el.planSource.innerHTML = `<p class="eyebrow">DAILY CONTRACT</p>${renderMarkdown(planSection)}`;
+      el.resourceSource.innerHTML = `<p class="eyebrow">TÀI NGUYÊN BÙ LỖ HỔNG · tối đa 15 phút, tính trong Target</p>${renderMarkdown(resourceSection)}`;
+      el.appliedAssessmentSource.innerHTML = `<p class="eyebrow">STRETCH / DIAGNOSTIC TÙY CHỌN · không phải điều kiện PASS</p>${renderMarkdown(appliedAssessmentSection)}`;
+      typesetMath([el.lessonSource, el.planSource, el.resourceSource, el.appliedAssessmentSource, el.assessmentSource]);
       const draft = getDraft(day);
       el.statusSelect.value = validStatuses.includes(draft.status) && draft.status !== "PASS" ? draft.status : "IN_PROGRESS";
       el.timeSpent.value = draft.timeMinutes ?? "";
@@ -1034,7 +1226,7 @@
     function assessmentKeySection(day) {
       const source = readDocument("ASSESSMENT_KEYS.md");
       if (day === 1) return extractSection(source, 2, "Baseline Form A");
-      if (day === 30) return [extractSection(source, 2, "Final Form B"), extractSection(source, 2, "Final status")].filter(Boolean).join("\n\n");
+      if (day === 30) return extractSection(source, 2, "Final status");
       return extractSection(source, 2, "Weekly review rubric");
     }
     function hasAssessmentUnlock(day) { return state.assessmentUnlocks.some(item => item.day === day); }
@@ -1043,7 +1235,7 @@
       el.documentNotice.dataset.state = "idle";
       if (name === "ASSESSMENT_KEYS.md" && !hasAssessmentUnlock(visibleDay)) {
         const heading = assessmentHeading(visibleDay);
-        const attempt = heading && eventsForDay(visibleDay).some(event => event.evidence && event.status !== "SKIPPED");
+        const attempt = heading && eventsForDay(visibleDay).some(event => ["PASS", "PARTIAL", "FAIL"].includes(event.status) && event.evidence.trim() && event.doneTest.trim() && event.verification === "self-reported" && event.origin === "app");
         if (!heading) {
           el.documentNotice.textContent = "Ngày hiện tại không có assessment để mở đáp án.";
           el.documentNotice.dataset.state = "error";
@@ -1061,6 +1253,7 @@
       activeDocument = name;
       el.documentTitle.textContent = name;
       el.documentContent.innerHTML = renderMarkdown(name === "ASSESSMENT_KEYS.md" ? assessmentKeySection(visibleDay) : readDocument(name));
+      typesetMath(el.documentContent);
       renderDocumentRail();
       el.documentTitle.tabIndex = -1;
       if (!document.getElementById("documentPanel").hidden) el.documentTitle.focus({ preventScroll: true });
@@ -1072,10 +1265,12 @@
       if (activeDocument === "ASSESSMENT_KEYS.md") {
         if (hasAssessmentUnlock(visibleDay)) {
           el.documentContent.innerHTML = renderMarkdown(assessmentKeySection(visibleDay));
+          typesetMath(el.documentContent);
         } else {
           activeDocument = "CHALLENGE.md";
           el.documentTitle.textContent = activeDocument;
           el.documentContent.innerHTML = renderMarkdown(readDocument(activeDocument));
+          typesetMath(el.documentContent);
           renderDocumentRail();
         }
       }
@@ -1155,7 +1350,7 @@
         setFormMessage("PASS cần Done test, evidence và xác nhận tự kiểm tra.", "error", invalid);
         return;
       }
-      if (["IN_PROGRESS", "PARTIAL"].includes(status) && !evidence) {
+      if (["IN_PROGRESS", "PARTIAL", "FAIL"].includes(status) && !evidence) {
         setFormMessage(`${status} cần evidence của phần đã làm.`, "error", [el.evidenceNote]);
         return;
       }
@@ -1170,7 +1365,7 @@
       state.events.push(sanitizeEvent({
         id: eventId(), timestamp: new Date().toISOString(), session: nextSession(), day: visibleDay, status,
         timeMinutes: draft.timeMinutes === "" ? null : Number(draft.timeMinutes), doneTest, evidence,
-        mainError: draft.mainError.trim(), nextAction: draft.nextAction.trim(), verification: status === "PASS" ? "self-reported" : "not-verified", origin: "app"
+        mainError: draft.mainError.trim(), nextAction: draft.nextAction.trim(), verification: draft.verified ? "self-reported" : "not-verified", origin: "app"
       }));
       delete state.drafts[visibleDay];
       saveState();
@@ -1206,7 +1401,7 @@
       const file = event.target.files?.[0];
       if (!file) return;
       try {
-        const imported = normalizeState(JSON.parse(await file.text()));
+        const imported = normalizeState(JSON.parse(await file.text()), true);
         if (!imported) throw new Error("invalid");
         const knownIds = new Set(state.events.map(item => item.id));
         state.events.push(...imported.events.filter(item => !knownIds.has(item.id)));

@@ -1,5 +1,11 @@
 # Mẫu bài học và mẫu trả lời có khả năng chuyển giao
 
+## Contract hiển thị theo ngày
+
+Mỗi `## Ngày N —` phải trực tiếp chứa: `Outcome and learning tree`, `First principles and worked reconstruction`, `Independent practice`, `Material transfer and advanced variant`, `Evaluator, feedback and retrieval`, `Done and evidence`. Không được giữ bài cũ làm nội dung chính rồi chèn remediation xuống dưới như phụ lục.
+
+Mỗi capability phải có evaluator và rubric theo ID, misconception boundary, changed retry và delayed retrieval. Chỉ đổi số hoặc danh từ không được tính là material transfer. Curriculum readiness không phải learner mastery.
+
 ## Mẫu tạo một bài học
 
 Mỗi bài học phải có đủ các phần sau:
@@ -104,4 +110,3 @@ Reversal condition — bằng chứng nào sẽ làm đổi quyết định:
 - `2`: đúng ý chính, thiếu assumptions/derivation/failure boundary.
 - `3`: đúng và có lý giải; còn thiếu một phần kiểm chứng hoặc trade-off.
 - `4`: chính xác, có cơ chế, boundary, sanity check và chuyển giao sang ví dụ mới.
-

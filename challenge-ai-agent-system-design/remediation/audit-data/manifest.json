@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "source": "../../AUDIT_REPORT.md",
+  "sourceSha256": "6caeae442f6d8deb1aa3ac113cd946a512a7cff05e0c47bcc71fb1d823e95b0f",
+  "auditDate": "2026-09-11",
+  "extraction": "deterministic; generated files must not be hand-edited",
+  "files": {
+    "questions.json": {
+      "sha256": "a8a477cfc086e17f735c35e01ab873b9f176b47249617f31b54ba1af5b0acdc1",
+      "records": 100
+    },
+    "days.json": {
+      "sha256": "46a8d147209adc88fa65f4a0360841533fcfc2a4db2abddc4d4054e1a3bb90fa",
+      "records": 30
+    },
+    "gaps.json": {
+      "sha256": "a8da3f35eb94225e9a8fdfbe8f359ca76687427e92b8b382151260cf267ac215",
+      "records": 18
+    },
+    "acceptance.json": {
+      "sha256": "c38cacab64c14afd9c3f4d16677437868834e9b9fd60918ba7f836759f718546",
+      "records": 9
+    },
+    "conflicts.json": {
+      "sha256": "373ba09d802e3123e22e3802db35d8f3782b7bdec3d543a0c0d8e5f91025d14d",
+      "records": 9
+    }
+  }
+}
