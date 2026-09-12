@@ -11,8 +11,8 @@ const required=["lesson","plan","resources","practice"];
 for(let expected=1;expected<=30;expected++){
   const day=days[expected-1];
   if(!day || day.day!==expected){out.fail(`day-${expected}`,"Missing or out-of-order day record");continue;}
-  const missing=required.filter(field=>!day.content?.[field]?.trim());
+  const missing=required.filter(field=>!day.content?.[field]?.markdown?.trim()||!day.content?.[field]?.blocks?.length);
   if(!day.phase||!day.title||!day.outcome||!day.minimum||!day.target||!day.done||!day.evidence) missing.push("contract metadata");
-  missing.length?out.fail(`day-${expected}`,`Missing: ${missing.join(", ")}`):out.pass(`day-${expected}`,required.map(field=>`${field}:${day.content[field].length}`).join(" "));
+  missing.length?out.fail(`day-${expected}`,`Missing: ${missing.join(", ")}`):out.pass(`day-${expected}`,required.map(field=>`${field}:${day.content[field].blocks.length} blocks`).join(" "));
 }
 out.finish();

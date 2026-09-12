@@ -12,7 +12,14 @@
   <script>
     globalThis.MathJax = {
       tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]], processEscapes: true },
-      options: { enableMenu: false },
+      options: {
+        enableMenu: false,
+        enableSpeech: false,
+        enableBraille: false,
+        enableExplorer: false,
+        a11y: { speech: false, braille: false },
+        renderActions: { attachSpeech: [], explorable: [] }
+      },
       startup: {
         typeset: false,
         ready() {
@@ -548,8 +555,9 @@
       <section class="day-detail-view" id="dayDetailView" hidden>
         <nav class="detail-nav" aria-label="Điều hướng ngày">
           <button class="back-link" id="backToOverview" type="button">← Tất cả ngày</button>
-          <span id="detailStatus">NOT_STARTED</span>
+          <span><span id="runtimeBuild">SCHEMA V1</span> · <span id="detailStatus">NOT_STARTED</span></span>
         </nav>
+        <p class="evidence-help" id="runtimeError" data-state="error" role="alert" hidden></p>
         <article class="lesson-panel" aria-live="polite">
         <header class="day-heading">
           <p class="phase" id="dayPhase"></p>
@@ -879,6 +887,34 @@
       }
       return output.join("\n");
     }
+    function renderBlocks(blocks) {
+      if (!Array.isArray(blocks)) return "";
+      return blocks.map(block => {
+        if (!block || !block.type) return "";
+        if (block.type === "heading") {
+          const level = Math.min(Number(block.level || 2) + 1, 6);
+          return `<h${level}>${renderInline(block.text || "")}</h${level}>`;
+        }
+        if (block.type === "paragraph") return `<p>${renderInline(block.text || "")}</p>`;
+        if (block.type === "quote") return `<blockquote><p>${renderInline(block.text || "")}</p></blockquote>`;
+        if (block.type === "rule") return "<hr>";
+        if (block.type === "code") {
+          const language = String(block.language || "text").replace(/[^A-Za-z0-9_+#.-]/g, "") || "text";
+          return `<figure class="code-figure"><figcaption class="code-caption"><span>${escapeHtml(language)}</span><button class="copy-code" type="button">Sao chép</button></figcaption><pre><code class="language-${escapeHtml(language)}">${escapeHtml(block.source || "")}</code></pre></figure>`;
+        }
+        if (block.type === "list") {
+          const tag = block.ordered ? "ol" : "ul";
+          return `<${tag}>${(block.items || []).map(item => `<li>${renderInline(item)}</li>`).join("")}</${tag}>`;
+        }
+        if (block.type === "table") return `<div class="table-scroll"><table><thead><tr>${(block.header || []).map(cell => `<th>${renderInline(cell)}</th>`).join("")}</tr></thead><tbody>${(block.rows || []).map(row => `<tr>${row.map(cell => `<td>${renderInline(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+        return `<p class="evidence-help" data-state="error">Unsupported content block: ${escapeHtml(block.type)}</p>`;
+      }).join("\n");
+    }
+    function renderTypedContent(value) {
+      if (value && Array.isArray(value.blocks)) return renderBlocks(value.blocks);
+      return renderMarkdown(typeof value === "string" ? value : value?.markdown || "");
+    }
+    function contentMarkdown(value) { return typeof value === "string" ? value : value?.markdown || ""; }
     function typesetMath(targets) {
       const candidates = targets && typeof targets !== "string" && Symbol.iterator in Object(targets) ? [...targets] : [targets];
       const elements = [...new Set(candidates.filter(Boolean))];
@@ -928,8 +964,12 @@
     let activeRoute = { kind: "overview" };
     let routeNoticeText = "";
 
-    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","previousButton","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","resourceSource","appliedAssessmentSource","assessmentSource","assessmentGateMessage","assessmentWrap","learnBuildBlock","practiceVerifyBlock","practiceStep","practiceVerifyLead","documentRail","documentTitle","documentNotice","documentContent","overviewView","dayDetailView","routeNotice","phaseMap","backToOverview","detailStatus","nowStepCopy","dayActionBar"];
+    const ids = ["dayPhase","dayTitle","dayOutcome","dayMinimum","dayTarget","dayDone","dayEvidence","dayStretch","evidenceForm","statusSelect","timeSpent","doneTestResult","evidenceNote","mainError","nextAction","verificationCheck","evidenceHelp","saveLogButton","passButton","dayGrid","progressList","historyList","completedCount","currentReadout","railOutput","actionCopy","previousButton","nextButton","navStatus","exportButton","importButton","importInput","storageMessage","lessonSource","planSource","resourceSource","appliedAssessmentSource","assessmentSource","assessmentGateMessage","assessmentWrap","learnBuildBlock","practiceVerifyBlock","practiceStep","practiceVerifyLead","documentRail","documentTitle","documentNotice","documentContent","overviewView","dayDetailView","routeNotice","phaseMap","backToOverview","detailStatus","runtimeBuild","runtimeError","nowStepCopy","dayActionBar"];
     const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+    el.runtimeBuild.textContent = Array.isArray(window.CHALLENGE_DAYS) ? "SCHEMA V1 · 30 DAYS" : "LEGACY FALLBACK";
+    const showRuntimeError = message => { el.runtimeError.hidden = false; el.runtimeError.textContent = `Không render được nội dung: ${message}`; };
+    window.addEventListener("error", event => showRuntimeError(event.message || "JavaScript runtime error"));
+    window.addEventListener("unhandledrejection", event => showRuntimeError(event.reason?.message || String(event.reason || "Promise rejection")));
     const lessonShell = el.dayDetailView.querySelector(".lesson-panel");
     const dayBrief = document.createElement("div"); dayBrief.className = "day-brief";
     const dayWork = document.createElement("div"); dayWork.className = "day-work";
@@ -1120,18 +1160,19 @@
       const resourceSection = content.resources || "";
       const appliedAssessmentSection = content.practice || "";
       const assessmentSection = content.assessment || "";
-      const assessmentLocked = Boolean(assessmentSection) && Boolean(days[visibleDay - 1].assessmentFirst) && !terminalStatuses.includes(dayStatus(day));
+      const assessmentLocked = Boolean(contentMarkdown(assessmentSection)) && Boolean(days[visibleDay - 1].assessmentFirst) && !terminalStatuses.includes(dayStatus(day));
+      el.runtimeError.hidden = true;
       el.assessmentSource.hidden = !assessmentSection;
       el.assessmentWrap.hidden = !assessmentSection;
-      el.assessmentSource.innerHTML = assessmentSection ? renderMarkdown(assessmentSection) : "";
+      el.assessmentSource.innerHTML = contentMarkdown(assessmentSection) ? renderTypedContent(assessmentSection) : "";
       el.assessmentGateMessage.hidden = !assessmentLocked;
       el.assessmentGateMessage.textContent = assessmentLocked ? "Bước 00 là assessment closed-book. Hãy hoàn thành và lưu attempt trước khi tự mở Learn & Build; nội dung bài vẫn được giữ nguyên và không bị xóa." : "";
       el.learnBuildBlock.hidden = false;
       const previousFlowDay = el.dayDetailView.dataset.flowDay;
       if (previousFlowDay !== String(day)) {
-        el.learnBuildBlock.open = !assessmentLocked;
-        el.practiceVerifyBlock.open = assessmentLocked;
-        el.evidenceContinueBlock.open = false;
+        if (el.learnBuildBlock) el.learnBuildBlock.open = !assessmentLocked;
+        if (el.practiceVerifyBlock) el.practiceVerifyBlock.open = assessmentLocked;
+        if (el.evidenceContinueBlock) el.evidenceContinueBlock.open = false;
       }
       el.dayDetailView.dataset.flowDay = String(day);
       el.practiceStep.textContent = assessmentLocked ? "00" : "02";
@@ -1139,10 +1180,10 @@
         ? "Làm assessment closed-book và lưu attempt trước khi tự mở nội dung học hoặc phần chữa."
         : "Làm bài độc lập, chuyển giao sang tình huống mới và kiểm chứng bằng rubric.";
       [el.lessonSource, el.planSource, el.resourceSource, el.appliedAssessmentSource].forEach(surface => { surface.hidden = false; });
-      el.lessonSource.innerHTML = `<p class="eyebrow">BÀI HỌC GỐC</p>${renderMarkdown(lessonSection)}`;
-      el.planSource.innerHTML = `<p class="eyebrow">DAILY CONTRACT</p>${renderMarkdown(planSection)}`;
-      el.resourceSource.innerHTML = `<p class="eyebrow">TÀI NGUYÊN BÙ LỖ HỔNG · tối đa 15 phút, tính trong Target</p>${renderMarkdown(resourceSection)}`;
-      el.appliedAssessmentSource.innerHTML = `<p class="eyebrow">STRETCH / DIAGNOSTIC TÙY CHỌN · không phải điều kiện PASS</p>${renderMarkdown(appliedAssessmentSection)}`;
+      el.lessonSource.innerHTML = `<p class="eyebrow">BÀI HỌC GỐC</p>${renderTypedContent(lessonSection)}`;
+      el.planSource.innerHTML = `<p class="eyebrow">DAILY CONTRACT</p>${renderTypedContent(planSection)}`;
+      el.resourceSource.innerHTML = `<p class="eyebrow">TÀI NGUYÊN BÙ LỖ HỔNG · tối đa 15 phút, tính trong Target</p>${renderTypedContent(resourceSection)}`;
+      el.appliedAssessmentSource.innerHTML = `<p class="eyebrow">STRETCH / DIAGNOSTIC TÙY CHỌN · không phải điều kiện PASS</p>${renderTypedContent(appliedAssessmentSection)}`;
       typesetMath([el.lessonSource, el.planSource, el.resourceSource, el.appliedAssessmentSource, el.assessmentSource]);
       const draft = getDraft(day);
       el.statusSelect.value = validStatuses.includes(draft.status) && draft.status !== "PASS" ? draft.status : "IN_PROGRESS";

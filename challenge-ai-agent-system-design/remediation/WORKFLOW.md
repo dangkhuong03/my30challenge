@@ -71,9 +71,9 @@ Exit: every capability has scheduled retrieval and a reviewed correction route; 
 
 ### Phase 6 — Content, payload, and application synchronization
 
-Propagate approved authoritative Markdown to generated payloads. Validate byte equality, assessment isolation, evidence-bearing status transitions, import/export integrity, and append-only preservation. Generation is an explicit command; validation never rewrites sources.
+Propagate approved authoritative Markdown to document payloads and the generated typed day schema. Validate byte equality, 30/30 non-empty daily content contracts, typed code blocks, grouped learning-surface routing, assessment isolation, evidence-bearing status transitions, import/export integrity, and append-only preservation. Generation is an explicit command; validation never rewrites sources.
 
-Exit: payload and application validators pass locally and browser behavior is verified. Static/function-level checks remain distinct from browser evidence.
+Exit: payload, day-schema and application validators pass locally and browser behavior is verified. Browser evidence must show `SCHEMA V1 · 30 DAYS`, non-empty opened learning sections, readable code, and rendered or readable-fallback mathematics. Static/function-level checks remain distinct from browser evidence.
 
 ### Phase 7 — Full validation and independent re-audit
 

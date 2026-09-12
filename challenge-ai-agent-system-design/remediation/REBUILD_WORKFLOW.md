@@ -34,9 +34,9 @@ Exit: no mandatory work hidden in stretch; uncertain workload remains PENDING ra
 
 ## Gate 5 — Application delivery
 
-Verify Markdown→payload byte equality and that HTML renders the authoritative day contract, correct evaluators, evidence states and key gates. Browser behavior and visual quality remain distinct checks.
+Verify canonical Markdown → document payload → typed day schema → block renderer. The day schema must carry contract metadata plus non-empty lesson, plan, resources, practice and applicable assessment content. Code fences are explicit `code` blocks; mathematical source is rendered only inside typed content, with readable fallback when MathJax is unavailable. The HTML groups the learning flow as Learn & Build, Practice & Verify, and Evidence & Continue without deleting source text. Verify correct evaluators, evidence states and key gates. Browser behavior and visual quality remain distinct checks.
 
-Exit: static delivery PASS plus browser PASS; user may defer visual preference, but not content visibility/functionality.
+Exit: schema validation PASS, static delivery PASS, and browser PASS. Browser evidence must show the schema build marker, non-empty opened sections, readable code and rendered/fallback mathematics. A static harness PASS cannot replace this gate; user may defer visual preference, but not content visibility/functionality.
 
 ## Gate 6 — Final-output system
 

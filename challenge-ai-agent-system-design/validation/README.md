@@ -77,4 +77,14 @@ node challenge-ai-agent-system-design/validation/generate-payloads.mjs
 node challenge-ai-agent-system-design/validation/validate-payload.mjs
 ```
 
-The generator has a fixed source inventory and does not include audit, remediation, generated audit-data, or held-back final content.
+The generator has a fixed source inventory and does not include audit, remediation, generated audit-data, or held-back final content. It also generates `day-data.js`, the browser-facing typed schema. Every day contains contract metadata and `lesson`, `plan`, `resources`, `practice`, and `assessment` content. Each content field preserves its canonical Markdown and a deterministic array of typed blocks (`heading`, `paragraph`, `list`, `table`, `quote`, `rule`, or `code`).
+
+The application renders `day-data.js`; runtime heading searches are compatibility fallback only. Run these checks after changing either curriculum content or the renderer:
+
+```powershell
+node challenge-ai-agent-system-design/validation/validate-day-schema.mjs
+node challenge-ai-agent-system-design/validation/validate-application-static.mjs
+node challenge-ai-agent-system-design/validation/validate-math-rendering.mjs
+```
+
+`validate-day-schema.mjs` rejects a missing, out-of-order, or empty daily learning surface. Static checks do not certify browser execution. The day view exposes `SCHEMA V1 · 30 DAYS` when the structured payload loaded and shows runtime exceptions in-page; `LEGACY FALLBACK` means the generated schema was not loaded and is not an acceptable release state.

@@ -1,9 +1,9 @@
 # Latest Validation Result
 
-- Timestamp: 2026-09-12T16:11:56.954Z
+- Timestamp: 2026-09-12T16:28:39.798Z
 - Scope: local static workflow/harness validation
 - Overall curriculum gate: `PENDING`
-- Checks: 1270 PASS, 0 FAIL, 25 PENDING, 0 WARNING
+- Checks: 1282 PASS, 0 FAIL, 25 PENDING, 0 WARNING
 
 ## Validator summary
 
@@ -26,8 +26,8 @@
 | validate-batch-25-29.mjs | 0 | PENDING | 94 | 0 | 2 | 0 |
 | validate-final-output.mjs | 0 | PENDING | 21 | 0 | 1 | 0 |
 | validate-day-schema.mjs | 0 | PASS | 31 | 0 | 0 | 0 |
-| validate-application-static.mjs | 0 | PENDING | 25 | 0 | 1 | 0 |
-| validate-math-rendering.mjs | 0 | PENDING | 13 | 0 | 1 | 0 |
+| validate-application-static.mjs | 0 | PENDING | 30 | 0 | 1 | 0 |
+| validate-math-rendering.mjs | 0 | PENDING | 20 | 0 | 1 | 0 |
 | validate-payload.mjs | 0 | PASS | 15 | 0 | 0 | 0 |
 
 ## Failed invariants and warnings
